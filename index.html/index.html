@@ -2,8 +2,8 @@
 <html>
 
 <head>
- 
-    <title>小澤ゼミ紹介サイト</title>
+
+  <title>小澤ゼミ紹介サイト</title>
 
   <style>
     nav {
@@ -49,140 +49,45 @@
     .dropdown:hover .dropdown-content {
       display: block;
     }
-
-    /* 全体のリセットと基本設定 */
-body {
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  background-color: #f9f9f9;
-  margin: 0;
-  padding: 50px 0;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* スライダーの余白設定 */
-.swiper {
-  width: 100%;
-  padding: 20px 0;
-}
-
-/* リンクタグのデフォルト装飾を消す */
-.card-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-
-/* カードのデザイン */
-.card {
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-  transition: transform 0.2s, box-shadow 0.2s;
-  height: 100%;
-}
-
-/* ホバー時に少し浮き上がらせる演出 */
-.card-link:hover .card {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-}
-
-/* 画像部分 */
-.card-img img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover; /* 画像の比率を崩さずにトリミング */
-}
-
-/* テキストコンテンツ部分 */
-.card-content {
-  padding: 20px;
-}
-
-.category {
-  font-size: 12px;
-  color: #666;
-  border: 1px solid #ccc;
-  padding: 2px 8px;
-  display: inline-block;
-  margin-bottom: 10px;
-}
-
-.card-content h3 {
-  font-size: 16px;
-  margin: 10px 0;
-  line-height: 1.4;
-  color: #333;
-}
-
-.date {
-  font-size: 12px;
-  color: #999;
-  margin-bottom: 15px;
-}
-
-/* タグのスタイリング */
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-
-.tag {
-  font-size: 12px;
-  color: #333;
-  border: 1px solid #333;
-  border-radius: 20px;
-  padding: 3px 10px;
-}
   </style>
 
 </head>
 
 <body>
 
-<nav>
-  <a href="index.html">🏠 ホーム</a>
+  <nav>
+    <a href="index.html">🏠 ホーム</a>
 
-   <div class="dropdown">
-    <a href="#">📘活動内容</a>
-    <div class="dropdown-content">
-      <a href="activities-seminar.html">毎日の活動</a>
-      <a href="activities-event.html">行事</a>
-    </div>
+    <div class="dropdown">
+      <a href="#">📘活動内容</a>
+      <div class="dropdown-content">
+        <a href="activities-seminar.html">毎日の活動</a>
+        <a href="activities-event.html">行事</a>
+      </div>
 
-  <a href="members.html">👥 メンバー紹介</a>
+      <a href="members.html">👥 メンバー紹介</a>
 
-  <div class="dropdown">
-    <a href="#">🎮 シミュレーション</a>
-    <div class="dropdown-content">
-      <a href="simulation-daily.html">日常編</a>
-      <a href="simulation-camp.html">合宿編</a>
-      <a href="simulation-factory.html">工場見学編</a>
-      <a href="simulation-end.html">エンディング編</a>
-    </div>
-  </div>
-</nav>
+      <div class="dropdown">
+        <a href="#">🎮 シミュレーション</a>
+        <div class="dropdown-content">
+          <a href="simulation-daily.html">日常編</a>
+          <a href="simulation-camp.html">合宿編</a>
+          <a href="simulation-factory.html">工場見学編</a>
+          <a href="simulation-end.html">エンディング編</a>
+        </div>
+      </div>
+  </nav>
 
-<h1>小澤ゼミ紹介サイト</h1>
+  <h1>小澤ゼミ紹介サイト</h1>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
   <div class="container">
-    <h2>BVTL Magazine</h2>
-    
+    <h2>通年活動</h2>
+
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
-        
+
         <div class="swiper-slide">
           <a href="detail1.html" class="card-link">
             <div class="card">
@@ -190,12 +95,12 @@ body {
                 <img src="image1.jpg" alt="記事画像">
               </div>
               <div class="card-content">
-                <span class="category">技術力でつなぐ</span>
-                <h3>自動車専用船AI配船システムを開発・本格導入…</h3>
+                <span class="category">ディスカッション</span>
+                <h3>2.3年共通！経済に関するテーマでディスカッション</h3>
                 <p class="date">2026年05月18日</p>
                 <div class="tags">
-                  <span class="tag">#DX</span>
-                  <span class="tag">#環境保全</span>
+                  <span class="tag">#英文記事</span>
+                  <span class="tag">#書評</span>
                 </div>
               </div>
             </div>
@@ -209,12 +114,12 @@ body {
                 <img src="image2.jpg" alt="記事画像">
               </div>
               <div class="card-content">
-                <span class="category">技術力でつなぐ</span>
-                <h3>3Dモデルで切り拓く新造船設計の未来…</h3>
+                <span class="category">２年次活動</span>
+                <h3>財務会計を仲間と学ぼう</h3>
                 <p class="date">2026年05月15日</p>
                 <div class="tags">
-                  <span class="tag">#DX</span>
-                  <span class="tag">#船のテクノロジー</span>
+                  <span class="tag">#輪読</span>
+                  <span class="tag">#プレゼンテーション</span>
                 </div>
               </div>
             </div>
@@ -228,22 +133,25 @@ body {
                 <img src="image3.jpg" alt="記事画像">
               </div>
               <div class="card-content">
-                <span class="category">日本郵船の舞台裏</span>
-                <h3>新規事業を生み出す人材を育てる…</h3>
+                <span class="category">三年次活動</span>
+                <h3>AIを使ってプログラミングをしてみよう</h3>
                 <p class="date">2026年05月13日</p>
                 <div class="tags">
-                  <span class="tag">#イノベーション</span>
+                  <span class="tag">#AI</span>
+                  <span class="tag">#programming</span>
+                  </span>
                 </div>
               </div>
             </div>
-          </a>
         </div>
-
+        </a>
       </div>
 
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
     </div>
+
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
