@@ -8,6 +8,41 @@
 </head>
 
 <body>
+
+    <header class="main-header">
+        <nav class="nav-container">
+            <div class="logo">BVTL Magazine</div>
+
+            <ul class="nav-links">
+                <li><a href="index.html">ホーム</a></li>
+
+                <li class="dropdown">
+                    <a href="#">活動内容 ▼</a>
+                    <ul class="dropdown-content">
+                        <li><a href="activities-member.html">所属ゼミ生</a></li>
+                        <li><a href="activities-event.html">行事</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="activities-ozawaquiz.html">小澤先生クイズ</a></li>
+
+                <li class="dropdown">
+                    <a href="#">シミュレーション ▼</a>
+                    <ul class="dropdown-content">
+                        <li><a href="simulation-daily.html">日常編</a></li>
+                        <li><a href="simulation-camp.html">合宿編</a></li>
+                        <li><a href="simulation-factory.html">工場見学編</a></li>
+                        <li><a href="simulation-end.html">エンディング編</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="header-right">
+                <span>MENU</span>
+            </div>
+        </nav>
+    </header>
+
     <div class="magazine-container">
         <header class="magazine-header">
             <p class="recruit-text">SPECIAL INTERVIEW</p>
@@ -21,7 +56,7 @@
                 <div class="name-badge">
                     <p class="role">立教大学 教授</p>
                     <p class="name-jp">小澤 康裕</p>
-                    <p class="name-en">Michihiro Ozawa</p>
+                    <p class="name-en">Yasuhiro Ozawa</p>
                 </div>
             </div>
         </header>
@@ -266,3 +301,18 @@
                     </div>
                 </div>
             </div>
+        </section>
+    </div>
+
+    <script>
+        function checkAnswer(quizId) {
+            const quizCard = document.getElementById(quizId);
+            const revealText = quizCard.querySelector('.reveal-text');
+            const pollResult = quizCard.querySelector('.poll-result');
+            if (revealText) revealText.style.display = 'none';
+            if (pollResult) pollResult.style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>

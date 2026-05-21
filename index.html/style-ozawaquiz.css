@@ -383,3 +383,119 @@ body {
         grid-column: 1 / 2;
     }
 }
+
+/* ==========================================
+   🌐 共通ページ選択バーのスタイル
+   ========================================== */
+.main-header {
+    background-color: rgba(0, 0, 0, 0.85);
+    /* 高級感のある半透明の黒 */
+    color: #fff;
+    position: fixed;
+    /* 画面の一番上にずっと固定する設定 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    /* 他のパーツの下に隠れないように最前面にする */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 60px;
+    /* バーの高さ */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* ロゴ、メニュー、MENUを綺麗に左右に広げる */
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* メニューを横並びにする */
+    gap: 25px;
+    /* メニューごとの間隔 */
+}
+
+.nav-links>li {
+    position: relative;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #ccc;
+    /* 普段の文字色 */
+    font-size: 14px;
+    font-weight: bold;
+    transition: color 0.3s;
+    padding: 10px 0;
+}
+
+.nav-links a:hover {
+    color: #fff;
+    /* マウスを乗せたときに白く光る */
+}
+
+.header-right {
+    font-size: 12px;
+    font-weight: bold;
+    color: #888;
+    border: 1px solid #444;
+    padding: 4px 8px;
+    border-radius: 3px;
+}
+
+/* --- 下にパッと広がるドロップダウンメニューの仕組み --- */
+.dropdown-content {
+    display: none;
+    /* 普段は隠しておく */
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #111;
+    /* メニューの背景色 */
+    border: 1px solid #333;
+    border-radius: 4px;
+    min-width: 160px;
+    padding: 10px 0;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.dropdown-content li {
+    list-style: none;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px 20px;
+    color: #ccc;
+    text-align: center;
+}
+
+.dropdown-content a:hover {
+    background-color: #222;
+    color: #fff;
+}
+
+/* マウスを乗せたらドロップダウンを表示する */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* ⚠️ 注意：バーが画面最上部に固定されるため、各ページのメインコンテンツが上にめり込まないようにする対策 */
+body {
+    padding-top: 60px !important;
+}
