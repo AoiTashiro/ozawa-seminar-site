@@ -1,102 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>所属ゼミ生紹介</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+    <header class="main-header">
+        <nav class="nav-container">
+            <div class="logo">BVTL Magazine</div>
+
+            <ul class="nav-links">
+                <li><a href="index.html">ホーム</a></li>
+
+                <li class="dropdown">
+                    <a href="#">活動内容 ▼</a>
+                    <ul class="dropdown-content">
+                        <li><a href="activities-member.html">所属ゼミ生</a></li>
+                        <li><a href="activities-event.html">行事</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="activities-ozawaquiz.html">小澤先生クイズ</a></li>
+
+                <li class="dropdown">
+                    <a href="#">シミュレーション ▼</a>
+                    <ul class="dropdown-content">
+                        <li><a href="simulation-daily.html">日常編</a></li>
+                        <li><a href="simulation-camp.html">合宿編</a></li>
+                        <li><a href="simulation-factory.html">工場見学編</a></li>
+                        <li><a href="simulation-end.html">エンディング編</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="header-right">
+                <span>MENU</span>
+            </div>
+        </nav>
+    </header>
+
     <h1>係紹介</h1>
 
     <section class="roles">
-
         <a href="#leader" class="role-link">
-
             <div class="role-card">
                 <h2>ゼミ長</h2>
-                <p>
-                    ゼミ全体の運営を担当します。
-
-                </p>
-
+                <p>ゼミ全体の運営を担当します。</p>
             </div>
         </a>
 
         <a href="#sub-leader" class="role-link">
-
             <div class="role-card">
                 <h2>副ゼミ長</h2>
-                <p>
-                    ゼミ長のサポートを行います。
-                </p>
-
+                <p>ゼミ長のサポートを行います。</p>
             </div>
         </a>
 
         <a href="#observation" class="role-link">
             <div class="role-card">
                 <h2>企業・工場見学係</h2>
-                <p>
-                    企画や見学先の予約を行います。
-                </p>
-
+                <p>企画や見学先の予約を行います。</p>
             </div>
         </a>
 
         <a href="#camp" class="role-link">
             <div class="role-card">
                 <h2>合宿係</h2>
-                <p>
-                    合宿の企画や宿泊先の手配を行います。
-                </p>
-
+                <p>合宿の企画や宿泊先の手配を行います。</p>
             </div>
         </a>
 
         <a href="#union" class="role-link">
             <div class="role-card">
                 <h2>ゼミ連係</h2>
-                <p>
-                    ゼミ連合と連絡を取ったり、リクルート期間の企画を行います。
-                </p>
-
+                <p>ゼミ連合と連絡を取ったり、リクルート期間の企画を行います。</p>
             </div>
         </a>
 
         <a href="#sns" class="role-link">
             <div class="role-card">
                 <h2>SNS係</h2>
-                <p>
-                    Instagramの運営や広報を担当します。
-                </p>
-
+                <p>Instagramの運営や広報を担当します。</p>
             </div>
         </a>
 
         <a href="#obog" class="role-link">
             <div class="role-card">
                 <h2>OBOG・フェアウェル係</h2>
-                <p>
-                    OBOG会やフェアウェルパーティのお店の手配を行います。
-                </p>
-
+                <p>OBOG会やフェアウェルパーティのお店の手配を行います。</p>
             </div>
         </a>
 
         <a href="#recording" class="role-link">
             <div class="role-card">
                 <h2>記録係</h2>
-                <p>
-                    日々の活動や行事を記録します。
-                </p>
-
+                <p>日々の活動や行事を記録します。</p>
             </div>
         </a>
-
     </section>
 
     <div style="height: 80px;"></div>
@@ -105,185 +110,107 @@
 
     <section class="members">
 
-        <div class="card">
-            <h1 id="leader"></h1>
-
-            <img src="images/member4.jpg" alt="メンバー写真">
-
+        <div class="card" id="leader">
+            <img src="photo.jpg/member4.jpg" alt="メンバー写真">
             <h2>はる</h2>
-
             <p class="role">ゼミ長</p>
-
             <p>好きなこと：音楽を聴くこと</p>
-
             <p>一言：楽しいゼミです！</p>
         </div>
 
-        <div class="card">
-            <h1 id="sub-leader"></h1>
-
-            <img src="images/member2.jpg" alt="メンバー写真">
-
+        <div class="card" id="sub-leader">
+            <img src="photo.jpg/member2.jpg" alt="メンバー写真">
             <h2>ぜん</h2>
-
             <p class="role">副ゼミ長</p>
-
             <p>好きなこと：水泳・ミセス</p>
-
             <p>一言：ぜひ来てください！</p>
         </div>
 
-        <div class="card">
-            <h1 id="observation"></h1>
-
-            <img src="images/member3.jpg" alt="メンバー写真">
-
+        <div class="card" id="observation">
+            <img src="photo.jpg/member3.jpg" alt="メンバー写真">
             <h2>けいご</h2>
-
             <p class="role">工場見学係</p>
-
             <p>好きなこと：旅行</p>
-
             <p>一言：みんな仲がいいです！</p>
         </div>
 
         <div class="card">
-            <h1 id="observation"></h1>
-
-            <img src="images/member1.jpg" alt="メンバー写真">
-
+            <img src="photo.jpg/member1.jpg" alt="メンバー写真">
             <h2>はやと</h2>
-
             <p class="role">工場見学係</p>
-
             <p>好きなこと：ゲーム・筋トレ・音楽</p>
-
             <p>一言：ぜひ来てください！</p>
         </div>
 
-        <div class="card">
-            <h1 id="camp"></h1>
-
-            <img src="images/member5.jpg" alt="メンバー写真">
-
+        <div class="card" id="camp">
+            <img src="photo.jpg/member5.jpg" alt="メンバー写真">
             <h2>いき</h2>
-
             <p class="role">合宿係</p>
-
             <p>好きなこと：ダイビング</p>
-
             <p>一言：ぜひ来てください！</p>
         </div>
 
         <div class="card">
-            <h1 id="camp"></h1>
-
-            <img src="images/member6.jpg" alt="メンバー写真">
-
+            <img src="photo.jpg/member6.jpg" alt="メンバー写真">
             <h2>こうすけ</h2>
-
             <p class="role">合宿係</p>
-
             <p>好きなこと：アニメ・サッカー観戦</p>
-
             <p>一言：ぜひ来てください！</p>
         </div>
 
-        <div class="card">
-            <h1 id="union"></h1>
-
-            <img src="images/member7.jpg" alt="メンバー写真">
-
+        <div class="card" id="union">
+            <img src="photo.jpg/member7.jpg" alt="メンバー写真">
             <h2>かいと</h2>
-
             <p class="role">ゼミ連係</p>
-
             <p>好きなこと：漫画・アニメ・映画</p>
-
             <p>一言：ぜひ来てください！</p>
         </div>
 
-        <div class="card">
-            <h1 id="sns"></h1>
-
-            <img src="images/member1.jpg" alt="メンバー写真">
-
+        <div class="card" id="sns">
+            <img src="photo.jpg/member1.jpg" alt="メンバー写真">
             <h2>あまね</h2>
-
             <p class="role">SNS係</p>
-
             <p>好きなこと：アニメ</p>
-
             <p>一言：ぜひ来てください！</p>
         </div>
 
         <div class="card">
-            <h1 id="sns"></h1>
-
-            <img src="images/member4.jpg" alt="メンバー写真">
-
+            <img src="photo.jpg/member4.jpg" alt="メンバー写真">
             <h2>ちゅら</h2>
-
             <p class="role">SNS係</p>
-
             <p>好きなこと：ダンス</p>
-
             <p>一言：ぜひ来てください！</p>
         </div>
 
-        <div class="card">
-            <h1 id="obog"></h1>
-
-            <img src="images/member6.jpg" alt="メンバー写真">
-
+        <div class="card" id="obog">
+            <img src="photo.jpg/member6.jpg" alt="メンバー写真">
             <h2>このみ</h2>
-
             <p class="role">OBOG会係</p>
-
             <p>好きなこと：映画</p>
-
             <p>一言：ぜひ来てください！</p>
         </div>
 
         <div class="card">
-            <h1 id="obog"></h1>
-
-            <img src="images/member7.jpg" alt="メンバー写真">
-
+            <img src="photo.jpg/member7.jpg" alt="メンバー写真">
             <h2>ひなこ</h2>
-
             <p class="role">OBOG会係</p>
-
             <p>好きなこと：旅行・散歩・音楽</p>
-
             <p>一言：ぜひ来てください！</p>
         </div>
 
-        <div class="card">
-            <h1 id="recording"></h1>
-
-            <img src="images/member1.jpg" alt="メンバー写真">
-
+        <div class="card" id="recording">
+            <img src="photo.jpg/member1.jpg" alt="メンバー写真">
             <h2>あおい</h2>
-
             <p class="role">記録係</p>
-
             <p>好きなこと：旅行</p>
-
             <p>一言：ぜひ来てください！</p>
         </div>
 
         <div class="card">
-            <h1 id="recording"></h1>
-
-            <img src="images/member2.jpg" alt="メンバー写真">
-
+            <img src="photo.jpg/member2.jpg" alt="メンバー写真">
             <h2>けんた</h2>
-
             <p class="role">記録係</p>
-
             <p>好きなこと：ゲーム・筋トレ</p>
-
             <p>一言：ぜひ来てください！</p>
         </div>
 
