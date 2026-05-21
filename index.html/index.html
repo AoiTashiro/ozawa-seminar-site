@@ -1,163 +1,142 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 
 <head>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>小澤ゼミ紹介サイト</title>
 
-  <style>
-    nav {
-      background-color: #333;
-      padding: 10px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 10px;
-      padding: 8px 15px;
-      border-radius: 5px;
-    }
-
-    nav a:hover {
-      background-color: #555;
-    }
-
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      padding: 10px;
-      min-width: 250px;
-    }
-
-    .dropdown-content a {
-      display: block;
-      padding: 10px;
-      color: black;
-    }
-
-    .dropdown-content a:hover {
-      background-color: #ddd;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-  </style>
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <nav>
-    <a href="index.html">🏠 ホーム</a>
-
-    <div class="dropdown">
-      <a href="#">📘活動内容</a>
-      <div class="dropdown-content">
-        <a href="activities-seminar.html">毎日の活動</a>
-        <a href="activities-event.html">行事</a>
+  <header class="main-header">
+    <nav class="nav-container">
+      <div class="logo">BVTL Magazine</div>
+      <ul class="nav-links">
+        <li><a href="index.html">ホーム</a></li>
+        <li class="dropdown">
+          <a href="#">活動内容 ▼</a>
+          <ul class="dropdown-content">
+            <li><a href="activities-seminar.html">毎日の活動</a></li>
+            <li><a href="activities-event.html">行事</a></li>
+          </ul>
+        </li>
+        <li><a href="members.html">メンバー紹介</a></li>
+        <li class="dropdown">
+          <a href="#">シミュレーション ▼</a>
+          <ul class="dropdown-content">
+            <li><a href="simulation-daily.html">日常編</a></li>
+            <li><a href="simulation-camp.html">合宿編</a></li>
+            <li><a href="simulation-factory.html">工場見学編</a></li>
+            <li><a href="simulation-end.html">エンディング編</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="darkmode-toggle">
+        ダークモード <input type="checkbox">
       </div>
+    </nav>
+  </header>
 
-      <a href="members.html">👥 メンバー紹介</a>
-
-      <div class="dropdown">
-        <a href="#">🎮 シミュレーション</a>
-        <div class="dropdown-content">
-          <a href="simulation-daily.html">日常編</a>
-          <a href="simulation-camp.html">合宿編</a>
-          <a href="simulation-factory.html">工場見学編</a>
-          <a href="simulation-end.html">エンディング編</a>
-        </div>
-      </div>
-  </nav>
-
-  <h1>小澤ゼミ紹介サイト</h1>
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
-  <div class="container">
-    <h2>通年活動</h2>
-
-    <div class="swiper mySwiper">
-      <div class="swiper-wrapper">
-
-        <div class="swiper-slide">
-          <a href="detail1.html" class="card-link">
-            <div class="card">
-              <div class="card-img">
-                <img src="image1.jpg" alt="記事画像">
-              </div>
-              <div class="card-content">
-                <span class="category">ディスカッション</span>
-                <h3>2.3年共通！経済に関するテーマでディスカッション</h3>
-                <p class="date">2026年05月18日</p>
-                <div class="tags">
-                  <span class="tag">#英文記事</span>
-                  <span class="tag">#書評</span>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div class="swiper-slide">
-          <a href="detail2.html" class="card-link">
-            <div class="card">
-              <div class="card-img">
-                <img src="image2.jpg" alt="記事画像">
-              </div>
-              <div class="card-content">
-                <span class="category">２年次活動</span>
-                <h3>財務会計を仲間と学ぼう</h3>
-                <p class="date">2026年05月15日</p>
-                <div class="tags">
-                  <span class="tag">#輪読</span>
-                  <span class="tag">#プレゼンテーション</span>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div class="swiper-slide">
-          <a href="detail3.html" class="card-link">
-            <div class="card">
-              <div class="card-img">
-                <img src="image3.jpg" alt="記事画像">
-              </div>
-              <div class="card-content">
-                <span class="category">三年次活動</span>
-                <h3>AIを使ってプログラミングをしてみよう</h3>
-                <p class="date">2026年05月13日</p>
-                <div class="tags">
-                  <span class="tag">#AI</span>
-                  <span class="tag">#programming</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-        </div>
-        </a>
-      </div>
-
+  <div class="hero-section">
+    <div class="hero-content">
+      <span class="magazine-label">BVTL Magazine</span>
+      <h1 class="hero-title">小澤ゼミ紹介サイト</h1>
+      <p class="hero-subtitle">未来の経済と社会を語る、私たちの学びの場。</p>
     </div>
+  </div>
 
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
+  <div class="content-container">
+    <div class="card-gallery-wrapper">
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+
+          <div class="swiper-slide">
+            <a href="detail1.html" class="card-link">
+              <div class="card">
+                <div class="card-img">
+                  <img src="photo.jpg/photo1-daily.jpg" alt="ディスカッション風景">
+                </div>
+                <div class="card-content">
+                  <span class="company-tag">日本郵船「ツゥ」の方へ</span>
+                  <span class="skill-tag">技術力でつなぐ</span>
+                  <h3>自動車専用船AI配船システムを開発・本格導入 最適計画を迅速... →</h3>
+                  <p class="date">2026年05月18日</p>
+                  <div class="tags">
+                    <span class="tag">#日本郵船グループ</span>
+                    <span class="tag">#DX</span>
+                    <span class="tag">#環境保全</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="swiper-slide">
+            <a href="detail2.html" class="card-link">
+              <div class="card">
+                <div class="card-img">
+                  <img src="image2.jpg" alt="財務会計の学習">
+                </div>
+                <div class="card-content">
+                  <span class="company-tag">日本郵船「ツゥ」の方へ</span>
+                  <span class="skill-tag">技術力でつなぐ</span>
+                  <h3>3Dモデルで切り拓く新造船設計の未来 デジタル化が船舶管理の... →</h3>
+                  <p class="date">2026年05月15日</p>
+                  <div class="tags">
+                    <span class="tag">#DX</span>
+                    <span class="tag">#船のテクノロジー</span>
+                    <span class="tag">#日本郵船グループ</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="swiper-slide">
+            <a href="detail3.html" class="card-link">
+              <div class="card">
+                <div class="card-img">
+                  <img src="image3.jpg" alt="プログラミング風景">
+                </div>
+                <div class="card-content">
+                  <span class="company-tag">日本郵船の舞台裏</span>
+                  <span class="skill-tag">新規事業を生活して新造船設備人材を育てるのエネコー... →</span>
+                  <p class="date">2026年05月13日</p>
+                  <div class="tags">
+                    <span class="tag">#タレントマネジンズ</span>
+                    <span class="tag">#DX</span>
+                    <span class="tag">#イノベーション</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+        </div>
+        <div class="swiper-controls-bar">
+          <div class="bottom-magazine-logo">BVTL Magazine →</div>
+          <div class="swiper-button-container">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
-  </div>
+  <footer class="site-footer">
+    <div class="footer-logo">BVTL</div>
+    <div class="footer-social">
+      <span>(f)</span> <span>(t)</span> <span>(y)</span>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="script.js"></script>
-
-
 </body>
 
 </html>

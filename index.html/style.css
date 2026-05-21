@@ -1,89 +1,323 @@
-/* --- ここから書き換え・追加 --- */
+/* --- 全体の基本スタイル --- */
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #222;
+    /* 画像がない時も暗く保つ */
+    background-image: url('hero-background.jpg');
+    /* 背景画像 */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
 
-/* 1. カード全体の基本設定（はみ出た部分を隠す設定を追加） */
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ==========================================
+   🌐 ヘッダーとナビゲーション
+   ========================================== */
+.main-header {
+    background-color: rgba(0, 0, 0, 0.6);
+    /* 画像通りの半透明な黒 */
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links>li {
+    position: relative;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 20px 0;
+    display: block;
+}
+
+.darkmode-toggle {
+    font-size: 12px;
+    color: #ccc;
+}
+
+/* --- 普通のドロップダウンメニュー --- */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border-radius: 4px;
+    min-width: 150px;
+    padding: 10px 0;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content li {
+    list-style: none;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    height: auto;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* ==========================================
+   🚀 ヒーローセクション（大きな文字）
+   ========================================== */
+.hero-section {
+    height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.magazine-label {
+    font-size: 14px;
+    color: #fff;
+    background-color: #d32f2f;
+    /* 赤いラベル */
+    padding: 4px 10px;
+    display: inline-block;
+    margin-bottom: 15px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.hero-title {
+    font-size: 64px;
+    /* 画像通りの超大文字！ */
+    font-weight: bold;
+    color: #fff;
+    margin: 0 0 10px 0;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.hero-subtitle {
+    font-size: 22px;
+    color: #fff;
+    margin: 0;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+    font-weight: bold;
+}
+
+/* ==========================================
+   🎡 カードギャラリー（画像の下部重ね合わせ）
+   ========================================== */
+.card-gallery-wrapper {
+    margin-top: -120px;
+    /* タイトル部分にカードを食い込ませる */
+    position: relative;
+    z-index: 10;
+}
+
+.swiper {
+    width: 100%;
+    padding-bottom: 90px;
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 .card {
     background: #fff;
-    border: 1px solid #e0e0e0;
     border-radius: 4px;
     overflow: hidden;
-    /* これでカードからはみ出るテキストを最初は隠します */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 400px;
-    /* カード全体の高さを固定します */
-    position: relative;
-    /* 中身の位置の基準にします */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    height: 420px;
 }
 
-/* ホバー時にカード全体を少し浮かせる */
-.card-link:hover .card {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+.card-img {
+    width: 100%;
+    height: 180px;
 }
 
-/* 2. 画像部分の調整 */
 .card-img img {
     width: 100%;
     height: 100%;
-    /* カードいっぱいに画像を表示 */
     object-fit: cover;
 }
 
-/* 3. テキスト部分（最初は下に隠しておき、ホバーで競り上がらせる） */
 .card-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.95);
-    /* 背景を少し透明な白にする */
-
-    /* 【重要】最初は下にずらして隠しておく（数値は調整してください） */
-    transform: translateY(70%);
-    /* 動くスピード（0.3秒かけてスムーズに動く） */
-    transition: transform 0.3s ease;
+    padding: 15px;
 }
 
-/* 4. 【ホバー時の動き】カーソルが合ったら元の位置に戻す */
-.card-link:hover .card-content {
-    transform: translateY(0);
+.company-tag {
+    font-size: 11px;
+    color: #444;
+    display: block;
+    font-weight: bold;
 }
 
-/* --- ここから下は好みに合わせて微調整 --- */
-.category {
-    font-size: 12px;
-    color: #666;
-    border: 1px solid #ccc;
-    padding: 2px 8px;
+.skill-tag {
+    font-size: 10px;
+    color: #fff;
+    background-color: #777;
+    padding: 1px 5px;
     display: inline-block;
-    margin-bottom: 10px;
+    margin: 4px 0;
 }
 
 .card-content h3 {
-    font-size: 16px;
-    margin: 10px 0;
+    font-size: 14px;
+    margin: 6px 0;
     line-height: 1.4;
-    color: #333;
+    color: #111;
+    font-weight: bold;
+    height: 60px;
+    overflow: hidden;
 }
 
 .date {
-    font-size: 12px;
+    font-size: 11px;
     color: #999;
-    margin-bottom: 15px;
+    margin: 0 0 10px 0;
 }
 
 .tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 4px;
 }
 
 .tag {
-    font-size: 12px;
-    color: #333;
-    border: 1px solid #333;
+    font-size: 10px;
+    color: #666;
+    border: 1px solid #ccc;
     border-radius: 20px;
-    padding: 3px 10px;
+    padding: 1px 8px;
+}
+
+/* ==========================================
+   コントロールバーと独自の赤い矢印ボタン
+   ========================================== */
+.swiper-controls-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-radius: 4px;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    z-index: 20;
+}
+
+.bottom-magazine-logo {
+    font-weight: bold;
+    font-size: 14px;
+    color: #222;
+}
+
+.swiper-button-container {
+    display: flex;
+    position: relative;
+    width: 80px;
+    height: 35px;
+}
+
+/* 画像通りの小さな赤いコントロールボタン */
+.swiper-button-prev,
+.swiper-button-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 35px;
+    height: 35px;
+    background-color: #d32f2f;
+    color: #fff !important;
+    margin: 0;
+    border-radius: 2px;
+}
+
+.swiper-button-prev {
+    left: 0;
+}
+
+.swiper-button-next {
+    right: 0;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size: 12px !important;
+    font-weight: bold;
+}
+
+/* フッター */
+.site-footer {
+    background-color: #111;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-logo {
+    font-size: 16px;
+    font-weight: bold;
+    color: #d32f2f;
+}
+
+.footer-social span {
+    margin-left: 10px;
+    font-size: 12px;
+    color: #aaa;
 }
