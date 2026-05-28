@@ -8,7 +8,7 @@ body {
     color: #333;
 
     /* ⭕ あおいさんの選んだ写真を画面全体の一番後ろに固定します */
-    background-image: url('/photo.jpg/photo3-daily.jpg');
+    background-image: url('photo.jpg/photo3-daily.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
