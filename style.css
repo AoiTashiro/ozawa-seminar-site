@@ -1,5 +1,5 @@
 /* ==========================================================================
-   🎨 ホームページの背景設定（ここにあおいさんの写真をセット！）
+   🎨 全体の基本スタイル ＆ 背景画像設定
    ========================================================================== */
 body {
     font-family: "Helvetica Neue", Arial, sans-serif;
@@ -7,16 +7,13 @@ body {
     padding: 0;
     color: #333;
 
-    /* ⭕ 写真の指示をここに合体！頭の /（スラッシュ）は無しが正解です */
+    /* ⭕ あおいさんの選んだ写真を画面全体の一番後ろに固定します */
     background-image: url('photo.jpg/photo3-daily.jpg');
     background-size: cover;
-    /* 画面いっぱいに画像を広げる */
     background-position: center;
-    /* 画像の中心を画面の真ん中に */
     background-attachment: fixed;
-    /* スクロールしても背景画像を固定 */
     background-color: #222;
-    /* 万が一画像が読み込めない時の予備の暗い色 */
+    /* 画像が読み込まれるまでの待機色 */
 }
 
 .content-container {
@@ -30,7 +27,7 @@ body {
    ========================================== */
 .main-header {
     background-color: rgba(0, 0, 0, 0.6);
-    /* 画像通りの半透明な黒 */
+    /* 半透明な黒 */
     color: #fff;
     position: fixed;
     top: 0;
@@ -123,6 +120,8 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
+    background: transparent;
+    /* ⭕ ここを完全に透明にして、後ろの背景写真を見せます！ */
 }
 
 .hero-content {
@@ -143,7 +142,7 @@ body {
 
 .hero-title {
     font-size: 64px;
-    /* 画像通りの超大文字！ */
+    /* 超大文字！ */
     font-weight: bold;
     color: #fff;
     margin: 0 0 10px 0;
@@ -278,7 +277,6 @@ body {
     height: 35px;
 }
 
-/* 画像通りの小さな赤いコントロールボタン */
 .swiper-button-prev,
 .swiper-button-next {
     position: absolute;
