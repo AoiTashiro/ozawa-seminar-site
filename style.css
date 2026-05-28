@@ -1,3 +1,15 @@
+body {
+    background-image: url('photo.jpg/photo3-daily.jpg');
+    /* 👈 ここに使いたい画像のパスを書きます */
+    background-size: cover;
+    /* 画面いっぱいに画像を広げる */
+    background-position: center;
+    /* 画像の中心を画面の真ん中に合わせる */
+    background-attachment: fixed;
+    /* スクロールしても背景画像を固定する */
+    margin: 0;
+}
+
 /* --- 全体の基本スタイル --- */
 body {
     font-family: "Helvetica Neue", Arial, sans-serif;
