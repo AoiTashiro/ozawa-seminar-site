@@ -1,148 +1,406 @@
-import time
-import random
+<!DOCTYPE html>
+<html lang="ja">
 
-def click_to_progress():
-"""クリック（Enterキー）でテキストを進める関数"""
-input("\n[Enterキーを押して次へ]")
-print("-" * 50)
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>小澤ゼミ紹介シミュレーション</title>
+      <style>
+            /* ========== CSS (見た目の設定) ========== */
+            body {
+                  background-color: #111;
+                  /* 背景を暗く */
+                  color: #eee;
+                  font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  height: 100vh;
+                  margin: 0;
+            }
 
-def main():
-print("==================================================")
-print(" 小澤ゼミ紹介シミュレーションゲーム (動作確認版) ")
-print("==================================================")
+            #game-container {
+                  width: 800px;
+                  height: 500px;
+                  background-color: #000;
+                  border: 2px solid #444;
+                  border-radius: 8px;
+                  padding: 30px;
+                  box-sizing: border-box;
+                  display: flex;
+                  flex-direction: column;
+                  position: relative;
+                  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+            }
 
-# --- ①〜③：オープニング自動演出パート ---
-print("\n【仮想空間演出開始】")
-print("① [演出：多色の物体が画面奥から手前へ高速で流れてくる（サマーウォーズ風）]")
-print(" (グレー、紫ピンク、黄色、水色、黄緑、赤の光 / 電子音)")
-time.sleep(4) # 4秒待機
+            #text-box {
+                  flex-grow: 1;
+                  font-size: 1.4rem;
+                  line-height: 1.8;
+                  white-space: pre-wrap;
+                  /* 改行をそのまま表示 */
+            }
 
-print("\n② [演出：Language ➤ Japanese を自動選択（近未来UI風・カーソル移動・決定音）]")
-time.sleep(1) # 1秒待機
+            #indicator {
+                  text-align: right;
+                  font-size: 1.2rem;
+                  color: #0ff;
+                  animation: blink 1s infinite;
+                  display: none;
+                  /* 初期状態は非表示 */
+                  cursor: pointer;
+            }
 
-print("\n③ [演出：ログイン画面表示＆自動入力（タイピング風・入力音）]")
-print(" Log in")
-print(" account : ozawa2026")
-print(" password : ********")
-time.sleep(1) # 1秒待機
+            @keyframes blink {
 
-# --- ④：プレイヤー名入力 ---
-print("\n④ [演出：近未来UI風 プレイヤー名入力画面]")
-player_name = input("プレイヤー名を入力してください ➤ ")
-if not player_name.strip():
-player_name = "主人公" # 未入力の場合のデフォルト名
+                  0%,
+                  100% {
+                        opacity: 1;
+                  }
 
-# --- ⑤：Welcome演出 ---
-print("\n⑤ [演出：強い発光・インパクト重視・電子音・背景暗め]")
-print("*" * 50)
-print(" Welcome to Ozawa Seminar ! ")
-print("*" * 50)
-time.sleep(2) # 2秒待機
+                  50% {
+                        opacity: 0;
+                  }
+            }
 
-print("\n⑤-2 [演出：文字へ吸い込まれるように移行（青系のワープ空間・高速移動・光の線・ホワイトアウト）]")
-time.sleep(3) # 3秒待機
+            /* 選択肢ボタンのスタイル */
+            #choices-area {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 15px;
+                  margin-top: 20px;
+            }
 
-# --- 日常パート開始 ---
-print("\n【背景A：廊下】 【BGMA：足音】")
-print(f"{player_name}「今日から経済学部最強の小澤ゼミが始まるぞ。まずは教室に向かおう。」")
-click_to_progress()
+            .choice-btn {
+                  background-color: #222;
+                  color: #fff;
+                  border: 1px solid #0ff;
+                  padding: 15px;
+                  font-size: 1.2rem;
+                  cursor: pointer;
+                  border-radius: 4px;
+                  transition: 0.2s;
+            }
 
-print(f"{player_name}「（歩き始めた足は教室に近づくにつれて軽くなる。気づかぬうちに新たな挑戦に心が昂っているのだろう。）」")
-click_to_progress()
+            .choice-btn:hover {
+                  background-color: #0ff;
+                  color: #000;
+            }
 
-print("\n【背景B：ドア前】 【BGMA足音停止】(0.5秒フェードアウト)")
-time.sleep(0.5)
-print("「（そんなことを思っている間に教室に着いていた。）」")
-click_to_progress()
+            /* 名前入力エリアのスタイル */
+            #input-area {
+                  display: none;
+                  text-align: center;
+                  margin-top: 40px;
+            }
 
-print("\n【背景C：ドア開】(ホワイトアウト) 【SE：ドア開】")
-print(f"{player_name}「（教室の扉を開けた瞬間、新たな高みに踏み入ったことを自覚する。）」")
-click_to_progress()
+            #player-name-input {
+                  font-size: 1.2rem;
+                  padding: 10px;
+                  width: 50%;
+                  background: #222;
+                  color: #fff;
+                  border: 1px solid #555;
+            }
 
-# --- 【状況A】挨拶パート ---
-print("\n【背景D：教室ドア前】 【BGM：賑やか】")
-print(f"{player_name}「賑やかだな。」")
-click_to_progress()
+            #submit-name {
+                  font-size: 1.2rem;
+                  padding: 10px 20px;
+                  cursor: pointer;
+            }
+      </style>
+</head>
 
-print(f"{player_name}「よーしとりあえず...」")
+<body>
 
-# 選択肢Aのループ（小澤先生に挨拶するまで終わらない）
-while True:
-time.sleep(0.5)
-print("\n【選択肢A】")
-print("1: 小澤先生に挨拶に行く")
-print("2: ゼミ生に挨拶に行く")
-choice_a = input("選択してください (1 または 2): ")
+      <div id="game-container">
+            <div id="text-box"></div>
 
-if choice_a == "1":
-print("\n【背景E：教室黒板前】(画面が右から黒くなって移動した風に)")
-print(f"{player_name}「小澤先生！本日からよろしくお願いします！」")
-click_to_progress()
-print("小澤先生「おう、よう来たな。そんな固くならんでええ。適当に座れ。」")
-click_to_progress()
-break # ループを抜けて状況Bへ
+            <div id="input-area">
+                  <input type="text" id="player-name-input" placeholder="プレイヤー名を入力">
+                  <button id="submit-name">決定</button>
+            </div>
 
-elif choice_a == "2":
-# 50%の確率で「けいご」か「ぜん」に分岐
-if random.random() < 0.5: print("\n【背景F：教室窓側】") print("？？？（けいご）「おいおい。先に先生への挨拶や。筋は通しとかねぇとな。」") else:
-      print("\n【背景G：教室廊下側】") print("？？？（ぜん）「小澤先生をスルーとはとんでもない新入りが入ってきたもんやな。」") click_to_progress()
-      print("（...まずは先生に挨拶に行かなければいけないようだ。体勢を立て直そう。）") else: print("※1か2の半角数字で入力してください。") # --- 【状況B】教室入って座る席 ---
-      print("\n【背景H：教室黒板前逆向き】") print(f"{player_name}「どこに座ろうかな？」") while True: time.sleep(0.5) print("\n【選択肢B】")
-      print("1: 資料を読んでいる先輩のところに行く") print("2: 話している先輩のところに行く") choice_b=input("選択してください (1 または 2): ")
-        
-        if choice_b == " 1": print(f"\n{player_name}「真面目そうだな。よし。」") click_to_progress()
-      print(f"{player_name}「{player_name}です。今日からからよろしくお願いします。」") click_to_progress() print("真面目A先輩「よろしく。今日は初めて？」")
-      click_to_progress() print(f"{player_name}「はい、今日が初めてです。」") click_to_progress() print("真面目A先輩「そっか。最初は緊張するよね。」")
-      click_to_progress() print("真面目A先輩「聞きたいことがあったらなんでも聞いてね。」") click_to_progress() print(f"{player_name}「じゃあ...」")
-      click_to_progress() break elif choice_b=="2" : print(f"\n{player_name}「賑やかそうだな。よし。」") click_to_progress()
-      print(f"{player_name}「{player_name}です！今日からからよろしくお願いします！」") click_to_progress() print("話B先輩「おぉ！これからよろしくね！！」")
-      click_to_progress() print("話C先輩「おぉ今日初めてか！そんな固くならなくて大丈夫よ。」") click_to_progress()
-      print(f"{player_name}「すごく緊張してます。」") click_to_progress() print("話B先輩「最初はみんなそんな感じだったよ。」")
-      print("話C先輩「わからないことあったら何でも聞いてくれい。」") click_to_progress() print("主「じゃあ...」") click_to_progress() break else:
-      print("※1か2の半角数字で入力してください。") # --- 【状況C】質問内容 --- while True: time.sleep(0.5) print("\n【選択肢C】") print("1:
-      「ディスカッションって役割分担とかあるんですか？」") print("2: 「このゼミってどんな人がいるんですか？」") choice_c=input("選択してください (1 または 2): ")
-        
-        if choice_c in [" 1", "2" ]: break else: print("※1か2の半角数字で入力してください。") print("\n===質問パート===")
-    # 選択肢BとCの組み合わせによる4パターンの分岐
-    if choice_b == " 1" and choice_c=="1" : # 真面目先輩 × 役割分担 print(f"{player_name}「ディスカッションって役割分担とかあるんですか？」")
-      click_to_progress() print("真面目A先輩「あるよ。毎回班ごとに決めるんだ。」") click_to_progress()
-      print(f"{player_name}「例えばどんな役割があるんですか？」") click_to_progress()
-      print("真面目A先輩「発表者にタイムキーパー、進行役や記録係が主な役割だよ。最初は周りの先輩を頼るといいよ。」") click_to_progress()
-      print(f"{player_name}「はい。そうします。」") click_to_progress() print("真面目A先輩「せっかくだから今日のThe Wall Street
-      Journalを一緒に見てみようか。」") elif choice_b=="2" and choice_c=="1" : # 話す先輩 × 役割分担
-      print(f"{player_name}「ディスカッションって役割分担とかあるんですか？」") click_to_progress() print("話B先輩「あるよ。毎回班ごとに決めるんだ。」")
-      click_to_progress() print(f"{player_name}「例えばどんな役割があるんですか？」") click_to_progress()
-      print("話B先輩「発表者にタイムキーパー、進行役や記録係が主な役割だよ。最初は周りの先輩を頼るといいよ。」") click_to_progress() print(f"{player_name}「はい。そうします。」")
-      click_to_progress() print("話C先輩「せっかくだから今日のThe Wall Street Journalを一緒に見てみようか。」") elif choice_b=="1" and
-      choice_c=="2" : # 真面目先輩 × どんな人 print(f"{player_name}「このゼミってどんな人がいるんですか？」") click_to_progress()
-      print("真面目A先輩「いろんな人がいるよ。」") click_to_progress() print(f"{player_name}「どんな人がいるんですか？」") click_to_progress()
-      print("真面目A先輩「私たちの代はお酒が好きな人が多いかな？」") click_to_progress() print(f"{player_name}「それは楽しそうですね。他にはどんな方がいるんですか？」")
-      click_to_progress() print("真面目A先輩「やる気がなさそうに見えるけど、秘めてる力は底が見えないよ。」") click_to_progress()
-      print(f"{player_name}「それはすごいですね。他にはどんな方が？」") click_to_progress()
-      print("真面目A先輩「ディスカッションになると急に人が変わったように饒舌になる人もいるかな。」") print("真面目A先輩「普段は静かなのに、議論が始まるとまるで別人みたいになるんだよね。」")
-      click_to_progress() print(f"{player_name}「小澤ゼミにはいろいろな人がいるんですね。」") click_to_progress()
-      print("真面目A先輩「そうなんだ。せっかくだし、このまま今日のThe Wall Street Journalを一緒に見てみようか。」") elif choice_b=="2" and choice_c=="2" : #
-      話す先輩 × どんな人 print(f"{player_name}「このゼミってどんな人がいるんですか？」") click_to_progress() print("話B先輩「いろんな人がいるよ。」")
-      click_to_progress() print(f"{player_name}「どんな人がいるんですか？」") click_to_progress()
-      print("話B先輩「機嫌がいいと帰りにみんなにドーナツをおごってくれる人がいるよ。」") click_to_progress() print(f"{player_name}「楽しそうです。他にはどんな方がいるんですか？」")
-      click_to_progress() print("話C先輩「インドネシアに帰省しているのにオンラインで馬券を買っている人がいるよ。」") click_to_progress()
-      print(f"{player_name}「それはすごいですね。他にはどんな方が？」") click_to_progress()
-      print("話B先輩「旅行好きで海外によく行ってお土産を買ってきてくれるんだけど、その買ってきてくれるお土産すべてが美味しくない人がいるよ。」") click_to_progress()
-      print(f"{player_name}「小澤ゼミにはいろいろな人がいるんですね。」") click_to_progress() print("話C先輩「ｿｳﾀﾞﾖ。せっかくだし、このまま今日のThe Wall Street
-      Journalを一緒に見てみようか。」") click_to_progress() print(f"{player_name}「はい。ありがとうございます。」") click_to_progress() # ---
-      【状況D】班決め --- print("\n【状況D】班決め") print("ゼミ長（声だけ）「ディスカッション始めるよー！班作ってー！」") click_to_progress()
-      print(f"{player_name}「誰と一緒の班になろうか？」") while True: time.sleep(0.5) print("\n【選択肢D】") print("1: 「真面目そうな人」のところに行く")
-      print("2: 「雰囲気良さそうだな。あそこに行ってみるか。」") choice_d=input("選択してください (1 または 2): ")
-        
-        if choice_d == " 1": print("\n真面目D先輩「人数ちょうどいいからぜひぜひ。」") click_to_progress()
-      print("陽気E先輩「じゃあ簡単に自己紹介しますか。僕/私はC先輩で趣味は競馬だよ。でこっちが真面目D先輩だよ。」") click_to_progress() print("D先輩「よろしく。趣味は漫画だよ。」")
-      click_to_progress() print(f"{player_name}「{player_name}です。よろしくお願いします。」") click_to_progress()
-      print("ゼミ長「ディスカッション始めまーす。」") print("\n ➡ 【ルートEND：真面目な班でスタート！】") break elif choice_d=="2" :
-      print(f"\n{player_name}「雰囲気良さそうだな。あそこに行ってみるか！」") click_to_progress() print("陽気E先輩「ちょうど人探してたところ！一緒にやろうか！！」")
-      click_to_progress() print("陽気E先輩「よろしくね！僕/私は陽気E先輩で趣味は漫画だよ。で、こっちが真面目D先輩だよ。」") click_to_progress()
-      print("真面目D先輩「よろしく。趣味は競馬だよ。」") click_to_progress() print("ゼミ長「ディスカッション始めまーす。」") print("\n ➡ 【ルートEND：賑やかな班でスタート！】")
-      break else: print("※1か2の半角数字で入力してください。") print("\n==================================================")
-    print(" GAME CLEAR !! ")
-    print("==================================================")
+            <div id="choices-area"></div>
+            <div id="indicator">▼ クリックして次へ</div>
+      </div>
 
-if __name__ == " __main__": main()
+      <script>
+            /* ========== JavaScript (ゲームの動きの設定) ========== */
+            const textBox = document.getElementById('text-box');
+            const indicator = document.getElementById('indicator');
+            const choicesArea = document.getElementById('choices-area');
+            const inputArea = document.getElementById('input-area');
+            const nameInput = document.getElementById('player-name-input');
+            const submitBtn = document.getElementById('submit-name');
+            const gameContainer = document.getElementById('game-container');
+
+            let playerName = "主人公";
+
+            // 待機用関数 (指定ミリ秒待つ)
+            const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+            // クリック待ち関数
+            const waitClick = () => {
+                  return new Promise(resolve => {
+                        indicator.style.display = 'block';
+
+                        const clickHandler = () => {
+                              indicator.style.display = 'none';
+                              gameContainer.removeEventListener('click', clickHandler);
+                              resolve();
+                        };
+
+                        // 少し遅らせてイベントを登録（連続クリック防止）
+                        setTimeout(() => {
+                              gameContainer.addEventListener('click', clickHandler);
+                        }, 100);
+                  });
+            };
+
+            // テキスト表示関数
+            const showText = (text, append = false) => {
+                  if (append) {
+                        textBox.innerHTML += "\n" + text;
+                  } else {
+                        textBox.innerHTML = text;
+                  }
+            };
+
+            // 選択肢表示関数
+            const askChoices = (choices) => {
+                  return new Promise(resolve => {
+                        choicesArea.innerHTML = ''; // クリア
+                        choices.forEach((choiceText, index) => {
+                              const btn = document.createElement('button');
+                              btn.className = 'choice-btn';
+                              btn.innerText = choiceText;
+                              btn.onclick = () => {
+                                    choicesArea.innerHTML = ''; // 押されたら消す
+                                    resolve(index + 1); // 1, 2, ... を返す
+                              };
+                              choicesArea.appendChild(btn);
+                        });
+                  });
+            };
+
+            // 名前入力関数
+            const askName = () => {
+                  return new Promise(resolve => {
+                        inputArea.style.display = 'block';
+                        submitBtn.onclick = () => {
+                              const val = nameInput.value.trim();
+                              if (val) playerName = val;
+                              inputArea.style.display = 'none';
+                              resolve();
+                        };
+                  });
+            };
+
+            // メインのゲーム進行関数
+            async function startGame() {
+                  showText("【仮想空間演出開始】\n\n①4秒\n・多色の物体が画面奥から手前へ高速で流れてくる\n・サマーウォーズの電脳空間のような雰囲気\n・グレー、紫ピンク、黄色、水色、黄緑、赤を使用\n・プレイヤーが空間を移動しているような没入感\n・電子音あり");
+                  await sleep(4000);
+
+                  showText("②1秒\nLanguage ➤ Japanese\nを自動選択する演出。\n・近未来UI風 / カーソル自動移動 / 決定音");
+                  await sleep(1000);
+
+                  showText("③1秒\nログイン画面表示。\nLog in\naccount : ozawa2026\npassword : ********\nを自動入力する演出。\n・タイピング風 / 近未来UI / 入力音");
+                  await sleep(1000);
+
+                  showText("④プレイヤー名入力");
+                  await askName();
+
+                  showText("⑤2秒\nWelcome to Ozawa Seminar !\nを画面中央に大きく表示。\n・強い発光 / インパクト重視 / 電子音 / 背景は暗め");
+                  await sleep(2000);
+
+                  showText("⑤3秒\nWelcome to Ozawa Seminar ! の文字へ吸い込まれるように移行。\n・青系のワープ空間 / 奥へ進む演出 / 高速移動感 / 光の線が流れる / 最後はホワイトアウト");
+                  await sleep(3000);
+
+                  // --- 日常パート ---
+                  showText(`【背景A：廊下】 【BGMA：足音】\n${playerName}「今日から経済学部最強の小澤ゼミが始まるぞ。まずは教室に向かおう。」`);
+                  await waitClick();
+
+                  showText(`${playerName}「（歩き始めた足は教室に近づくにつれて軽くなる。気づかぬうちに新たな挑戦に心が昂っているのだろう。）」`);
+                  await waitClick();
+
+                  showText(`【背景B：ドア前】 【BGMA足音停止】（0.5秒フェードアウト）`);
+                  await sleep(500);
+                  showText(`「（そんなことを思っている間に教室に着いていた。）」`);
+                  await waitClick();
+
+                  showText(`【背景C：ドア開】（ホワイトアウト） 【SE：ドア開】\n${playerName}「（教室の扉を開けた瞬間、新たな高みに踏み入ったことを自覚する。）」`);
+                  await waitClick();
+
+                  showText(`【背景D：教室ドア前】 【BGM：賑やか】\n${playerName}「賑やかだな。」`);
+                  await waitClick();
+                  showText(`${playerName}「よーしとりあえず...」`);
+                  await sleep(500);
+
+                  // 【選択肢A】ループ処理
+                  while (true) {
+                        let choiceA = await askChoices(["①小澤先生に挨拶に行く", "②ゼミ生に挨拶に行く"]);
+
+                        if (choiceA === 1) {
+                              showText(`【背景E：教室黒板前】（画面右から黒くなって移動した風に）\n${playerName}「小澤先生！本日からよろしくお願いします！」`);
+                              await waitClick();
+                              showText(`小澤先生「おう、よう来たな。そんな固くならんでええ。適当に座れ。」`);
+                              await waitClick();
+                              break; // ループを抜ける
+                        } else {
+                              if (Math.random() < 0.5) {
+                                    showText(`【背景F：教室窓側】\n？？？（けいご）「おいおい。先に先生への挨拶や。筋は通しとかねぇとな。」`);
+                              } else {
+                                    showText(`【背景G：教室廊下側】\n？？？（ぜん）「小澤先生をスルーとはとんでもない新入りが入ってきたもんやな。」`);
+                              }
+                              await waitClick();
+                              showText(`（...先に先生に挨拶した方が良さそうだ。）`);
+                              await waitClick();
+                        }
+                  }
+
+                  // 【選択肢B】
+                  showText(`【背景H：教室黒板前逆向き】\n${playerName}「どこに座ろうかな？」`);
+                  await sleep(500);
+                  let choiceB = await askChoices(["①資料を読んでいる先輩のところに行く", "②話している先輩のところに行く"]);
+
+                  if (choiceB === 1) {
+                        showText(`${playerName}「真面目そうだな。よし。」`);
+                        await waitClick();
+                        showText(`${playerName}「${playerName}です。今日からよろしくお願いします。」`);
+                        await waitClick();
+                        showText(`真面目A先輩「よろしく。今日は初めて？」`);
+                        await waitClick();
+                        showText(`${playerName}「はい、今日が初めてです。」`);
+                        await waitClick();
+                        showText(`真面目A先輩「そっか。最初は緊張するよね。」`);
+                        await waitClick();
+                        showText(`真面目A先輩「聞きたいことがあったらなんでも聞いてね。」`);
+                        await waitClick();
+                        showText(`${playerName}「じゃあ...」`);
+                        await waitClick();
+                  } else {
+                        showText(`${playerName}「賑やかそうだな。よし。」`);
+                        await waitClick();
+                        showText(`${playerName}「${playerName}です！今日からよろしくお願いします！」`);
+                        await waitClick();
+                        showText(`話B先輩「おぉ！これからよろしくね！！」`);
+                        await waitClick();
+                        showText(`話C先輩「おぉ今日初めてか！そんな固くならなくて大丈夫よ。」`);
+                        await waitClick();
+                        showText(`${playerName}「すごく緊張してます。」`);
+                        await waitClick();
+                        showText(`話B先輩「最初はみんなそんな感じだったよ。」\n話C先輩「わからないことあったら何でも聞いてくれい。」`);
+                        await waitClick();
+                        showText(`${playerName}「じゃあ...」`);
+                        await waitClick();
+                  }
+
+                  // 【選択肢C】
+                  showText(`質問内容`);
+                  await sleep(500);
+                  let choiceC = await askChoices(["①「ディスカッションって役割分担とかあるんですか？」", "②「このゼミってどんな人がいるんですか？」"]);
+
+                  // 分岐処理
+                  if (choiceC === 1) {
+                        showText(`${playerName}「ディスカッションって役割分担とかあるんですか？」`);
+                        await waitClick();
+                        let senpai = choiceB === 1 ? "真面目A先輩" : "話B先輩";
+                        let senpai2 = choiceB === 1 ? "真面目A先輩" : "話C先輩";
+
+                        showText(`${senpai}「あるよ。毎回班ごとに決めるんだ。」`);
+                        await waitClick();
+                        showText(`${playerName}「例えばどんな役割があるんですか？」`);
+                        await waitClick();
+                        showText(`${senpai}「発表者にタイムキーパー、進行役や記録係が主な役割だよ。最初は周りの先輩を頼るといいよ。」`);
+                        await waitClick();
+                        showText(`${playerName}「はい。そうします。」`);
+                        await waitClick();
+                        showText(`${senpai2}「せっかくだから今日のThe Wall Street Journalを一緒に見てみようか。」`);
+                        await waitClick();
+                  } else {
+                        showText(`${playerName}「このゼミってどんな人がいるんですか？」`);
+                        await waitClick();
+
+                        if (choiceB === 1) {
+                              showText(`真面目A先輩「いろんな人がいるよ。」`);
+                              await waitClick();
+                              showText(`${playerName}「どんな人がいるんですか？」`);
+                              await waitClick();
+                              showText(`真面目A先輩「私たちの代はお酒が好きな人が多いかな？」`);
+                              await waitClick();
+                              showText(`${playerName}「それは楽しそうですね。他にはどんな方がいるんですか？」`);
+                              await waitClick();
+                              showText(`真面目A先輩「やる気がなさそうに見えるけど、秘めてる力は底が見えないよ。」`);
+                              await waitClick();
+                              showText(`${playerName}「それはすごいですね。他にはどんな方が？」`);
+                              await waitClick();
+                              showText(`真面目A先輩「ディスカッションになると急に人が変わったように饒舌になる人もいるかな。\n普段は静かなのに、議論が始まるとまるで別人みたいになるんだよね。」`);
+                              await waitClick();
+                              showText(`${playerName}「小澤ゼミにはいろいろな人がいるんですね。」`);
+                              await waitClick();
+                              showText(`真面目A先輩「そうなんだ。せっかくだし、このまま今日のThe Wall Street Journalを一緒に見てみようか。」`);
+                              await waitClick();
+                        } else {
+                              showText(`話B先輩「いろんな人がいるよ。」`);
+                              await waitClick();
+                              showText(`${playerName}「どんな人がいるんですか？」`);
+                              await waitClick();
+                              showText(`話B先輩「機嫌がいいと帰りにみんなにドーナツをおごってくれる人がいるよ。」`);
+                              await waitClick();
+                              showText(`${playerName}「楽しそうです。他にはどんな方がいるんですか？」`);
+                              await waitClick();
+                              showText(`話C先輩「インドネシアに帰省しているのにオンラインで馬券を買っている人がいるよ。」`);
+                              await waitClick();
+                              showText(`${playerName}「それはすごいですね。他にはどんな方が？」`);
+                              await waitClick();
+                              showText(`話B先輩「旅行好きで海外によく行ってお土産を買ってきてくれるんだけど、その買ってきてくれるお土産すべてが美味しくない人がいるよ。」`);
+                              await waitClick();
+                              showText(`${playerName}「小澤ゼミにはいろいろな人がいるんですね。」`);
+                              await waitClick();
+                              showText(`話C先輩「ｿｳﾀﾞﾖ。せっかくだし、このまま今日のThe Wall Street Journalを一緒に見てみようか。」`);
+                              await waitClick();
+                        }
+                  }
+
+                  showText(`${playerName}「はい。ありがとうございます。」`);
+                  await waitClick();
+
+                  // 【選択肢D】班決め
+                  showText(`ゼミ長（声だけ）「ディスカッション始めるよー！班作ってー！」`);
+                  await waitClick();
+                  showText(`${playerName}「誰と一緒の班になろうか？」`);
+                  await sleep(500);
+
+                  let choiceD = await askChoices(["①「真面目そうな人」のところに行く", "②「雰囲気良さそうだな。あそこに行ってみるか。」"]);
+
+                  if (choiceD === 1) {
+                        showText(`真面目D先輩「人数ちょうどいいからぜひぜひ。」`);
+                        await waitClick();
+                        showText(`陽気E先輩「じゃあ簡単に自己紹介しますか。僕はC先輩で趣味は競馬だよ。でこっちが真面目D先輩だよ。」`);
+                        await waitClick();
+                        showText(`D先輩「よろしく。趣味は漫画だよ。」`);
+                        await waitClick();
+                        showText(`${playerName}「${playerName}です。よろしくお願いします。」`);
+                        await waitClick();
+                        showText(`ゼミ長「ディスカッション始めまーす。」\n\n【END】`);
+                  } else {
+                        showText(`${playerName}「雰囲気良さそうだな。あそこに行ってみるか！」`);
+                        await waitClick();
+                        showText(`陽気E先輩「ちょうど人探してたところ！一緒にやろうか！！」`);
+                        await waitClick();
+                        showText(`陽気E先輩「よろしくね！僕は陽気E先輩で趣味は漫画だよ。で、こっちが真面目D先輩だよ。」`);
+                        await waitClick();
+                        showText(`真面目D先輩「よろしく。趣味は競馬だよ。」`);
+                        await waitClick();
+                        showText(`ゼミ長「ディスカッション始めまーす。」\n\n【END】`);
+                  }
+            }
+
+            // ゲーム開始
+            startGame();
+
+      </script>
+</body>
+
+</html>
