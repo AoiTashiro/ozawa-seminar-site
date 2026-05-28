@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>年間行事予定 - フロートイン</title>
+    <!-- ▼ここでCSSを読み込みます -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ▼ここから下が行事の「骨組み」です -->
+    <div class="dummy-header" style="text-align: center; margin-bottom: 100px;">
+        <h1>ゼミナール年間行事</h1>
+    </div>
+
+    <div class="schedule-container" style="max-width: 800px; margin: 0 auto;">
+
+        <section class="event-card">
+            <div class="month">3月</div>
+            <h2 class="title">春合宿</h2>
+            <p class="desc">小澤ゼミナール最初のイベント！新入生と先輩が中を深める合宿です！</p>
+        </section>
+
+        <section class="event-card">
+            <div class="month">6月</div>
+            <h2 class="title">工場見学</h2>
+            <p class="desc">メーカーの工場や、物流の最先端など現地に足を運び学びます。</p>
+        </section>
+
+        <section class="event-card">
+            <div class="month">9月</div>
+            <h2 class="title">夏合宿</h2>
+            <p class="desc">日常から離れた場所で、ゼミ生同士の親睦を深めながら各学年に分かれて、研究テーマを掘り下げます。</p>
+        </section>
+
+        <section class="event-card">
+            <div class="month">10月</div>
+            <h2 class="title">OBOG会</h2>
+            <p class="desc">社会の第一線で活躍する先輩方と交流し、キャリアについて直接話を聞ける貴重な機会です。</p>
+        </section>
+
+        <section class="event-card">
+            <div class="month">11月</div>
+            <h2 class="title">オープンゼミ</h2>
+            <p class="desc">来年度ゼミに入りたい後輩たちに向けて、ゼミの雰囲気や研究内容、普段の活動を発表します。ゼミナールの選考もこの時期に行われます。
+            </p>
+        </section>
+
+        <section class="event-card">
+            <div class="month">12月</div>
+            <h2 class="title">クリスマスパーティ</h2>
+            <p class="desc">1年間の労をねぎらい、ゼミ生全員で楽しく盛り上がる大忘年会です！ゼミ生同士でのプレゼント交換もあります🎁</p>
+        </section>
+
+        <section class="event-card">
+            <div class="month">1月</div>
+            <h2 class="title">他大学合同ゼミ</h2>
+            <p class="desc">他大学の学生と研究発表を行い、普段とは違う視点からの意見交換で刺激を受けます。2026年は中央大学と関西学院大学と合同で実施されました。</p>
+        </section>
+
+
+    </div>
+
+    <!-- ▼ここが「動きの魔法」です（一番下に置くのが正解です！） -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        });
+
+        const cards = document.querySelectorAll('.event-card');
+        cards.forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+
+</body>
+
+</html>
