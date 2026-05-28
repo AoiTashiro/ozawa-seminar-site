@@ -4,500 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小澤先生特集</title>
+    <title>スペシャルインタビュー - 小澤ゼミ</title>
     <style>
         /* =========================================
-           全体・ベースデザイン（フォント一括統一）
+           元のCSSスタイル（ご提示いただいたもの）
            ========================================= */
-        /* 18行目あたりにある元のbodyを探してください */
-        body {
-            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-
-            /* ★ここからノート風の背景コードに書き換えます★ */
-            background-color: #fcfaf2;
-            /* 元の #f4f8fa から変更 */
-            /* background-imageの部分だけをこれに差し替え */
-            background-image:
-                linear-gradient(90deg, transparent 79px, #ffb3b3 79px, #ffb3b3 81px, transparent 81px),
-                /* 赤い縦線 */
-                linear-gradient(#91c9ff 1px, transparent 1px);
-            /* 青い横線 */
-            background-size: 100% 100%, 100% 24px;
-            background-attachment: fixed;
-            /* ★ここまで★ */
-            /* ファイルの上のほう（<style>の中）に貼り付けてください */
-        }
-
-        /* Q5の右下のマスにイラスト用カードを綺麗に収める */
-        .grid-view-container .bonus-card-q5 {
-            display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
-            background-color: #ffffff !important;
-            padding: 6px !important;
-            height: 100% !important;
-            box-sizing: border-box !important;
-            overflow: hidden !important;
-        }
-
-        /* バンザイ先生がデカくなりすぎないように枠内にひょこっと収める */
-        .grid-view-container .bonus-img-q5 {
-            max-height: 95px !important;
-            /* 縦長イラストが綺麗に収まるベストな高さ */
-            width: auto !important;
-            object-fit: contain !important;
-            display: block !important;
-            margin: 0 auto !important;
-        }
-
-        /* ==========================================
-   右下の先生をクリックすると左下から飛び出す魔法
-========================================== */
-        /* 飛び出す先生の画像（パターンA：ステッカー風） */
-        .right-bottom-popup img {
-            height: 450px;
-            width: auto;
-            object-fit: contain;
-
-            /* 🌟 ここを追加・変更：白いフチとオシャレな影 */
-            background: #ffffff;
-            padding: 10px;
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-            border: 3px solid #ff9f43;
-            /* Q4ならオレンジ、Q5ならブルーに。または無しでもOK */
-
-            transform-origin: bottom right;
-            animation: popRightBottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
-        }
-
-        /* --- グリッド内での通常の見た目（崩れ防止） --- */
-        .grid-view-container .bonus-card,
-        .grid-view-container .bonus-card-q5 {
-            display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
-            background-color: #ffffff !important;
-            padding: 6px !important;
-            height: 100% !important;
-            box-sizing: border-box !important;
-            overflow: hidden !important;
-            cursor: pointer;
-        }
-
-        .grid-view-container .bonus-img {
-            max-height: 85px !important;
-            width: auto !important;
-        }
-
-        .grid-view-container .bonus-img-q5 {
-            max-height: 95px !important;
-            width: auto !important;
-        }
-
-        /* 🌟 右下にドカンと飛び出す大画面の設定（背景は暗くしない） */
-        .right-bottom-popup {
-            display: none;
-            /* 普段は隠す */
-            position: fixed;
-            bottom: 20px;
-            /* 右下からの距離 */
-            right: 20px;
-            z-index: 10000;
-            /* 一番手前に表示 */
-            cursor: zoom-out;
-        }
-
-        /* 飛び出す先生の画像 */
-        .right-bottom-popup img {
-            height: 450px;
-            /* 👈 ここでお好みの大きさに調整できます！ */
-            width: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3));
-            /* クッキリした影 */
-
-            /* 左下から右上にシュパッと大きく飛び出すアニメーション */
-            transform-origin: bottom right;
-            animation: popRightBottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
-        }
-
-        @keyframes popRightBottom {
-            0% {
-                transform: scale(0.3);
-                opacity: 0;
-            }
-
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .magazine-container {
-            max-width: 1040px;
-            margin: 40px auto;
-            background: #ffffff;
-            padding: 50px 60px;
-            box-sizing: border-box;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-        }
-
-        /* 38行目〜45行目のマーカー設定を、これに丸ごと差し替えます */
-        .magazine-container h3,
-        .magazine-container [class*="title"],
-        .magazine-container .main-title-text,
-        .magazine-container h2 {
-            background: linear-gradient(transparent 60%, rgba(255, 235, 59, 0.6) 60%);
-            display: table;
-            /* 1行ずつ独立させて、文字の長さぴったりに合わせる */
-            margin-bottom: 10px;
-            /* マーカー同士がくっつかないように少し隙間をあける */
-            padding-right: 4px;
-            /* 右端にほんの少し余白を作って綺麗に見せる */
-        }
-
-        /* 46行目の場所にこれを貼り付けます！ */
-        .magazine-container {
-            position: relative;
-            /* 右上の文字を配置するための基準の合図 */
-        }
-
-        .magazine-container::before {
-            content: "OZAWA SEMINAR";
-            position: absolute;
-            top: 30px;
-            /* 少し上に上げて、余白にきれいに収めます */
-            right: 50px;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            font-weight: bold;
-            font-size: 0.85rem;
-            color: #4a76a8;
-            /* ノートの青線より少し濃い、上品なネイビーブルー */
-            letter-spacing: 4px;
-            /* 文字の間隔を広げてオシャレに */
-            border-bottom: 2px solid #91c9ff;
-            /* 下に細い青線を引く */
-            padding-bottom: 4px;
-        }
-
-        /* ファイルの上のほう（<style>の中）に貼り付けます */
-        .grid-view-container .bonus-card {
-            display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
-            background-color: #ffffff !important;
-            padding: 8px !important;
-            height: 100% !important;
-            box-sizing: border-box !important;
-            overflow: hidden !important;
-        }
-
-        .grid-view-container .bonus-img {
-            max-height: 85px !important;
-            width: auto !important;
-            object-fit: contain !important;
-            display: block !important;
-            margin: 0 auto !important;
-        }
-
-        /* =========================================
-           トップエリア（ヘッダー・2分割レイアウト）
-           ========================================= */
-        .magazine-header {
-            text-align: left;
-            margin-bottom: 40px;
-        }
-
-        .recruit-text {
-            font-size: 13px;
-            letter-spacing: 0.2em;
-            color: #94a3b8;
-            margin: 0 0 8px 0;
-            font-weight: bold;
-        }
-
-        .main-title-text {
-            font-size: 36px;
-            font-weight: bold;
-            color: #0c345a;
-            margin: 0 0 10px 0;
-        }
-
-        .sub-title-line {
-            font-size: 22px;
-            color: #4ba3e3;
-            font-weight: bold;
-            border-bottom: 2px solid #edf2f7;
-            padding-bottom: 15px;
-            margin-top: 0;
-        }
-
-        /* 左右のレイアウトバランス */
-        .top-profile-flex {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 60px;
-            align-items: stretch;
-        }
-
-        /* 左側カラム：写真エリア */
-        .profile-left-col {
-            flex: 0 0 380px;
-            position: relative;
-        }
-
-        .prof-img-wrapper {
-            width: 100%;
-            height: 100%;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-        }
-
-        .prof-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* 2重名前カード */
-        .name-card-stacked-wrapper {
-            position: absolute;
-            bottom: -20px;
-            left: -15px;
-            width: 240px;
-            height: 90px;
-            z-index: 10;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .name-card-stacked-wrapper:hover {
-            transform: translateY(-8px);
-        }
-
-        .name-card-shadow-layer {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            width: 100%;
-            height: 100%;
-            background: #0c345a;
-            border-radius: 12px;
-            z-index: 1;
-        }
-
-        .name-card-front-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #e06a1b;
-            color: #ffffff;
-            padding: 15px 22px;
-            border-radius: 12px;
-            box-sizing: border-box;
-            z-index: 2;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .name-card-front-layer .role {
-            font-size: 11px;
-            opacity: 0.9;
-            margin: 0 0 4px 0;
-            letter-spacing: 0.05em;
-        }
-
-        .name-card-front-layer .name {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 0;
-            white-space: nowrap;
-            letter-spacing: 0.02em;
-        }
-
-        /* 右側カラム */
-        .profile-right-col {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .lead-message-box {
-            font-size: 16px;
-            color: #0c345a;
-            font-weight: bold;
-            line-height: 1.8;
-            padding-bottom: 5px;
-        }
-
-        .lead-message-box p {
-            margin: 6px 0;
-        }
-
-        .cards-inline-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        /* 紹介カード */
-        .info-border-card {
-            border: 2px solid #cce0f0;
-            border-radius: 14px;
-            padding: 22px;
-            background: #ffffff;
-            box-shadow: 0 4px 12px rgba(12, 52, 90, 0.02);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-        }
-
-        .info-border-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 24px rgba(12, 52, 90, 0.08);
-            border-color: #4ba3e3;
-        }
-
-        .info-border-card h3 {
-            font-size: 14px;
-            color: #10497e;
-            margin: 0 0 14px 0;
-            font-weight: bold;
-            letter-spacing: 0.05em;
-        }
-
-        .info-border-card h3 span.year-notice {
-            font-size: 11px;
-            color: #94a3b8;
-            font-weight: normal;
-            margin-left: 6px;
-        }
-
-        .subject-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tag-item {
-            background-color: #e0f2fe;
-            color: #0369a1;
-            font-size: 12px;
-            font-weight: bold;
-            padding: 6px 12px;
-            border-radius: 8px;
-        }
-
-        .plain-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            font-size: 14px;
-        }
-
-        .plain-list li {
-            margin-bottom: 8px;
-            color: #334155;
-        }
-
-        .history-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-
-        .history-table td {
-            padding: 6px 0;
-            vertical-align: top;
-        }
-
-        .history-table td.year {
-            width: 90px;
-            color: #475569;
-            font-weight: bold;
-        }
-
-        .history-table td.desc {
-            color: #334155;
-        }
-
-        /* =========================================
-           セクション共通タイトル
-           ========================================= */
-        .survey-section-title {
-            font-size: 24px;
-            color: #0c345a;
-            font-weight: bold;
-            border-bottom: 3px solid #0c345a;
-            padding-bottom: 12px;
-            margin: 60px 0 35px 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .survey-section-title .sub-count {
-            font-size: 14px;
-            color: #64748b;
-            font-weight: normal;
-            margin-left: 12px;
-        }
-
-        /* =========================================
-           新設：先生へのインタビュー用デザイン
-           ========================================= */
-        .interview-card {
-            background: #ffffff;
-            border: 2px solid #0c345a;
-            border-radius: 16px;
-            padding: 35px 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(12, 52, 90, 0.04);
-        }
-
-        .interview-q-title {
-            font-size: 17px;
-            color: #0c345a;
-            font-weight: bold;
-            margin: 0 0 20px 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            line-height: 1.5;
-        }
-
-        .interview-q-title .badge-q {
-            background: #0c345a;
-            color: #ffffff;
-            font-size: 13px;
-            padding: 3px 9px;
-            border-radius: 4px;
-            font-weight: 900;
-            white-space: nowrap;
-        }
-
-        .interview-options-list {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 20px 0;
-            background: #f8fafc;
-            border-radius: 10px;
-            padding: 15px 20px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .interview-options-list li {
-            font-size: 14px;
-            color: #64748b;
-            margin-bottom: 8px;
-            padding-left: 20px;
-            position: relative;
-        }
-
         .interview-options-list li::before {
             content: "・";
             position: absolute;
@@ -561,9 +72,7 @@
             margin: 0;
         }
 
-        /* =========================================
-           学生アンケートセクション（Q1〜Q3用）
-           ========================================= */
+        /* 学生アンケートセクション（Q1〜Q3用） */
         .question-container {
             border: 2px solid #10497e;
             border-radius: 14px;
@@ -616,6 +125,7 @@
 
         .quiz-result-content {
             display: none;
+            /* 初期状態はJSで制御するため非表示 */
         }
 
         .bar-row {
@@ -713,9 +223,7 @@
             margin-bottom: 8px;
         }
 
-        /* =========================================
-           自由回答セクション（Q4・Q5 流れるカード）
-           ========================================= */
+        /* 自由回答セクション（Q4・Q5 流れるカード） */
         .section-header-flex {
             display: flex;
             justify-content: space-between;
@@ -758,6 +266,8 @@
             border-radius: 14px;
             padding: 24px 0;
             display: block;
+            width: 100%;
+            /* 不足修正: 幅を100%に固定 */
         }
 
         .loop-track {
@@ -832,6 +342,61 @@
             white-space: normal !important;
             word-break: break-all !important;
             justify-content: flex-start;
+        }
+
+        /* =========================================
+           🛠️ 不足していた追加CSSスタイル
+           ========================================= */
+        /* 右下ポップアップの見た目 */
+        .right-bottom-popup {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 260px;
+            background: #ffffff;
+            border: 3px solid #10497e;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            z-index: 9999;
+            overflow: hidden;
+            cursor: pointer;
+            animation: popupSlip 0.3s ease-out;
+        }
+
+        .right-bottom-popup img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        @keyframes popupSlip {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* グリッド表示内の写真入りボーナスカード */
+        .bonus-card,
+        .bonus-card-q5 {
+            padding: 0 !important;
+            overflow: hidden;
+            border: 2px dashed #f37032 !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        .bonus-img,
+        .bonus-img-q5 {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -1198,7 +763,7 @@
             <div class="ans-card orange-border">知</div>
             <div class="ans-card orange-border">立教１イケメン穏やかストイック教授</div>
             <div class="ans-card orange-border">立教一のイケオジ</div>
-            <div class="ans-card orange-border bonus-card" onclick="openTeacherPopup('ozawa-cake.jpg')">
+            <div class="ans-card bonus-card" onclick="openTeacherPopup('photo.jpg/ozawa-cake.jpg')">
                 <img src="photo.jpg/ozawa-cake.jpg" alt="小澤先生" class="bonus-img">
             </div>
         </div>
@@ -1261,52 +826,69 @@
             <div class="ans-card blue-border">結構ゼミ生思いで、ご飯会行事としてたくさんやってくれるし、2次会とかまで来てくれるところ</div>
             <div class="ans-card blue-border">ゼミ生好きなところ</div>
             <div class="ans-card blue-border">合宿の時、一緒にマシュマロ焼いたり、一緒に楽しんでくれるところ</div>
-            <div class="ans-card blue-border bonus-card-q5" onclick="openTeacherPopup('ozawa-happy.jpg')">
+            <div class="ans-card bonus-card-q5" onclick="openTeacherPopup('photo.jpg/ozawa-happy.jpg')">
                 <img src="photo.jpg/ozawa-happy.jpg" alt="小澤先生バンザイ" class="bonus-img-q5">
             </div>
         </div>
     </div>
-
     <div id="teacherPopup" class="right-bottom-popup" onclick="closeTeacherPopup()">
         <img id="popupImg" src="" alt="拡大先生">
     </div>
 
     <script>
-        // 🌟 先生を右下に大画面表示する最新の命令（Popup）に書き換え！
+        // ポップアップを開く
         function openTeacherPopup(imageSrc) {
             const popup = document.getElementById('teacherPopup');
             const popupImg = document.getElementById('popupImg');
-            popupImg.src = imageSrc;
-            popup.style.display = 'block';
+            if (popup && popupImg) {
+                popupImg.src = imageSrc;
+                popup.style.display = 'block';
+            }
         }
 
+        // ポップアップを閉じる
         function closeTeacherPopup() {
-            document.getElementById('teacherPopup').style.display = 'none';
+            const popup = document.getElementById('teacherPopup');
+            if (popup) {
+                popup.style.display = 'none';
+            }
         }
 
+        // クイズの選択肢をクリックして結果を出す
         function selectAndReveal(quizId) {
-            document.getElementById(quizId + '-choices').style.display = 'none';
-            document.getElementById(quizId + '-result').style.display = 'block';
+            const choices = document.getElementById(quizId + '-choices');
+            const result = document.getElementById(quizId + '-result');
+            if (choices && result) {
+                choices.style.display = 'none';
+                result.style.display = 'block';
+            }
         }
 
+        // 「流れる」と「一覧」の表示モード切り替え
         function toggleDisplayMode(qId) {
             const sliderView = document.getElementById(qId + '-slider-view');
             const gridView = document.getElementById(qId + '-grid-view');
             const btn = document.getElementById('btn-toggle-' + qId);
 
-            if (window.getComputedStyle(sliderView).display !== 'none') {
-                sliderView.style.display = 'none';
-                gridView.style.display = 'grid';
-                btn.innerText = '流れる表示に戻す';
-            } else {
-                sliderView.style.display = 'block';
-                gridView.style.display = 'none';
-                btn.innerText = '一覧で見る';
+            if (sliderView && gridView && btn) {
+                if (window.getComputedStyle(sliderView).display !== 'none') {
+                    sliderView.style.display = 'none';
+                    gridView.style.display = 'grid';
+                    btn.innerText = '流れる表示に戻す';
+                } else {
+                    sliderView.style.display = 'block';
+                    gridView.style.display = 'none';
+                    btn.innerText = '一覧で見る';
+                }
             }
         }
 
+        // なめらかな自動横スクロールの設定（JSループ処理）
         function setupSeamlessScroll(trackId) {
             const track = document.getElementById(trackId);
+            if (!track) return;
+
+            // 最初の中身を2倍にコピーして隙間をなくす
             const innerHTMLCopy = track.innerHTML;
             track.innerHTML = innerHTMLCopy + innerHTMLCopy;
 
@@ -1317,6 +899,7 @@
             track.addEventListener('mouseleave', () => { isHovered = false; });
 
             function runScroll() {
+                // 親要素（スライダービュー）が表示中のときだけ進める
                 if (window.getComputedStyle(track.parentElement).display !== 'none' && !isHovered) {
                     currentX += 1;
                     if (currentX >= track.scrollWidth / 2) {
@@ -1328,12 +911,12 @@
             setInterval(runScroll, 30);
         }
 
+        // DOMの読み込みが終わったらスクロールを開始
         window.addEventListener('DOMContentLoaded', () => {
             setupSeamlessScroll('q4Track');
             setupSeamlessScroll('q5Track');
         });
     </script>
 </body>
-｝
 
 </html>

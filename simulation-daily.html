@@ -1,574 +1,310 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>小澤ゼミシミュレーション</title>
+```python
+import tkinter as tk
+from tkinter import simpledialog
+import random
 
-  <style>
-    body {
-      margin: 0;
-      background-color: #555;
-      color: white;
-      font-family: sans-serif;
-      height: 100vh;
-      overflow: hidden;
-    }
+# =========================
+# 初期設定
+# =========================
 
-    /* 背景 */
-    .game-screen {
-      width: 100%;
-      height: 100vh;
-      position: relative;
-      background-color: #666;
-    }
+root = tk.Tk()
+root.title("Ozawa Seminar")
+root.geometry("1280x720")
+root.configure(bg="black")
 
-    /* セリフ欄 */
-    .textbox {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      background: rgba(0,0,0,0.85);
-      padding: 30px;
-      box-sizing: border-box;
-      cursor: pointer;
-    }
+player_name = ""
 
-    /* 名前 */
-    #speaker {
-      color: gold;
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
+# =========================
+# 背景
+# =========================
 
-    /* セリフ */
-    #text {
-      font-size: 24px;
-      line-height: 1.8;
-    }
+background = tk.Label(
+root,
+bg="black"
+)
+background.place(relwidth=1, relheight=1)
 
-    /* クリック表示 */
-    .tap {
-      text-align: right;
-      margin-top: 15px;
-      color: lightgray;
-    }
+# =========================
+# テキストボックス
+# =========================
 
-    #choices {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+text_frame = tk.Frame(
+root,
+bg="#111111"
+)
+text_frame.place(relx=0.05, rely=0.72, relwidth=0.9, relheight=0.22)
 
-button {
-  padding: 15px;
-  font-size: 18px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
-  </style>
-</head>
+name_label = tk.Label(
+text_frame,
+text="",
+font=("Yu Gothic", 18, "bold"),
+fg="cyan",
+bg="#111111",
+anchor="w"
+)
+name_label.place(relx=0.02, rely=0.05)
 
-<body>
+text_label = tk.Label(
+text_frame,
+text="",
+font=("Yu Gothic", 20),
+fg="white",
+bg="#111111",
+justify="left",
+wraplength=1000,
+anchor="nw"
+)
+text_label.place(relx=0.02, rely=0.25)
 
-<div class="game-screen">
+# =========================
+# 選択肢
+# =========================
 
-  <div class="textbox" onclick="nextText()">
+choice_frame = tk.Frame(root, bg="black")
 
-    <div id="speaker"></div>
+# =========================
+# シナリオ
+# =========================
 
-    <div id="text"></div>
+story = []
+index = 0
 
-    <div class="tap">
-      ▼クリック
-    </div>
+# =========================
+# 名前入力
+# =========================
 
-  </div>
+def input_name():
+global player_name
 
-</div>
-<script>
+name = simpledialog.askstring(
+"PLAYER NAME",
+"プレイヤー名を入力してください"
+)
 
-const scenes = {
+if not name:
+name = "新入生"
 
-  start: {
-    speaker: "あなた",
-    text: "今日から経済学部最強の小澤ゼミが始まるぞ。まずは教室に向かおう。",
-    next: "hall1"
-  },
+player_name = name
 
-  hall1: {
-    speaker: "ナレーション",
-    text: "歩き始めた足は教室に近づくにつれて軽くなる。気づかぬうちに新たな挑戦に心が昂っているのだろう。",
-    next: "hall2"
-  },
+# =========================
+# 背景変更
+# =========================
 
-  hall2: {
-    speaker: "ナレーション",
-    text: "そんなことを思っている間に教室に着いていた。",
-    next: "hall3"
-  },
+def change_bg(color):
+background.config(bg=color)
 
-  hall3: {
-    speaker: "ナレーション",
-    text: "教室の扉を開けた瞬間、新たな高みに踏み入ったことを自覚する。",
-    next: "greeting"
-  },
+# =========================
+# テキスト表示
+# =========================
 
-  greeting: {
-    speaker: "あなた",
-    text: "よーしまずは...",
-    next: "greetingChoice"
-  },
+def show_text(name, text):
+name_label.config(text=name)
+text_label.config(text=text.replace("プレイヤー名", player_name))
 
-  greetingChoice: {
-    speaker: "",
-    text: "",
-    choices: [
-      {
-        text: "① 小澤先生に挨拶に行く",
-        next: "teacherGreeting"
-      },
+# =========================
+# 次へ
+# =========================
 
-      {
-        text: "② ゼミ生に挨拶に行く",
-        next: "senior1"
-      }
-    ]
-  },
+def next_story(event=None):
+global index
 
-  teacherGreeting: {
-    speaker: "あなた",
-    text: "小澤先生！本日からよろしくお願いします！",
-    next: "teacherReply"
-  },
+if index >= len(story):
+return
 
-  teacherReply: {
-    speaker: "小澤先生",
-    text: "おう、よう来たな。そんな固くならんでええ。適当に座れ。",
-    next: "seatPart"
-  },
-seatPart: {
-  speaker: "あなた",
-  text: "どこに座ろうかな？",
-  next: "seatChoice"
+scene = story[index]
+
+if scene["type"] == "text":
+show_text(scene["name"], scene["text"])
+
+elif scene["type"] == "bg":
+change_bg(scene["color"])
+show_text("", "")
+
+elif scene["type"] == "choice":
+show_choices(scene["choices"])
+return
+
+index += 1
+
+# =========================
+# 選択肢表示
+# =========================
+
+def show_choices(choices):
+choice_frame.place(
+relx=0.35,
+rely=0.3,
+relwidth=0.3,
+relheight=0.25
+)
+
+for widget in choice_frame.winfo_children():
+widget.destroy()
+
+for text, jump in choices:
+
+btn = tk.Button(
+choice_frame,
+text=text,
+font=("Yu Gothic", 16),
+bg="#222222",
+fg="white",
+command=lambda j=jump: jump_to(j)
+)
+
+btn.pack(fill="x", pady=10)
+
+# =========================
+# 分岐
+# =========================
+
+def jump_to(label):
+global index
+
+choice_frame.place_forget()
+
+for i, s in enumerate(story):
+if s.get("label") == label:
+index = i
+next_story()
+return
+
+# =========================
+# シナリオ内容
+# =========================
+
+story = [
+
+{
+"type": "bg",
+"color": "#220044"
 },
 
-// 選択肢
-seatChoice: {
-  speaker: "",
-  text: "",
-  choices: [
-    {
-      text: "① 資料を読んでいる先輩のところに行く",
-      next: "logic1"
-    },
-
-    {
-      text: "② 話している先輩のところに行く",
-      next: "social1"
-    }
-  ]
+{
+"type": "text",
+"name": "",
+"text": "Welcome to Ozawa Seminar !"
 },
 
-// ① 真面目そうな先輩ルート
-logic1: {
-  speaker: "あなた",
-  text: "真面目そうだな。よし。",
-  next: "logic2"
+{
+"type": "bg",
+"color": "#333333"
 },
 
-logic2: {
-  speaker: "あなた",
-  text: "〇〇です。今日からよろしくお願いします。",
-  next: "logic3"
+{
+"type": "text",
+"name": "プレイヤー名",
+"text": "今日から経済学部最強の小澤ゼミが始まるぞ。"
 },
 
-logic3: {
-  speaker: "先輩",
-  text: "よろしく。今日は初めて？",
-  next: "logic4"
+{
+"type": "text",
+"name": "プレイヤー名",
+"text": "まずは教室に向かおう。"
 },
 
-logic4: {
-  speaker: "あなた",
-  text: "はい、今日が初めてです。",
-  next: "logic5"
+{
+"type": "bg",
+"color": "#666666"
 },
 
-logic5: {
-  speaker: "先輩",
-  text: "そっか。最初は緊張するよね。聞きたいことがあったらなんでも言ってね。",
-  next: "logic6"
+{
+"type": "text",
+"name": "",
+"text": "（そんなことを思っている間に教室に着いていた。）"
 },
 
-logic6: {
-  speaker: "あなた",
-  text: "じゃあ...",
-  next: "cPart"
+{
+"type": "bg",
+"color": "white"
 },
 
-// ② 社交ルート
-social1: {
-  speaker: "あなた",
-  text: "賑やかそうだな。よし。",
-  next: "social2"
+{
+"type": "text",
+"name": "プレイヤー名",
+"text": "（教室の扉を開けた瞬間、新たな高みに踏み入ったことを自覚する。）"
 },
 
-social2: {
-  speaker: "あなた",
-  text: "〇〇です！今日からよろしくお願いします！",
-  next: "social3"
+{
+"type": "bg",
+"color": "#444444"
 },
 
-social3: {
-  speaker: "A先輩",
-  text: "おぉ！これからよろしくね！！",
-  next: "social4"
+{
+"type": "text",
+"name": "プレイヤー名",
+"text": "賑やかだな。"
 },
 
-social4: {
-  speaker: "B先輩",
-  text: "おぉ今日初めてか！そんな固くならなくて大丈夫よ。",
-  next: "social5"
+{
+"type": "choice",
+"choices": [
+("小澤先生に挨拶に行く", "teacher"),
+("ゼミ生に挨拶に行く", "student")
+]
 },
 
-social5: {
-  speaker: "あなた",
-  text: "すごく緊張してます。",
-  next: "social6"
+# =========================
+# 先生ルート
+# =========================
+
+{
+"label": "teacher",
+"type": "bg",
+"color": "#003366"
 },
 
-social6: {
-  speaker: "A先輩",
-  text: "最初はみんなそんな感じだったよ。B先輩『わからないことあったら何でも聞いてくれい。』",
-  next: "social7"
+{
+"type": "text",
+"name": "プレイヤー名",
+"text": "小澤先生！本日からよろしくお願いします！"
 },
 
-social7: {
-  speaker: "あなた",
-  text: "じゃあ...",
-  next: "cPart"
-},
-cPart: {
-  speaker: "",
-  text: "",
-  choices: [
-    {
-      text: "① ディスカッションって役割分担とかあるんですか？",
-      next: "discussion1"
-    },
-
-    {
-      text: "② このゼミってどんな人がいるんですか？",
-      next: "people1"
-    }
-  ]
+{
+"type": "text",
+"name": "小澤先生",
+"text": "おう、よう来たな。そんな固くならんでええ。"
 },
 
-// ① 役割分担ルート
-discussion1: {
-  speaker: "先輩",
-  text: "あるよ。毎回班ごとに決めるんだ。",
-  next: "discussion2"
+{
+"type": "text",
+"name": "小澤先生",
+"text": "適当に座れ。"
 },
 
-discussion2: {
-  speaker: "あなた",
-  text: "例えばどんな役割があるんですか？",
-  next: "discussion3"
+# =========================
+# ゼミ生ルート
+# =========================
+
+{
+"label": "student",
+"type": "bg",
+"color": "#550000"
 },
 
-discussion3: {
-  speaker: "先輩",
-  text: "発表者にタイムキーパー、進行役や記録係が主な役割だよ。最初は周りの先輩を頼るといいよ。",
-  next: "discussion4"
+{
+"type": "text",
+"name": "？？？",
+"text": "おいおい。先に先生への挨拶や。"
 },
 
-discussion4: {
-  speaker: "あなた",
-  text: "はい。そうします。",
-  next: "discussion5"
+{
+"type": "text",
+"name": "？？？",
+"text": "筋は通しとかねぇとな。"
 },
 
-discussion5: {
-  speaker: "先輩",
-  text: "せっかくだから今日のThe Wall Street Journalを一緒に見てみようか。",
-  next: "discussion6"
-},
+]
 
-discussion6: {
-  speaker: "あなた",
-  text: "はい。ありがとうございます。",
-  next: "dPart"
-},
+# =========================
+# 開始
+# =========================
 
-// ② どんな人がいる？ルート
-people1: {
-  speaker: "先輩",
-  text: "いろんな人がいるよ。",
-  next: "people2"
-},
+input_name()
 
-people2: {
-  speaker: "あなた",
-  text: "どんな人がいるんですか？",
-  next: "people3"
-},
+root.bind("<Button-1>", next_story)
 
-people3: {
-  speaker: "先輩",
-  text: "機嫌がいいと帰りにみんなにドーナツをおごってくれる人がいるよ。",
-  next: "people4"
-},
+  next_story()
 
-people4: {
-  speaker: "あなた",
-  text: "楽しそうです。他にはどんな方がいるんですか？",
-  next: "people5"
-},
-
-people5: {
-  speaker: "先輩",
-  text: "インドネシアに帰省しているのにオンラインで馬券を買っている人がいるよ。",
-  next: "people6"
-},
-
-people6: {
-  speaker: "あなた",
-  text: "それはすごいですね。他にはどんな方が？",
-  next: "people7"
-},
-
-people7: {
-  speaker: "先輩",
-  text: "旅行好きで海外によく行ってお土産を買ってきてくれるんだけど、その買ってきてくれるお土産すべてが美味しくない人がいるよ。",
-  next: "people8"
-},
-
-people8: {
-  speaker: "あなた",
-  text: "小澤ゼミにはいろいろな人がいるんですね。",
-  next: "people9"
-},
-
-people9: {
-  speaker: "先輩",
-  text: "ｿｳﾀﾞﾖ。せっかくだし、このまま今日のThe Wall Street Journalを一緒に見てみようか。",
-  next: "people10"
-},
-people10: {
-  speaker: "あなた",
-  text: "はい。ありがとうございます。",
-  next: "dPart"
-},
-dPart: {
-  speaker: "ゼミ長",
-  text: "ディスカッション始めるよー！班作ってー！",
-  next: "dPart2"
-},
-
-dPart2: {
-  speaker: "あなた",
-  text: "誰と一緒の班になろうか？",
-  next: "groupChoice"
-},
-
-// 選択肢
-groupChoice: {
-  speaker: "",
-  text: "",
-  choices: [
-    {
-      text: "① 真面目そうな人のところに行く",
-      next: "serious1"
-    },
-
-    {
-      text: "② 雰囲気良さそうだな。あそこに行ってみるか。",
-      next: "friendly1"
-    }
-  ]
-},
-
-// ① 真面目そうな人ルート
-serious1: {
-  speaker: "C先輩",
-  text: "人数ちょうどいいからぜひぜひ。",
-  next: "serious2"
-},
-
-serious2: {
-  speaker: "C先輩",
-  text: "じゃあ簡単に自己紹介しますか。僕/私はC先輩で趣味は競馬だよ。でこっちがD先輩だよ。",
-  next: "serious3"
-},
-
-serious3: {
-  speaker: "D先輩",
-  text: "よろしく。趣味は漫画だよ。",
-  next: "serious4"
-},
-
-serious4: {
-  speaker: "あなた",
-  text: "〇〇です。よろしくお願いします。",
-  next: "serious5"
-},
-
-serious5: {
-  speaker: "ゼミ長",
-  text: "ディスカッション始めまーす。",
-  next: "ePart"
-},
-
-// ② 社交ルート
-friendly1: {
-  speaker: "あなた",
-  text: "雰囲気良さそうだな。あそこに行ってみるか！",
-  next: "friendly2"
-},
-
-friendly2: {
-  speaker: "D先輩",
-  text: "ちょうど人探してたところ！一緒にやろうか！！",
-  next: "friendly3"
-},
-
-friendly3: {
-  speaker: "D先輩",
-  text: "よろしくね！僕/私はDで趣味は漫画だよ。で、こっちがC先輩だよ。",
-  next: "friendly4"
-},
-
-friendly4: {
-  speaker: "C先輩",
-  text: "よろしく。趣味は競馬だよ。",
-  next: "friendly5"
-},
-
-friendly5: {
-  speaker: "ゼミ長",
-  text: "ディスカッション始めまーす。",
-  next: "ePart"
-},
-
-// Eパート（仮）
-ePart: {
-  speaker: "ナレーション",
-  text: "【Eパートへ】"
-},
-
-  senior1: {
-    speaker: "先輩１",
-    text: "おいおい。先に先生への挨拶や。筋は通しとかねぇとな。",
-    next: "senior2"
-  },
-
-  senior2: {
-    speaker: "先輩２",
-    text: "小澤先生をスルーとはとんでもない新入りが入ってきたもんやな。",
-    next: "retryChoice"
-  },
-
-  retryChoice: {
-    speaker: "",
-    text: "",
-    choices: [
-      {
-        text: "① 小澤先生に挨拶に行く",
-        next: "teacherGreeting"
-      },
-
-      {
-        text: "② ゼミ生に挨拶に行く",
-        next: "senior1"
-      }
-    ]
-  }
-
-};
-
-let currentScene = "start";
-
-function showScene() {
-
-  const scene = scenes[currentScene];
-
-  document.getElementById("speaker").textContent =
-    scene.speaker;
-
-  document.getElementById("text").textContent =
-    scene.text;
-
-  const oldChoices =
-    document.getElementById("choices");
-
-  if(oldChoices){
-    oldChoices.remove();
-  }
-
-  if(scene.choices){
-
-    const choiceBox =
-      document.createElement("div");
-
-    choiceBox.id = "choices";
-
-    scene.choices.forEach(choice => {
-
-      const button =
-        document.createElement("button");
-
-      button.textContent =
-        choice.text;
-
-      button.onclick = function(event){
-
-        event.stopPropagation();
-
-        currentScene =
-          choice.next;
-
-        showScene();
-      };
-
-      choiceBox.appendChild(button);
-    });
-
-    document.querySelector(".textbox")
-      .appendChild(choiceBox);
-  }
-}
-
-function nextText() {
-
-  const scene =
-    scenes[currentScene];
-
-  if(scene.choices){
-    return;
-  }
-
-  if(scene.next){
-    currentScene =
-      scene.next;
-
-    showScene();
-  }
-}
-
-showScene();
-
-</script>
-
-  
-
-showText();
-
-</script>
-
-</body>
-</html>
+  root.mainloop()
+  ```
