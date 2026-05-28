@@ -1,5 +1,5 @@
 body {
-    background-image: url('photo.jpg/photo3-daily.jpg');
+    background-image: url('/photo.jpg/photo3-daily.jpg');
     /* 👈 ここに使いたい画像のパスを書きます */
     background-size: cover;
     /* 画面いっぱいに画像を広げる */
