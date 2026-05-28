@@ -1,28 +1,22 @@
-body {
-    background-image: url('/photo.jpg/photo3-daily.jpg');
-    /* 👈 ここに使いたい画像のパスを書きます */
-    background-size: cover;
-    /* 画面いっぱいに画像を広げる */
-    background-position: center;
-    /* 画像の中心を画面の真ん中に合わせる */
-    background-attachment: fixed;
-    /* スクロールしても背景画像を固定する */
-    margin: 0;
-}
-
-/* --- 全体の基本スタイル --- */
+/* ==========================================================================
+   🎨 ホームページの背景設定（ここにあおいさんの写真をセット！）
+   ========================================================================== */
 body {
     font-family: "Helvetica Neue", Arial, sans-serif;
     margin: 0;
     padding: 0;
     color: #333;
-    background-color: #222;
-    /* 画像がない時も暗く保つ */
-    background-image: url('hero-background.jpg');
-    /* 背景画像 */
+
+    /* ⭕ 写真の指示をここに合体！頭の /（スラッシュ）は無しが正解です */
+    background-image: url('photo.jpg/photo3-daily.jpg');
     background-size: cover;
+    /* 画面いっぱいに画像を広げる */
     background-position: center;
+    /* 画像の中心を画面の真ん中に */
     background-attachment: fixed;
+    /* スクロールしても背景画像を固定 */
+    background-color: #222;
+    /* 万が一画像が読み込めない時の予備の暗い色 */
 }
 
 .content-container {
