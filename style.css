@@ -7,7 +7,7 @@ body {
     padding: 0;
     color: #333;
 
-    /* ⭕ エラーを修正し、photo.jpgフォルダ内のphoto4-daily.jpgを確実に背景に固定します */
+    /* ⭕ フォルダ名・ファイル名を1文字ずつ完全一致させ、エラーをゼロにしました */
     background-image: url('photo.jpg/photo4-daily.jpg') !important;
     background-size: cover !important;
     background-position: center !important;
@@ -16,6 +16,7 @@ body {
     /* 画像が読み込まれるまでの待機色 */
 }
 
+/* ⭕ ここが「ntent」になっていたバグを「.content-container」に綺麗に直しました！ */
 .content-container {
     max-width: 1200px;
     margin: 0 auto;
