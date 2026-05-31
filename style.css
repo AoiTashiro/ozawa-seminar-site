@@ -435,3 +435,86 @@ body {
     transform: translateY(-5px);
     /* ちょっと上に浮く可愛いエフェクト */
 }
+
+/* ==========================================
+   ✨ ぐっとポイント専用の可愛い別枠デザイン
+   ========================================== */
+.modal-good-point {
+    background-color: #fffde7;
+    /* 優しいパステルイエロー */
+    border-left: 4px solid #fbc02d;
+    /* アクセントの濃い黄色 */
+    padding: 12px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    /* 下の枠とのすき間 */
+    color: #555;
+    border-radius: 0 4px 4px 0;
+}
+
+/* ==========================================
+   🌱 コメントが流れるようにつながるデザイン
+   ========================================== */
+
+/* コメント全体を包む枠（ここに縦線を引きます） */
+.modal-flow-container {
+    position: relative;
+    padding-left: 25px;
+    /* 左側に線と丸を入れるスペースを作る */
+    margin-top: 25px;
+}
+
+/* 縦の流れる一本線 */
+.modal-flow-container::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 7px;
+    width: 2px;
+    height: 75%;
+    /* 1つ目から2つ目の枠の手前まで線を伸ばす */
+    background: dotted #d32f2f;
+    /* 可愛い赤のドット（点線） */
+}
+
+/* つながるカード共通のベース設定 */
+.modal-good-point,
+.modal-accent {
+    position: relative;
+    margin-bottom: 25px !important;
+    /* カード同士の間隔を広げる */
+    border-radius: 6px !important;
+    border-left: none !important;
+    /* 古い左線を消して、丸い点に変えます */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    /* ほんのり影をつけて立体的に */
+}
+
+/* 各カードの左側につく可愛い「●」の目印 */
+.modal-good-point::after,
+.modal-accent::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: -22px;
+    /* ドット線の上にぴったり重ねる */
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+/* ぐっとポイント（1番目）の丸の色 */
+.modal-good-point::after {
+    background-color: #fbc02d;
+    /* 黄色の丸 */
+    box-shadow: 0 0 0 4px #fffde7;
+    /* 周りに薄い光の輪 */
+}
+
+/* 先輩からのコメント（2番目）の丸の色 */
+.modal-accent::after {
+    background-color: #d32f2f;
+    /* 赤色の丸 */
+    box-shadow: 0 0 0 4px #fdf2f2;
+    /* 周りに薄い光の輪 */
+}
