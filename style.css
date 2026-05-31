@@ -512,3 +512,56 @@ body {
         /* 半分（1セット分）進んだら最初に戻す */
     }
 }
+
+/* ==========================================
+   🖋️ タイトルの手書き風フォント＆出現アニメーション
+   ========================================== */
+
+.handwritten-reveal {
+    font-family: 'Caveat', cursive !important;
+    /* 手書き風の可愛い英語フォント */
+    font-size: 76px !important;
+    /* 手書き文字なので少し大きめに調整 */
+    letter-spacing: 2px;
+    /* 文字の間隔を少しあけてお洒落に */
+    opacity: 0;
+    /* 最初は非表示 */
+    transform: translateX(-50px);
+    /* 最初は左に50pxずらしておく */
+    animation: slideFromLeft 1.5s ease-out forwards;
+    /* 1.5秒かけてアニメーション */
+}
+
+/* サブタイトルも少し遅れてふわっと出します */
+.text-fade-in {
+    opacity: 0;
+    animation: fadeInSimple 1.2s ease-out forwards;
+    animation-delay: 0.8s;
+    /* タイトルが出てから0.8秒後にスタート */
+}
+
+/* 🎥 左から右へ現れるアニメーションの命令 */
+@keyframes slideFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+        /* 左端＆透明 */
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+        /* 定位置＆くっきり表示 */
+    }
+}
+
+/* 🎥 ふわっと浮き出るアニメーションの命令 */
+@keyframes fadeInSimple {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
