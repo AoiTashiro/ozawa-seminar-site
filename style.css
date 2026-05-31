@@ -7,13 +7,12 @@ body {
     padding: 0;
     color: #333;
 
-    /* ⭕ あおいさんの選んだ写真を画面全体の一番後ろに固定します */
+    /* ⭕ 選んだ写真を画面全体の一番後ろに固定 */
     background-image: url('photo.jpg/photo3-daily.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     background-color: #222;
-    /* 画像が読み込まれるまでの待機色 */
 }
 
 .content-container {
@@ -27,7 +26,6 @@ body {
    ========================================== */
 .main-header {
     background-color: rgba(0, 0, 0, 0.6);
-    /* 半透明な黒 */
     color: #fff;
     position: fixed;
     top: 0;
@@ -72,12 +70,7 @@ body {
     display: block;
 }
 
-.darkmode-toggle {
-    font-size: 12px;
-    color: #ccc;
-}
-
-/* --- 普通のドロップダウンメニュー --- */
+/* ドロップダウンメニュー */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -112,45 +105,30 @@ body {
 }
 
 /* ==========================================
-   🚀 ヒーローセクション（大きな文字）
+   🚀 ヒーローセクション
    ========================================== */
 .hero-section {
-    height: 520px;
+    height: 480px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     background: transparent;
-    /* ⭕ ここを完全に透明にして、後ろの背景写真を見せます！ */
 }
 
 .hero-content {
     max-width: 800px;
 }
 
-.magazine-label {
-    font-size: 14px;
-    color: #fff;
-    background-color: #d32f2f;
-    /* 赤いラベル */
-    padding: 4px 10px;
-    display: inline-block;
-    margin-bottom: 15px;
-    font-style: italic;
-    font-weight: bold;
-}
-
 .hero-title {
-    font-size: 64px;
-    /* 超大文字！ */
     font-weight: bold;
     color: #fff;
-    margin: 0 0 10px 0;
+    margin: 0 0 15px 0;
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
 }
 
 .hero-subtitle {
-    font-size: 22px;
+    font-size: 20px;
     color: #fff;
     margin: 0;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
@@ -158,37 +136,59 @@ body {
 }
 
 /* ==========================================
-   🎡 カードギャラリー（画像の下部重ね合わせ）
+   🧱 2段グリッドレイアウト（上段3枚・下段3枚）
    ========================================== */
-.card-gallery-wrapper {
-    margin-top: -120px;
-    /* タイトル部分にカードを食い込ませる */
+.cards-grid-container {
+    margin-top: -80px;
+    /* タイトル部分に少し食い込ませてオシャレに */
     position: relative;
     z-index: 10;
+    padding-bottom: 60px;
 }
 
-.swiper {
-    width: 100%;
-    padding-bottom: 90px;
+.stage-section {
+    margin-bottom: 50px;
+    /* 上段と下段の間隔 */
 }
 
-.card-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
+/* 「2年生の活動」などの見出しの文字 */
+.stage-title {
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    font-weight: bold;
 }
 
+/* 🔥 横に3枚きれいに並べる魔法の命令 */
+.stage-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 均等に3枚並べる */
+    gap: 25px;
+    /* カード同士の間隔 */
+}
+
+/* 各カードのスタイル */
 .card {
     background: #fff;
-    border-radius: 4px;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     height: 420px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ホバー時の浮き上がりエフェクト */
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
 .card-img {
     width: 100%;
-    height: 180px;
+    height: 190px;
 }
 
 .card-img img {
@@ -198,12 +198,12 @@ body {
 }
 
 .card-content {
-    padding: 15px;
+    padding: 18px;
 }
 
 .company-tag {
     font-size: 11px;
-    color: #444;
+    color: #555;
     display: block;
     font-weight: bold;
 }
@@ -211,15 +211,17 @@ body {
 .skill-tag {
     font-size: 10px;
     color: #fff;
-    background-color: #777;
-    padding: 1px 5px;
+    background-color: #d32f2f;
+    /* ゼミカラーの赤 */
+    padding: 2px 6px;
     display: inline-block;
-    margin: 4px 0;
+    margin: 6px 0;
+    border-radius: 2px;
 }
 
 .card-content h3 {
-    font-size: 14px;
-    margin: 6px 0;
+    font-size: 15px;
+    margin: 8px 0;
     line-height: 1.4;
     color: #111;
     font-weight: bold;
@@ -230,13 +232,13 @@ body {
 .date {
     font-size: 11px;
     color: #999;
-    margin: 0 0 10px 0;
+    margin: 0 0 12px 0;
 }
 
 .tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
+    gap: 6px;
 }
 
 .tag {
@@ -244,64 +246,7 @@ body {
     color: #666;
     border: 1px solid #ccc;
     border-radius: 20px;
-    padding: 1px 8px;
-}
-
-/* ==========================================
-   コントロールバーと独自の赤い矢印ボタン
-   ========================================== */
-.swiper-controls-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    background-color: #fff;
-    border-radius: 4px;
-    position: absolute;
-    bottom: 10px;
-    left: 0;
-    right: 0;
-    z-index: 20;
-}
-
-.bottom-magazine-logo {
-    font-weight: bold;
-    font-size: 14px;
-    color: #222;
-}
-
-.swiper-button-container {
-    display: flex;
-    position: relative;
-    width: 80px;
-    height: 35px;
-}
-
-.swiper-button-prev,
-.swiper-button-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 35px;
-    height: 35px;
-    background-color: #d32f2f;
-    color: #fff !important;
-    margin: 0;
-    border-radius: 2px;
-}
-
-.swiper-button-prev {
-    left: 0;
-}
-
-.swiper-button-next {
-    right: 0;
-}
-
-.swiper-button-prev::after,
-.swiper-button-next::after {
-    font-size: 12px !important;
-    font-weight: bold;
+    padding: 2px 10px;
 }
 
 /* フッター */
@@ -320,17 +265,9 @@ body {
     color: #d32f2f;
 }
 
-.footer-social span {
-    margin-left: 10px;
-    font-size: 12px;
-    color: #aaa;
-}
-
 /* ==========================================
-   🔔 モーダル（大きな窓）の見た目デザイン
+   🔔 モーダルのデザイン
    ========================================== */
-
-/* 背景の黒い暗幕（最初は非表示） */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -339,15 +276,12 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
-    /* 後ろを暗くする */
     z-index: 2000;
-    /* ヘッダーより前に出す */
     justify-content: center;
     align-items: center;
     padding: 20px;
 }
 
-/* 中央に浮き出る白い窓 */
 .modal-window {
     background-color: #fff;
     width: 100%;
@@ -355,15 +289,12 @@ body {
     max-height: 85vh;
     border-radius: 8px;
     overflow-y: auto;
-    /* 文字が多くなったらスクロール可能にする */
     position: relative;
     padding: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     animation: fadeInModal 0.3s ease;
-    /* ふわっと出すアニメーション */
 }
 
-/* ふわっと浮き出るアニメーション設定 */
 @keyframes fadeInModal {
     from {
         opacity: 0;
@@ -376,7 +307,6 @@ body {
     }
 }
 
-/* 右上の「×」閉じるボタン */
 .modal-close {
     position: absolute;
     top: 15px;
@@ -389,10 +319,8 @@ body {
 
 .modal-close:hover {
     color: #d32f2f;
-    /* ホバーでゼミカラーの赤に */
 }
 
-/* モーダルの中の画像 */
 .modal-img {
     width: 100%;
     height: 280px;
@@ -401,15 +329,12 @@ body {
     margin: 15px 0;
 }
 
-/* モーダルの中のタイトル */
 .modal-window h2 {
     font-size: 22px;
     color: #111;
     margin-top: 0;
-    padding-right: 30px;
 }
 
-/* モーダルの文章の装飾 */
 .modal-body p {
     font-size: 15px;
     line-height: 1.6;
@@ -417,65 +342,33 @@ body {
     margin-bottom: 15px;
 }
 
-/* カードを触ったときに「クリックできるよ」とわかるように矢印を指マークにする */
-.card {
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    /* ちょっと上に浮く可愛いエフェクト */
-}
-
 /* ==========================================
-   🔄【完全解決版】コメントが自動で横に流れる無限ループ
+   🔄 コメントが自動で横に流れる無限ループ
    ========================================== */
-
-/* 見出しの文字 */
-.flow-section-title {
-    font-size: 14px;
-    font-weight: bold;
-    color: #444;
-    margin: 25px 0 10px 0 !important;
-    display: block !important;
-}
-
-/* スクロールする窓（はみ出たカードは隠す） */
 .infinite-flow-container {
     width: 100% !important;
     overflow: hidden !important;
     position: relative !important;
     padding: 12px 0 !important;
-    margin-bottom: 20px !important;
+    margin-top: 15px !important;
     background-color: #f8f9fa !important;
-    /* 薄いグレーの背景 */
     border-radius: 8px !important;
     display: block !important;
 }
 
-/* 🔥 ここが最重要！縦並びを100%解除して強制横一列にする設定 */
 .infinite-flow-track {
     display: flex !important;
-    /* 絶対に横並び */
     flex-direction: row !important;
-    /* 確実に右へ並べる */
     flex-wrap: nowrap !important;
-    /* 絶対に下に折り返さない */
     gap: 15px !important;
-    /* カード同士のすき間 */
     width: max-content !important;
-    /* 中身の分だけ横に無限に広げる */
     animation: scrollLeft 25s linear infinite !important;
-    /* 25秒かけてループ */
 }
 
-/* マウスを乗せたら動きを一時停止 */
 .infinite-flow-container:hover .infinite-flow-track {
     animation-play-state: paused !important;
 }
 
-/* 各単語のカードデザイン（あおいさんの画像風） */
 .flow-item {
     background-color: #fff !important;
     padding: 12px 22px !important;
@@ -485,23 +378,17 @@ body {
     color: #333 !important;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
     white-space: nowrap !important;
-    /* 文字を絶対に改行させない */
     display: inline-block !important;
-    /* ブロック化を防ぐ */
-    position: relative !important;
 }
 
-/* ぐっとポイント側：オレンジ色の線 */
 .orange-line .flow-item {
     border-left: 5px solid #e67e22 !important;
 }
 
-/* 先輩からのコメント側：青色の線 */
 .blue-line .flow-item {
     border-left: 5px solid #3498db !important;
 }
 
-/* 🎥 自動スクロールのアニメーション */
 @keyframes scrollLeft {
     0% {
         transform: translateX(0);
@@ -509,53 +396,38 @@ body {
 
     100% {
         transform: translateX(-50%);
-        /* 半分（1セット分）進んだら最初に戻す */
     }
 }
 
 /* ==========================================
    🖋️ タイトルの手書き風フォント＆出現アニメーション
    ========================================== */
-
 .handwritten-reveal {
     font-family: 'Caveat', cursive !important;
-    /* 手書き風の可愛い英語フォント */
     font-size: 76px !important;
-    /* 手書き文字なので少し大きめに調整 */
     letter-spacing: 2px;
-    /* 文字の間隔を少しあけてお洒落に */
     opacity: 0;
-    /* 最初は非表示 */
-    transform: translateX(-50px);
-    /* 最初は左に50pxずらしておく */
     animation: slideFromLeft 1.5s ease-out forwards;
-    /* 1.5秒かけてアニメーション */
 }
 
-/* サブタイトルも少し遅れてふわっと出します */
 .text-fade-in {
     opacity: 0;
     animation: fadeInSimple 1.2s ease-out forwards;
     animation-delay: 0.8s;
-    /* タイトルが出てから0.8秒後にスタート */
 }
 
-/* 🎥 左から右へ現れるアニメーションの命令 */
 @keyframes slideFromLeft {
     0% {
         opacity: 0;
         transform: translateX(-50px);
-        /* 左端＆透明 */
     }
 
     100% {
         opacity: 1;
         transform: translateX(0);
-        /* 定位置＆くっきり表示 */
     }
 }
 
-/* 🎥 ふわっと浮き出るアニメーションの命令 */
 @keyframes fadeInSimple {
     0% {
         opacity: 0;

@@ -10,7 +10,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -54,77 +53,118 @@
   </div>
 
   <div class="content-container">
-    <div class="card-gallery-wrapper">
-      <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
+    <div class="cards-grid-container">
 
-          <div class="swiper-slide">
-            <div class="card" onclick="openModal('modal1')">
-              <div class="card-img">
-                <img src="photo.jpg/photo1-daily.jpg" alt="ディスカッション風景">
-              </div>
-              <div class="card-content">
-                <span class="company-tag">学年通年活動</span>
-                <span class="skill-tag">2,3年共通</span>
-                <h3>毎週のディスカッションで学年を超えた交流を。</h3>
-                <p class="date">2026年05月18日</p>
-                <div class="tags">
-                  <span class="tag">#ディスカッション</span>
-                  <span class="tag">#The Wall Street Journal</span>
-                  <span class="tag">#経済書評</span>
-                </div>
+      <div class="stage-section">
+        <h2 class="stage-title">🌱 2年生の活動</h2>
+        <div class="stage-row">
+
+          <div class="card" onclick="openModal('modal1')">
+            <div class="card-img">
+              <img src="photo.jpg/photo1-daily.jpg" alt="ディスカッション風景">
+            </div>
+            <div class="card-content">
+              <span class="company-tag">学年通年活動</span>
+              <span class="skill-tag">2,3年共通</span>
+              <h3>毎週のディスカッションで学年を超えた交流を。</h3>
+              <p class="date">2026年05月18日</p>
+              <div class="tags">
+                <span class="tag">#ディスカッション</span>
+                <span class="tag">#書評</span>
               </div>
             </div>
           </div>
 
-          <div class="swiper-slide">
-            <div class="card" onclick="openModal('modal2')">
-              <div class="card-img">
-                <img src="image2.jpg" alt="財務会計の学習">
-              </div>
-              <div class="card-content">
-                <span class="company-tag">２年次活動</span>
-                <span class="skill-tag">財務会計学習</span>
-                <h3>財務会計の輪読とプレゼンテーションを繰り返し、知識をアウトプットする</h3>
-                <p class="date">2026年05月21日</p>
-                <div class="tags">
-                  <span class="tag">#財務会計</span>
-                  <span class="tag">#グループプレゼンテーション</span>
-                  <span class="tag">#輪読</span>
-                </div>
+          <div class="card" onclick="openModal('modal2')">
+            <div class="card-img">
+              <img src="image2.jpg" alt="財務会計の学習">
+            </div>
+            <div class="card-content">
+              <span class="company-tag">２年次活動</span>
+              <span class="skill-tag">財務会計学習</span>
+              <h3>財務会計の輪読とプレゼンを繰り返し、知識をアウトプット</h3>
+              <p class="date">2026年05月21日</p>
+              <div class="tags">
+                <span class="tag">#財務会計</span>
+                <span class="tag">#プレゼン</span>
               </div>
             </div>
           </div>
 
-          <div class="swiper-slide">
-            <div class="card" onclick="openModal('modal3')">
-              <div class="card-img">
-                <img src="photo.jpg/photo2-daily.jpg" alt="プログラミング風景">
-              </div>
-              <div class="card-content">
-                <span class="company-tag">３年次活動</span>
-                <span class="skill-tag">プログラミング</span>
-                <h3>AIを活用してコード作成・システム開発しよう</h3>
-                <p class="date">2026年05月21日</p>
-                <div class="tags">
-                  <span class="tag">#programming</span>
-                  <span class="tag">#グループ活動</span>
-                  <span class="tag">#AI</span>
-                </div>
+          <div class="card" onclick="openModal('modal2')">
+            <div class="card-img">
+              <img src="image2.jpg" alt="2年生の活動3">
+            </div>
+            <div class="card-content">
+              <span class="company-tag">２年次活動</span>
+              <span class="skill-tag">ゼミ基礎</span>
+              <h3>2年生の活動カード3枚目（ここにタイトルが入ります）</h3>
+              <p class="date">2026年05月22日</p>
+              <div class="tags">
+                <span class="tag">#基礎学習</span>
+                <span class="tag">#交流</span>
               </div>
             </div>
           </div>
 
         </div>
-        <div class="swiper-controls-bar">
-          <div class="bottom-magazine-logo">Ozawa seminar Introduction →</div>
-          <div class="swiper-button-container">
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-          </div>
-        </div>
-
       </div>
+
+      <div class="stage-section">
+        <h2 class="stage-title">🚀 3年生の活動</h2>
+        <div class="stage-row">
+
+          <div class="card" onclick="openModal('modal3')">
+            <div class="card-img">
+              <img src="photo.jpg/photo2-daily.jpg" alt="プログラミング風景">
+            </div>
+            <div class="card-content">
+              <span class="company-tag">３年次活動</span>
+              <span class="skill-tag">プログラミング</span>
+              <h3>AIを活用してコード作成・システム開発しよう</h3>
+              <p class="date">2026年05月21日</p>
+              <div class="tags">
+                <span class="tag">#programming</span>
+                <span class="tag">#AI</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" onclick="openModal('modal3')">
+            <div class="card-img">
+              <img src="photo.jpg/photo2-daily.jpg" alt="3年生の活動2">
+            </div>
+            <div class="card-content">
+              <span class="company-tag">３年次活動</span>
+              <span class="skill-tag">応用研究</span>
+              <h3>3年生の活動カード2枚目（ここにタイトルが入ります）</h3>
+              <p class="date">2026年05月23日</p>
+              <div class="tags">
+                <span class="tag">#応用</span>
+                <span class="tag">#グループワーク</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" onclick="openModal('modal3')">
+            <div class="card-img">
+              <img src="photo.jpg/photo2-daily.jpg" alt="3年生の活動3">
+            </div>
+            <div class="card-content">
+              <span class="company-tag">３年次活動</span>
+              <span class="skill-tag">ゼミ論文</span>
+              <h3>3年生の活動カード3枚目（ここにタイトルが入ります）</h3>
+              <p class="date">2026年05月24日</p>
+              <div class="tags">
+                <span class="tag">#研究発表</span>
+                <span class="tag">#まとめ</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -133,12 +173,9 @@
       <span class="modal-close" onclick="closeModal('modal1')">×</span>
       <h2>２・３年生一緒に毎週ディスカッション</h2>
       <img src="photo.jpg/photo1-daily.jpg" class="modal-img" alt="詳細画像">
-
       <div class="modal-body">
         <p>経済に関するテーマを自分たちで設定し、毎週ディスカッションを行います。</p>
-        <p>世界的な経済紙である『The Wall Street
-          Journal』と、経済に関連する本を元に、その週の担当者が書評を書きます。担当者はその内容に沿ったディスカッションテーマを立て、グループごとに意見を交わし一つの結論を出し合います。新しい経済動向を知るきっかけになります。多角的な視点を養うとともに、先輩と仲良くできる機会です。
-        </p>
+        <p>世界的な経済紙である『The Wall Street Journal』と、経済に関連する本を元に、その週の担当者が書評を書きます。</p>
 
         <div class="infinite-flow-container orange-line">
           <div class="infinite-flow-track">
@@ -165,7 +202,6 @@
             <div class="flow-item">実践的な経験が積めるのは小澤ゼミの強み!!</div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -177,7 +213,7 @@
       <img src="image2.jpg" class="modal-img" alt="詳細画像">
       <div class="modal-body">
         <p>2年次の中心活動として、財務会計の基礎から応用までを徹底的に学びます。</p>
-        <p>教科書の輪読（順番に解説していく勉強法）を行い、インプットした知識をすぐにグループでのプレゼンテーションでアウトプットします。人に対して分かりやすく伝えるスキルが飛躍的に身につきます。</p>
+        <p>教科書の輪読を行い、インプットした知識をすぐにグループでのプレゼンテーションでアウトプットします。</p>
       </div>
     </div>
   </div>
@@ -189,7 +225,6 @@
       <img src="photo.jpg/photo2-daily.jpg" class="modal-img" alt="詳細画像">
       <div class="modal-body">
         <p>3年次からは、最先端のAIツールを駆使しながら実際のプログラミングやシステム開発に挑戦します。</p>
-        <p>ただコードを書くだけでなく、「社会のどんな課題を解決できるか」をグループで話し合い、形にしていきます。今まさに求められるデジタルスキルを実践形式で学べる貴重なカリキュラムです。</p>
       </div>
     </div>
   </div>
@@ -201,7 +236,6 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="script.js"></script>
 </body>
 
