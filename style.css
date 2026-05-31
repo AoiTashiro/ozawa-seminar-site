@@ -7,13 +7,19 @@ body {
     padding: 0;
     color: #333;
 
-    /* ⭕ あおいさんの選んだ写真を画面全体の一番後ろに確実に固定します */
-    background-image: url('photo.jpg/photo3-daily.jpg') !important;
+    /* ⭕ フォルダ名を一般的な「photo/...」に修正して、背景を最背面に強制固定します */
+    background-image: url('photo/photo3-daily.jpg') !important;
     background-size: cover !important;
     background-position: center !important;
     background-attachment: fixed !important;
     background-color: #222 !important;
     /* 画像が読み込まれるまでの待機色 */
+}
+
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 /* ==========================================
