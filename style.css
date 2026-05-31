@@ -417,14 +417,6 @@ body {
     margin-bottom: 15px;
 }
 
-/* 先輩のコメントなどの強調エリア */
-.modal-accent {
-    background-color: #f9f9f9;
-    border-left: 4px solid #d32f2f;
-    padding: 12px;
-    font-weight: bold;
-}
-
 /* カードを触ったときに「クリックできるよ」とわかるように矢印を指マークにする */
 .card {
     cursor: pointer;
@@ -437,23 +429,7 @@ body {
 }
 
 /* ==========================================
-   ✨ ぐっとポイント専用の可愛い別枠デザイン
-   ========================================== */
-.modal-good-point {
-    background-color: #fffde7;
-    /* 優しいパステルイエロー */
-    border-left: 4px solid #fbc02d;
-    /* アクセントの濃い黄色 */
-    padding: 12px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    /* 下の枠とのすき間 */
-    color: #555;
-    border-radius: 0 4px 4px 0;
-}
-
-/* ==========================================
-   🔄 コメントが自動で横に流れる无限ループデザイン
+   🔄【完全解決版】コメントが自動で横に流れる無限ループ
    ========================================== */
 
 /* 見出しの文字 */
@@ -461,62 +437,71 @@ body {
     font-size: 14px;
     font-weight: bold;
     color: #444;
-    margin: 20px 0 8px 0;
+    margin: 25px 0 10px 0 !important;
+    display: block !important;
 }
 
 /* スクロールする窓（はみ出たカードは隠す） */
 .infinite-flow-container {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    padding: 10px 0;
-    margin-bottom: 15px;
-    background-color: #f8f9fa;
+    width: 100% !important;
+    overflow: hidden !important;
+    position: relative !important;
+    padding: 12px 0 !important;
+    margin-bottom: 20px !important;
+    background-color: #f8f9fa !important;
     /* 薄いグレーの背景 */
-    border-radius: 6px;
+    border-radius: 8px !important;
+    display: block !important;
 }
 
-/* 動く線（トラック）の設定 */
+/* 🔥 ここが最重要！縦並びを100%解除して強制横一列にする設定 */
 .infinite-flow-track {
-    display: flex;
-    gap: 15px;
-    width: max-content;
-    animation: scrollLeft 20s linear infinite;
-    /* 20秒かけて左へ（ずっと繰り返す） */
+    display: flex !important;
+    /* 絶対に横並び */
+    flex-direction: row !important;
+    /* 確実に右へ並べる */
+    flex-wrap: nowrap !important;
+    /* 絶対に下に折り返さない */
+    gap: 15px !important;
+    /* カード同士のすき間 */
+    width: max-content !important;
+    /* 中身の分だけ横に無限に広げる */
+    animation: scrollLeft 25s linear infinite !important;
+    /* 25秒かけてループ */
 }
 
-/* マウスを乗せたら動きを一時停止させる（読みやすくする工夫） */
+/* マウスを乗せたら動きを一時停止 */
 .infinite-flow-container:hover .infinite-flow-track {
-    animation-play-state: paused;
+    animation-play-state: paused !important;
 }
 
 /* 各単語のカードデザイン（あおいさんの画像風） */
 .flow-item {
-    background-color: #fff;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: bold;
-    color: #333;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-    white-space: nowrap;
-    /* 文字を改行させない */
-    position: relative;
-    border-left: 4px solid #ccc;
-    /* 基本の左線 */
+    background-color: #fff !important;
+    padding: 12px 22px !important;
+    border-radius: 6px !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    color: #333 !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+    white-space: nowrap !important;
+    /* 文字を絶対に改行させない */
+    display: inline-block !important;
+    /* ブロック化を防ぐ */
+    position: relative !important;
 }
 
-/* ぐっとポイント側は画像の「オレンジ・茶色の線」に */
+/* ぐっとポイント側：オレンジ色の線 */
 .orange-line .flow-item {
-    border-left: 4px solid #e67e22;
+    border-left: 5px solid #e67e22 !important;
 }
 
-/* 先輩からのコメント側は画像の「青い線」に */
+/* 先輩からのコメント側：青色の線 */
 .blue-line .flow-item {
-    border-left: 4px solid #3498db;
+    border-left: 5px solid #3498db !important;
 }
 
-/* 🎥 自動スクロールの動かすアニメーション（左にスライド） */
+/* 🎥 自動スクロールのアニメーション */
 @keyframes scrollLeft {
     0% {
         transform: translateX(0);
@@ -524,6 +509,6 @@ body {
 
     100% {
         transform: translateX(-50%);
-        /* 半分まで進んだら最初に戻す（無限ループ） */
+        /* 半分（1セット分）進んだら最初に戻す */
     }
 }
