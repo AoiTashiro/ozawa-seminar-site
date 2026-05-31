@@ -453,68 +453,77 @@ body {
 }
 
 /* ==========================================
-   🌱 コメントが流れるようにつながるデザイン
+   🔄 コメントが自動で横に流れる无限ループデザイン
    ========================================== */
 
-/* コメント全体を包む枠（ここに縦線を引きます） */
-.modal-flow-container {
+/* 見出しの文字 */
+.flow-section-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #444;
+    margin: 20px 0 8px 0;
+}
+
+/* スクロールする窓（はみ出たカードは隠す） */
+.infinite-flow-container {
+    width: 100%;
+    overflow: hidden;
     position: relative;
-    padding-left: 25px;
-    /* 左側に線と丸を入れるスペースを作る */
-    margin-top: 25px;
+    padding: 10px 0;
+    margin-bottom: 15px;
+    background-color: #f8f9fa;
+    /* 薄いグレーの背景 */
+    border-radius: 6px;
 }
 
-/* 縦の流れる一本線 */
-.modal-flow-container::before {
-    content: '';
-    position: absolute;
-    top: 15px;
-    left: 7px;
-    width: 2px;
-    height: 75%;
-    /* 1つ目から2つ目の枠の手前まで線を伸ばす */
-    background: dotted #d32f2f;
-    /* 可愛い赤のドット（点線） */
+/* 動く線（トラック）の設定 */
+.infinite-flow-track {
+    display: flex;
+    gap: 15px;
+    width: max-content;
+    animation: scrollLeft 20s linear infinite;
+    /* 20秒かけて左へ（ずっと繰り返す） */
 }
 
-/* つながるカード共通のベース設定 */
-.modal-good-point,
-.modal-accent {
+/* マウスを乗せたら動きを一時停止させる（読みやすくする工夫） */
+.infinite-flow-container:hover .infinite-flow-track {
+    animation-play-state: paused;
+}
+
+/* 各単語のカードデザイン（あおいさんの画像風） */
+.flow-item {
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    white-space: nowrap;
+    /* 文字を改行させない */
     position: relative;
-    margin-bottom: 25px !important;
-    /* カード同士の間隔を広げる */
-    border-radius: 6px !important;
-    border-left: none !important;
-    /* 古い左線を消して、丸い点に変えます */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    /* ほんのり影をつけて立体的に */
+    border-left: 4px solid #ccc;
+    /* 基本の左線 */
 }
 
-/* 各カードの左側につく可愛い「●」の目印 */
-.modal-good-point::after,
-.modal-accent::after {
-    content: '';
-    position: absolute;
-    top: 15px;
-    left: -22px;
-    /* ドット線の上にぴったり重ねる */
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
+/* ぐっとポイント側は画像の「オレンジ・茶色の線」に */
+.orange-line .flow-item {
+    border-left: 4px solid #e67e22;
 }
 
-/* ぐっとポイント（1番目）の丸の色 */
-.modal-good-point::after {
-    background-color: #fbc02d;
-    /* 黄色の丸 */
-    box-shadow: 0 0 0 4px #fffde7;
-    /* 周りに薄い光の輪 */
+/* 先輩からのコメント側は画像の「青い線」に */
+.blue-line .flow-item {
+    border-left: 4px solid #3498db;
 }
 
-/* 先輩からのコメント（2番目）の丸の色 */
-.modal-accent::after {
-    background-color: #d32f2f;
-    /* 赤色の丸 */
-    box-shadow: 0 0 0 4px #fdf2f2;
-    /* 周りに薄い光の輪 */
+/* 🎥 自動スクロールの動かすアニメーション（左にスライド） */
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+        /* 半分まで進んだら最初に戻す（無限ループ） */
+    }
 }
