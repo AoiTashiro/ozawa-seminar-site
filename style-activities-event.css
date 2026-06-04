@@ -1,3 +1,29 @@
+/* ==========================================
+   🌐 ヘッダーとナビゲーション
+   ========================================== */
+.main-header {
+    background-color: rgba(0, 0, 0, 0.6);
+    /* ← ここが黒い背景の正体！ */
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ...（この下にも .logo や .nav-links などのナビゲーション関連のコードが続きます）... */
+
 body {
     margin: 0;
     padding: 120px 20px;
