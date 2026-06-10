@@ -497,3 +497,119 @@ body {
         opacity: 1;
     }
 }
+
+/* ==========================================
+   🧱 カードレイアウトとサイズアップ（修正）
+   ========================================== */
+
+/* カード自体のサイズをさらに一回り大きく */
+.card {
+    flex: 0 0 350px;
+    /* 💡 横幅を 320px ⇒ 350px に拡大 */
+    height: 520px;
+    /* 💡 縦幅を 460px ⇒ 520px に拡大（文字が大きくなった分をカバー） */
+    scroll-snap-align: start;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+}
+
+/* 画像の高さもカードに合わせて調整 */
+.card-img {
+    width: 100%;
+    height: 190px;
+    /* 💡 180px ⇒ 190px に少し拡大 */
+    overflow: hidden;
+}
+
+.card-content {
+    padding: 24px;
+    /* 💡 余白を広げて文字の圧迫感を軽減 */
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ==========================================
+   ✨ カード内の文字サイズ・デザイン調整（重要）
+   ========================================== */
+
+/* 【大】メインタイトル（一番大きく！） */
+.card-content h3 {
+    font-size: 20px;
+    /* 💡 15px ⇒ 20px に大幅サイズアップ */
+    margin: 10px 0 15px 0;
+    line-height: 1.6;
+    color: #222;
+    font-weight: bold;
+    height: auto;
+    /* 💡 文字が溢れないように自動縦伸びに変更 */
+    max-height: 96px;
+    /* 3行分まで許容 */
+    overflow: hidden;
+    order: 3;
+    /* 💡 順番を3番目に固定 */
+}
+
+/* 【中】元・赤枠タグ（パステル緑＆中央寄せ） */
+.skill-tag {
+    font-size: 14px;
+    /* 💡 10px ⇒ 14px にサイズアップ */
+    color: #2e7d32;
+    /* 💡 文字色を濃いめの緑にして視認性を確保 */
+    background-color: #c8e6c9;
+    /* 💡 背景を優しいパステルグリーンに変更 */
+    padding: 6px 16px;
+    /* 💡 タグ自体も少しふっくらと */
+    margin: 8px auto 12px auto;
+    /* 💡 左右の margin を auto にして「真ん中寄せ」に */
+    display: table;
+    /* 💡 中央寄せを綺麗に効かせるための指定 */
+    border-radius: 8px;
+    font-weight: bold;
+    order: 2;
+    /* 💡 順番を2番目に固定 */
+}
+
+/* 【小】会社名・カテゴリタグ */
+.company-tag {
+    font-size: 12px;
+    /* 💡 11px ⇒ 12px にサイズアップ */
+    color: #666;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 4px;
+    text-align: center;
+    /* 💡 真ん中寄せのタグに合わせてここも中央寄せに（お好みで） */
+    order: 1;
+    /* 💡 順番を1番目に固定 */
+}
+
+/* 日付とハッシュタグの調整（その他） */
+.date {
+    font-size: 12px;
+    color: #888;
+    margin: 0 0 12px 0;
+    order: 4;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    order: 5;
+}
+
+/* ハッシュタグの文字も少し大きく */
+.tag {
+    font-size: 12px;
+    /* 💡 10px ⇒ 12px にサイズアップ */
+    color: #d32f2f;
+    background-color: rgba(211, 47, 47, 0.06);
+    border: 1px solid rgba(211, 47, 47, 0.2);
+    border-radius: 12px;
+    padding: 4px 12px;
+}
