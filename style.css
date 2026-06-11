@@ -151,11 +151,19 @@ body {
 
 /* 統合した新しい見出しスタイル */
 .stage-main-title {
-    font-size: 26px;
-    color: #fff;
-    margin-bottom: 25px;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-    font-weight: bold;
+    font-size: 38px !important;
+    /* 💡パステル緑(14px)を圧倒する大迫力サイズにアップ！ */
+    font-weight: 900 !important;
+    /* 💡文字の太さを最高値(極太)にして存在感をプラス */
+    color: #ffffff;
+    margin-top: 40px;
+    /* 上に少し余白を作ってバランスを調整 */
+    margin-bottom: 30px;
+    /* 下のカード達との隙間をゆったり広げる */
+    letter-spacing: 2px;
+    /* 文字の間隔を少し広げて高級感を出す */
+    text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.85);
+    /* 💡背景写真に絶対に負けない強い影 */
     text-align: center;
 }
 
