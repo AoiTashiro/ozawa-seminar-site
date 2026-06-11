@@ -621,3 +621,149 @@ body {
     border-radius: 12px;
     padding: 4px 12px;
 }
+
+/* ==========================================
+   📦 モーダル内専用：ディスカッション事例レイアウト
+   ========================================== */
+.modal-discussion-section {
+    margin-top: 10px;
+    text-align: left;
+}
+
+.modal-discussion-title {
+    font-size: 18px !important;
+    font-weight: bold;
+    color: #222;
+    margin: 0 0 4px 0;
+}
+
+.modal-discussion-desc {
+    font-size: 12px;
+    color: #666;
+    margin: 0 0 15px 0;
+}
+
+/* モーダル内で横スクロールさせるコンテナ */
+.modal-scroll-container {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 5px 5px 20px 5px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.modal-scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* コンパクトな事例カード（モーダル用サイズ） */
+.mini-discussion-card {
+    flex: 0 0 260px;
+    /* モーダルの横幅に合わせて少しスリムに */
+    height: 240px;
+    /* 縦幅もコンパクトに収める */
+    perspective: 1000px;
+    cursor: pointer;
+    scroll-snap-align: start;
+}
+
+.mini-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+/* タップで裏返る */
+.mini-discussion-card.flipped .mini-card-inner {
+    transform: rotateY(180deg);
+}
+
+.mini-card-front,
+.mini-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    padding: 18px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* 🟦 表：お題 */
+.mini-card-front {
+    background: #fdfdfd;
+    border: 1px solid #e0e0e0;
+    color: #222;
+}
+
+/* 🟥 裏：回答 */
+.mini-card-back {
+    background: #f4f9f4;
+    /* 優しい緑系の背景 */
+    border: 1px solid #c8e6c9;
+    color: #222;
+    transform: rotateY(180deg);
+}
+
+/* タグのカラーバリエーション */
+.mini-card-tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: bold;
+    align-self: flex-start;
+}
+
+.font-macro {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.font-labor {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+
+.font-digital {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.font-answer {
+    background: #c8e6c9;
+    color: #2e7d32;
+}
+
+.mini-card-title {
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.5;
+    margin: 10px 0;
+    flex-grow: 1;
+}
+
+.mini-card-body {
+    font-size: 11px;
+    line-height: 1.5;
+    color: #444;
+    margin: 0;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.mini-tap-hint {
+    text-align: center;
+    font-size: 10px;
+    color: #aaa;
+    font-weight: bold;
+}
