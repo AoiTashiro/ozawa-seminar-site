@@ -767,3 +767,178 @@ body {
     color: #aaa;
     font-weight: bold;
 }
+
+/* ==========================================================================
+   📦 モーダル内専用：ディスカッション事例＆3D反転カードのレイアウト
+   ========================================================================== */
+
+/* セクション全体の余白設定 */
+.modal-discussion-section {
+    margin-top: 30px !important;
+    text-align: left !important;
+    display: block !important;
+}
+
+/* 「📚 毎日のディスカッション事例集」の見出し */
+.modal-discussion-title {
+    font-size: 18px !important;
+    font-weight: bold !important;
+    color: #222 !important;
+    margin: 0 0 4px 0 !important;
+}
+
+/* 見出しの下の説明文 */
+.modal-discussion-desc {
+    font-size: 12px !important;
+    color: #666 !important;
+    margin: 0 0 15px 0 !important;
+}
+
+/* 🔥 重要：縦並びを防いで横スクロールにさせるコンテナ */
+.modal-scroll-container {
+    display: flex !important;
+    /* 横一列に並べる */
+    flex-direction: row !important;
+    gap: 15px !important;
+    /* カード同士の隙間 */
+    overflow-x: auto !important;
+    /* 横スクロールを有効にする */
+    scroll-snap-type: x mandatory !important;
+    /* ピタッと止まる設定 */
+    padding: 10px 5px 25px 5px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    -ms-overflow-style: none !important;
+    /* スクロールバー非表示（IE） */
+    scrollbar-width: none !important;
+    /* スクロールバー非表示（Firefox） */
+}
+
+/* Chrome, Safari用スクロールバー非表示 */
+.modal-scroll-container::-webkit-scrollbar {
+    display: none !important;
+}
+
+/* 🌸 コンパクトな立体反転カードの土台 */
+.mini-discussion-card {
+    flex: 0 0 260px !important;
+    /* カードの横幅を260pxに完全固定 */
+    width: 260px !important;
+    height: 250px !important;
+    /* 縦幅を固定 */
+    perspective: 1000px !important;
+    /* 3D効果の奥行き */
+    cursor: pointer !important;
+    scroll-snap-align: start !important;
+    display: block !important;
+}
+
+/* カードの内側の立体回転軸 */
+.mini-card-inner {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transform-style: preserve-3d !important;
+    border-radius: 14px !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* flippedクラスがついたら180度クルッと回転 */
+.mini-discussion-card.flipped .mini-card-inner {
+    transform: rotateY(180deg) !important;
+}
+
+/* 表面・裏面の共通スタイル（重なり合うように配置） */
+.mini-card-front,
+.mini-card-back {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    -webkit-backface-visibility: hidden !important;
+    /* 裏面の時は表面を隠す */
+    backface-visibility: hidden !important;
+    border-radius: 14px !important;
+    padding: 18px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+}
+
+/* 🟦 表：お題カードのデザイン */
+.mini-card-front {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #222 !important;
+}
+
+/* 🟥 裏：回答カードのデザイン（優しい緑色） */
+.mini-card-back {
+    background: #f4fbf7 !important;
+    border: 1px solid #c8e6c9 !important;
+    color: #222 !important;
+    transform: rotateY(180deg) !important;
+    /* 最初から裏返しておく */
+}
+
+/* カード内のミニタグ */
+.mini-card-tag {
+    font-size: 10px !important;
+    padding: 3px 8px !important;
+    border-radius: 6px !important;
+    font-weight: bold !important;
+    align-self: flex-start !important;
+}
+
+.font-macro {
+    background: #e3f2fd !important;
+    color: #1565c0 !important;
+}
+
+.font-labor {
+    background: #fff3e0 !important;
+    color: #ef6c00 !important;
+}
+
+.font-digital {
+    background: #f3e5f5 !important;
+    color: #7b1fa2 !important;
+}
+
+.font-answer {
+    background: #c8e6c9 !important;
+    color: #2e7d32 !important;
+}
+
+/* お題のタイトル */
+.mini-card-title {
+    font-size: 13px !important;
+    font-weight: bold !important;
+    line-height: 1.5 !important;
+    color: #333 !important;
+    margin: 8px 0 !important;
+    flex-grow: 1 !important;
+}
+
+/* 回答集の文章 */
+.mini-card-body {
+    font-size: 11px !important;
+    line-height: 1.5 !important;
+    color: #444 !important;
+    margin: 0 !important;
+    overflow-y: auto !important;
+    /* 文字が多い時はカード内でスクロール */
+    flex-grow: 1 !important;
+}
+
+/* 下部のポチポチ誘導ヒント */
+.mini-tap-hint {
+    text-align: center !important;
+    font-size: 10px !important;
+    color: #a0aec0 !important;
+    font-weight: bold !important;
+    margin-top: 5px !important;
+}
