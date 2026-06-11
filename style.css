@@ -942,3 +942,114 @@ body {
     font-weight: bold !important;
     margin-top: 5px !important;
 }
+
+/* ==========================================
+   🖼️ モーダル内専用：スライドショー（7枚対応）
+   ========================================== */
+.presentation-slide-section {
+    margin: 25px 0;
+    text-align: left;
+}
+
+.slide-section-title {
+    font-size: 16px !important;
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 4px 0;
+}
+
+.slide-section-desc {
+    font-size: 12px;
+    color: #666;
+    margin: 0 0 12px 0;
+}
+
+/* スライダー全体の囲い */
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* スライドが横に並ぶコンテナ */
+.slide-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    /* スムーズにスクロールさせる */
+    scroll-snap-type: x mandatory;
+    /* ピタッと1枚ずつ止まる */
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    border: 1px solid #e2e8f0;
+    background-color: #f7fafc;
+    /* スクロールバーを非表示にする設定 */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.slide-container::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari用 */
+}
+
+/* 各スライド画像（1枚ずつの設定） */
+.slide-item {
+    flex: 0 0 100%;
+    /* 横幅100%を維持して並べる */
+    width: 100%;
+    scroll-snap-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    /* 横長のスライドが綺麗に収まるように */
+    border-radius: 10px;
+}
+
+/* 🎯 下部の丸ボタン（インジケーター）の並び */
+.slider-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+/* 丸ボタンの見た目 */
+.nav-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #cbd5e0;
+    /* 通常時はグレー */
+    transition: background-color 0.3s, transform 0.2s;
+    text-decoration: none;
+}
+
+/* マウスが乗った時や、選択されている時 */
+.nav-dot:hover,
+.nav-dot:active {
+    background-color: #2b6cb0;
+    /* ゼミカラーなど、濃い青や緑に */
+    transform: scale(1.2);
+}
+
+/* スライド下のコメントボックス */
+.slide-comment-box {
+    background-color: #f7fafc;
+    border-left: 4px solid #4299e1;
+    /* アクセントの青線 */
+    padding: 12px 15px;
+    border-radius: 0 8px 8px 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #4a5568;
+}

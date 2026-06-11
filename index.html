@@ -289,10 +289,46 @@
     <div class="modal-window" onclick="event.stopPropagation()">
       <span class="modal-close" onclick="closeModal('modal2')">×</span>
       <h2>財務会計学習とプレゼンテーション</h2>
-      <img src="photo.jpg/photo6-daily.jpg" class="modal-img" alt="財務諸表の教科書">
+      <img src="photo.jpg/photo7-daily.jpg" class="modal-img" alt="財務諸表の教科書">
       <div class="modal-body">
         <p>財務会計の本を章ごとに輪読し、チームプレゼンテーションでアウトプットします。</p>
         <p>章ごとに教科書の輪読を行い、その章の担当チームはプレゼンテーションします。インプットした知識をアウトプットし、理解を深めます。</p>
+      </div>
+    </div>
+    <!-- ======= 🖼️ 2年次春季活動：スライドショーセクション ======= -->
+    <div class="presentation-slide-section">
+      <h4 class="slide-section-title">📊 プレゼンテーションスライド（抜粋）</h4>
+      <p class="slide-section-desc">左右にスクロール、または下の丸ボタンでスライドを切り替えられます（全7枚）</p>
+
+      <div class="slider-wrapper">
+        <!-- スライドを表示する本体コンテナ -->
+        <div class="slide-container" id="springSlideContainer">
+          <div class="slide-item" id="slide-1"><img src="slide1.jpg" alt="スライド1：表紙"></div>
+          <div class="slide-item" id="slide-2"><img src="slide2.jpg" alt="スライド2：課題提起"></div>
+          <div class="slide-item" id="slide-3"><img src="slide3.jpg" alt="スライド3：現状分析"></div>
+          <div class="slide-item" id="slide-4"><img src="slide4.jpg" alt="スライド4：データ考察"></div>
+          <div class="slide-item" id="slide-5"><img src="slide5.jpg" alt="スライド5：提案内容"></div>
+          <div class="slide-item" id="slide-6"><img src="slide6.jpg" alt="スライド6：期待される効果"></div>
+          <div class="slide-item" id="slide-7"><img src="slide7.jpg" alt="スライド7：まとめ"></div>
+        </div>
+
+        <!-- 🎯 下部のナビゲーション（丸ボタン） -->
+        <div class="slider-nav">
+          <a href="#slide-1" class="nav-dot" onclick="setActiveDot(0)"></a>
+          <a href="#slide-2" class="nav-dot" onclick="setActiveDot(1)"></a>
+          <a href="#slide-3" class="nav-dot" onclick="setActiveDot(2)"></a>
+          <a href="#slide-4" class="nav-dot" onclick="setActiveDot(3)"></a>
+          <a href="#slide-5" class="nav-dot" onclick="setActiveDot(4)"></a>
+          <a href="#slide-6" class="nav-dot" onclick="setActiveDot(5)"></a>
+          <a href="#slide-7" class="nav-dot" onclick="setActiveDot(6)"></a>
+        </div>
+      </div>
+
+      <!-- スライドの下に添える一言コメント -->
+      <div class="slide-comment-box">
+        <strong>💡 ゼミ生から：</strong><br>
+        プレゼンテーションするには、自分がその内容のプロにならないといけないので、自ずと深い理解ができました。担当外の人も、質問することで自分事として取り組めます。<br>
+
       </div>
     </div>
   </div>
@@ -318,5 +354,59 @@
 
   <script src="script.js"></script>
 </body>
+
+<script>
+  // スライドの位置を検知して丸ボタン（ドット）の色を変える
+  const container = document.getElementById('springSlideContainer');
+  const dots = document.querySelectorAll('.nav-dot');
+
+  if (container && dots.length > 0) {
+    // 初期状態で1枚目をアクティブに
+    dots[0].style.backgroundColor = '#2b6cb0';
+
+    container.addEventListener('scroll', () => {
+      const width = container.clientWidth;
+      const activeIndex = Math.round(container.scrollLeft / width);
+
+      dots.forEach((dot, index) => {
+        if (index === activeIndex) {
+          dot.style.backgroundColor = '#2b6cb0'; // アクティブな色
+          dot.style.transform = 'scale(1.2)';
+        } else {
+          dot.style.backgroundColor = '#cbd5e0'; // 通常の色
+          dot.style.transform = 'scale(1.0)';
+        }
+      });
+    });
+  }
+
+</script>
+
+<script>
+  (function () {
+    const springContainer = document.getElementById('springSlideContainer');
+    const springDots = document.querySelectorAll('.nav-dot');
+
+    if (springContainer && springDots.length > 0) {
+      // 初期状態で1枚目をアクティブにする
+      springDots[0].style.backgroundColor = '#2b6cb0';
+
+      springContainer.addEventListener('scroll', () => {
+        const slideWidth = springContainer.clientWidth;
+        const currentActiveIndex = Math.round(springContainer.scrollLeft / slideWidth);
+
+        springDots.forEach((dot, index) => {
+          if (index === currentActiveIndex) {
+            dot.style.backgroundColor = '#2b6cb0';
+            dot.style.transform = 'scale(1.2)';
+          } else {
+            dot.style.backgroundColor = '#cbd5e0';
+            dot.style.transform = 'scale(1.0)';
+          }
+        });
+      });
+    }
+  })();
+</script>
 
 </html>
