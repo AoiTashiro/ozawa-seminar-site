@@ -39,7 +39,7 @@ function closeModal(modalId) {
         document.body.style.overflow = 'auto'; // 背景のスクロールを戻す
     }
 }
-// ======= 🖼️ 2年次春季活動：自動スライドショー（外部ファイル用） =======
+// ======= 🖼️ 2年次春季活動：自動スライドショーコントロール（6枚版） =======
 (function () {
     const container = document.getElementById('springSlideContainer');
     const wrapper = document.getElementById('springSliderWrapper');
@@ -49,9 +49,9 @@ function closeModal(modalId) {
     if (!container || !wrapper || dots.length === 0 || !modal2) return;
 
     let currentIndex = 0;
-    const totalSlides = dots.length;
+    const totalSlides = dots.length; // 自動的に6枚としてカウントされます
     let slideInterval = null;
-    const intervalTime = 2500;
+    const intervalTime = 2500; // 2.5秒ごとに次のスライドへ
 
     function goToSlide(index) {
         currentIndex = index;
@@ -73,7 +73,7 @@ function closeModal(modalId) {
     function nextSlide() {
         let nextIndex = currentIndex + 1;
         if (nextIndex >= totalSlides) {
-            nextIndex = 0;
+            nextIndex = 0; // 6枚目の次は1枚目に戻る
         }
         goToSlide(nextIndex);
     }
@@ -92,11 +92,13 @@ function closeModal(modalId) {
         }
     }
 
+    // マウスやスマホ操作時のホバーイベント
     wrapper.addEventListener('mouseenter', stopSlide);
     wrapper.addEventListener('mouseleave', startSlide);
     wrapper.addEventListener('touchstart', stopSlide);
     wrapper.addEventListener('touchend', startSlide);
 
+    // モーダル開閉の監視
     const observer = new MutationObserver(() => {
         if (window.getComputedStyle(modal2).display !== 'none') {
             setTimeout(() => {
