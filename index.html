@@ -309,12 +309,10 @@
               <div class="slide-item"><img src="photo.jpg/slide4.jpg" alt="スライド4"></div>
               <div class="slide-item"><img src="photo.jpg/slide5.jpg" alt="スライド5"></div>
               <div class="slide-item"><img src="photo.jpg/slide6.jpg" alt="スライド6"></div>
-              <div class="slide-item"><img src="photo.jpg/slide7.jpg" alt="スライド7"></div>
             </div>
 
             <div class="slider-nav" id="springSliderNav">
               <span class="nav-dot active"></span>
-              <span class="nav-dot"></span>
               <span class="nav-dot"></span>
               <span class="nav-dot"></span>
               <span class="nav-dot"></span>
@@ -354,59 +352,5 @@
 
   <script src="script.js"></script>
 </body>
-
-<script>
-  // スライドの位置を検知して丸ボタン（ドット）の色を変える
-  const container = document.getElementById('springSlideContainer');
-  const dots = document.querySelectorAll('.nav-dot');
-
-  if (container && dots.length > 0) {
-    // 初期状態で1枚目をアクティブに
-    dots[0].style.backgroundColor = '#2b6cb0';
-
-    container.addEventListener('scroll', () => {
-      const width = container.clientWidth;
-      const activeIndex = Math.round(container.scrollLeft / width);
-
-      dots.forEach((dot, index) => {
-        if (index === activeIndex) {
-          dot.style.backgroundColor = '#2b6cb0'; // アクティブな色
-          dot.style.transform = 'scale(1.2)';
-        } else {
-          dot.style.backgroundColor = '#cbd5e0'; // 通常の色
-          dot.style.transform = 'scale(1.0)';
-        }
-      });
-    });
-  }
-
-</script>
-
-<script>
-  (function () {
-    const springContainer = document.getElementById('springSlideContainer');
-    const springDots = document.querySelectorAll('.nav-dot');
-
-    if (springContainer && springDots.length > 0) {
-      // 初期状態で1枚目をアクティブにする
-      springDots[0].style.backgroundColor = '#2b6cb0';
-
-      springContainer.addEventListener('scroll', () => {
-        const slideWidth = springContainer.clientWidth;
-        const currentActiveIndex = Math.round(springContainer.scrollLeft / slideWidth);
-
-        springDots.forEach((dot, index) => {
-          if (index === currentActiveIndex) {
-            dot.style.backgroundColor = '#2b6cb0';
-            dot.style.transform = 'scale(1.2)';
-          } else {
-            dot.style.backgroundColor = '#cbd5e0';
-            dot.style.transform = 'scale(1.0)';
-          }
-        });
-      });
-    }
-  })();
-</script>
 
 </html>

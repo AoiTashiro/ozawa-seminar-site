@@ -39,3 +39,78 @@ function closeModal(modalId) {
         document.body.style.overflow = 'auto'; // 背景のスクロールを戻す
     }
 }
+// ======= 🖼️ 2年次春季活動：自動スライドショー（外部ファイル用） =======
+(function () {
+    const container = document.getElementById('springSlideContainer');
+    const wrapper = document.getElementById('springSliderWrapper');
+    const dots = document.querySelectorAll('#springSliderNav .nav-dot');
+    const modal2 = document.getElementById('modal2');
+
+    if (!container || !wrapper || dots.length === 0 || !modal2) return;
+
+    let currentIndex = 0;
+    const totalSlides = dots.length;
+    let slideInterval = null;
+    const intervalTime = 2500;
+
+    function goToSlide(index) {
+        currentIndex = index;
+        const slideWidth = container.clientWidth;
+        container.scrollTo({
+            left: slideWidth * currentIndex,
+            behavior: 'smooth'
+        });
+
+        dots.forEach((dot, i) => {
+            if (i === currentIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+
+    function nextSlide() {
+        let nextIndex = currentIndex + 1;
+        if (nextIndex >= totalSlides) {
+            nextIndex = 0;
+        }
+        goToSlide(nextIndex);
+    }
+
+    function startSlide() {
+        if (window.getComputedStyle(modal2).display === 'none') return;
+        if (!slideInterval) {
+            slideInterval = setInterval(nextSlide, intervalTime);
+        }
+    }
+
+    function stopSlide() {
+        if (slideInterval) {
+            clearInterval(slideInterval);
+            slideInterval = null;
+        }
+    }
+
+    wrapper.addEventListener('mouseenter', stopSlide);
+    wrapper.addEventListener('mouseleave', startSlide);
+    wrapper.addEventListener('touchstart', stopSlide);
+    wrapper.addEventListener('touchend', startSlide);
+
+    const observer = new MutationObserver(() => {
+        if (window.getComputedStyle(modal2).display !== 'none') {
+            setTimeout(() => {
+                goToSlide(0);
+                startSlide();
+            }, 300);
+        } else {
+            stopSlide();
+        }
+    });
+
+    observer.observe(modal2, { attributes: true, attributeFilter: ['style', 'class'] });
+
+    window.addEventListener('resize', () => {
+        goToSlide(currentIndex);
+    });
+})();
