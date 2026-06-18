@@ -2,6 +2,330 @@
 <html lang="ja">
 
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>　係紹介　</h1>
+
+    <section class="roles">
+
+        <a href="#leader" class="role-link">
+
+            <div class="role-card" onclick="showRole('leader')">
+                <h2>ゼミ長</h2>
+                <p>
+                    ゼミ全体の運営を担当します。
+
+                </p>
+
+            </div>
+        </a>
+
+        <a href="#sub-leader" class="role-link">
+
+            <div class="role-card" onclick="showRole('sub-leader')">
+                <h2>副ゼミ長</h2>
+                <p>
+                    ゼミ長のサポートを行います。
+                </p>
+
+            </div>
+        </a>
+
+        <a href="#observation" class="role-link">
+            <div class="role-card" onclick="showRole('observation')">
+                <h2>企業・工場見学係</h2>
+                <p>
+                    企画や見学先の予約を行います。
+                </p>
+
+            </div>
+        </a>
+
+        <a href="#camp" class="role-link">
+            <div class="role-card" onclick="showRole('camp')">
+                <h2>合宿係</h2>
+                <p>
+                    合宿の企画や宿泊先の手配を行います。
+                </p>
+
+            </div>
+        </a>
+
+        <a href="#union" class="role-link">
+            <div class="role-card" onclick="showRole('union')">
+                <h2>ゼミ連係</h2>
+                <p>
+                    ゼミ連合と連絡を取ったり、リクルート期間の企画を行います。
+                </p>
+
+            </div>
+        </a>
+
+        <a href="#sns" class="role-link">
+            <div class="role-card" onclick="showRole('sns')">
+                <h2>SNS係</h2>
+                <p>
+                    Instagramの運営や広報を担当します。
+                </p>
+
+            </div>
+        </a>
+
+        <a href="#obog" class="role-link">
+            <div class="role-card" onclick="showRole('obog')">
+                <h2>OBOG・フェアウェル係</h2>
+                <p>
+                    OBOG会やフェアウェルパーティのお店の手配を行います。
+                </p>
+
+            </div>
+        </a>
+
+        <a href="#recording" class="role-link">
+            <div class="role-card" onclick="showRole('recording')">
+                <h2>記録係</h2>
+                <p>
+                    日々の活動や行事を記録します。
+                </p>
+
+            </div>
+        </a>
+
+    </section>
+
+    <div style="height: 80px;"></div>
+
+    <h1>　ゼミ生紹介　</h1>
+
+    <section class="members">
+
+        <div class="card" leader>
+            <h1 id="leader"></h1>
+
+            <img src="images/member4.jpg" alt="メンバー写真">
+
+            <h2>はる</h2>
+
+            <p class="role">ゼミ長</p>
+
+            <p>会計ファイナンス学科</p>
+
+            <p>音楽を聴くこと</p>
+
+            <p>楽しいゼミです！</p>
+        </div>
+
+        <div class="card" sub-leader>
+            <h1 id="sub-leader"></h1>
+
+            <img src="images/member2.jpg" alt="メンバー写真">
+
+            <h2>ぜん</h2>
+
+            <p class="role">副ゼミ長</p>
+
+            <p>会計ファイナンス学科</p>
+
+            <p>水泳・ミセス</p>
+
+            <p>いっぱいお話して　　　　　　　　仲良くなりましょー！</p>
+        </div>
+
+        <div class="card" observation>
+            <h1 id="observation"></h1>
+
+            <img src="images/member3.jpg" alt="メンバー写真">
+
+            <h2>けいご</h2>
+
+            <p class="role">工場見学係</p>
+
+            <p>経済学科</p>
+
+            <p>旅行</p>
+
+            <p>真剣さと楽しさの両方とも　　　　味わえるゼミです</p>
+        </div>
+
+        <div class="card" observation>
+            <h1 id="observation"></h1>
+
+            <img src="images/member4.jpg" alt="メンバー写真">
+
+            <h2>はやと</h2>
+
+            <p class="role">工場見学係</p>
+
+            <p>経済学科</p>
+
+            <p>ゲーム・筋トレ・音楽</p>
+
+            <p>先輩と後輩がフラットな関係で　　楽しめるゼミです！</p>
+        </div>
+
+        <div class="card" camp>
+            <h1 id="camp"></h1>
+
+            <img src="images/member5.jpg" alt="メンバー写真">
+
+            <h2>いき</h2>
+
+            <p class="role">合宿係</p>
+
+            <p>経済学科</p>
+
+            <p>ダイビング</p>
+
+            <p>先輩も同期も先生もあたたかくて　楽しいゼミです</p>
+
+        </div>
+
+        <div class="card" camp>
+            <h1 id="camp"></h1>
+
+            <img src="images/member6.jpg" alt="メンバー写真">
+
+            <h2>こうすけ</h2>
+
+            <p class="role">合宿係</p>
+
+            <p>経済学科</p>
+
+            <p>アニメ・サッカー観戦</p>
+
+            <p>楽しみながら深く学べるゼミです。</p>
+
+        </div>
+
+        <div class="card" union>
+            <h1 id="union"></h1>
+
+            <img src="images/member7.jpg" alt="メンバー写真">
+
+            <h2>かいと</h2>
+
+            <p class="role">ゼミ連係</p>
+
+            <p>会計ファイナンス学科</p>
+
+            <p>漫画・アニメ・映画</p>
+
+            <p>何かの成長につながるゼミです</p>
+        </div>
+
+        <div class="card" sns>
+            <h1 id="sns"></h1>
+
+            <img src="images/member8.jpg" alt="メンバー写真">
+
+            <h2>あまね</h2>
+
+            <p class="role">SNS係</p>
+
+            <p>経済学科</p>
+
+            <p>アニメ</p>
+
+            <p>楽しく学べるゼミです！</p>
+
+        </div>
+
+        <div class="card" sns>
+            <h1 id="sns"></h1>
+
+            <img src="images/member9.jpg" alt="メンバー写真">
+
+            <h2>ちゅら</h2>
+
+            <p class="role">SNS係</p>
+
+            <p>経済学科</p>
+
+            <p>ダンス</p>
+
+            <p>先輩も同期も先生もあたたかくて　楽しいゼミです。</p>
+
+        </div>
+
+        <div class="card" obog>
+            <h1 id="obog"></h1>
+
+            <img src="images/member10.jpg" alt="メンバー写真">
+
+            <h2>このみ</h2>
+
+            <p class="role">OBOG会係</p>
+
+            <p>経済学科</p>
+
+            <p>映画</p>
+
+            <p>学年問わず仲良くなれるので楽しくお勉強できます！</p>
+        </div>
+
+        <div class="card" obog>
+            <h1 id="obog"></h1>
+
+            <img src="images/member11.jpg" alt="メンバー写真">
+
+            <h2>ひなこ</h2>
+
+            <p class="role">OBOG会係</p>
+
+            <p>会計ファイナンス学科</p>
+
+            <p>旅行・散歩・音楽</p>
+
+            <p>みんな優しくて楽しいゼミです！</p>
+        </div>
+
+        <div class="card" recording>
+            <h1 id="recording"></h1>
+
+            <img src="images/member12.jpg" alt="メンバー写真">
+
+            <h2>あおい</h2>
+
+            <p class="role">記録係</p>
+
+            <p>経済政策学科</p>
+
+            <p>旅行</p>
+
+            <p>優しい先輩方や同期が沢山いて　　居心地のいいゼミです。</p>
+        </div>
+
+        <div class="card" recording>
+            <h1 id="recording"></h1>
+
+            <img src="images/member13.jpg" alt="メンバー写真">
+
+            <h2>けんた</h2>
+
+            <p class="role">記録係</p>
+
+            <p>経済学科</p>
+
+            <p>ゲーム・筋トレ</p>
+
+            <p>学びと遊びのオンオフがはっきり　している和やかなゼミです！</p>
+        </div>
+
+    </section>
+
+    </script>
+</body>
+
+</html>
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>所属ゼミ生紹介</title>
@@ -38,178 +362,3 @@
             </div>
         </nav>
     </header>
-
-    <h1>係紹介</h1>
-
-    <section class="roles">
-        <a href="#leader" class="role-link">
-            <div class="role-card">
-                <h2>ゼミ長</h2>
-                <p>ゼミ全体の運営を担当します。</p>
-            </div>
-        </a>
-
-        <a href="#sub-leader" class="role-link">
-            <div class="role-card">
-                <h2>副ゼミ長</h2>
-                <p>ゼミ長のサポートを行います。</p>
-            </div>
-        </a>
-
-        <a href="#observation" class="role-link">
-            <div class="role-card">
-                <h2>企業・工場見学係</h2>
-                <p>企画や見学先の予約を行います。</p>
-            </div>
-        </a>
-
-        <a href="#camp" class="role-link">
-            <div class="role-card">
-                <h2>合宿係</h2>
-                <p>合宿の企画や宿泊先の手配を行います。</p>
-            </div>
-        </a>
-
-        <a href="#union" class="role-link">
-            <div class="role-card">
-                <h2>ゼミ連係</h2>
-                <p>ゼミ連合と連絡を取ったり、リクルート期間の企画を行います。</p>
-            </div>
-        </a>
-
-        <a href="#sns" class="role-link">
-            <div class="role-card">
-                <h2>SNS係</h2>
-                <p>Instagramの運営や広報を担当します。</p>
-            </div>
-        </a>
-
-        <a href="#obog" class="role-link">
-            <div class="role-card">
-                <h2>OBOG・フェアウェル係</h2>
-                <p>OBOG会やフェアウェルパーティのお店の手配を行います。</p>
-            </div>
-        </a>
-
-        <a href="#recording" class="role-link">
-            <div class="role-card">
-                <h2>記録係</h2>
-                <p>日々の活動や行事を記録します。</p>
-            </div>
-        </a>
-    </section>
-
-    <div style="height: 80px;"></div>
-
-    <h1>ゼミ生紹介</h1>
-
-    <section class="members">
-
-        <div class="card" id="leader">
-            <img src="photo.jpg/member4.jpg" alt="メンバー写真">
-            <h2>はる</h2>
-            <p class="role">ゼミ長</p>
-            <p>好きなこと：音楽を聴くこと</p>
-            <p>一言：楽しいゼミです！</p>
-        </div>
-
-        <div class="card" id="sub-leader">
-            <img src="photo.jpg/member2.jpg" alt="メンバー写真">
-            <h2>ぜん</h2>
-            <p class="role">副ゼミ長</p>
-            <p>好きなこと：水泳・ミセス</p>
-            <p>一言：ぜひ来てください！</p>
-        </div>
-
-        <div class="card" id="observation">
-            <img src="photo.jpg/member3.jpg" alt="メンバー写真">
-            <h2>けいご</h2>
-            <p class="role">工場見学係</p>
-            <p>好きなこと：旅行</p>
-            <p>一言：みんな仲がいいです！</p>
-        </div>
-
-        <div class="card">
-            <img src="photo.jpg/member1.jpg" alt="メンバー写真">
-            <h2>はやと</h2>
-            <p class="role">工場見学係</p>
-            <p>好きなこと：ゲーム・筋トレ・音楽</p>
-            <p>一言：ぜひ来てください！</p>
-        </div>
-
-        <div class="card" id="camp">
-            <img src="photo.jpg/member5.jpg" alt="メンバー写真">
-            <h2>いき</h2>
-            <p class="role">合宿係</p>
-            <p>好きなこと：ダイビング</p>
-            <p>一言：ぜひ来てください！</p>
-        </div>
-
-        <div class="card">
-            <img src="photo.jpg/member6.jpg" alt="メンバー写真">
-            <h2>こうすけ</h2>
-            <p class="role">合宿係</p>
-            <p>好きなこと：アニメ・サッカー観戦</p>
-            <p>一言：ぜひ来てください！</p>
-        </div>
-
-        <div class="card" id="union">
-            <img src="photo.jpg/member7.jpg" alt="メンバー写真">
-            <h2>かいと</h2>
-            <p class="role">ゼミ連係</p>
-            <p>好きなこと：漫画・アニメ・映画</p>
-            <p>一言：ぜひ来てください！</p>
-        </div>
-
-        <div class="card" id="sns">
-            <img src="photo.jpg/member1.jpg" alt="メンバー写真">
-            <h2>あまね</h2>
-            <p class="role">SNS係</p>
-            <p>好きなこと：アニメ</p>
-            <p>一言：ぜひ来てください！</p>
-        </div>
-
-        <div class="card">
-            <img src="photo.jpg/member4.jpg" alt="メンバー写真">
-            <h2>ちゅら</h2>
-            <p class="role">SNS係</p>
-            <p>好きなこと：ダンス</p>
-            <p>一言：ぜひ来てください！</p>
-        </div>
-
-        <div class="card" id="obog">
-            <img src="photo.jpg/member6.jpg" alt="メンバー写真">
-            <h2>このみ</h2>
-            <p class="role">OBOG会係</p>
-            <p>好きなこと：映画</p>
-            <p>一言：ぜひ来てください！</p>
-        </div>
-
-        <div class="card">
-            <img src="photo.jpg/member7.jpg" alt="メンバー写真">
-            <h2>ひなこ</h2>
-            <p class="role">OBOG会係</p>
-            <p>好きなこと：旅行・散歩・音楽</p>
-            <p>一言：ぜひ来てください！</p>
-        </div>
-
-        <div class="card" id="recording">
-            <img src="photo.jpg/member1.jpg" alt="メンバー写真">
-            <h2>あおい</h2>
-            <p class="role">記録係</p>
-            <p>好きなこと：旅行</p>
-            <p>一言：ぜひ来てください！</p>
-        </div>
-
-        <div class="card">
-            <img src="photo.jpg/member2.jpg" alt="メンバー写真">
-            <h2>けんた</h2>
-            <p class="role">記録係</p>
-            <p>好きなこと：ゲーム・筋トレ</p>
-            <p>一言：ぜひ来てください！</p>
-        </div>
-
-    </section>
-</body>
-
-</html>
