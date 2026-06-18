@@ -54,8 +54,10 @@
 
       <h2 class="stage-main-title">🌱 ゼミ生の日常活動の流れ 🤖</h2>
 
+      <!-- 🌟 入れ子エラーを解消し、ご希望通りの5枚（通年・2年春・2年秋・3年春・3年秋）に整理しました -->
       <div class="stage-six-row">
 
+        <!-- 1枚目：通年活動 -->
         <div class="card" onclick="openModal('modal1')">
           <div class="card-img">
             <img src="photo.jpg/photo1-daily.jpg" alt="ディスカッション風景">
@@ -72,6 +74,7 @@
           </div>
         </div>
 
+        <!-- 2枚目：２年次 春学期 -->
         <div class="card" onclick="openModal('modal2')">
           <div class="card-img">
             <img src="photo.jpg/photo-daily-grade2.jpg" alt="財務会計の学習">
@@ -88,6 +91,7 @@
           </div>
         </div>
 
+        <!-- 3枚目：２年次 秋学期 -->
         <div class="card" onclick="openModal('modal2')">
           <div class="card-img">
             <img src="photo-daily-kangaku.jpg" alt="2年生の活動3">
@@ -104,6 +108,7 @@
           </div>
         </div>
 
+        <!-- 4枚目：３年次 春学期 -->
         <div class="card" onclick="openModal('modal3')">
           <div class="card-img">
             <img src="photo.jpg/photo3-daily.jpg" alt="プログラミング風景">
@@ -112,7 +117,7 @@
             <span class="company-tag">３年次 春学期</span>
             <span class="skill-tag">プログラミング</span>
             <h3>AIを活用してコード作成・システム開発しよう</h3>
-            <p class="date">2026年05月21日</p>
+            <p class="date">2026年05+21日</p>
             <div class="tags">
               <span class="tag">#programming</span>
               <span class="tag">#AI</span>
@@ -120,6 +125,7 @@
           </div>
         </div>
 
+        <!-- 5枚目：３年次 秋学期 -->
         <div class="card" onclick="openModal('modal3')">
           <div class="card-img">
             <img src="photo.jpg/photo-daily-kangaku.jpg" alt="3年生の活動2">
@@ -136,26 +142,11 @@
           </div>
         </div>
 
-        <div class="card" onclick="openModal('modal3')">
-          <div class="card-img">
-            <img src="photo.jpg/photo2-daily.jpg" alt="3年生の活動3">
-          </div>
-          <div class="card-content">
-            <span class="company-tag">３年次活動</span>
-            <span class="skill-tag">ゼミ論文</span>
-            <h3>3年生の活動カード3枚目（ここにタイトルが入ります）</h3>
-            <p class="date">2026年05月24日</p>
-            <div class="tags">
-              <span class="tag">#研究発表</span>
-              <span class="tag">#まとめ</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
+      </div> <!-- stage-six-rowの終わり（これでカードエリアが正常に閉じます） -->
     </div>
   </div>
 
+  <!-- ======= 🟢 モーダル1：ディスカッション ======= -->
   <div id="modal1" class="modal-overlay" onclick="closeModal('modal1')">
     <div class="modal-window" onclick="event.stopPropagation()">
       <span class="modal-close" onclick="closeModal('modal1')">×</span>
@@ -200,11 +191,9 @@
 
         <div class="modal-discussion-section">
           <h4 class="modal-discussion-title">📚 毎日のディスカッション事例集</h4>
-          <p class="modal-discussion-desc">タップすると、ゼミ生の実際の回答や解説が見れます！
-          </p>
+          <p class="modal-discussion-desc">タップすると、ゼミ生の実際の回答や解説が見れます！</p>
 
           <div class="modal-scroll-container">
-
             <div class="mini-discussion-card" onclick="this.classList.toggle('flipped')">
               <div class="mini-card-inner">
                 <div class="mini-card-front">
@@ -216,14 +205,7 @@
                 <div class="mini-card-back">
                   <span class="mini-card-tag font-answer">ゼミ生の回答</span>
                   <p class="mini-card-body">
-                    <strong>【主な意見】</strong><br>①反面教師
-                    ロールモデルがあると型にハマってしまう（選択肢が狭まる）。
-                    他人の失敗、予想できなかったことを学べ、選択肢が広がる。
-                    <br>②尊敬できる人
-                    尊敬できる人の方が人生の参考になる。
-                    憧れる人の方が影響されやすい、ポジティブな影響。
-                    モチベーションの維持。
-
+                    <strong>【主な意見】</strong><br>①反面教師<br>ロールモデルがあると型にハマってしまう（選択肢が狭まる）。他人の失敗、予想できなかったことを学べ、選択肢が広がる。<br>②尊敬できる人<br>尊敬できる人の方が人生の参考になる。憧れる人の方が影響されやすい、ポジティブな影響。モチベーションの維持。
                   </p>
                   <div class="mini-tap-hint">👆 タップで戻る</div>
                 </div>
@@ -240,13 +222,7 @@
                 <div class="mini-card-back">
                   <span class="mini-card-tag font-answer">ゼミ生の回答</span>
                   <p class="mini-card-body">
-                    <strong>【主な意見】</strong><br>①機能性
-                    車などの安全性が関わるもの、ガソリン高騰により燃費の良い日本車を強化すべき。
-                    任天堂などはすでに感情価値を持っているから機能性を強化すべき。
-                    <br>②感情価値
-                    →中国企業の技術で低価格高品質の商品が市場に並び始めているため
-                    →すでに高品質というイメージが築かれているため必要ない
-
+                    <strong>【主な意見】</strong><br>①機能性<br>車などの安全性が関わるもの、ガソリン高騰により燃費の良い日本車を強化すべき。任天堂などはすでに感情価値を持っているから機能性を強化すべき。<br>②感情価値<br>→中国企業の技術で低価格高品質の商品が市場に並び始めているため<br>→すでに高品質というイメージが築かれているため必要ない
                   </p>
                   <div class="mini-tap-hint">👆 タップで戻る</div>
                 </div>
@@ -265,19 +241,12 @@
                 <div class="mini-card-back">
                   <span class="mini-card-tag font-answer">ゼミ生の回答</span>
                   <p class="mini-card-body">
-                    <strong>【主な意見】</strong><br>①合理的
-                    既にAmazonが成功しているという実例があるから。
-                    長期的に利益を出すという観点において、ライバル企業の掌握、依存させることができるから。
-                    物流を把握することで新たなニーズに気づくことができるから。
-                    <br>②非合理的
-                    ライバル会社の新規顧客が増えるから。
-
+                    <strong>【主な意見】</strong><br>①合理的<br>既にAmazonが成功しているという実例があるから。長期的に利益を出すという観点において、ライバル企業の掌握、依存させることができるから。物流を把握することで新たなニーズに気づくことができるから。<br>②非合理的<br>ライバル会社の新規顧客が増えるから。
                   </p>
                   <div class="mini-tap-hint">👆 タップで戻る</div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
 
@@ -303,7 +272,6 @@
           <p class="slide-section-desc">スライドが自動で流れます。マウスを乗せると一時停止します（全6枚）</p>
 
           <div class="slider-wrapper" id="springSliderWrapper">
-            <!-- 📷 画像を6枚に揃えました（slide7を削除） -->
             <div class="slide-container" id="springSlideContainer">
               <div class="slide-item"><img src="photo.jpg/slide1.jpg" alt="スライド1"></div>
               <div class="slide-item"><img src="photo.jpg/slide2.jpg" alt="スライド2"></div>
@@ -313,7 +281,6 @@
               <div class="slide-item"><img src="photo.jpg/slide6.jpg" alt="スライド6"></div>
             </div>
 
-            <!-- 🎯 ドットも6個に揃えました -->
             <div class="slider-nav" id="springSliderNav">
               <span class="nav-dot active"></span>
               <span class="nav-dot"></span>
@@ -334,7 +301,7 @@
     </div>
   </div>
 
-
+  <!-- ======= 🔴 モーダル3：プログラミング ======= -->
   <div id="modal3" class="modal-overlay" onclick="closeModal('modal3')">
     <div class="modal-window" onclick="event.stopPropagation()">
       <span class="modal-close" onclick="closeModal('modal3')">×</span>
@@ -349,9 +316,7 @@
 
   <footer class="site-footer">
     <div class="footer-logo">Ozawa seminar</div>
-    <div class="footer-social">
-
-    </div>
+    <div class="footer-social"></div>
   </footer>
 
   <script src="script.js"></script>
