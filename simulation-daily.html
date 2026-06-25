@@ -2,602 +2,666 @@
 <html lang="ja">
 
 <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>小澤ゼミ紹介シミュレーション</title>
-      <style>
-            /* ========== 全体スタイル (ノベルゲーム仕様) ========== */
-            body {
-                  background-color: #050508;
-                  color: #eee;
-                  font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  height: 100vh;
-                  margin: 0;
-                  overflow: hidden;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小澤ゼミ紹介シミュレーション</title>
+    <style>
+        /* ========== 全体スタイル (ノベルゲーム仕様) ========== */
+        body {
+            background-color: #050508;
+            color: #eee;
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* ゲーム画面全体（ここに背景写真が広がります） */
+        #game-container {
+            width: 800px;
+            height: 500px;
+            background-color: #000;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #333;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 後から写真を入れるための背景レイヤー */
+        #bg-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background-size: cover;
+            background-position: center;
+            transition: background 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 後ほど写真を入れる場所の「目印（薄い文字）」 */
+        #bg-placeholder {
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.12);
+            /* 奥で非常に薄く表示 */
+            font-weight: bold;
+            pointer-events: none;
+            text-align: center;
+            z-index: 1;
+        }
+
+        /* 演出用キャンバス（リンクスタートの光） */
+        #cyber-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+
+        /* 画面レイヤー（下詰めに配置） */
+        .screen-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            /* テキストボックスなどを下部に配置 */
+            align-items: center;
+            box-sizing: border-box;
+            padding: 20px;
+        }
+
+        /* ホワイトアウト用マスク */
+        #whiteout {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            opacity: 0;
+            z-index: 10;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        /* ========== 演出用UI（画面中央に浮かせるもの） ========== */
+        .center-ui {
+            position: absolute;
+            top: 40%;
+            transform: translateY(-50%);
+            z-index: 4;
+            text-align: center;
+        }
+
+        /* ②言語選択 */
+        #lang-ui {
+            border: 2px solid #00f3ff;
+            background: rgba(0, 10, 20, 0.85);
+            padding: 20px 40px;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+        }
+
+        .lang-option {
+            font-size: 1.5rem;
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .lang-option.active {
+            color: #00f3ff;
+            text-shadow: 0 0 10px #00f3ff;
+        }
+
+        /* ③ログイン画面 */
+        #login-ui {
+            font-size: 1.3rem;
+            color: #00f3ff;
+            text-align: left;
+            width: 300px;
+            background: rgba(0, 5, 10, 0.85);
+            padding: 20px;
+            border-left: 4px solid #00f3ff;
+        }
+
+        /* ④プレイヤー名入力 */
+        #input-ui input {
+            background: rgba(0, 0, 0, 0.6);
+            border: none;
+            border-bottom: 2px solid #00f3ff;
+            color: #fff;
+            font-size: 1.6rem;
+            text-align: center;
+            outline: none;
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 300px;
+        }
+
+        #input-ui button {
+            background: #00f3ff;
+            color: #000;
+            border: none;
+            padding: 10px 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 0 15px #00f3ff;
+        }
+
+        /* ⑤Welcome大文字 */
+        #welcome-ui {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 20px #00f3ff, 0 0 40px #00f3ff;
+            transform: scale(0.5);
+            opacity: 0;
+            transition: transform 2s cubic-bezier(0.1, 0.8, 0.3, 1), opacity 1s;
+        }
+
+        #welcome-ui.show {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        /* ========== ゲーム本編（下部テキストボックス） ========== */
+        #text-box {
+            width: 100%;
+            height: 135px;
+            /* ↓ここがポイント：黒の75%の薄さにして、奥の背景を見せつつ文字を読みやすくしています */
+            background: rgba(0, 0, 0, 0.75);
+            border: 2px solid #334466;
+            border-radius: 8px;
+            padding: 15px 25px;
+            box-sizing: border-box;
+            font-size: 1.25rem;
+            line-height: 1.6;
+            cursor: pointer;
+            z-index: 5;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        #speaker-name {
+            color: #00f3ff;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            height: 1.2rem;
+        }
+
+        #dialogue-text {
+            color: #fff;
+        }
+
+        /* 選択肢ボタンの表示位置（テキストボックスの上） */
+        #choices-area {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 80%;
+            margin-bottom: 15px;
+            z-index: 6;
+        }
+
+        .choice-btn {
+            width: 100%;
+            background: rgba(15, 20, 35, 0.9);
+            color: #fff;
+            border: 1px solid #4466aa;
+            padding: 12px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: 0.2s;
+            text-align: center;
+        }
+
+        .choice-btn:hover {
+            background: #335599;
+            border-color: #00f3ff;
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+        }
+
+        #indicator {
+            position: absolute;
+            bottom: 15px;
+            right: 30px;
+            color: #4466aa;
+            font-size: 0.9rem;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
             }
 
-            /* ゲーム画面全体（ここに背景写真が広がります） */
-            #game-container {
-                  width: 800px;
-                  height: 500px;
-                  background-color: #000;
-                  background-size: cover;
-                  background-position: center;
-                  border: 2px solid #333;
-                  border-radius: 12px;
-                  position: relative;
-                  overflow: hidden;
-                  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            50% {
+                opacity: 0;
             }
-
-            /* 後から写真を入れるための背景レイヤー */
-            #bg-layer {
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  width: 100%;
-                  height: 100%;
-                  z-index: 0;
-                  background-size: cover;
-                  background-position: center;
-                  transition: background 0.5s ease;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-            }
-
-            /* 後ほど写真を入れる場所の「目印（薄い文字）」 */
-            #bg-placeholder {
-                  font-size: 1.8rem;
-                  color: rgba(255, 255, 255, 0.12);
-                  /* 奥で非常に薄く表示 */
-                  font-weight: bold;
-                  pointer-events: none;
-                  text-align: center;
-                  z-index: 1;
-            }
-
-            /* 演出用キャンバス（リンクスタートの光） */
-            #cyber-canvas {
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  width: 100%;
-                  height: 100%;
-                  z-index: 2;
-            }
-
-            /* 画面レイヤー（下詰めに配置） */
-            .screen-layer {
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  width: 100%;
-                  height: 100%;
-                  z-index: 3;
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: flex-end;
-                  /* テキストボックスなどを下部に配置 */
-                  align-items: center;
-                  box-sizing: border-box;
-                  padding: 20px;
-            }
-
-            /* ホワイトアウト用マスク */
-            #whiteout {
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  width: 100%;
-                  height: 100%;
-                  background-color: #fff;
-                  opacity: 0;
-                  z-index: 10;
-                  pointer-events: none;
-                  transition: opacity 0.5s ease;
-            }
-
-            /* ========== 演出用UI（画面中央に浮かせるもの） ========== */
-            .center-ui {
-                  position: absolute;
-                  top: 40%;
-                  transform: translateY(-50%);
-                  z-index: 4;
-                  text-align: center;
-            }
-
-            /* ②言語選択 */
-            #lang-ui {
-                  border: 2px solid #00f3ff;
-                  background: rgba(0, 10, 20, 0.85);
-                  padding: 20px 40px;
-                  box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
-            }
-
-            .lang-option {
-                  font-size: 1.5rem;
-                  margin: 10px 0;
-                  color: #555;
-            }
-
-            .lang-option.active {
-                  color: #00f3ff;
-                  text-shadow: 0 0 10px #00f3ff;
-            }
-
-            /* ③ログイン画面 */
-            #login-ui {
-                  font-size: 1.3rem;
-                  color: #00f3ff;
-                  text-align: left;
-                  width: 300px;
-                  background: rgba(0, 5, 10, 0.85);
-                  padding: 20px;
-                  border-left: 4px solid #00f3ff;
-            }
-
-            /* ④プレイヤー名入力 */
-            #input-ui input {
-                  background: rgba(0, 0, 0, 0.6);
-                  border: none;
-                  border-bottom: 2px solid #00f3ff;
-                  color: #fff;
-                  font-size: 1.6rem;
-                  text-align: center;
-                  outline: none;
-                  padding: 10px;
-                  margin-bottom: 20px;
-                  width: 300px;
-            }
-
-            #input-ui button {
-                  background: #00f3ff;
-                  color: #000;
-                  border: none;
-                  padding: 10px 30px;
-                  font-size: 1.1rem;
-                  cursor: pointer;
-                  font-weight: bold;
-                  box-shadow: 0 0 15px #00f3ff;
-            }
-
-            /* ⑤Welcome大文字 */
-            #welcome-ui {
-                  font-size: 2.5rem;
-                  font-weight: bold;
-                  color: #fff;
-                  text-shadow: 0 0 20px #00f3ff, 0 0 40px #00f3ff;
-                  transform: scale(0.5);
-                  opacity: 0;
-                  transition: transform 2s cubic-bezier(0.1, 0.8, 0.3, 1), opacity 1s;
-            }
-
-            #welcome-ui.show {
-                  transform: scale(1.1);
-                  opacity: 1;
-            }
-
-            /* ========== ゲーム本編（下部テキストボックス） ========== */
-            #text-box {
-                  width: 100%;
-                  height: 135px;
-                  /* ↓ここがポイント：黒の75%の薄さにして、奥の背景を見せつつ文字を読みやすくしています */
-                  background: rgba(0, 0, 0, 0.75);
-                  border: 2px solid #334466;
-                  border-radius: 8px;
-                  padding: 15px 25px;
-                  box-sizing: border-box;
-                  font-size: 1.25rem;
-                  line-height: 1.6;
-                  cursor: pointer;
-                  z-index: 5;
-                  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
-            }
-
-            #speaker-name {
-                  color: #00f3ff;
-                  font-weight: bold;
-                  margin-bottom: 8px;
-                  font-size: 1.1rem;
-                  height: 1.2rem;
-            }
-
-            #dialogue-text {
-                  color: #fff;
-            }
-
-            /* 選択肢ボタンの表示位置（テキストボックスの上） */
-            #choices-area {
-                  display: flex;
-                  flex-direction: column;
-                  gap: 10px;
-                  width: 80%;
-                  margin-bottom: 15px;
-                  z-index: 6;
-            }
-
-            .choice-btn {
-                  width: 100%;
-                  background: rgba(15, 20, 35, 0.9);
-                  color: #fff;
-                  border: 1px solid #4466aa;
-                  padding: 12px;
-                  font-size: 1.1rem;
-                  cursor: pointer;
-                  border-radius: 6px;
-                  transition: 0.2s;
-                  text-align: center;
-            }
-
-            .choice-btn:hover {
-                  background: #335599;
-                  border-color: #00f3ff;
-                  box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
-            }
-
-            #indicator {
-                  position: absolute;
-                  bottom: 15px;
-                  right: 30px;
-                  color: #4466aa;
-                  font-size: 0.9rem;
-                  animation: blink 1s infinite;
-            }
-
-            @keyframes blink {
-
-                  0%,
-                  100% {
-                        opacity: 1;
-                  }
-
-                  50% {
-                        opacity: 0;
-                  }
-            }
-      </style>
+        }
+    </style>
 </head>
 
 <body>
 
-      <div id="game-container">
-            <div id="bg-layer">
-                  <div id="bg-placeholder"></div>
+    <div id="game-container">
+        <div id="bg-layer">
+            <div id="bg-placeholder"></div>
+        </div>
+
+        <canvas id="cyber-canvas" width="800" height="500"></canvas>
+
+        <div id="whiteout"></div>
+
+        <div id="screen" class="screen-layer">
+            <div id="center-ui-container" class="center-ui"></div>
+
+            <div id="choices-area"></div>
+            <div id="text-box">
+                <div id="speaker-name"></div>
+                <div id="dialogue-text"></div>
+                <div id="indicator" style="display:none;">▼ ENTER</div>
             </div>
+        </div>
+    </div>
 
-            <canvas id="cyber-canvas" width="800" height="500"></canvas>
+    <script>
+        const canvas = document.getElementById('cyber-canvas');
+        const ctx = canvas.getContext('2d');
+        const screen = document.getElementById('screen');
+        const whiteout = document.getElementById('whiteout');
+        const centerUi = document.getElementById('center-ui-container');
+        const textBox = document.getElementById('text-box');
+        const bgPlaceholder = document.getElementById('bg-placeholder');
+        const bgLayer = document.getElementById('bg-layer');
 
-            <div id="whiteout"></div>
+        let playerName = "主人公";
+        let warpSpeed = 2;
+        let warpMode = "multi";
 
-            <div id="screen" class="screen-layer">
-                  <div id="center-ui-container" class="center-ui"></div>
-
-                  <div id="choices-area"></div>
-                  <div id="text-box">
-                        <div id="speaker-name"></div>
-                        <div id="dialogue-text"></div>
-                        <div id="indicator" style="display:none;">▼ ENTER</div>
-                  </div>
-            </div>
-      </div>
-
-      <script>
-            const canvas = document.getElementById('cyber-canvas');
-            const ctx = canvas.getContext('2d');
-            const screen = document.getElementById('screen');
-            const whiteout = document.getElementById('whiteout');
-            const centerUi = document.getElementById('center-ui-container');
-            const textBox = document.getElementById('text-box');
-            const bgPlaceholder = document.getElementById('bg-placeholder');
-            const bgLayer = document.getElementById('bg-layer');
-
-            let playerName = "主人公";
-            let warpSpeed = 2;
-            let warpMode = "multi";
-
-            // ========== ①〜⑤ 演出用パーティクルシステム ==========
-            const colors = {
-                  multi: ['#888888', '#ff007f', '#ffff00', '#00ffff', '#7fff00', '#ff0000'],
-                  blue: ['#0033ff', '#0099ff', '#00ffff', '#ffffff']
-            };
-            class Particle {
-                  constructor() { this.reset(); this.z = Math.random() * 800; }
-                  reset() {
-                        this.x = (Math.random() - 0.5) * 800;
-                        this.y = (Math.random() - 0.5) * 500;
-                        this.z = 800;
-                        this.color = colors[warpMode] ? colors[warpMode][Math.floor(Math.random() * colors[warpMode].length)] : '#fff';
-                  }
-                  update() { this.z -= warpSpeed; if (this.z <= 0) this.reset(); }
-                  draw() {
-                        if (warpMode === "stop") return;
-                        let k = 300 / this.z;
-                        let px = this.x * k + 400; let py = this.y * k + 250;
-                        if (px >= 0 && px <= 800 && py >= 0 && py <= 500) {
-                              ctx.fillStyle = this.color;
-                              let size = (800 - this.z) * 0.01;
-                              ctx.fillRect(px, py, size, size * 2);
-                        }
-                  }
+        // ========== ①〜⑤ 演出用パーティクルシステム ==========
+        const colors = {
+            multi: ['#888888', '#ff007f', '#ffff00', '#00ffff', '#7fff00', '#ff0000'],
+            blue: ['#0033ff', '#0099ff', '#00ffff', '#ffffff']
+        };
+        class Particle {
+            constructor() { this.reset(); this.z = Math.random() * 800; }
+            reset() {
+                this.x = (Math.random() - 0.5) * 800;
+                this.y = (Math.random() - 0.5) * 500;
+                this.z = 800;
+                this.color = colors[warpMode] ? colors[warpMode][Math.floor(Math.random() * colors[warpMode].length)] : '#fff';
             }
-            const particles = Array.from({ length: 150 }, () => new Particle());
-            function animate() {
-                  ctx.fillStyle = 'rgba(5, 5, 10, 0.3)';
-                  ctx.fillRect(0, 0, 800, 500);
-                  particles.forEach(p => { p.update(); p.draw(); });
-                  requestAnimationFrame(animate);
+            update() { this.z -= warpSpeed; if (this.z <= 0) this.reset(); }
+            draw() {
+                if (warpMode === "stop") return;
+                let k = 300 / this.z;
+                let px = this.x * k + 400; let py = this.y * k + 250;
+                if (px >= 0 && px <= 800 && py >= 0 && py <= 500) {
+                    ctx.fillStyle = this.color;
+                    let size = (800 - this.z) * 0.01;
+                    ctx.fillRect(px, py, size, size * 2);
+                }
             }
-            animate();
+        }
+        const particles = Array.from({ length: 150 }, () => new Particle());
+        function animate() {
+            ctx.fillStyle = 'rgba(5, 5, 10, 0.3)';
+            ctx.fillRect(0, 0, 800, 500);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
 
-            // ========== 環境管理（後から写真や音を入れやすくする仕組み） ==========
-            function setEnvironment(bgInfo, bgImageURL = "", bgmInfo = "") {
-                  // セリフには含めず、奥に薄い文字で現在のステージ状況を表示
-                  if (bgInfo || bgmInfo) {
-                        bgPlaceholder.innerHTML = `[${bgInfo}]<br><span style="font-size:1.2rem;">[${bgmInfo}]</span>`;
-                  } else {
-                        bgPlaceholder.innerHTML = "";
-                  }
-
-                  // 【重要】後から写真を連動させる場合は、ここに画像のパスを指定すれば背景が変わります
-                  if (bgImageURL) {
-                        bgLayer.style.backgroundImage = `url(${bgImageURL})`;
-                  }
+        // ========== 環境管理 ==========
+        function setEnvironment(bgInfo, bgImageURL = "", bgmInfo = "") {
+            if (bgInfo || bgmInfo) {
+                bgPlaceholder.innerHTML = `[${bgInfo}]<br><span style="font-size:1.2rem;">[${bgmInfo}]</span>`;
+            } else {
+                bgPlaceholder.innerHTML = "";
             }
+            if (bgImageURL) {
+                bgLayer.style.backgroundImage = `url(${bgImageURL})`;
+            }
+        }
 
-            // ========== 各種進行用の制御関数 ==========
-            const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+        // ========== 各種進行用の制御関数 ==========
+        const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-            const waitClick = () => {
-                  return new Promise(resolve => {
-                        const indicator = document.getElementById('indicator');
-                        if (indicator) indicator.style.display = 'block';
-                        const handler = () => {
-                              window.removeEventListener('keydown', keyHandler);
-                              screen.removeEventListener('click', handler);
-                              if (indicator) indicator.style.display = 'none';
-                              resolve();
-                        };
-                        const keyHandler = (e) => { if (e.key === 'Enter' || e.key === ' ') handler(); };
-                        setTimeout(() => {
-                              screen.addEventListener('click', handler);
-                              window.addEventListener('keydown', keyHandler);
-                        }, 100);
-                  });
-            };
+        const waitClick = () => {
+            return new Promise(resolve => {
+                const indicator = document.getElementById('indicator');
+                if (indicator) indicator.style.display = 'block';
+                const handler = () => {
+                    window.removeEventListener('keydown', keyHandler);
+                    screen.removeEventListener('click', handler);
+                    if (indicator) indicator.style.display = 'none';
+                    resolve();
+                };
+                const keyHandler = (e) => { if (e.key === 'Enter' || e.key === ' ') handler(); };
+                setTimeout(() => {
+                    screen.addEventListener('click', handler);
+                    window.addEventListener('keydown', keyHandler);
+                }, 100);
+            });
+        };
 
-            const askChoices = (choices) => {
-                  return new Promise(resolve => {
-                        const area = document.getElementById('choices-area');
+        const askChoices = (choices) => {
+            return new Promise(resolve => {
+                const area = document.getElementById('choices-area');
+                area.innerHTML = '';
+                choices.forEach((text, i) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'choice-btn';
+                    btn.innerText = text;
+                    btn.onclick = (e) => {
+                        e.stopPropagation();
                         area.innerHTML = '';
-                        choices.forEach((text, i) => {
-                              const btn = document.createElement('button');
-                              btn.className = 'choice-btn';
-                              btn.innerText = text;
-                              btn.onclick = (e) => {
-                                    e.stopPropagation();
-                                    area.innerHTML = '';
-                                    resolve(i + 1);
-                              };
-                              area.appendChild(btn);
-                        });
-                  });
-            };
+                        resolve(i + 1);
+                    };
+                    area.appendChild(btn);
+                });
+            });
+        };
 
-            const setMsg = (speaker, txt) => {
-                  document.getElementById('speaker-name').innerText = speaker ? speaker : "";
-                  document.getElementById('dialogue-text').innerText = txt;
-            };
+        const setMsg = (speaker, txt) => {
+            document.getElementById('speaker-name').innerText = speaker ? speaker : "";
+            document.getElementById('dialogue-text').innerText = txt;
+        };
 
-            // ========== ゲームメインシナリオ ==========
-            async function startSimulation() {
-                  // テキストボックスは日常パートまで一旦隠す
-                  textBox.style.display = "none";
+        // ========== ゲームメインシナリオ ==========
+        async function startSimulation() {
+            // テキストボックスは日常パートまで一旦隠す
+            textBox.style.display = "none";
 
-                  // --- ① 多色ワープ演出 (4秒) ---
-                  warpMode = "multi"; warpSpeed = 8;
-                  setEnvironment("仮想空間演出：多色高速移動", "", "BGM: 電子音あり");
-                  await sleep(4000);
+            // --- ① 多色ワープ演出 (4秒) ---
+            warpMode = "multi"; warpSpeed = 8;
+            setEnvironment("仮想空間演出：多色高速移動", "", "BGM: 電子音あり");
+            await sleep(4000);
 
-                  // --- ② 言語自動選択 (1秒) ---
-                  warpSpeed = 3;
-                  centerUi.innerHTML = `
-            <div id="lang-ui">
-                <div class="lang-option">Language ➤ English</div>
-                <div class="lang-option" id="lang-jp">Language ➤ Japanese</div>
-            </div>
-        `;
-                  await sleep(200);
-                  document.getElementById('lang-jp').classList.add('active'); // 自動選択演出
-                  setEnvironment("演出：Language自動選択", "", "SE: 決定音");
-                  await sleep(1000);
-                  centerUi.innerHTML = "";
+            // --- ② 言語自動選択 (1秒) ---
+            warpSpeed = 3;
+            centerUi.innerHTML = `
+                      <div id="lang-ui">
+                          <div class="lang-option">Language ➤ English</div>
+                          <div class="lang-option" id="lang-jp">Language ➤ Japanese</div>
+                      </div>
+                  `;
+            await sleep(200);
+            document.getElementById('lang-jp').classList.add('active');
+            setEnvironment("演出：Language自動選択", "", "SE: 決定音");
+            await sleep(1000);
+            centerUi.innerHTML = "";
 
-                  // --- ③ ログイン画面自動入力 (1秒) ---
-                  centerUi.innerHTML = `<div id="login-ui">Log in<br>account : <span id="acc"></span><br>password : <span id="pass"></span></div>`;
-                  setEnvironment("演出：ログイン画面自動入力", "", "SE: 入力音");
-                  let accStr = "ozawa2026", passStr = "********";
-                  for (let i = 0; i < accStr.length; i++) {
-                        document.getElementById('acc').innerHTML += accStr[i]; await sleep(40);
-                  }
-                  for (let i = 0; i < passStr.length; i++) {
-                        document.getElementById('pass').innerHTML += passStr[i]; await sleep(40);
-                  }
-                  await sleep(600);
-                  centerUi.innerHTML = "";
+            // --- ③ ログイン画面自動入力 (1秒) ---
+            centerUi.innerHTML = `<div id="login-ui">Log in<br>account : <span id="acc"></span><br>password : <span id="pass"></span></div>`;
+            setEnvironment("演出：ログイン画面自動入力", "", "SE: 入力音");
+            let accStr = "ozawa2026", passStr = "********";
+            for (let i = 0; i < accStr.length; i++) {
+                document.getElementById('acc').innerHTML += accStr[i]; await sleep(40);
+            }
+            for (let i = 0; i < passStr.length; i++) {
+                document.getElementById('pass').innerHTML += passStr[i]; await sleep(40);
+            }
+            await sleep(600);
+            centerUi.innerHTML = "";
 
-                  // --- ④ プレイヤー名入力 ---
-                  setEnvironment("演出：プレイヤー名入力待ち", "", "");
-                  centerUi.innerHTML = `
-            <div id="input-ui">
-                <div style="color:#00f3ff; margin-bottom:15px; font-size:1.1rem; letter-spacing:2px;">ENTER USERNAME</div>
-                <input type="text" id="name-in" maxlength="10" placeholder="プレイヤー名を入力" autofocus><br>
-                <button id="name-btn">ENTER</button>
-            </div>
-        `;
-                  await new Promise(resolve => {
-                        const btn = document.getElementById('name-btn');
-                        const input = document.getElementById('name-in');
-                        const proceed = () => {
-                              if (input.value.trim()) playerName = input.value.trim();
-                              resolve();
-                        };
-                        btn.onclick = proceed;
-                        input.onkeydown = (e) => { if (e.key === 'Enter') proceed(); };
-                  });
-                  centerUi.innerHTML = "";
+            // --- ④ プレイヤー名入力 ---
+            setEnvironment("演出：プレイヤー名入力待ち", "", "");
+            centerUi.innerHTML = `
+                      <div id="input-ui">
+                          <div style="color:#00f3ff; margin-bottom:15px; font-size:1.1rem; letter-spacing:2px;">ENTER USERNAME</div>
+                          <input type="text" id="name-in" maxlength="10" placeholder="プレイヤー名を入力" autofocus><br>
+                          <button id="name-btn">ENTER</button>
+                      </div>
+                  `;
+            await new Promise(resolve => {
+                const btn = document.getElementById('name-btn');
+                const input = document.getElementById('name-in');
+                const proceed = () => {
+                    if (input.value.trim()) playerName = input.value.trim();
+                    resolve();
+                };
+                btn.onclick = proceed;
+                input.onkeydown = (e) => { if (e.key === 'Enter') proceed(); };
+            });
+            centerUi.innerHTML = "";
 
-                  // --- ⑤-1 Welcome表示 (2秒) ---
-                  centerUi.innerHTML = `<div id="welcome-ui">Welcome to Ozawa Seminar !</div>`;
-                  await sleep(50);
-                  document.getElementById('welcome-ui').classList.add('show');
-                  setEnvironment("演出：Welcome表示（インパクト重視）", "", "SE: 電子音（強）");
-                  await sleep(2000);
+            // --- ⑤-1 Welcome表示 (2秒) ---
+            centerUi.innerHTML = `<div id="welcome-ui">Welcome to Ozawa Seminar !</div>`;
+            await sleep(50);
+            document.getElementById('welcome-ui').classList.add('show');
+            setEnvironment("演出：Welcome表示（インパクト重視）", "", "SE: 電子音（強）");
+            await sleep(2000);
 
-                  // --- ⑤-2 青系ワープ加速 ＆ ホワイトアウト (3秒) ---
-                  warpMode = "blue"; warpSpeed = 25;
-                  document.getElementById('welcome-ui').style.transition = "transform 3s ease-in, opacity 1s";
-                  document.getElementById('welcome-ui').style.transform = "scale(0.01)"; // 奥へ吸い込まれる
-                  setEnvironment("演出：青系ワープ空間へ吸い込み", "", "高速移動演出");
-                  await sleep(2500);
+            // --- ⑤-2 青系ワープ加速 ＆ ホワイトアウト (3秒) ---
+            warpMode = "blue"; warpSpeed = 25;
+            document.getElementById('welcome-ui').style.transition = "transform 3s ease-in, opacity 1s";
+            document.getElementById('welcome-ui').style.transform = "scale(0.01)";
+            setEnvironment("演出：青系ワープ空間へ吸い込み", "", "高速移動演出");
+            await sleep(2500);
 
-                  whiteout.style.opacity = "1"; // ホワイトアウト
-                  await sleep(500);
+            whiteout.style.opacity = "1";
+            await sleep(500);
 
-                  // --- 演出終了・日常パートへ移行 ---
-                  warpMode = "stop";
-                  ctx.clearRect(0, 0, 800, 500);
-                  canvas.style.display = "none"; // キャンバスを片付ける
-                  centerUi.innerHTML = "";
-                  whiteout.style.opacity = "0"; // 画面を戻す
-                  textBox.style.display = "block"; // テキストボックスを表示
+            // --- 演出終了・日常パートへ移行 ---
+            warpMode = "stop";
+            ctx.clearRect(0, 0, 800, 500);
+            canvas.style.display = "none";
+            centerUi.innerHTML = "";
+            whiteout.style.opacity = "0";
+            textBox.style.display = "block";
 
-                  // --- シナリオ本編 ---
-                  setEnvironment("背景A：廊下", "", "BGM A：足音");
-                  setMsg(playerName, "今日から経済学部最強の小澤ゼミが始まるぞ。まずは教室に向かおう。");
-                  await waitClick();
+            // ==================== 日常編 ====================
+            setEnvironment("背景A：廊下", "", "BGM A：足音");
+            setMsg(playerName, "今日から経済学部最強の小澤ゼミが始まるぞ。まずは教室に向かおう。");
+            await waitClick();
 
-                  setMsg(playerName, "（歩き始めた足は教室に近づくにつれて軽くなる。気づかぬうちに新たな挑戦に心が昂っているのだろう。）");
-                  await waitClick();
+            setMsg(playerName, "（歩き始めた足は教室に近づくにつれて軽くなる。気づかぬうちに新たな挑戦に心が昂っているのだろう。）");
+            await waitClick();
 
-                  setEnvironment("背景B：ドア前", "", "BGM A：足音停止（フェードアウト）");
-                  setMsg("", "（そんなことを思っている間に教室に着いていた。）");
-                  await waitClick();
+            setEnvironment("背景B：ドア前", "", "BGM A：足音停止（フェードアウト）");
+            setMsg("", "（そんなことを思っている間に教室に着いていた。）");
+            await waitClick();
 
-                  setEnvironment("背景C：ドア開（ホワイトアウト）", "", "SE：ドア開");
-                  setMsg(playerName, "（教室の扉を開けた瞬間、新たな高みに踏み入ったことを自覚する。）");
-                  await waitClick();
+            setEnvironment("背景C：ドア開（ホワイトアウト）", "", "SE：ドア開");
+            setMsg(playerName, "（教室の扉を開けた瞬間、新たな高みに踏み入ったことを自覚する。）");
+            await waitClick();
 
-                  setEnvironment("背景D：教室ドア前", "", "BGM：賑やか");
-                  setMsg(playerName, "賑やかだな。");
-                  await waitClick();
+            setEnvironment("背景D：教室ドア前", "", "BGM：賑やか");
+            setMsg(playerName, "賑やかだな。");
+            await waitClick();
 
-                  setMsg(playerName, "よーしとりあえず...");
-                  await sleep(500);
+            setMsg(playerName, "よーしとりあえず...");
+            await sleep(500);
 
-                  // 【選択肢A】
-                  while (true) {
-                        let choiceA = await askChoices(["①小澤先生に挨拶に行く", "②ゼミ生に挨拶に行く"]);
-                        if (choiceA === 1) {
-                              setEnvironment("背景E：教室黒板前（画面右から黒く移動風）", "", "BGM：賑やか");
-                              setMsg(playerName, "小澤先生！本日からよろしくお願いします！");
-                              await waitClick();
-                              setMsg("小澤先生", "おう、よう来たな。そんな固くならんでええ。適当に座れ。");
-                              await waitClick();
-                              break;
-                        } else {
-                              if (Math.random() < 0.5) {
-                                    setEnvironment("背景F：教室窓側", "", "BGM：賑やか");
-                                    setMsg("？？？（けいご）", "おいおい。先に先生への挨拶や。筋は通しとかねぇとな。");
-                              } else {
-                                    setEnvironment("背景G：教室廊下側", "", "BGM：賑やか");
-                                    setMsg("？？？（ぜん）", "小澤先生をスルーとはとんでもない新入りが入ってきたもんやな。");
-                              }
-                              await waitClick();
-                        }
-                  }
-
-                  // 【選択肢B】
-                  setEnvironment("背景H：教室黒板前逆向き", "", "BGM：賑やか");
-                  setMsg(playerName, "どこに座ろうかな？");
-                  let choiceB = await askChoices(["①資料を読んでいる先輩のところに行く", "②話している先輩のところに行く"]);
-
-                  if (choiceB === 1) {
-                        setMsg(playerName, "真面目そうだな。よし。"); await waitClick();
-                        setMsg(playerName, `${playerName}です。今日からからよろしくお願いします。`); await waitClick();
-                        setMsg("真面目A先輩", "よろしく。今日は初めて？"); await waitClick();
-                        setMsg(playerName, "はい、今日が初めてです。"); await waitClick();
-                        setMsg("真面目A先輩", "そっか。最初は緊張するよね。聞きたいことがあったらなんでも聞いてね。"); await waitClick();
-                  } else {
-                        setMsg(playerName, "賑やかそうだな。よし。"); await waitClick();
-                        setMsg(playerName, `${playerName}です！今日からからよろしくお願いします！`); await waitClick();
-                        setMsg("話B先輩", "おぉ！これからよろしくね！！"); await waitClick();
-                        setMsg("話C先輩", "おぉ今日初めてか！そんな固くならなくて大丈夫よ。"); await waitClick();
-                        setMsg(playerName, "すごく緊張してます。"); await waitClick();
-                        setMsg("話B先輩", "最初はみんなそんな感じだったよ。");
-                        setMsg("話C先輩", "わからないことあったら何でも聞いてくれい。"); await waitClick();
-                  }
-
-                  setMsg(playerName, "じゃあ...");
-                  await waitClick();
-
-                  // 【選択肢C】
-                  let choiceC = await askChoices(["①「ディスカッションって役割分担とかあるんですか？」", "②「このゼミってどんな人がいるんですか？」"]);
-
-                  if (choiceC === 1) {
-                        let s = choiceB === 1 ? "真面目A先輩" : "話B先輩";
-                        setMsg(playerName, "ディスカッションって役割分担とかあるんですか？"); await waitClick();
-                        setMsg(s, "あるよ。毎回班ごとに決めるんだ。発表者にタイムキーパー、進行役や記録係が主な役割だよ。最初は周りの先輩を頼るといいよ。"); await waitClick();
-                        setMsg(playerName, "はい。そうします。"); await waitClick();
-                        setMsg(choiceB === 1 ? "真面目A先輩" : "話C先輩", "せっかくだから今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
-                  } else {
-                        setMsg(playerName, "このゼミってどんな人がいるんですか？"); await waitClick();
-                        if (choiceB === 1) {
-                              setMsg("真面目A先輩", "いろんな人がいるよ。私たちの代はお酒が好きな人が多いかな？やる気がなさそうに見えるけど、秘めてる力は底が見えないよ。"); await waitClick();
-                              setMsg("真面目A先輩", "ディスカッションになると急に人が変わったように饒舌になる人もいるかな。普段は静かなのに、議論が始まるとまるで別人みたいになるんだよね。"); await waitClick();
-                              setMsg("真面目A先輩", "そうんだ。せっかくだし、このまま今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
-                        } else {
-                              setMsg("話B先輩", "いろんな人がいるよ。機嫌がいいと帰りにみんなにドーナツをおごしてくれる人がいるよ。"); await waitClick();
-                              setMsg("話C先輩", "インドネシアに帰省しているのにオンラインで馬券を買っている人がいるよ。"); await waitClick();
-                              setMsg("話B先輩", "旅行好きで海外によく行ってお土産を買ってきてくれるんだけど、その買ってきてくれるお土産すべてが美味しくない人がいるよ。"); await waitClick();
-                              setMsg("話C先輩", "ｿｳﾀﾞﾖ。せっかくだし、このまま今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
-                        }
-                  }
-
-                  setMsg(playerName, "はい。ありがとうございます。");
-                  await waitClick();
-
-                  // 【選択肢D】
-                  setEnvironment("ディスカッション開始", "", "SE/BGM連動箇所");
-                  setMsg("ゼミ長（声だけ）", "ディスカッション始めるよー！班作ってー！"); await waitClick();
-                  setMsg(playerName, "誰と一緒の班になろうか？");
-                  let choiceD = await askChoices(["①「真面目そうな人」のところに行く", "②「雰囲気良さそうだな。あそこに行ってみるか。」"]);
-
-                  if (choiceD === 1) {
-                        setMsg("真面目D先輩", "人数ちょうどいいからぜひぜひ。"); await waitClick();
-                        setMsg("陽気E先輩", "じゃあ簡単に自己紹介しますか。僕/私はC先輩で趣味は競馬だよ。でこっちが真面目D先輩だよ。"); await waitClick();
-                        setMsg("D先輩", "よろしく。趣味は漫画だよ。"); await waitClick();
-                  } else {
-                        setMsg(playerName, "雰囲気良さそうだな。あそこに行ってみるか！"); await waitClick();
-                        setMsg("陽気E先輩", "ちょうど人探してたところ！一緒にやろうか！！"); await waitClick();
-                        setMsg("陽気E先輩", "よろしくね！僕/私は陽気E先輩で趣味は漫画だよ。で、こっちが真面目D先輩だよ。"); await waitClick();
-                        setMsg("真面目D先輩", "よろしく。趣味は競馬だよ。"); await waitClick();
-                  }
-
-                  setMsg(playerName, `${playerName}です。よろしくお願いします。`); await waitClick();
-                  setMsg("ゼミ長", "ディスカッション始めまーす。"); await waitClick();
-
-                  // 終了
-                  setEnvironment("ゲームクリア", "", "");
-                  setMsg("SYSTEM", "小澤ゼミ紹介シミュレーション 動作確認終了です。");
-                  document.getElementById('choices-area').innerHTML = `<button class="choice-btn" onclick="location.reload()">最初からやり直す</button>`;
+            // 【選択肢A】
+            while (true) {
+                let choiceA = await askChoices(["①小澤先生に挨拶に行く", "②ゼミ生に挨拶に行く"]);
+                if (choiceA === 1) {
+                    setEnvironment("背景E：教室黒板前（画面右から黒く移動風）", "", "BGM：賑やか");
+                    setMsg(playerName, "小澤先生！本日からよろしくお願いします！");
+                    await waitClick();
+                    setMsg("小澤先生", "おう、よう来たな。そんな固くならんでええ。適当に座れ。");
+                    await waitClick();
+                    break;
+                } else {
+                    if (Math.random() < 0.5) {
+                        setEnvironment("背景F：教室窓側", "", "BGM：賑やか");
+                        setMsg("？？？（けいご）", "おいおい。先に先生への挨拶や。筋は通しとかねぇとな。");
+                    } else {
+                        setEnvironment("背景G：教室廊下側", "", "BGM：賑やか");
+                        setMsg("？？？（ぜん）", "小澤先生をスルーとはとんでもない新入りが入ってきたもんやな。");
+                    }
+                    await waitClick();
+                }
             }
 
-            startSimulation();
-      </script>
+            // 【選択肢B】
+            setEnvironment("背景H：教室黒板前逆向き", "", "BGM：賑やか");
+            setMsg(playerName, "どこに座ろうかな？");
+            let choiceB = await askChoices(["①資料を読んでいる先輩のところに行く", "②話している先輩のところに行く"]);
+
+            if (choiceB === 1) {
+                setMsg(playerName, "真面目そうだな。よし。"); await waitClick();
+                setMsg(playerName, `${playerName}です。今日からからよろしくお願いします。`); await waitClick();
+                setMsg("真面目A先輩", "よろしく。今日は初めて？"); await waitClick();
+                setMsg(playerName, "はい、今日が初めてです。"); await waitClick();
+                setMsg("真面目A先輩", "そっか。最初は緊張するよね。聞きたいことがあったらなんでも聞いてね。"); await waitClick();
+            } else {
+                setMsg(playerName, "賑やかそうだな。よし.。。"); await waitClick();
+                setMsg(playerName, `${playerName}です！今日からからよろしくお願いします！`); await waitClick();
+                setMsg("話B先輩", "おぉ！これからよろしくね！！"); await waitClick();
+                setMsg("話C先輩", "おぉ今日初めてか！そんな固くならなくて大丈夫よ。"); await waitClick();
+                setMsg(playerName, "すごく緊張してます。"); await waitClick();
+                setMsg("話B先輩", "最初はみんなそんな感じだったよ。");
+                setMsg("話C先輩", "わからないことあったら何でも聞いてくれい。"); await waitClick();
+            }
+
+            setMsg(playerName, "じゃあ...");
+            await waitClick();
+
+            // 【選択肢C】
+            let choiceC = await askChoices(["①「ディスカッションって役割分担とかあるんですか？」", "②「このゼミってどんな人がいるんですか？」"]);
+
+            if (choiceC === 1) {
+                let s = choiceB === 1 ? "真面目A先輩" : "話B先輩";
+                setMsg(playerName, "ディスカッションって役割分担とかあるんですか？"); await waitClick();
+                setMsg(s, "あるよ。毎回班ごとに決めるんだ。発表者にタイムキーパー、進行役や記録係が主な役割だよ。最初は周りの先輩を頼るといいよ。"); await waitClick();
+                setMsg(playerName, "はい。そうします。"); await waitClick();
+                setMsg(choiceB === 1 ? "真面目A先輩" : "話C先輩", "せっかくだから今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
+            } else {
+                setMsg(playerName, "このゼミってどんな人がいるんですか？"); await waitClick();
+                if (choiceB === 1) {
+                    setMsg("真面目A先輩", "いろんな人がいるよ。私たちの代はお酒が好きな人が多いかな？やる気がなさそうに見えるけど、秘めてる力は底が見えないよ。"); await waitClick();
+                    setMsg("真面目A先輩", "ディスカッションになると急に人が変わったように饒舌になる人もいるかな。普段は静かなのに、議論が始まるとまるで別人みたいになるんだよね。"); await waitClick();
+                    setMsg("真面目A先輩", "そうんだ。せっかくだし、このまま今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
+                } else {
+                    setMsg("話B先輩", "いろんな人がいるよ。機嫌がいいと帰りにみんなにドーナツをおごしてくれる人がいるよ。"); await waitClick();
+                    setMsg("話C先輩", "インドネシアに帰省しているのにオンラインで馬券を買っている人がいるよ。"); await waitClick();
+                    setMsg("話B先輩", "旅行好きで海外によく行ってお土産を買ってきてくれるんだけど、その買ってきてくれるお土産すべてが美味しくない人がいるよ。"); await waitClick();
+                    setMsg("話C先輩", "ｿｳﾀﾞﾖ。せっかくだし、このまま今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
+                }
+            }
+
+            setMsg(playerName, "はい。ありがとうございます。");
+            await waitClick();
+
+            // 【選択肢D】
+            setEnvironment("ディスカッション開始", "", "SE/BGM連動箇所");
+            setMsg("ゼミ長（声だけ）", "ディスカッション始めるよー！班作ってー！"); await waitClick();
+            setMsg(playerName, "誰と一緒の班になろうか？");
+            let choiceD = await askChoices(["①「真面目そうな人」のところに行く", "②「雰囲気良さそうだな。あそこに行ってみるか。」"]);
+
+            if (choiceD === 1) {
+                setMsg("真面目D先輩", "人数ちょうどいいからぜひぜひ。"); await waitClick();
+                setMsg("陽気E先輩", "じゃア簡単に自己紹介しますか。僕/私はE先輩で趣味は競馬だよ。でこっちが真面目D先輩だよ。"); await waitClick();
+                setMsg("真面目D先輩", "よろしく。趣味は漫画だよ。"); await waitClick();
+            } else {
+                setMsg(playerName, "雰囲気良さそうだな。あそこに行ってみるか！"); await waitClick();
+                setMsg("陽気E先輩", "ちょうど人探してたところ！一緒にやろうか！！"); await waitClick();
+                setMsg("陽気E先輩", "よろしくね！僕/私は陽気E先輩で趣味は漫画だよ。で、こっちが真面目D先輩だよ。"); await waitClick();
+                setMsg("真面目D先輩", "よろしく。趣味は競馬だよ。"); await waitClick();
+            }
+
+            setMsg(playerName, `${playerName}です。よろしくお願いします。`); await waitClick();
+            setMsg("ゼミ長", "ディスカッション始めまーす。"); await waitClick();
+
+
+            // ==================== 合宿編 ====================
+            whiteout.style.opacity = "1";
+            await sleep(1000);
+            whiteout.style.opacity = "0";
+
+            setEnvironment("背景I：合宿所・昼", "", "BGM B：自然の音と賑やかな声");
+            setMsg(playerName, "日常のゼミも慣れてきたところで、ついに待ちに待った夏合宿だ！");
+            await waitClick();
+
+            setMsg(playerName, "普段の教室とは違う開放的な雰囲気だな。でも、合宿でもしっかり学び、そして楽しむのが小澤ゼミの伝統らしい。");
+            await waitClick();
+
+            setMsg("小澤先生", "おい、全員集まったか。合宿やから言うて浮かれすぎるなよ。まずは課題の成果報告から始める。");
+            await waitClick();
+
+            setMsg(playerName, "（先生の言葉に、一瞬で場に緊張感が走る。これぞ経済学部最強のゼミだ。）");
+            await waitClick();
+
+            setMsg("ゼミ長", "それでは、班ごとに発表をお願いします！");
+            await waitClick();
+
+            // 【選択肢E：合宿でのアプローチ】
+            setMsg(playerName, "僕たちの班の発表か。どうアピールしよう？");
+            let choiceE = await askChoices(["①「理論ベースの鋭い分析で勝負する」", "②「ユーモアを交えた分かりやすいプレゼンで勝負する」"]);
+
+            if (choiceE === 1) {
+                setMsg(playerName, "WSJで培った知識とデータを用いて、論理の隙をなくして発表しよう。"); await waitClick();
+                setMsg("真面目D先輩", "完璧なスライドだね。これなら議論で負けることはないよ。"); await waitClick();
+                setMsg("小澤先生", "ほう、着眼点が鋭いな。データの裏付けもしっかりしとる。及第点や。"); await waitClick();
+                setMsg(playerName, "（よし！先生からお褒めの言葉をいただいたぞ！）"); await waitClick();
+            } else {
+                setMsg(playerName, "みんなが惹きつけられるような、具体例とユーモアを取り入れた発表にしよう。"); await waitClick();
+                setMsg("陽気E先輩", "最高に面白いプレゼンだったよ！会場の空気もばっちり掴んでたね！"); await waitClick();
+                setMsg("小澤先生", "おもろいやないか。分かりやすさは人に伝える上で一番大事やからな。"); await waitClick();
+                setMsg(playerName, "（やった！ゼミ生のみんなからも大好評だ！）"); await waitClick();
+            }
+
+            setEnvironment("背景J：合宿所・夜（BBQ）", "", "BGM C：楽しげな音楽と肉の焼ける音");
+            setMsg("", "（厳しい勉強の時間が終わり、夜はお楽しみの懇親会BBQが始まった！）");
+            await waitClick();
+
+            setMsg("陽気E先輩", "いやー！発表お疲れ様！お肉どんどん焼くから食べて食べてー！"); await waitClick();
+            setMsg("真面目A先輩", "お酒もたくさんあるよ。でも、飲みすぎには注意してね。"); await waitClick();
+
+            // 【選択肢F：夜の過ごし方】
+            setMsg(playerName, "夜の懇親会、誰のところに行ってみようかな？");
+            let choiceF = await askChoices(["①小澤先生のところへお酒を注ぎに行く", "②先輩たちと趣味の競馬や漫画の話で盛り上がる"]);
+
+            if (choiceF === 1) {
+                setMsg(playerName, "小澤先生、お疲れ様です！お酒どうぞ！"); await waitClick();
+                setMsg("小澤先生", "おう、ありがとな。お前の今日の発表、なかなか見どころがあったで。これからも期待しとるわ。"); await waitClick();
+                setMsg(playerName, "（お酒を交えながら、先生の深い経験談を聞くことができた。とても貴重な時間だ…！）"); await waitClick();
+            } else {
+                setMsg(playerName, "先輩方、お疲れ様です！さっき話してた趣味の話、もっと聞かせてください！"); await waitClick();
+                setMsg("？？？（けいご）", "お、乗ってきたな！お前に競馬のロマンってやつを教えてやるよ！"); await waitClick();
+                setMsg("？？？（ぜん）", "おいおい、新入りに妙な知識を吹き込むなや（笑）"); await waitClick();
+                setMsg(playerName, "（普段は見られない先輩たちの意外な一面を知ることができて、一気に距離が縮まった気がする！）"); await waitClick();
+            }
+
+            setMsg("", "（楽しい時間はあっという間に過ぎ、夜が更けていく…）");
+            await waitClick();
+
+            whiteout.style.opacity = "1";
+            await sleep(1000);
+            whiteout.style.opacity = "0";
+
+            // 終了処理
+            setEnvironment("ゲームクリア", "", "");
+            setMsg("SYSTEM", "小澤ゼミ紹介シミュレーション（日常編＆合宿編） 動作確認終了です。");
+            document.getElementById('choices-area').innerHTML = `<button class="choice-btn" onclick="location.reload()">最初からやり直す</button>`;
+        }
+
+        startSimulation();
+    </script>
 </body>
 
 </html>

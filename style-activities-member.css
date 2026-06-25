@@ -30,6 +30,10 @@ body {
 h1 {
     text-align: left;
     color: #1e3a5f;
+    text-shadow:
+        0 0 10px white,
+        0 0 20px white,
+        0 0 30px white;
     letter-spacing: 3px;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 
@@ -50,6 +54,28 @@ h1 {
     gap: 20px;
 }
 
+#close-filter {
+    display: none;
+    width: fit-content;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+}
+
+.detail {
+    display: none;
+}
+
+.full-body {
+    width: 180px;
+    margin-top: 15px;
+    border-radius: 15px;
+}
+
 h1::after {
     content: "";
     position: absolute;
@@ -61,6 +87,8 @@ h1::after {
     z-index: -1;
     border-radius: 20px;
 }
+
+
 
 /* --- メンバーカード --- */
 
@@ -104,7 +132,11 @@ h1::after {
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    margin-top: 40px;
+    margin-top: 40%;
+}
+
+.roles {
+    margin-top: 60px;
 }
 
 /* --- 役職カード（3つに分かれていた設定を1つに合体！） --- */
