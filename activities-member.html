@@ -106,7 +106,7 @@
 
     <section class="members">
 
-        <div class="card" leader>
+        <div class="card leader">
             <h1 id="leader"></h1>
 
             <img src="photo.jpg/member1.jpg" alt="メンバー写真">
@@ -122,7 +122,7 @@
             <p>楽しいゼミです！</p>
         </div>
 
-        <div class="card" sub-leader>
+        <div class="card sub-leader">
             <h1 id="sub-leader"></h1>
 
             <img src="photo.jpg/member2.jpg" alt="メンバー写真">
@@ -138,7 +138,7 @@
             <p>いっぱいお話して　　　　　　　　仲良くなりましょー！</p>
         </div>
 
-        <div class="card" observation>
+        <div class="card observation">
             <h1 id="observation"></h1>
 
             <img src="photo.jpg/member3.jpg" alt="メンバー写真">
@@ -154,7 +154,7 @@
             <p>真剣さと楽しさの両方とも　　　　味わえるゼミです</p>
         </div>
 
-        <div class="card" observation>
+        <div class="card observation">
             <h1 id="observation"></h1>
 
             <img src="photo.jpg/member4.jpg" alt="メンバー写真">
@@ -170,7 +170,7 @@
             <p>先輩と後輩がフラットな関係で　　楽しめるゼミです！</p>
         </div>
 
-        <div class="card" camp>
+        <div class="card camp">
             <h1 id="camp"></h1>
 
             <img src="photo.jpg/member5.jpg" alt="メンバー写真">
@@ -187,7 +187,7 @@
 
         </div>
 
-        <div class="card" camp>
+        <div class="card camp">
             <h1 id="camp"></h1>
 
             <img src="photo.jpg/member6.jpg" alt="メンバー写真">
@@ -204,7 +204,7 @@
 
         </div>
 
-        <div class="card" union>
+        <div class="card union">
             <h1 id="union"></h1>
 
             <img src="photo.jpg/member7.jpg" alt="メンバー写真">
@@ -220,7 +220,7 @@
             <p>何かの成長につながるゼミです</p>
         </div>
 
-        <div class="card" sns>
+        <div class="card sns">
             <h1 id="sns"></h1>
 
             <img src="photo.jpg/member8.jpg" alt="メンバー写真">
@@ -237,7 +237,7 @@
 
         </div>
 
-        <div class="card" sns>
+        <div class="card sns">
             <h1 id="sns"></h1>
 
             <img src="photo.jpg/member9.jpg" alt="メンバー写真">
@@ -254,7 +254,7 @@
 
         </div>
 
-        <div class="card" obog>
+        <div class="card obog">
             <h1 id="obog"></h1>
 
             <img src="photo.jpg/member10.jpg" alt="メンバー写真">
@@ -270,7 +270,7 @@
             <p>学年問わず仲良くなれるので楽しくお勉強できます！</p>
         </div>
 
-        <div class="card" obog>
+        <div class="card obog">
             <h1 id="obog"></h1>
 
             <img src="photo.jpg/member11.jpg" alt="メンバー写真">
@@ -286,7 +286,7 @@
             <p>みんな優しくて楽しいゼミです！</p>
         </div>
 
-        <div class="card" recording>
+        <div class="card recording">
             <h1 id="recording"></h1>
 
             <img src="photo.jpg/member12.jpg" alt="メンバー写真">
@@ -302,7 +302,7 @@
             <p>優しい先輩方や同期が沢山いて　　居心地のいいゼミです。</p>
         </div>
 
-        <div class="card" recording>
+        <div class="card recording">
             <h1 id="recording"></h1>
 
             <img src="photo.jpg/member13.jpg" alt="メンバー写真">
@@ -320,7 +320,48 @@
 
     </section>
 
+    <script>
+
+        function showRole(role) {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const detail = card.querySelector('.detail');
+                if (card.classList.contains(role)) {
+                    card.style.display = '';
+                    if (detail) {
+                        detail.style.display = 'block';
+                    }
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            document.getElementById('close-filter').style.display = 'block';
+        }
+
+        function showAll() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.style.display = '';
+                const detail = card.querySelector('.detail');
+                if (detail) {
+                    detail.style.display = 'none';
+                }
+            });
+            document.getElementById('close-filter').style.display = 'none';
+        }
+
+        document.addEventListener('click', function (e) {
+
+            if (
+                !e.target.closest('.role-card') &&
+                !e.target.closest('.card')
+            ) {
+                showAll();
+            }
+        });
+
     </script>
+
 </body>
 
 </html>

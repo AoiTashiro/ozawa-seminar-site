@@ -508,10 +508,10 @@
                 } else {
                     if (Math.random() < 0.5) {
                         setEnvironment("背景F：教室窓側", "", "BGM：賑やか");
-                        setMsg("？？？（けいご）", "おいおい。先に先生への挨拶や。筋は通しとかねぇとな。");
+                        setMsg("けいご", "おいおい。先に先生への挨拶や。筋は通しとかねぇとな。");
                     } else {
                         setEnvironment("背景G：教室廊下側", "", "BGM：賑やか");
-                        setMsg("？？？（ぜん）", "小澤先生をスルーとはとんでもない新入りが入ってきたもんやな。");
+                        setMsg("ぜん", "小澤先生をスルーとはとんでもない新入りが入ってきたもんやな。");
                     }
                     await waitClick();
                 }
@@ -525,17 +525,17 @@
             if (choiceB === 1) {
                 setMsg(playerName, "真面目そうだな。よし。"); await waitClick();
                 setMsg(playerName, `${playerName}です。今日からからよろしくお願いします。`); await waitClick();
-                setMsg("真面目A先輩", "よろしく。今日は初めて？"); await waitClick();
+                setMsg("健太", "よろしく。今日は初めて？"); await waitClick();
                 setMsg(playerName, "はい、今日が初めてです。"); await waitClick();
-                setMsg("真面目A先輩", "そっか。最初は緊張するよね。聞きたいことがあったらなんでも聞いてね。"); await waitClick();
+                setMsg("健太", "そっか。最初は緊張するよね。聞きたいことがあったらなんでも聞いてね。"); await waitClick();
             } else {
                 setMsg(playerName, "賑やかそうだな。よし.。。"); await waitClick();
                 setMsg(playerName, `${playerName}です！今日からからよろしくお願いします！`); await waitClick();
-                setMsg("話B先輩", "おぉ！これからよろしくね！！"); await waitClick();
-                setMsg("話C先輩", "おぉ今日初めてか！そんな固くならなくて大丈夫よ。"); await waitClick();
+                setMsg("行", "おぉ！これからよろしくね！！"); await waitClick();
+                setMsg("然", "おぉ今日初めてか！そんな固くならなくて大丈夫よ。"); await waitClick();
                 setMsg(playerName, "すごく緊張してます。"); await waitClick();
-                setMsg("話B先輩", "最初はみんなそんな感じだったよ。");
-                setMsg("話C先輩", "わからないことあったら何でも聞いてくれい。"); await waitClick();
+                setMsg("行", "最初はみんなそんな感じだったよ。");
+                setMsg("然", "わからないことあったら何でも聞いてくれい。"); await waitClick();
             }
 
             setMsg(playerName, "じゃあ...");
@@ -545,22 +545,22 @@
             let choiceC = await askChoices(["①「ディスカッションって役割分担とかあるんですか？」", "②「このゼミってどんな人がいるんですか？」"]);
 
             if (choiceC === 1) {
-                let s = choiceB === 1 ? "真面目A先輩" : "話B先輩";
+                let s = choiceB === 1 ? "健太" : "行";
                 setMsg(playerName, "ディスカッションって役割分担とかあるんですか？"); await waitClick();
                 setMsg(s, "あるよ。毎回班ごとに決めるんだ。発表者にタイムキーパー、進行役や記録係が主な役割だよ。最初は周りの先輩を頼るといいよ。"); await waitClick();
                 setMsg(playerName, "はい。そうします。"); await waitClick();
-                setMsg(choiceB === 1 ? "真面目A先輩" : "話C先輩", "せっかくだから今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
+                setMsg(choiceB === 1 ? "真面目A先輩" : "然", "せっかくだから今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
             } else {
                 setMsg(playerName, "このゼミってどんな人がいるんですか？"); await waitClick();
                 if (choiceB === 1) {
-                    setMsg("真面目A先輩", "いろんな人がいるよ。私たちの代はお酒が好きな人が多いかな？やる気がなさそうに見えるけど、秘めてる力は底が見えないよ。"); await waitClick();
-                    setMsg("真面目A先輩", "ディスカッションになると急に人が変わったように饒舌になる人もいるかな。普段は静かなのに、議論が始まるとまるで別人みたいになるんだよね。"); await waitClick();
-                    setMsg("真面目A先輩", "そうんだ。せっかくだし、このまま今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
+                    setMsg("こうすけ", "いろんな人がいるよ。私たちの代はお酒が好きな人が多いかな？やる気がなさそうに見えるけど、秘めてる力は底が見えないよ。"); await waitClick();
+                    setMsg("こうすけ", "ディスカッションになると急に人が変わったように饒舌になる人もいるかな。普段は静かなのに、議論が始まるとまるで別人みたいになるんだよね。"); await waitClick();
+                    setMsg("このみ", "そうなんだ。せっかくだし、このまま今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
                 } else {
-                    setMsg("話B先輩", "いろんな人がいるよ。機嫌がいいと帰りにみんなにドーナツをおごしてくれる人がいるよ。"); await waitClick();
-                    setMsg("話C先輩", "インドネシアに帰省しているのにオンラインで馬券を買っている人がいるよ。"); await waitClick();
-                    setMsg("話B先輩", "旅行好きで海外によく行ってお土産を買ってきてくれるんだけど、その買ってきてくれるお土産すべてが美味しくない人がいるよ。"); await waitClick();
-                    setMsg("話C先輩", "ｿｳﾀﾞﾖ。せっかくだし、このまま今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
+                    setMsg("行", "いろんな人がいるよ。機嫌がいいと帰りにみんなにドーナツをおごしてくれる人がいるよ。"); await waitClick();
+                    setMsg("然", "インドネシアに帰省しているのにオンラインで馬券を買っている人がいるよ。"); await waitClick();
+                    setMsg("はる", "旅行好きで海外によく行ってお土産を買ってきてくれるんだけど、その買ってきてくれるお土産すべてが美味しくない人がいるよ。"); await waitClick();
+                    setMsg("然", "ｿｳﾀﾞﾖ。せっかくだし、このまま今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
                 }
             }
 
@@ -569,23 +569,23 @@
 
             // 【選択肢D】
             setEnvironment("ディスカッション開始", "", "SE/BGM連動箇所");
-            setMsg("ゼミ長（声だけ）", "ディスカッション始めるよー！班作ってー！"); await waitClick();
+            setMsg("はる", "ディスカッション始めるよー！班作ってー！"); await waitClick();
             setMsg(playerName, "誰と一緒の班になろうか？");
             let choiceD = await askChoices(["①「真面目そうな人」のところに行く", "②「雰囲気良さそうだな。あそこに行ってみるか。」"]);
 
             if (choiceD === 1) {
-                setMsg("真面目D先輩", "人数ちょうどいいからぜひぜひ。"); await waitClick();
-                setMsg("陽気E先輩", "じゃア簡単に自己紹介しますか。僕/私はE先輩で趣味は競馬だよ。でこっちが真面目D先輩だよ。"); await waitClick();
-                setMsg("真面目D先輩", "よろしく。趣味は漫画だよ。"); await waitClick();
+                setMsg("葵", "人数ちょうどいいからぜひぜひ。"); await waitClick();
+                setMsg("行", "じゃア簡単に自己紹介しますか。僕/私は行で趣味は競馬だよ。でこっちは遠山だよ。"); await waitClick();
+                setMsg("遠山", "よろしく。趣味は漫画だよ。"); await waitClick();
             } else {
                 setMsg(playerName, "雰囲気良さそうだな。あそこに行ってみるか！"); await waitClick();
-                setMsg("陽気E先輩", "ちょうど人探してたところ！一緒にやろうか！！"); await waitClick();
-                setMsg("陽気E先輩", "よろしくね！僕/私は陽気E先輩で趣味は漫画だよ。で、こっちが真面目D先輩だよ。"); await waitClick();
-                setMsg("真面目D先輩", "よろしく。趣味は競馬だよ。"); await waitClick();
+                setMsg("遠山", "ちょうど人探してたところ！一緒にやろうか！！"); await waitClick();
+                setMsg("遠山", "よろしくね！僕/私は遠山で趣味は漫画だよ。で、こっちが行だよ。"); await waitClick();
+                setMsg("行", "よろしく。趣味は競馬だよ。"); await waitClick();
             }
 
             setMsg(playerName, `${playerName}です。よろしくお願いします。`); await waitClick();
-            setMsg("ゼミ長", "ディスカッション始めまーす。"); await waitClick();
+            setMsg("はる", "ディスカッション始めまーす。"); await waitClick();
 
 
             // ==================== 合宿編 ====================
