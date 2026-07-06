@@ -8,392 +8,402 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@500;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+  <div class="emoji-border-line">🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼</div>
+
   <header class="main-header">
     <nav class="nav-container">
-      <div class="logo">Ozawa Seminar</div>
+      <div class="logo">🍓 小澤ゼミ / Ozawa Seminar 🍓</div>
       <ul class="nav-links">
-        <li><a href="index.html">ホーム</a></li>
+        <li><a href="index.html" class="active">🏠 ホーム</a></li>
         <li class="dropdown">
-          <a href="#">活動内容 ▼</a>
+          <a href="#">📢 活動内容 ▼</a>
           <ul class="dropdown-content">
-            <li><a href="activities-member.html">メンバー紹介</a></li>
-            <li><a href="activities-event.html">年間行事</a></li>
+            <li><a href="activities-member.html">👥 メンバー紹介</a></li>
+            <li><a href="activities-event.html">📅 年間行事</a></li>
           </ul>
         </li>
-        <li><a href="activities-ozawaquiz.html">小澤先生について知ろう！▼</a></li>
+        <li><a href="activities-ozawaquiz.html">🧐 先生について ▼</a></li>
         <li class="dropdown">
-          <a href="#">ゼミ生体験シュミレーション ▼</a>
+          <a href="#">🎮 体験シミュレーション ▼</a>
           <ul class="dropdown-content">
-            <li><a href="simulation-daily.html">日常編</a></li>
-            <li><a href="simulation-camp.html">合宿編</a></li>
+            <li><a href="simulation-daily.html">☀️ 日常編</a></li>
+            <li><a href="simulation-camp.html">⛺ 合宿編</a></li>
           </ul>
         </li>
       </ul>
       <div class="header-right">
-        <span>MENU</span>
+        <span>MENU 📋</span>
       </div>
     </nav>
   </header>
 
-  <div class="hero-section">
-    <div class="hero-content">
-      <h1 class="hero-title handwritten-reveal">Welcome to Ozawa Seminar</h1>
-      <p class="hero-subtitle text-fade-in">どんな環境でも生き抜ける「自ら学ぶ力と人間性」</p>
-    </div>
-  </div>
+  <div class="emoji-border-line">🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓🍓</div>
 
-  <div class="content-container">
-    <div class="cards-grid-container">
+  <main class="home-main-layout">
 
-      <h2 class="stage-main-title">🌱 ゼミ生の日常活動の流れ 🤖</h2>
+    <div class="main-left-column">
 
-      <!-- 🌟 入れ子エラーを解消し、ご希望通りの5枚（通年・2年春・2年秋・3年春・3年秋）に整理しました -->
-      <div class="stage-six-row">
-
-        <!-- 1枚目：通年活動 -->
-        <div class="card" onclick="openModal('modal1')">
-          <div class="card-img">
-            <img src="photo.jpg/photo1-daily.jpg" alt="ディスカッション風景">
-          </div>
-          <div class="card-content">
-            <span class="company-tag">通年活動</span>
-            <span class="skill-tag">2,3年共通</span>
-            <h3>毎週のディスカッションで学年を超えた交流を。</h3>
-            <p class="date">毎週木曜日 17:00～19:00（日によって変わります）</p>
-            <div class="tags">
-              <span class="tag">#ディスカッション</span>
-              <span class="tag">#書評</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 2枚目：２年次 春学期 -->
-        <div class="card" onclick="openModal('modal2')">
-          <div class="card-img">
-            <img src="photo.jpg/photo-daily-grade2.jpg" alt="財務会計の学習">
-          </div>
-          <div class="card-content">
-            <span class="company-tag">２年次 春学期</span>
-            <span class="skill-tag">財務会計学習</span>
-            <h3>財務会計の輪読とチーム発表を繰り返し、知識を身につけよう！</h3>
-            <p class="date">毎週木曜日 ディスカッション後</p>
-            <div class="tags">
-              <span class="tag">#財務会計</span>
-              <span class="tag">#プレゼン</span>
-            </div>
-          </div>
-        </div>
+      <div class="fancy-hero-box">
+        <span class="decor-flower left-flower">🌼</span>
+        <span class="decor-flower right-flower">🌼</span>
+        <h1 class="hero-title">🍓 Welcome to Ozawa Seminar 🍓</h1>
+        <p class="hero-subtitle">どんな環境でも生き抜ける「自ら学ぶ力と人間性」</p>
+      </div>
 
 
-        <!-- 4枚目：３年次 春学期 -->
-        <div class="card" onclick="openModal('modal3')">
-          <div class="card-img">
-            <img src="photo.jpg/photo3-daily.jpg" alt="プログラミング風景">
-          </div>
-          <div class="card-content">
-            <span class="company-tag">３年次 春学期</span>
-            <span class="skill-tag">プログラミング</span>
-            <h3>AIを活用してコード作成・システム開発しよう</h3>
-            <p class="date">毎週木曜日 16:00～17:00</p>
-            <div class="tags">
-              <span class="tag">#programming</span>
-              <span class="tag">#AI</span>
-            </div>
-          </div>
-        </div>
+      <body>
+        <div class="content-container">
+          <div class="cards-grid-container">
 
-        <!-- 5枚目：２・３年次 秋学期 -->
-        <div class="card" onclick="openModal('modal4')">
-          <div class="card-img">
-            <img src="photo.jpg/合同２年.jpg" alt="3年生の活動2">
-          </div>
-          <div class="card-content">
-            <span class="company-tag">２・３年次 秋学期</span>
-            <span class="skill-tag">合同ゼミ研究</span>
-            <h3>学年ごと一体となって研究をし、研究発表で他大学と交流</h3>
-            <p class="date">毎週木曜日 16:00～17:00</p>
-            <div class="tags">
-              <span class="tag">#他大学と交流</span>
-              <span class="tag">#グループワーク</span>
-            </div>
-          </div>
-        </div>
+            <h2 class="stage-main-title">🌱 ゼミ生の日常活動の流れ 🤖</h2>
 
-      </div> <!-- stage-six-rowの終わり（これでカードエリアが正常に閉じます） -->
-    </div>
-  </div>
+            <!-- 🌟 入れ子エラーを解消し、ご希望通りの5枚（通年・2年春・2年秋・3年春・3年秋）に整理しました -->
+            <div class="stage-six-row">
 
-  <!-- ======= 🟢 モーダル1：ディスカッション ======= -->
-  <div id="modal1" class="modal-overlay" onclick="closeModal('modal1')">
-    <div class="modal-window" onclick="event.stopPropagation()">
-      <span class="modal-close" onclick="closeModal('modal1')">×</span>
-      <h2>２・３年生一緒に毎週ディスカッション</h2>
-      <img src="photo.jpg/photo1-daily.jpg" class="modal-img" alt="詳細画像">
-
-      <div class="modal-body">
-        <p>経済に関するテーマを自分たちで設定し、毎週ディスカッションを行います。</p>
-        <p>世界的な経済紙である『The Wall Street Journal』(英文記事)と経済に関連する本を元に、その週の担当者がディスカッションテーマを決めます。</p>
-
-        <h4 style="color: #2e7d32; font-size: 15px; margin: 25px 0 6px 0; font-weight: bold; text-align: left;">✨
-          グッドポイント</h4>
-        <div class="infinite-flow-container orange-line">
-          <div class="infinite-flow-track">
-            <div class="flow-item">リアルタイムのニュースに強い！</div>
-            <div class="flow-item">教科書以外の生きた学び</div>
-            <div class="flow-item">自分でテーマを決める楽しさ</div>
-            <div class="flow-item">多角的な視点が身につく</div>
-            <div class="flow-item">リアルタイムのニュースに強い！</div>
-            <div class="flow-item">教科書以外の生きた学び</div>
-            <div class="flow-item">自分でテーマを決める楽しさ</div>
-            <div class="flow-item">多角的な視点が身につく</div>
-          </div>
-        </div>
-
-        <h4 style="color: #1565c0; font-size: 15px; margin: 20px 0 6px 0; font-weight: bold; text-align: left;">💬
-          先輩からのメッセージ</h4>
-        <div class="infinite-flow-container blue-line">
-          <div class="infinite-flow-track">
-            <div class="flow-item">先輩が意見を言いやすい雰囲気を作ってくれる！</div>
-            <div class="flow-item">就活に直結するディスカッション能力がつく！</div>
-            <div class="flow-item">学年を超えて楽しく交流できる！</div>
-            <div class="flow-item">実践的な経験が積めるのは小澤ゼミの強み!!</div>
-            <div class="flow-item">先輩が意見を言いやすい雰囲気を作ってくれる！</div>
-            <div class="flow-item">就活に直結するディスカッション能力がつく！</div>
-            <div class="flow-item">学年を超えて楽しく交流できる！</div>
-            <div class="flow-item">実践的な経験が積めるのは小澤ゼミの強み!!</div>
-          </div>
-        </div>
-
-        <hr style="border: none; border-top: 1px dashed #ddd; margin: 30px 0;">
-
-        <div class="modal-discussion-section">
-          <h4 class="modal-discussion-title">📚 毎日のディスカッション事例集</h4>
-          <p class="modal-discussion-desc">タップすると、ゼミ生の実際の回答や解説が見れます！</p>
-
-          <div class="modal-scroll-container">
-            <div class="mini-discussion-card" onclick="this.classList.toggle('flipped')">
-              <div class="mini-card-inner">
-                <div class="mini-card-front">
-                  <span class="mini-card-tag font-macro">事例 01:価値観 </span>
-                  <h5 class="mini-card-title">
-                    「自分の価値観をより大きく広げてくれる『師』は、自分が憧れる「尊敬できる人・成功体験」か、それとも絶対にこうはなりたくないと思う「反面教師・理不尽な経験」か」</h5>
-                  <div class="mini-tap-hint">👆 タップして回答を見る</div>
+              <!-- 1枚目：通年活動 -->
+              <div class="card" onclick="openModal('modal1')">
+                <div class="card-img">
+                  <img src="photo.jpg/photo1-daily.jpg" alt="ディスカッション風景">
                 </div>
-                <div class="mini-card-back">
-                  <span class="mini-card-tag font-answer">ゼミ生の回答</span>
-                  <p class="mini-card-body">
-                    <strong>【主な意見】</strong><br>①反面教師<br>ロールモデルがあると型にハマってしまう（選択肢が狭まる）。他人の失敗、予想できなかったことを学べ、選択肢が広がる。<br>②尊敬できる人<br>尊敬できる人の方が人生の参考になる。憧れる人の方が影響されやすい、ポジティブな影響。モチベーションの維持。
-                  </p>
-                  <div class="mini-tap-hint">👆 タップで戻る</div>
+                <div class="card-content">
+                  <span class="company-tag">通年活動</span>
+                  <span class="skill-tag">2,3年共通</span>
+                  <h3>毎週のディスカッションで学年を超えた交流を。</h3>
+                  <p class="date">毎週木曜日 17:00～19:00（日によって変わります）</p>
+                  <div class="tags">
+                    <span class="tag">#ディスカッション</span>
+                    <span class="tag">#書評</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="mini-discussion-card" onclick="this.classList.toggle('flipped')">
-              <div class="mini-card-inner">
-                <div class="mini-card-front">
-                  <span class="mini-card-tag font-labor">事例 02: 海外市場</span>
-                  <h5 class="mini-card-title">「海外市場において、限られた経営資源の中で日本は今後「機能性」と「感情価値」​のどちらに投資をすべきか。」</h5>
-                  <div class="mini-tap-hint">👆 タップして回答を見る</div>
+              <!-- 2枚目：２年次 春学期 -->
+              <div class="card" onclick="openModal('modal2')">
+                <div class="card-img">
+                  <img src="photo.jpg/photo-daily-grade2.jpg" alt="財務会計の学習">
                 </div>
-                <div class="mini-card-back">
-                  <span class="mini-card-tag font-answer">ゼミ生の回答</span>
-                  <p class="mini-card-body">
-                    <strong>【主な意見】</strong><br>①機能性<br>車などの安全性が関わるもの、ガソリン高騰により燃費の良い日本車を強化すべき。任天堂などはすでに感情価値を持っているから機能性を強化すべき。<br>②感情価値<br>→中国企業の技術で低価格高品質の商品が市場に並び始めているため<br>→すでに高品質というイメージが築かれているため必要ない
-                  </p>
-                  <div class="mini-tap-hint">👆 タップで戻る</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="mini-discussion-card" onclick="this.classList.toggle('flipped')">
-              <div class="mini-card-inner">
-                <div class="mini-card-front">
-                  <span class="mini-card-tag font-digital">事例 03: 物流網</span>
-                  <h5 class="mini-card-title">
-                    「自社の小売り部門にとって脅威となる相手に、自社の武器である物流網を貸し出すことは、自社の首を絞めることになるか。それとも、小売でのシェアが少なくなっても「インフラ手数料」で稼ぐ方が合理的といえるか。」
-                  </h5>
-                  <div class="mini-tap-hint">👆 タップして回答を見る</div>
-                </div>
-                <div class="mini-card-back">
-                  <span class="mini-card-tag font-answer">ゼミ生の回答</span>
-                  <p class="mini-card-body">
-                    <strong>【主な意見】</strong><br>①合理的<br>既にAmazonが成功しているという実例があるから。長期的に利益を出すという観点において、ライバル企業の掌握、依存させることができるから。物流を把握することで新たなニーズに気づくことができるから。<br>②非合理的<br>ライバル会社の新規顧客が増えるから。
-                  </p>
-                  <div class="mini-tap-hint">👆 タップで戻る</div>
+                <div class="card-content">
+                  <span class="company-tag">２年次 春学期</span>
+                  <span class="skill-tag">財務会計学習</span>
+                  <h3>財務会計の輪読とチーム発表を繰り返し、知識を身につけよう！</h3>
+                  <p class="date">毎週木曜日 ディスカッション後</p>
+                  <div class="tags">
+                    <span class="tag">#財務会計</span>
+                    <span class="tag">#プレゼン</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
 
-      </div>
-    </div>
-  </div>
 
-  <!-- ======= 🔵 モーダル2：財務会計（自動スライドショー 6枚版） ======= -->
-  <div id="modal2" class="modal-overlay" onclick="closeModal('modal2')">
-    <div class="modal-window" onclick="event.stopPropagation()">
-      <span class="modal-close" onclick="closeModal('modal2')">×</span>
-      <h2>財務会計本の輪読</h2>
-      <img src="photo.jpg/photo7-daily.jpg" class="modal-img" alt="財務諸表の教科書">
-
-      <div class="modal-body">
-        <p>財務会計の本を章ごとに輪読し、チームプレゼンテーションでアウトプットします。</p>
-        <p>章ごとに教科書の輪読を行い、その章の担当チームはプレゼンテーションします。インプットした知識をアウトプットし、理解を深めます。</p>
-
-        <hr style="border: none; border-top: 1px dashed #ddd; margin: 35px 0;">
-
-        <div class="presentation-slide-section">
-          <h4 class="slide-section-title">📊 プレゼンテーション抜粋</h4>
-          <p class="slide-section-desc">2025年度作（C班：田代・遠山・及川）</p>
-
-          <div class="slider-wrapper" id="springSliderWrapper">
-            <div class="slide-container" id="springSlideContainer">
-              <div class="slide-item"><img src="photo.jpg/slide1.jpg" alt="スライド1"></div>
-              <div class="slide-item"><img src="photo.jpg/slide2.jpg" alt="スライド2"></div>
-              <div class="slide-item"><img src="photo.jpg/slide3.jpg" alt="スライド3"></div>
-              <div class="slide-item"><img src="photo.jpg/slide4.jpg" alt="スライド4"></div>
-              <div class="slide-item"><img src="photo.jpg/slide5.jpg" alt="スライド5"></div>
-              <div class="slide-item"><img src="photo.jpg/slide6.jpg" alt="スライド6"></div>
-            </div>
-
-            <div class="slider-nav" id="springSliderNav">
-              <span class="nav-dot active"></span>
-              <span class="nav-dot"></span>
-              <span class="nav-dot"></span>
-              <span class="nav-dot"></span>
-              <span class="nav-dot"></span>
-              <span class="nav-dot"></span>
-            </div>
-          </div>
-
-          <div class="slide-comment-box">
-            <strong>💡 ゼミ生から：</strong><br>
-            プレゼンテーションするには、自分がその内容のプロにならないといけないので、自ずと深い理解ができました。担当外の人も、質問することで自分事として取り組めます。
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- ======= 🔴 モーダル3：プログラミング ======= -->
-  <div id="modal3" class="modal-overlay" onclick="closeModal('modal3')">
-    <div class="modal-window" onclick="event.stopPropagation()">
-      <span class="modal-close" onclick="closeModal('modal3')">×</span>
-      <h2>AIでコーディングしながらシステム開発しよう</h2>
-      <img src="photo.jpg/photo-daily-grade3.jpg" class="modal-img" alt="詳細画像">
-
-      <div class="modal-body">
-        <p>3年次からは、最先端のAIでコーディングしながらプログラミングを学び、システム開発に挑戦します。</p>
-        <p>作成したいシステムは学年で決めれるので、自分の興味に合わせたプロジェクトに取り組むことができます。このサイトも３年生が開発しています！</p>
-
-        <!-- 🌟 ここから追加：3年次春活動の流れるシステム -->
-        <h4 style="color: #2e7d32; font-size: 15px; margin: 25px 0 6px 0; font-weight: bold; text-align: left;">✨
-          グッドポイント</h4>
-        <div class="infinite-flow-container orange-line">
-          <div class="infinite-flow-track">
-            <div class="flow-item">学期末に全体発表があるので、計画性が身につくよ</div>
-            <div class="flow-item">普段身近なシステムがどのように作られているのか、体験して学べる！</div>
-            <div class="flow-item">最先端のAIスキルと開発力がガッツリ身につく！</div>
-            <div class="flow-item">自分たちのアイデアが実際の形になる感動！</div>
-            <div class="flow-item">AIへの指示の出し方・活用範囲を学べる</div>
-          </div>
-        </div>
-
-        <h4 style="color: #1565c0; font-size: 15px; margin: 20px 0 6px 0; font-weight: bold; text-align: left;">💬
-          💌先輩からのメッセージ</h4>
-        <div class="infinite-flow-container blue-line">
-          <div class="infinite-flow-track">
-            <div class="flow-item">「みんな初めてだから一つずつ完成に近づいてる実感が持ててやりがいがある！」</div>
-            <div class="flow-item">「コードエラーが出てもAIが助けてくれるのですぐに解決できる！」</div>
-            <div class="flow-item">「毎年自分たちでお題を決めてシステム構築するので、テーマ決めの楽しさもある！」</div>
-            <!-- ループを滑らかにするための繰り返し -->
-            <div class="flow-item">「楽しい」</div>
-            <div class="flow-item">「さらに仲良くなれる」</div>
-            <div class="flow-item">「AIの進化をコーディングを通して体感できるよ」</div>
-          </div>
-        </div>
-        <!-- 🌟 ここまで追加 -->
-
-      </div>
-    </div>
-  </div>
-
-  <div id="modal4" class="modal-overlay" onclick="closeModal('modal4')">
-    <div class="modal-window" onclick="event.stopPropagation()">
-      <span class="modal-close" onclick="closeModal('modal4')">×</span>
-      <h2>合同ゼミ～中央・立教・関西学院との交流～</h2>
-      <img src="photo.jpg/合同表彰.jpg" class="modal-img" alt="合同ゼミ・研究発表の様子">
-
-      <div class="modal-body">
-        <p>秋学期は学年で１チームとなり、テーマ決めから研究までを共同して行います。</p>
-        <p>他大学のゼミと合同で研究発表会を開催し、日頃の研究成果をプレゼンします。他校の学生からの鋭い質問に答えることで、論理的思考力と度胸が鍛えられます！</p>
-
-        <h4 style="color: #2e7d32; font-size: 15px; margin: 25px 0 6px 0; font-weight: bold; text-align: left;">✨
-          グッドポイント</h4>
-        <div class="infinite-flow-container orange-line">
-          <div class="infinite-flow-track">
-            <div class="flow-item">他大学の優秀な学生から大きな刺激をもらえる！</div>
-            <div class="flow-item">1つのテーマを数ヶ月かけて深掘りする達成感</div>
-            <div class="flow-item">発表後の懇親会で他校の仲間と人脈が広がる！</div>
-            <div class="flow-item">チームで役割分担し、協調性とリーダーシップが磨かれる</div>
-            <div class="flow-item">他大学に行けて新鮮な気持ちになれる！</div>
-            <div class="flow-item">1つのテーマを数ヶ月かけて深掘りする達成感</div>
-          </div>
-        </div>
-
-        <h4 style="color: #1565c0; font-size: 15px; margin: 20px 0 6px 0; font-weight: bold; text-align: left;">💬
-          先輩からのメッセージ</h4>
-        <div class="infinite-flow-container blue-line">
-          <div class="infinite-flow-track">
-            <div class="flow-item">「他校のプレゼン資料の作り方や話し方、めちゃくちゃ勉強になった！」</div>
-            <div class="flow-item">「準備は大変だけど、やり遂げた後の達成感は最高！」</div>
-            <div class="flow-item">「教授や他校の学生から鋭い質問が飛んでくるから、その対策の過程で勉強になった！」</div>
-            <div class="flow-item">「ゼミ生同士の絆が一番深まるのは、間違いなくこの秋学期の合同ゼミ！」</div>
-          </div>
-        </div>
-
-        <hr style="border: none; border-top: 1px dashed #ddd; margin: 30px 0;">
-
-        <div class="modal-discussion-section">
-          <h4 class="modal-discussion-title">🏆 過去の研究テーマ・実績</h4>
-          <p class="modal-discussion-desc">タップすると、研究の概要やポイントが見れます！</p>
-
-          <div class="modal-scroll-container">
-            <div class="mini-discussion-card" onclick="this.classList.toggle('flipped')">
-              <div class="mini-card-inner">
-                <div class="mini-card-front">
-                  <span class="mini-card-tag font-macro" style="background-color: #6a1b9a;">テーマ 01</span>
-                  <h5 class="mini-card-title">「ESGがWACCへ与える影響度」</h5>
-                  <div class="mini-tap-hint">👆 タップして詳細を見る</div>
+              <!-- 4枚目：３年次 春学期 -->
+              <div class="card" onclick="openModal('modal3')">
+                <div class="card-img">
+                  <img src="photo.jpg/photo3-daily.jpg" alt="プログラミング風景">
                 </div>
-                <div class="mini-card-back">
-                  <span class="mini-card-tag font-answer">研究のポイント</span>
-                  <p class="mini-card-body">
-                    <strong>【概要】</strong><br>
-                    2025年度の二年生テーマです。非財務情報における日米比較を行いました。サブゼミも積極的に行いながら、当日を迎え安心した環境下で発表することができました。<br>
-                    <strong>【ポイント】</strong><br>
-                    ESGやWACCなどの専門用語を理解することだけでなく、会計分野に苦手意識を抱いていた学生たちも積極的に参加に取り組む工夫ができたことはチーム力の向上に繋がったと考えています。<br>
-                  <div class="mini-tap-hint">👆 タップで戻る</div>
+                <div class="card-content">
+                  <span class="company-tag">３年次 春学期</span>
+                  <span class="skill-tag">プログラミング</span>
+                  <h3>AIを活用してコード作成・システム開発しよう</h3>
+                  <p class="date">毎週木曜日 16:00～17:00</p>
+                  <div class="tags">
+                    <span class="tag">#programming</span>
+                    <span class="tag">#AI</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
+              <!-- 5枚目：２・３年次 秋学期 -->
+              <div class="card" onclick="openModal('modal4')">
+                <div class="card-img">
+                  <img src="photo.jpg/合同２年.jpg" alt="3年生の活動2">
+                </div>
+                <div class="card-content">
+                  <span class="company-tag">２・３年次 秋学期</span>
+                  <span class="skill-tag">合同ゼミ研究</span>
+                  <h3>学年ごと一体となって研究をし、研究発表で他大学と交流</h3>
+                  <p class="date">毎週木曜日 16:00～17:00</p>
+                  <div class="tags">
+                    <span class="tag">#他大学と交流</span>
+                    <span class="tag">#グループワーク</span>
+                  </div>
+                </div>
+              </div>
+
+            </div> <!-- stage-six-rowの終わり（これでカードエリアが正常に閉じます） -->
           </div>
         </div>
 
-      </div>
-    </div>
-  </div>
-  <script src="script.js"></script>
-</body>
+        <!-- ======= 🟢 モーダル1：ディスカッション ======= -->
+        <div id="modal1" class="modal-overlay" onclick="closeModal('modal1')">
+          <div class="modal-window" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal('modal1')">×</span>
+            <h2>２・３年生一緒に毎週ディスカッション</h2>
+            <img src="photo.jpg/photo1-daily.jpg" class="modal-img" alt="詳細画像">
+
+            <div class="modal-body">
+              <p>経済に関するテーマを自分たちで設定し、毎週ディスカッションを行います。</p>
+              <p>世界的な経済紙である『The Wall Street Journal』(英文記事)と経済に関連する本を元に、その週の担当者がディスカッションテーマを決めます。</p>
+
+              <h4 style="color: #2e7d32; font-size: 15px; margin: 25px 0 6px 0; font-weight: bold; text-align: left;">✨
+                グッドポイント</h4>
+              <div class="infinite-flow-container orange-line">
+                <div class="infinite-flow-track">
+                  <div class="flow-item">リアルタイムのニュースに強い！</div>
+                  <div class="flow-item">教科書以外の生きた学び</div>
+                  <div class="flow-item">自分でテーマを決める楽しさ</div>
+                  <div class="flow-item">多角的な視点が身につく</div>
+                  <div class="flow-item">リアルタイムのニュースに強い！</div>
+                  <div class="flow-item">教科書以外の生きた学び</div>
+                  <div class="flow-item">自分でテーマを決める楽しさ</div>
+                  <div class="flow-item">多角的な視点が身につく</div>
+                </div>
+              </div>
+
+              <h4 style="color: #1565c0; font-size: 15px; margin: 20px 0 6px 0; font-weight: bold; text-align: left;">💬
+                先輩からのメッセージ</h4>
+              <div class="infinite-flow-container blue-line">
+                <div class="infinite-flow-track">
+                  <div class="flow-item">先輩が意見を言いやすい雰囲気を作ってくれる！</div>
+                  <div class="flow-item">就活に直結するディスカッション能力がつく！</div>
+                  <div class="flow-item">学年を超えて楽しく交流できる！</div>
+                  <div class="flow-item">実践的な経験が積めるのは小澤ゼミの強み!!</div>
+                  <div class="flow-item">先輩が意見を言いやすい雰囲気を作ってくれる！</div>
+                  <div class="flow-item">就活に直結するディスカッション能力がつく！</div>
+                  <div class="flow-item">学年を超えて楽しく交流できる！</div>
+                  <div class="flow-item">実践的な経験が積めるのは小澤ゼミの強み!!</div>
+                </div>
+              </div>
+
+              <hr style="border: none; border-top: 1px dashed #ddd; margin: 30px 0;">
+
+              <div class="modal-discussion-section">
+                <h4 class="modal-discussion-title">📚 毎日のディスカッション事例集</h4>
+                <p class="modal-discussion-desc">タップすると、ゼミ生の実際の回答や解説が見れます！</p>
+
+                <div class="modal-scroll-container">
+                  <div class="mini-discussion-card" onclick="this.classList.toggle('flipped')">
+                    <div class="mini-card-inner">
+                      <div class="mini-card-front">
+                        <span class="mini-card-tag font-macro">事例 01:価値観 </span>
+                        <h5 class="mini-card-title">
+                          「自分の価値観をより大きく広げてくれる『師』は、自分が憧れる「尊敬できる人・成功体験」か、それとも絶対にこうはなりたくないと思う「反面教師・理不尽な経験」か」</h5>
+                        <div class="mini-tap-hint">👆 タップして回答を見る</div>
+                      </div>
+                      <div class="mini-card-back">
+                        <span class="mini-card-tag font-answer">ゼミ生の回答</span>
+                        <p class="mini-card-body">
+                          <strong>【主な意見】</strong><br>①反面教師<br>ロールモデルがあると型にハマってしまう（選択肢が狭まる）。他人の失敗、予想できなかったことを学べ、選択肢が広がる。<br>②尊敬できる人<br>尊敬できる人の方が人生の参考になる。憧れる人の方が影響されやすい、ポジティブな影響。モチベーションの維持。
+                        </p>
+                        <div class="mini-tap-hint">👆 タップで戻る</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mini-discussion-card" onclick="this.classList.toggle('flipped')">
+                    <div class="mini-card-inner">
+                      <div class="mini-card-front">
+                        <span class="mini-card-tag font-labor">事例 02: 海外市場</span>
+                        <h5 class="mini-card-title">「海外市場において、限られた経営資源の中で日本は今後「機能性」と「感情価値」​のどちらに投資をすべきか。」</h5>
+                        <div class="mini-tap-hint">👆 タップして回答を見る</div>
+                      </div>
+                      <div class="mini-card-back">
+                        <span class="mini-card-tag font-answer">ゼミ生の回答</span>
+                        <p class="mini-card-body">
+                          <strong>【主な意見】</strong><br>①機能性<br>車などの安全性が関わるもの、ガソリン高騰により燃費の良い日本車を強化すべき。任天堂などはすでに感情価値を持っているから機能性を強化すべき。<br>②感情価値<br>→中国企業の技術で低価格高品質の商品が市場に並び始めているため<br>→すでに高品質というイメージが築かれているため必要ない
+                        </p>
+                        <div class="mini-tap-hint">👆 タップで戻る</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mini-discussion-card" onclick="this.classList.toggle('flipped')">
+                    <div class="mini-card-inner">
+                      <div class="mini-card-front">
+                        <span class="mini-card-tag font-digital">事例 03: 物流網</span>
+                        <h5 class="mini-card-title">
+                          「自社の小売り部門にとって脅威となる相手に、自社の武器である物流網を貸し出すことは、自社の首を絞めることになるか。それとも、小売でのシェアが少なくなっても「インフラ手数料」で稼ぐ方が合理的といえるか。」
+                        </h5>
+                        <div class="mini-tap-hint">👆 タップして回答を見る</div>
+                      </div>
+                      <div class="mini-card-back">
+                        <span class="mini-card-tag font-answer">ゼミ生の回答</span>
+                        <p class="mini-card-body">
+                          <strong>【主な意見】</strong><br>①合理的<br>既にAmazonが成功しているという実例があるから。長期的に利益を出すという観点において、ライバル企業の掌握、依存させることができるから。物流を把握することで新たなニーズに気づくことができるから。<br>②非合理的<br>ライバル会社の新規顧客が増えるから。
+                        </p>
+                        <div class="mini-tap-hint">👆 タップで戻る</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ======= 🔵 モーダル2：財務会計（自動スライドショー 6枚版） ======= -->
+        <div id="modal2" class="modal-overlay" onclick="closeModal('modal2')">
+          <div class="modal-window" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal('modal2')">×</span>
+            <h2>財務会計本の輪読</h2>
+            <img src="photo.jpg/photo7-daily.jpg" class="modal-img" alt="財務諸表の教科書">
+
+            <div class="modal-body">
+              <p>財務会計の本を章ごとに輪読し、チームプレゼンテーションでアウトプットします。</p>
+              <p>章ごとに教科書の輪読を行い、その章の担当チームはプレゼンテーションします。インプットした知識をアウトプットし、理解を深めます。</p>
+
+              <hr style="border: none; border-top: 1px dashed #ddd; margin: 35px 0;">
+
+              <div class="presentation-slide-section">
+                <h4 class="slide-section-title">📊 プレゼンテーション抜粋</h4>
+                <p class="slide-section-desc">2025年度作（C班：田代・遠山・及川）</p>
+
+                <div class="slider-wrapper" id="springSliderWrapper">
+                  <div class="slide-container" id="springSlideContainer">
+                    <div class="slide-item"><img src="photo.jpg/slide1.jpg" alt="スライド1"></div>
+                    <div class="slide-item"><img src="photo.jpg/slide2.jpg" alt="スライド2"></div>
+                    <div class="slide-item"><img src="photo.jpg/slide3.jpg" alt="スライド3"></div>
+                    <div class="slide-item"><img src="photo.jpg/slide4.jpg" alt="スライド4"></div>
+                    <div class="slide-item"><img src="photo.jpg/slide5.jpg" alt="スライド5"></div>
+                    <div class="slide-item"><img src="photo.jpg/slide6.jpg" alt="スライド6"></div>
+                  </div>
+
+                  <div class="slider-nav" id="springSliderNav">
+                    <span class="nav-dot active"></span>
+                    <span class="nav-dot"></span>
+                    <span class="nav-dot"></span>
+                    <span class="nav-dot"></span>
+                    <span class="nav-dot"></span>
+                    <span class="nav-dot"></span>
+                  </div>
+                </div>
+
+                <div class="slide-comment-box">
+                  <strong>💡 ゼミ生から：</strong><br>
+                  プレゼンテーションするには、自分がその内容のプロにならないといけないので、自ずと深い理解ができました。担当外の人も、質問することで自分事として取り組めます。
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ======= 🔴 モーダル3：プログラミング ======= -->
+        <div id="modal3" class="modal-overlay" onclick="closeModal('modal3')">
+          <div class="modal-window" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal('modal3')">×</span>
+            <h2>AIでコーディングしながらシステム開発しよう</h2>
+            <img src="photo.jpg/photo-daily-grade3.jpg" class="modal-img" alt="詳細画像">
+
+            <div class="modal-body">
+              <p>3年次からは、最先端のAIでコーディングしながらプログラミングを学び、システム開発に挑戦します。</p>
+              <p>作成したいシステムは学年で決めれるので、自分の興味に合わせたプロジェクトに取り組むことができます。このサイトも３年生が開発しています！</p>
+
+              <!-- 🌟 ここから追加：3年次春活動の流れるシステム -->
+              <h4 style="color: #2e7d32; font-size: 15px; margin: 25px 0 6px 0; font-weight: bold; text-align: left;">✨
+                グッドポイント</h4>
+              <div class="infinite-flow-container orange-line">
+                <div class="infinite-flow-track">
+                  <div class="flow-item">学期末に全体発表があるので、計画性が身につくよ</div>
+                  <div class="flow-item">普段身近なシステムがどのように作られているのか、体験して学べる！</div>
+                  <div class="flow-item">最先端のAIスキルと開発力がガッツリ身につく！</div>
+                  <div class="flow-item">自分たちのアイデアが実際の形になる感動！</div>
+                  <div class="flow-item">AIへの指示の出し方・活用範囲を学べる</div>
+                </div>
+              </div>
+
+              <h4 style="color: #1565c0; font-size: 15px; margin: 20px 0 6px 0; font-weight: bold; text-align: left;">💬
+                💌先輩からのメッセージ</h4>
+              <div class="infinite-flow-container blue-line">
+                <div class="infinite-flow-track">
+                  <div class="flow-item">「みんな初めてだから一つずつ完成に近づいてる実感が持ててやりがいがある！」</div>
+                  <div class="flow-item">「コードエラーが出てもAIが助けてくれるのですぐに解決できる！」</div>
+                  <div class="flow-item">「毎年自分たちでお題を決めてシステム構築するので、テーマ決めの楽しさもある！」</div>
+                  <!-- ループを滑らかにするための繰り返し -->
+                  <div class="flow-item">「楽しい」</div>
+                  <div class="flow-item">「さらに仲良くなれる」</div>
+                  <div class="flow-item">「AIの進化をコーディングを通して体感できるよ」</div>
+                </div>
+              </div>
+              <!-- 🌟 ここまで追加 -->
+
+            </div>
+          </div>
+        </div>
+
+        <div id="modal4" class="modal-overlay" onclick="closeModal('modal4')">
+          <div class="modal-window" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal('modal4')">×</span>
+            <h2>合同ゼミ～中央・立教・関西学院との交流～</h2>
+            <img src="photo.jpg/合同表彰.jpg" class="modal-img" alt="合同ゼミ・研究発表の様子">
+
+            <div class="modal-body">
+              <p>秋学期は学年で１チームとなり、テーマ決めから研究までを共同して行います。</p>
+              <p>他大学のゼミと合同で研究発表会を開催し、日頃の研究成果をプレゼンします。他校の学生からの鋭い質問に答えることで、論理的思考力と度胸が鍛えられます！</p>
+
+              <h4 style="color: #2e7d32; font-size: 15px; margin: 25px 0 6px 0; font-weight: bold; text-align: left;">✨
+                グッドポイント</h4>
+              <div class="infinite-flow-container orange-line">
+                <div class="infinite-flow-track">
+                  <div class="flow-item">他大学の優秀な学生から大きな刺激をもらえる！</div>
+                  <div class="flow-item">1つのテーマを数ヶ月かけて深掘りする達成感</div>
+                  <div class="flow-item">発表後の懇親会で他校の仲間と人脈が広がる！</div>
+                  <div class="flow-item">チームで役割分担し、協調性とリーダーシップが磨かれる</div>
+                  <div class="flow-item">他大学に行けて新鮮な気持ちになれる！</div>
+                  <div class="flow-item">1つのテーマを数ヶ月かけて深掘りする達成感</div>
+                </div>
+              </div>
+
+              <h4 style="color: #1565c0; font-size: 15px; margin: 20px 0 6px 0; font-weight: bold; text-align: left;">💬
+                先輩からのメッセージ</h4>
+              <div class="infinite-flow-container blue-line">
+                <div class="infinite-flow-track">
+                  <div class="flow-item">「他校のプレゼン資料の作り方や話し方、めちゃくちゃ勉強になった！」</div>
+                  <div class="flow-item">「準備は大変だけど、やり遂げた後の達成感は最高！」</div>
+                  <div class="flow-item">「教授や他校の学生から鋭い質問が飛んでくるから、その対策の過程で勉強になった！」</div>
+                  <div class="flow-item">「ゼミ生同士の絆が一番深まるのは、間違いなくこの秋学期の合同ゼミ！」</div>
+                </div>
+              </div>
+
+              <hr style="border: none; border-top: 1px dashed #ddd; margin: 30px 0;">
+
+              <div class="modal-discussion-section">
+                <h4 class="modal-discussion-title">🏆 過去の研究テーマ・実績</h4>
+                <p class="modal-discussion-desc">タップすると、研究の概要やポイントが見れます！</p>
+
+                <div class="modal-scroll-container">
+                  <div class="mini-discussion-card" onclick="this.classList.toggle('flipped')">
+                    <div class="mini-card-inner">
+                      <div class="mini-card-front">
+                        <span class="mini-card-tag font-macro" style="background-color: #6a1b9a;">テーマ 01</span>
+                        <h5 class="mini-card-title">「ESGがWACCへ与える影響度」</h5>
+                        <div class="mini-tap-hint">👆 タップして詳細を見る</div>
+                      </div>
+                      <div class="mini-card-back">
+                        <span class="mini-card-tag font-answer">研究のポイント</span>
+                        <p class="mini-card-body">
+                          <strong>【概要】</strong><br>
+                          2025年度の二年生テーマです。非財務情報における日米比較を行いました。サブゼミも積極的に行いながら、当日を迎え安心した環境下で発表することができました。<br>
+                          <strong>【ポイント】</strong><br>
+                          ESGやWACCなどの専門用語を理解することだけでなく、会計分野に苦手意識を抱いていた学生たちも積極的に参加に取り組む工夫ができたことはチーム力の向上に繋がったと考えています。<br>
+                        <div class="mini-tap-hint">👆 タップで戻る</div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <script src="script.js"></script>
+      </body>
 
 </html>
