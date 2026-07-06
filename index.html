@@ -109,9 +109,9 @@
         </div>
 
         <!-- 5枚目：２・３年次 秋学期 -->
-        <div class="card" onclick="openModal('modal3')">
+        <div class="card" onclick="openModal('modal4')">
           <div class="card-img">
-            <img src="photo.jpg/photo-daily-kangaku.jpg" alt="3年生の活動2">
+            <img src="photo.jpg/合同２年.jpg" alt="3年生の活動2">
           </div>
           <div class="card-content">
             <span class="company-tag">２・３年次 秋学期</span>
@@ -251,8 +251,8 @@
         <hr style="border: none; border-top: 1px dashed #ddd; margin: 35px 0;">
 
         <div class="presentation-slide-section">
-          <h4 class="slide-section-title">📊 プレゼンテーションスライド（抜粋）</h4>
-          <p class="slide-section-desc">スライドが自動で流れます。マウスを乗せると一時停止します（全6枚）</p>
+          <h4 class="slide-section-title">📊 プレゼンテーション抜粋</h4>
+          <p class="slide-section-desc">2025年度作（C班：田代・遠山・及川）</p>
 
           <div class="slider-wrapper" id="springSliderWrapper">
             <div class="slide-container" id="springSlideContainer">
@@ -327,6 +327,72 @@
     </div>
   </div>
 
+  <div id="modal4" class="modal-overlay" onclick="closeModal('modal4')">
+    <div class="modal-window" onclick="event.stopPropagation()">
+      <span class="modal-close" onclick="closeModal('modal4')">×</span>
+      <h2>合同ゼミ～中央・立教・関西学院との交流～</h2>
+      <img src="photo.jpg/合同表彰.jpg" class="modal-img" alt="合同ゼミ・研究発表の様子">
+
+      <div class="modal-body">
+        <p>秋学期は学年で１チームとなり、テーマ決めから研究までを共同して行います。</p>
+        <p>他大学のゼミと合同で研究発表会を開催し、日頃の研究成果をプレゼンします。他校の学生からの鋭い質問に答えることで、論理的思考力と度胸が鍛えられます！</p>
+
+        <h4 style="color: #2e7d32; font-size: 15px; margin: 25px 0 6px 0; font-weight: bold; text-align: left;">✨
+          グッドポイント</h4>
+        <div class="infinite-flow-container orange-line">
+          <div class="infinite-flow-track">
+            <div class="flow-item">他大学の優秀な学生から大きな刺激をもらえる！</div>
+            <div class="flow-item">1つのテーマを数ヶ月かけて深掘りする達成感</div>
+            <div class="flow-item">発表後の懇親会で他校の仲間と人脈が広がる！</div>
+            <div class="flow-item">チームで役割分担し、協調性とリーダーシップが磨かれる</div>
+            <div class="flow-item">他大学に行けて新鮮な気持ちになれる！</div>
+            <div class="flow-item">1つのテーマを数ヶ月かけて深掘りする達成感</div>
+          </div>
+        </div>
+
+        <h4 style="color: #1565c0; font-size: 15px; margin: 20px 0 6px 0; font-weight: bold; text-align: left;">💬
+          先輩からのメッセージ</h4>
+        <div class="infinite-flow-container blue-line">
+          <div class="infinite-flow-track">
+            <div class="flow-item">「他校のプレゼン資料の作り方や話し方、めちゃくちゃ勉強になった！」</div>
+            <div class="flow-item">「準備は大変だけど、やり遂げた後の達成感は最高！」</div>
+            <div class="flow-item">「教授や他校の学生から鋭い質問が飛んでくるから、その対策の過程で勉強になった！」</div>
+            <div class="flow-item">「ゼミ生同士の絆が一番深まるのは、間違いなくこの秋学期の合同ゼミ！」</div>
+          </div>
+        </div>
+
+        <hr style="border: none; border-top: 1px dashed #ddd; margin: 30px 0;">
+
+        <div class="modal-discussion-section">
+          <h4 class="modal-discussion-title">🏆 過去の研究テーマ・実績</h4>
+          <p class="modal-discussion-desc">タップすると、研究の概要やポイントが見れます！</p>
+
+          <div class="modal-scroll-container">
+            <div class="mini-discussion-card" onclick="this.classList.toggle('flipped')">
+              <div class="mini-card-inner">
+                <div class="mini-card-front">
+                  <span class="mini-card-tag font-macro" style="background-color: #6a1b9a;">テーマ 01</span>
+                  <h5 class="mini-card-title">「ESGがWACCへ与える影響度」</h5>
+                  <div class="mini-tap-hint">👆 タップして詳細を見る</div>
+                </div>
+                <div class="mini-card-back">
+                  <span class="mini-card-tag font-answer">研究のポイント</span>
+                  <p class="mini-card-body">
+                    <strong>【概要】</strong><br>
+                    2025年度の二年生テーマです。非財務情報における日米比較を行いました。サブゼミも積極的に行いながら、当日を迎え安心した環境下で発表することができました。<br>
+                    <strong>【ポイント】</strong><br>
+                    ESGやWACCなどの専門用語を理解することだけでなく、会計分野に苦手意識を抱いていた学生たちも積極的に参加に取り組む工夫ができたことはチーム力の向上に繋がったと考えています。<br>
+                  <div class="mini-tap-hint">👆 タップで戻る</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
   <script src="script.js"></script>
 </body>
 
