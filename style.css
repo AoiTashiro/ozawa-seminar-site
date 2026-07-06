@@ -1,1064 +1,6 @@
 /* ==========================================================================
-   🎨 全体の基本スタイル ＆ 背景画像設定
+   🎨 全体の基本スタイル ＆ 背景・フォント設定
    ========================================================================== */
-body {
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #333;
-
-    /* ⭕ フォルダ名・ファイル名を1文字ずつ完全一致させ、エラーをゼロにしました */
-    background-image: url('photo.jpg/photo4-daily.jpg') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-attachment: fixed !important;
-    background-color: #222 !important;
-    /* 画像が読み込まれるまでの待機色 */
-}
-
-/* ⭕ ここが「ntent」になっていたバグを「.content-container」に綺麗に直しました！ */
-.content-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* ==========================================
-   🌐 ヘッダーとナビゲーション
-   ========================================== */
-.main-header {
-    background-color: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.nav-links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 25px;
-}
-
-.nav-links>li {
-    position: relative;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: inherit;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 20px 0;
-    display: block;
-}
-
-/* ドロップダウンメニュー */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    top: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #fff;
-    border-radius: 4px;
-    min-width: 150px;
-    padding: 10px 0;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1001;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown-content li {
-    list-style: none;
-}
-
-.dropdown-content a {
-    display: block;
-    padding: 10px 15px;
-    color: #333;
-    height: auto;
-}
-
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-/* ==========================================
-   🚀 ヒーローセクション
-   ========================================== */
-.hero-section {
-    height: 480px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: transparent;
-}
-
-.hero-content {
-    max-width: 800px;
-}
-
-.hero-title {
-    font-weight: bold;
-    color: #fff;
-    margin: 0 0 15px 0;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
-}
-
-.hero-subtitle {
-    font-size: 20px;
-    color: #fff;
-    margin: 0;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
-    font-weight: bold;
-}
-
-/* ==========================================
-   🧱 横スクロールできる、大きめ＆柔らかデザインのカードレイアウト
-   ========================================== */
-.cards-grid-container {
-    margin-top: -60px;
-    position: relative;
-    z-index: 10;
-    padding-bottom: 60px;
-    overflow: hidden;
-    /* 横へのはみ出しを綺麗にカット */
-}
-
-/* 統合した新しい見出しスタイル */
-.stage-main-title {
-    font-size: 38px !important;
-    /* 💡パステル緑(14px)を圧倒する大迫力サイズにアップ！ */
-    font-weight: 900 !important;
-    /* 💡文字の太さを最高値(極太)にして存在感をプラス */
-    color: #ffffff;
-    margin-top: 40px;
-    /* 上に少し余白を作ってバランスを調整 */
-    margin-bottom: 30px;
-    /* 下のカード達との隙間をゆったり広げる */
-    letter-spacing: 2px;
-    /* 文字の間隔を少し広げて高級感を出す */
-    text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.85);
-    /* 💡背景写真に絶対に負けない強い影 */
-    text-align: center;
-}
-
-/* 🔥 カードを大きなまま横いっぱいに並べ、スルスル流れる（スクロール）ようにする魔法の命令 */
-.stage-six-row {
-    display: flex;
-    /* 横一列に並べる */
-    gap: 25px;
-    /* カード同士の間隔をゆったり広めに */
-    overflow-x: auto;
-    /* ⭐ 横にスライド（スクロール）できるようにする */
-    scroll-snap-type: x mandatory;
-    /* スクロールした時にピタッとカードが止まる親切設計 */
-    padding: 20px 20px 40px 20px;
-    /* 影が切れないように下と横に余白を作る */
-
-    /* Windowsなどで出る野暮ったいスクロールバーを非表示にする（裏技） */
-    -ms-overflow-style: none;
-    /* IE/Edge用 */
-    scrollbar-width: none;
-    /* Firefox用 */
-}
-
-/* Google ChromeやSafariでスクロールバーを消す */
-.stage-six-row::-webkit-scrollbar {
-    display: none;
-}
-
-/* 🌸 大きめ＆さらに優しく浮かび上がるカードスタイル */
-.card {
-    flex: 0 0 320px;
-    /* 💡 ここでカードの横幅を「320px」と大きめに完全固定！ */
-    scroll-snap-align: start;
-    /* スクロールが止まる位置の目印 */
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    /* 💡 角をさらにまあるく、もっと優しい印象に */
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    /* 影をよりふんわり深く */
-    height: 460px;
-    /* 💡 縦幅も大きくして文字を読みやすく変更 */
-    cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
-}
-
-/* ホバー時に滑らかに、優しく浮き上がるエフェクト */
-.card:hover {
-    transform: translateY(-12px) scale(1.02);
-    /* 大きめのカードに合わせて浮き上がりもアップ */
-    box-shadow: 0 22px 45px rgba(0, 0, 0, 0.25);
-}
-
-/* 画像の高さもカードに合わせて少し大きく */
-.card-img {
-    width: 100%;
-    height: 180px;
-    /* 画像エリアを広くしました */
-    overflow: hidden;
-}
-
-.card-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-}
-
-/* ホバーした時に画像がちょっとだけズームする可愛い仕掛け */
-.card:hover .card-img img {
-    transform: scale(1.08);
-}
-
-.card-content {
-    padding: 20px;
-    /* 内側の余白も広くして高級感をプラス */
-}
-
-.company-tag {
-    font-size: 11px;
-    color: #666;
-    display: block;
-    font-weight: bold;
-    margin-bottom: 2px;
-}
-
-/* ゼミカラーの赤タグ */
-.skill-tag {
-    font-size: 10px;
-    color: #fff;
-    background-color: #d32f2f;
-    padding: 4px 10px;
-    display: inline-block;
-    margin: 4px 0 10px 0;
-    border-radius: 6px;
-    font-weight: bold;
-}
-
-.card-content h3 {
-    font-size: 15px;
-    /* 大きなカードに合わせて文字も少し大きく */
-    margin: 4px 0 12px 0;
-    line-height: 1.5;
-    color: #222;
-    font-weight: bold;
-    height: 68px;
-    overflow: hidden;
-}
-
-.date {
-    font-size: 11px;
-    color: #888;
-    margin: 0 0 12px 0;
-}
-
-.tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-}
-
-/* ハッシュタグの枠もコロンと丸く */
-.tag {
-    font-size: 10px;
-    color: #d32f2f;
-    background-color: rgba(211, 47, 47, 0.06);
-    border: 1px solid rgba(211, 47, 47, 0.2);
-    border-radius: 12px;
-    padding: 3px 10px;
-}
-
-/* フッター */
-.site-footer {
-    background-color: #111;
-    color: #fff;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.footer-logo {
-    font-size: 16px;
-    font-weight: bold;
-    color: #d32f2f;
-}
-
-/* ==========================================
-   🔔 モーダルのデザイン
-   ========================================== */
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 2000;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.modal-window {
-    background-color: #fff;
-    width: 100%;
-    max-width: 650px;
-    max-height: 85vh;
-    border-radius: 8px;
-    overflow-y: auto;
-    position: relative;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    animation: fadeInModal 0.3s ease;
-}
-
-@keyframes fadeInModal {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.modal-close {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 28px;
-    font-weight: bold;
-    color: #666;
-    cursor: pointer;
-}
-
-.modal-close:hover {
-    color: #d32f2f;
-}
-
-.modal-img {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-    border-radius: 4px;
-    margin: 15px 0;
-}
-
-.modal-window h2 {
-    font-size: 22px;
-    color: #111;
-    margin-top: 0;
-}
-
-.modal-body p {
-    font-size: 15px;
-    line-height: 1.6;
-    color: #444;
-    margin-bottom: 15px;
-}
-
-/* ==========================================
-   🔄 コメントが自動で横に流れる無限ループ
-   ========================================== */
-.infinite-flow-container {
-    width: 100% !important;
-    overflow: hidden !important;
-    position: relative !important;
-    padding: 12px 0 !important;
-    margin-top: 15px !important;
-    background-color: #f8f9fa !important;
-    border-radius: 8px !important;
-    display: block !important;
-}
-
-.infinite-flow-track {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    gap: 15px !important;
-    width: max-content !important;
-    animation: scrollLeft 25s linear infinite !important;
-}
-
-.infinite-flow-container:hover .infinite-flow-track {
-    animation-play-state: paused !important;
-}
-
-.flow-item {
-    background-color: #fff !important;
-    padding: 12px 22px !important;
-    border-radius: 6px !important;
-    font-size: 13px !important;
-    font-weight: bold !important;
-    color: #333 !important;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
-    white-space: nowrap !important;
-    display: inline-block !important;
-}
-
-.orange-line .flow-item {
-    border-left: 5px solid #e67e22 !important;
-}
-
-.blue-line .flow-item {
-    border-left: 5px solid #3498db !important;
-}
-
-@keyframes scrollLeft {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
-/* ==========================================
-   🖋️ タイトルの手書き風フォント＆出現アニメーション
-   ========================================== */
-.handwritten-reveal {
-    font-family: 'Caveat', cursive !important;
-    /* 手書き風の可愛い英語フォント */
-    font-size: 80px !important;
-    /* 手書き文字なので大きめに */
-    color: #ffffff !important;
-    /* 文字色は絶対ホワイト */
-    letter-spacing: 2px;
-    /* 文字の間隔を少しあけてお洒落に */
-    margin-top: 60px !important;
-    /* 💡ヘッダーに被らないように下に下げる */
-    opacity: 0;
-    /* 最初は非表示 */
-    transform: translateX(-60px);
-    /* 最初は左に60pxずらしておく */
-    animation: slideFromLeft 1.5s ease-out forwards;
-    /* 1.5秒かけてアニメーション */
-    text-shadow: 2px 4px 15px rgba(0, 0, 0, 0.8) !important;
-    /* ⭕背景写真に負けないように影を強く */
-}
-
-/* サブタイトルも少し遅れてふわっと出します */
-.text-fade-in {
-    opacity: 0;
-    color: #ffffff !important;
-    font-weight: bold !important;
-    text-shadow: 1px 2px 8px rgba(0, 0, 0, 0.8) !important;
-    animation: fadeInSimple 1.2s ease-out forwards;
-    animation-delay: 0.8s;
-    /* タイトルが出てから0.8秒後にスタート */
-}
-
-/* 🎥 左から右へ現れるアニメーションの命令 */
-@keyframes slideFromLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(-60px);
-        /* 左端＆透明 */
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-        /* 定位置＆くっきり表示 */
-    }
-}
-
-/* 🎥 ふわっと浮き出るアニメーションの命令 */
-@keyframes fadeInSimple {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-/* ==========================================
-   🧱 カードレイアウトとサイズアップ（修正）
-   ========================================== */
-
-/* カード自体のサイズをさらに一回り大きく */
-.card {
-    flex: 0 0 350px;
-    /* 💡 横幅を 320px ⇒ 350px に拡大 */
-    height: 520px;
-    /* 💡 縦幅を 460px ⇒ 520px に拡大（文字が大きくなった分をカバー） */
-    scroll-snap-align: start;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
-}
-
-/* 画像の高さもカードに合わせて調整 */
-.card-img {
-    width: 100%;
-    height: 190px;
-    /* 💡 180px ⇒ 190px に少し拡大 */
-    overflow: hidden;
-}
-
-.card-content {
-    padding: 24px;
-    /* 💡 余白を広げて文字の圧迫感を軽減 */
-    display: flex;
-    flex-direction: column;
-}
-
-
-/* ==========================================
-   ✨ カード内の文字サイズ・デザイン調整（重要）
-   ========================================== */
-
-/* 【大】メインタイトル（一番大きく！） */
-.card-content h3 {
-    font-size: 20px;
-    /* 💡 15px ⇒ 20px に大幅サイズアップ */
-    margin: 10px 0 15px 0;
-    line-height: 1.6;
-    color: #222;
-    font-weight: bold;
-    height: auto;
-    /* 💡 文字が溢れないように自動縦伸びに変更 */
-    max-height: 96px;
-    /* 3行分まで許容 */
-    overflow: hidden;
-    order: 3;
-    /* 💡 順番を3番目に固定 */
-}
-
-/* 【中】元・赤枠タグ（パステル緑＆中央寄せ） */
-.skill-tag {
-    font-size: 14px;
-    /* 💡 10px ⇒ 14px にサイズアップ */
-    color: #2e7d32;
-    /* 💡 文字色を濃いめの緑にして視認性を確保 */
-    background-color: #c8e6c9;
-    /* 💡 背景を優しいパステルグリーンに変更 */
-    padding: 6px 16px;
-    /* 💡 タグ自体も少しふっくらと */
-    margin: 8px auto 12px auto;
-    /* 💡 左右の margin を auto にして「真ん中寄せ」に */
-    display: table;
-    /* 💡 中央寄せを綺麗に効かせるための指定 */
-    border-radius: 8px;
-    font-weight: bold;
-    order: 2;
-    /* 💡 順番を2番目に固定 */
-}
-
-/* 【小】会社名・カテゴリタグ */
-.company-tag {
-    font-size: 12px;
-    /* 💡 11px ⇒ 12px にサイズアップ */
-    color: #666;
-    display: block;
-    font-weight: bold;
-    margin-bottom: 4px;
-    text-align: center;
-    /* 💡 真ん中寄せのタグに合わせてここも中央寄せに（お好みで） */
-    order: 1;
-    /* 💡 順番を1番目に固定 */
-}
-
-/* 日付とハッシュタグの調整（その他） */
-.date {
-    font-size: 12px;
-    color: #888;
-    margin: 0 0 12px 0;
-    order: 4;
-}
-
-.tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    order: 5;
-}
-
-/* ハッシュタグの文字も少し大きく */
-.tag {
-    font-size: 12px;
-    /* 💡 10px ⇒ 12px にサイズアップ */
-    color: #d32f2f;
-    background-color: rgba(211, 47, 47, 0.06);
-    border: 1px solid rgba(211, 47, 47, 0.2);
-    border-radius: 12px;
-    padding: 4px 12px;
-}
-
-/* ==========================================
-   📦 モーダル内専用：ディスカッション事例レイアウト
-   ========================================== */
-.modal-discussion-section {
-    margin-top: 10px;
-    text-align: left;
-}
-
-.modal-discussion-title {
-    font-size: 18px !important;
-    font-weight: bold;
-    color: #222;
-    margin: 0 0 4px 0;
-}
-
-.modal-discussion-desc {
-    font-size: 12px;
-    color: #666;
-    margin: 0 0 15px 0;
-}
-
-/* モーダル内で横スクロールさせるコンテナ */
-.modal-scroll-container {
-    display: flex;
-    gap: 15px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding: 5px 5px 20px 5px;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.modal-scroll-container::-webkit-scrollbar {
-    display: none;
-}
-
-/* コンパクトな事例カード（モーダル用サイズ） */
-.mini-discussion-card {
-    flex: 0 0 260px;
-    /* モーダルの横幅に合わせて少しスリムに */
-    height: 240px;
-    /* 縦幅もコンパクトに収める */
-    perspective: 1000px;
-    cursor: pointer;
-    scroll-snap-align: start;
-}
-
-.mini-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-style: preserve-3d;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-}
-
-/* タップで裏返る */
-.mini-discussion-card.flipped .mini-card-inner {
-    transform: rotateY(180deg);
-}
-
-.mini-card-front,
-.mini-card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    border-radius: 12px;
-    padding: 18px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-/* 🟦 表：お題 */
-.mini-card-front {
-    background: #fdfdfd;
-    border: 1px solid #e0e0e0;
-    color: #222;
-}
-
-/* 🟥 裏：回答 */
-.mini-card-back {
-    background: #f4f9f4;
-    /* 優しい緑系の背景 */
-    border: 1px solid #c8e6c9;
-    color: #222;
-    transform: rotateY(180deg);
-}
-
-/* タグのカラーバリエーション */
-.mini-card-tag {
-    font-size: 11px;
-    padding: 3px 8px;
-    border-radius: 6px;
-    font-weight: bold;
-    align-self: flex-start;
-}
-
-.font-macro {
-    background: #e3f2fd;
-    color: #1565c0;
-}
-
-.font-labor {
-    background: #fff3e0;
-    color: #ef6c00;
-}
-
-.font-digital {
-    background: #f3e5f5;
-    color: #7b1fa2;
-}
-
-.font-answer {
-    background: #c8e6c9;
-    color: #2e7d32;
-}
-
-.mini-card-title {
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 1.5;
-    margin: 10px 0;
-    flex-grow: 1;
-}
-
-.mini-card-body {
-    font-size: 11px;
-    line-height: 1.5;
-    color: #444;
-    margin: 0;
-    overflow-y: auto;
-    flex-grow: 1;
-}
-
-.mini-tap-hint {
-    text-align: center;
-    font-size: 10px;
-    color: #aaa;
-    font-weight: bold;
-}
-
-/* ==========================================================================
-   📦 モーダル内専用：ディスカッション事例＆3D反転カードのレイアウト
-   ========================================================================== */
-
-/* セクション全体の余白設定 */
-.modal-discussion-section {
-    margin-top: 30px !important;
-    text-align: left !important;
-    display: block !important;
-}
-
-/* 「📚 毎日のディスカッション事例集」の見出し */
-.modal-discussion-title {
-    font-size: 18px !important;
-    font-weight: bold !important;
-    color: #222 !important;
-    margin: 0 0 4px 0 !important;
-}
-
-/* 見出しの下の説明文 */
-.modal-discussion-desc {
-    font-size: 12px !important;
-    color: #666 !important;
-    margin: 0 0 15px 0 !important;
-}
-
-/* 🔥 重要：縦並びを防いで横スクロールにさせるコンテナ */
-.modal-scroll-container {
-    display: flex !important;
-    /* 横一列に並べる */
-    flex-direction: row !important;
-    gap: 15px !important;
-    /* カード同士の隙間 */
-    overflow-x: auto !important;
-    /* 横スクロールを有効にする */
-    scroll-snap-type: x mandatory !important;
-    /* ピタッと止まる設定 */
-    padding: 10px 5px 25px 5px !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    -ms-overflow-style: none !important;
-    /* スクロールバー非表示（IE） */
-    scrollbar-width: none !important;
-    /* スクロールバー非表示（Firefox） */
-}
-
-/* Chrome, Safari用スクロールバー非表示 */
-.modal-scroll-container::-webkit-scrollbar {
-    display: none !important;
-}
-
-/* 🌸 コンパクトな立体反転カードの土台 */
-.mini-discussion-card {
-    flex: 0 0 260px !important;
-    /* カードの横幅を260pxに完全固定 */
-    width: 260px !important;
-    height: 250px !important;
-    /* 縦幅を固定 */
-    perspective: 1000px !important;
-    /* 3D効果の奥行き */
-    cursor: pointer !important;
-    scroll-snap-align: start !important;
-    display: block !important;
-}
-
-/* カードの内側の立体回転軸 */
-.mini-card-inner {
-    position: relative !important;
-    width: 100% !important;
-    height: 100% !important;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    transform-style: preserve-3d !important;
-    border-radius: 14px !important;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* flippedクラスがついたら180度クルッと回転 */
-.mini-discussion-card.flipped .mini-card-inner {
-    transform: rotateY(180deg) !important;
-}
-
-/* 表面・裏面の共通スタイル（重なり合うように配置） */
-.mini-card-front,
-.mini-card-back {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    -webkit-backface-visibility: hidden !important;
-    /* 裏面の時は表面を隠す */
-    backface-visibility: hidden !important;
-    border-radius: 14px !important;
-    padding: 18px !important;
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important;
-}
-
-/* 🟦 表：お題カードのデザイン */
-.mini-card-front {
-    background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
-    color: #222 !important;
-}
-
-/* 🟥 裏：回答カードのデザイン（優しい緑色） */
-.mini-card-back {
-    background: #f4fbf7 !important;
-    border: 1px solid #c8e6c9 !important;
-    color: #222 !important;
-    transform: rotateY(180deg) !important;
-    /* 最初から裏返しておく */
-}
-
-/* カード内のミニタグ */
-.mini-card-tag {
-    font-size: 10px !important;
-    padding: 3px 8px !important;
-    border-radius: 6px !important;
-    font-weight: bold !important;
-    align-self: flex-start !important;
-}
-
-.font-macro {
-    background: #e3f2fd !important;
-    color: #1565c0 !important;
-}
-
-.font-labor {
-    background: #fff3e0 !important;
-    color: #ef6c00 !important;
-}
-
-.font-digital {
-    background: #f3e5f5 !important;
-    color: #7b1fa2 !important;
-}
-
-.font-answer {
-    background: #c8e6c9 !important;
-    color: #2e7d32 !important;
-}
-
-/* お題のタイトル */
-.mini-card-title {
-    font-size: 13px !important;
-    font-weight: bold !important;
-    line-height: 1.5 !important;
-    color: #333 !important;
-    margin: 8px 0 !important;
-    flex-grow: 1 !important;
-}
-
-/* 回答集の文章 */
-.mini-card-body {
-    font-size: 11px !important;
-    line-height: 1.5 !important;
-    color: #444 !important;
-    margin: 0 !important;
-    overflow-y: auto !important;
-    /* 文字が多い時はカード内でスクロール */
-    flex-grow: 1 !important;
-}
-
-/* 下部のポチポチ誘導ヒント */
-.mini-tap-hint {
-    text-align: center !important;
-    font-size: 10px !important;
-    color: #a0aec0 !important;
-    font-weight: bold !important;
-    margin-top: 5px !important;
-}
-
-/* ==========================================
-   🖼️ モーダル内専用：スライドショー（7枚対応）
-   ========================================== */
-.presentation-slide-section {
-    margin: 25px 0;
-    text-align: left;
-}
-
-.slide-section-title {
-    font-size: 16px !important;
-    font-weight: bold;
-    color: #333;
-    margin: 0 0 4px 0;
-}
-
-.slide-section-desc {
-    font-size: 12px;
-    color: #666;
-    margin: 0 0 12px 0;
-}
-
-/* スライダー全体の囲い */
-.slider-wrapper {
-    position: relative;
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-/* スライドが横に並ぶコンテナ */
-.slide-container {
-    display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    /* スムーズにスクロールさせる */
-    scroll-snap-type: x mandatory;
-    /* ピタッと1枚ずつ止まる */
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-    border: 1px solid #e2e8f0;
-    background-color: #f7fafc;
-    /* スクロールバーを非表示にする設定 */
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.slide-container::-webkit-scrollbar {
-    display: none;
-    /* Chrome, Safari用 */
-}
-
-/* 各スライド画像（1枚ずつの設定） */
-.slide-item {
-    flex: 0 0 100%;
-    /* 横幅100%を維持して並べる */
-    width: 100%;
-    scroll-snap-align: start;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.slide-item img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
-    /* 横長のスライドが綺麗に収まるように */
-    border-radius: 10px;
-}
-
-/* 🎯 下部の丸ボタン（インジケーター）の並び */
-.slider-nav {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 12px;
-}
-
-/* 丸ボタンの見た目 */
-.nav-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #cbd5e0;
-    /* 通常時はグレー */
-    transition: background-color 0.3s, transform 0.2s;
-    text-decoration: none;
-}
-
-/* マウスが乗った時や、選択されている時 */
-.nav-dot:hover,
-.nav-dot:active {
-    background-color: #2b6cb0;
-    /* ゼミカラーなど、濃い青や緑に */
-    transform: scale(1.2);
-}
-
-/* スライド下のコメントボックス */
-.slide-comment-box {
-    background-color: #f7fafc;
-    border-left: 4px solid #4299e1;
-    /* アクセントの青線 */
-    padding: 12px 15px;
-    border-radius: 0 8px 8px 0;
-    font-size: 13px;
-    line-height: 1.6;
-    color: #4a5568;
-}
-
-/* ==========================================
-   ファンシー＆カワイイ レトロゲーム風スタイル
-   ========================================== */
-
-/* 全体でかわいい丸文字フォント（Kiwi Maru）を適用 */
 body {
     margin: 0;
     padding: 0;
@@ -1072,6 +14,12 @@ body {
 a {
     text-decoration: none;
     color: inherit;
+}
+
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 /* 🍓 絵文字のボーダーライン（ドット絵の帯風） */
@@ -1088,13 +36,18 @@ a {
 }
 
 /* ==========================================
-   ヘッダー ＆ ナビゲーション
+   🌐 ヘッダーとナビゲーション
    ========================================== */
 .main-header {
     background-color: #fff;
     padding: 15px 20px;
     border-bottom: 4px solid #5c4033;
     /* 太めのレトロな線 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 .nav-container {
@@ -1103,6 +56,7 @@ a {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
+    height: 60px;
 }
 
 .logo {
@@ -1120,11 +74,16 @@ a {
     padding: 0;
 }
 
+.nav-links>li {
+    position: relative;
+}
+
 .nav-links a {
     font-weight: 700;
     padding: 5px 10px;
     border-radius: 8px;
     transition: all 0.2s;
+    display: block;
 }
 
 .nav-links a:hover,
@@ -1133,21 +92,21 @@ a {
     color: #ff4d6d;
 }
 
-/* ドロップダウン */
-.dropdown {
-    position: relative;
-}
-
+/* ドロップダウンメニュー */
 .dropdown-content {
     display: none;
     position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: white;
     border: 3px solid #5c4033;
     border-radius: 8px;
     padding: 10px;
     list-style: none;
-    z-index: 10;
+    z-index: 1010;
     min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown:hover .dropdown-content {
@@ -1156,6 +115,17 @@ a {
 
 .dropdown-content li {
     margin: 5px 0;
+    list-style: none;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
 }
 
 .header-right {
@@ -1167,16 +137,15 @@ a {
 }
 
 /* ==========================================
-   メインレイアウト（変更対応部分）
+   🚀 メインレイアウト & ヒーローセクション
    ========================================== */
 .home-main-layout {
     max-width: 1000px;
-    /* 見やすさを保つため、中央にキュッと収まる幅に設定 */
-    margin: 30px auto;
+    margin: 100px auto 30px auto;
+    /* ヘッダー固定分、上に余白を追加 */
     padding: 0 20px;
 }
 
-/* 1カラム化に伴い、幅を100%にして中央寄せの土台を作成 */
 .main-left-column {
     width: 100%;
     display: flex;
@@ -1226,7 +195,149 @@ a {
 }
 
 /* ==========================================
-   日常活動セクション ＆ カード
+   🧱 横スクロール・メインカードレイアウト (1つに統合)
+   ========================================== */
+.cards-grid-container {
+    margin-top: 20px;
+    position: relative;
+    z-index: 10;
+    padding-bottom: 60px;
+    overflow: hidden;
+}
+
+.stage-main-title {
+    font-size: 38px;
+    font-weight: 900;
+    color: #2a9d8f;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.stage-six-row {
+    display: flex;
+    gap: 25px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 20px 20px 40px 20px;
+    -ms-overflow-style: none;
+    /* IE/Edge用 */
+    scrollbar-width: none;
+    /* Firefox用 */
+}
+
+.stage-six-row::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari用 */
+}
+
+/* 🌸 サイズアップを統合したカードスタイル */
+.card {
+    flex: 0 0 350px;
+    /* 横幅 350px に拡大固定 */
+    height: 520px;
+    /* 縦幅 520px に拡大 */
+    scroll-snap-align: start;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+}
+
+.card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 22px 45px rgba(0, 0, 0, 0.25);
+}
+
+.card-img {
+    width: 100%;
+    height: 190px;
+    overflow: hidden;
+}
+
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.card:hover .card-img img {
+    transform: scale(1.08);
+}
+
+.card-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 各要素の順番とデザイン */
+.company-tag {
+    font-size: 12px;
+    color: #666;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 4px;
+    text-align: center;
+    order: 1;
+}
+
+.skill-tag {
+    font-size: 14px;
+    color: #2e7d32;
+    background-color: #c8e6c9;
+    /* パステルグリーン */
+    padding: 6px 16px;
+    margin: 8px auto 12px auto;
+    display: block;
+    width: fit-content;
+    /* 綺麗に中央寄せを効かせるモダンな指定 */
+    border-radius: 8px;
+    font-weight: bold;
+    order: 2;
+}
+
+.card-content h3 {
+    font-size: 20px;
+    margin: 10px 0 15px 0;
+    line-height: 1.6;
+    color: #222;
+    font-weight: bold;
+    height: auto;
+    max-height: 96px;
+    overflow: hidden;
+    order: 3;
+}
+
+.date {
+    font-size: 12px;
+    color: #888;
+    margin: 0 0 12px 0;
+    order: 4;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    order: 5;
+}
+
+.tag {
+    font-size: 12px;
+    color: #d32f2f;
+    background-color: rgba(211, 47, 47, 0.06);
+    border: 1px solid rgba(211, 47, 47, 0.2);
+    border-radius: 12px;
+    padding: 4px 12px;
+}
+
+/* ==========================================
+   日常活動セクション ＆ ファンシーグリッドカード
    ========================================== */
 .activities-wrapper {
     background: #fff;
@@ -1236,22 +347,12 @@ a {
     box-shadow: 6px 6px 0px #e2ece9;
 }
 
-.stage-main-title {
-    font-size: 22px;
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 30px;
-    color: #2a9d8f;
-}
-
-/* 2×2のカードグリッド（PC時は綺麗に2列並びになります） */
 .fancy-cards-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 25px;
 }
 
-/* 🍓 ファンシーカード共通 */
 .fancy-card {
     position: relative;
     background: #fff;
@@ -1349,22 +450,124 @@ a {
 }
 
 /* ==========================================
-   📱 スマホ・タブレット用レスポンシブ対応
+   フッター
    ========================================== */
-@media (max-width: 768px) {
+.site-footer {
+    background-color: #111;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-    /* スマホ時はカードを縦1列に並び替え */
-    .fancy-cards-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+.footer-logo {
+    font-size: 16px;
+    font-weight: bold;
+    color: #d32f2f;
+}
+
+/* ==========================================
+   🔔 モーダルのデザイン
+   ========================================== */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-window {
+    background-color: #fff;
+    width: 100%;
+    max-width: 650px;
+    max-height: 85vh;
+    border-radius: 8px;
+    overflow-y: auto;
+    position: relative;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: fadeInModal 0.3s ease;
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
     }
 
-    .hero-title {
-        font-size: 20px;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
+}
 
-    .decor-flower {
-        display: none;
-        /* スマホ画面で文字と被らないようにお花を隠す */
-    }
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    color: #d32f2f;
+}
+
+.modal-img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin: 15px 0;
+}
+
+.modal-window h2 {
+    font-size: 22px;
+    color: #111;
+    margin-top: 0;
+}
+
+.modal-body p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+/* ==========================================
+   📦 モーダル内専用：ディスカッション事例＆3D反転カード
+   ========================================== */
+.modal-discussion-section {
+    margin-top: 30px;
+    text-align: left;
+    display: block;
+}
+
+.modal-discussion-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+    margin: 0 0 4px 0;
+}
+
+.modal-discussion-desc {
+    font-size: 12px;
+    color: #666;
+    margin: 0 0 15px 0;
+}
+
+.modal-scroll-container {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
 }
