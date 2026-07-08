@@ -115,6 +115,112 @@ h1::after {
     border: 5px solid white;
 }
 
+/* 背景 */
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 白いカード */
+.modal-content {
+    background: white;
+    width: 70%;
+    max-width: 1050px;
+    height: 72vh;
+    max-height: 85vh;
+    overflow-y: auto;
+    border-radius: 25px;
+    padding: 35px;
+    position: relative;
+}
+
+.modal-content h2 {
+    margin-bottom: 25px;
+}
+
+/* メンバー紹介 */
+
+.modal-members {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.modal-member {
+    flex: 1;
+    max-width: 410px;
+    display: flex;
+    align-items: center;
+    background: #f8fbff;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.modal-member img {
+    width: 140px;
+    flex-shrink: 0;
+}
+
+.modal-text {
+    flex: 1;
+}
+
+.modal-text h3 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #17396b;
+}
+
+.modal-text p {
+    margin: 10px 0;
+    line-height: 1.7;
+}
+
+.modal-text {
+    flex: 1;
+}
+
+.modal h2 {
+    font-size: 40px;
+    color: #1e3a5f;
+    border-bottom: 5px solid #ffe88a;
+    display: inline-block;
+    padding-bottom: 8px;
+    margin-bottom: 30px;
+}
+
+@keyframes popup {
+
+    0% {
+        transform: translateY(30px) scale(0.75);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateY(-5px) scale(1.05);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+.full-body.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
 /* --- 役職・ロール（タグの見た目） --- */
 .role {
     display: inline-block;

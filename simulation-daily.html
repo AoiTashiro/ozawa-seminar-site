@@ -375,6 +375,33 @@
             }
         }
     </style>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>シミュレーションゲーム</title>
+
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #111;
+                /* 背景を暗く */
+            }
+
+            /* 💡「game-canvas」の部分は、あなたのHTMLにあるゲームのタグ（canvasなど）のid名に合わせてね */
+            canvas,
+            #game-canvas {
+                max-width: 95vw;
+                max-height: 95vh;
+                object-fit: contain;
+            }
+        </style>
+    </head>
 </head>
 
 <body>
