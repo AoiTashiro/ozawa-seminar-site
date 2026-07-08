@@ -6,140 +6,141 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>年間行事 - Ozawa Seminar</title>
 
+    <!-- Google Fonts の読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- 外部CSSの読み込み -->
     <link rel="stylesheet" href="style-activities-event.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- 👇 ここにメニューの文字を黒にするCSSを追加しました！ -->
+    <style>
+        .nav-links a,
+        .dropdown-content a {
+            color: #000000 !important;
+        }
+    </style>
 </head>
 
 <body>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Ozawa seminar</title>
+    <div class="emoji-border-line">🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼
+    </div>
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@500;700&display=swap" rel="stylesheet">
+    <header class="main-header">
+        <nav class="nav-container">
+            <div class="logo">🍓 小澤ゼミ / Ozawa Seminar 🍓</div>
+            <ul class="nav-links">
+                <li><a href="index.html">🏠 ホーム</a></li>
+                <li class="dropdown">
+                    <a href="#">📢 活動内容 ▼</a>
+                    <ul class="dropdown-content">
+                        <li><a href="activities-member.html">👥 メンバー紹介</a></li>
+                        <li><a href="activities-event.html">📅 年間行事</a></li>
+                    </ul>
+                </li>
+                <li><a href="activities-ozawaquiz.html">🧐 先生について ▼</a></li>
+                <li class="dropdown">
+                    <a href="#">🎮 君もゼミ生だ！ ▼</a>
+                    <ul class="dropdown-content">
+                        <li><a href="simulation-daily.html">☀️シュミレーションゲームはこちら！</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="header-right">
+                <span>MENU 📋</span>
+            </div>
+        </nav>
+    </header>
 
-        <link rel="stylesheet" href="style.css">
-    </head>
+    <div class="pop-header">
+        <h1>ゼミナール年間行事</h1>
+        <p>スクロールしてイベントをチェック！ 👇</p>
+    </div>
 
-    <body>
-        <div class="emoji-border-line">🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼
-        </div>
+    <div class="schedule-container">
 
-        <header class="main-header">
-            <nav class="nav-container">
-                <div class="logo">🍓 小澤ゼミ / Ozawa Seminar 🍓</div>
-                <ul class="nav-links">
-                    <li><a href="index.html">🏠 ホーム</a></li>
-                    <li class="dropdown">
-                        <a href="#">📢 活動内容 ▼</a>
-                        <ul class="dropdown-content">
-                            <li><a href="activities-member.html">👥 メンバー紹介</a></li>
-                            <li><a href="activities-event.html">📅 年間行事</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="activities-ozawaquiz.html">🧐 先生について ▼</a></li>
-                    <li class="dropdown">
-                        <a href="#">🎮 君もゼミ生だ！ ▼</a>
-                        <ul class="dropdown-content">
-                            <li><a href="simulation-daily.html">☀️シュミレーションゲームはこちら！</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <div class="header-right">
-                    <span>MENU 📋</span>
-                </div>
-            </nav>
-        </header>
+        <section class="pop-event-card">
+            <img src="photo.jpg/6gatsu.jpg" alt="工場見学" class="event-photo">
+            <div class="card-text-area">
+                <div class="month-badge">6月</div>
+                <h2 class="title">工場見学</h2>
+                <p class="desc">企業の最前線を見学し、社会の仕組みを体感するゼミ最初のイベントです。</p>
+            </div>
+        </section>
 
+        <section class="pop-event-card">
+            <img src="photo.jpg/9gatsu.jpg" alt="夏合宿" class="event-photo">
+            <div class="card-text-area">
+                <div class="month-badge">9月</div>
+                <h2 class="title">夏合宿</h2>
+                <p class="desc">日常から離れた場所で、ゼミ生同士の親睦を深めながら研究テーマを掘り下げます。</p>
+            </div>
+        </section>
 
-        <div class="pop-header">
-            <h1>ゼミナール年間行事</h1>
-            <p>スクロールしてイベントをチェック！ 👇</p>
-        </div>
+        <section class="pop-event-card">
+            <img src="photo.jpg/10gatsu.jpg" alt="OBOG会" class="event-photo">
+            <div class="card-text-area">
+                <div class="month-badge">10月</div>
+                <h2 class="title">OBOG会</h2>
+                <p class="desc">社会の第一線で活躍する先輩方と交流し、キャリアについて直接話を聞ける貴重な機会です。</p>
+            </div>
+        </section>
 
-        <div class="schedule-container">
+        <section class="pop-event-card">
+            <img src="photo.jpg/11gatsu.jpg" alt="オープンゼミ" class="event-photo">
+            <div class="card-text-area">
+                <div class="month-badge">11月</div>
+                <h2 class="title">オープンゼミ</h2>
+                <p class="desc">来年度ゼミに入りたい後輩たちに向けて、ゼミの雰囲気や研究内容を発表します。</p>
+            </div>
+        </section>
 
-            <section class="pop-event-card">
-                <img src="photo.jpg/6gatsu.jpg" alt="工場見学" class="event-photo">
-                <div class="card-text-area">
-                    <div class="month-badge">6月</div>
-                    <h2 class="title">工場見学</h2>
-                    <p class="desc">企業の最前線を見学し、社会の仕組みを体感するゼミ最初のイベントです。</p>
-                </div>
-            </section>
+        <section class="pop-event-card">
+            <img src="photo.jpg/12gatsu.jpg" alt="クリスマスパーティ" class="event-photo">
+            <div class="card-text-area">
+                <div class="month-badge">12月</div>
+                <h2 class="title">クリスマスパーティ</h2>
+                <p class="desc">1年間の労をねぎらい、ゼミ生全員で楽しく盛り上がる大忘年会です！</p>
+            </div>
+        </section>
 
-            <section class="pop-event-card">
-                <img src="photo.jpg/9gatsu.jpg" alt="夏合宿" class="event-photo">
-                <div class="card-text-area">
-                    <div class="month-badge">9月</div>
-                    <h2 class="title">夏合宿</h2>
-                    <p class="desc">日常から離れた場所で、ゼミ生同士の親睦を深めながら研究テーマを掘り下げます。</p>
-                </div>
-            </section>
+        <section class="pop-event-card">
+            <img src="photo.jpg/1gatsu.jpg" alt="他大学合同ゼミ" class="event-photo">
+            <div class="card-text-area">
+                <div class="month-badge">1月</div>
+                <h2 class="title">他大学合同ゼミ</h2>
+                <p class="desc">他大学の学生と研究発表を行い、普段とは違う視点からの意見交換で刺激を受けます。</p>
+            </div>
+        </section>
 
-            <section class="pop-event-card">
-                <img src="photo.jpg/10gatsu.jpg" alt="OBOG会" class="event-photo">
-                <div class="card-text-area">
-                    <div class="month-badge">10月</div>
-                    <h2 class="title">OBOG会</h2>
-                    <p class="desc">社会の第一線で活躍する先輩方と交流し、キャリアについて直接話を聞ける貴重な機会です。</p>
-                </div>
-            </section>
+        <section class="pop-event-card">
+            <img src="photo.jpg/3gatsu.jpg" alt="春合宿" class="event-photo">
+            <div class="card-text-area">
+                <div class="month-badge">3月</div>
+                <h2 class="title">春合宿</h2>
+                <p class="desc">1年間の研究の集大成を発表し、次年度へ向けての目標を立てる締めくくりの合宿です。</p>
+            </div>
+        </section>
 
-            <section class="pop-event-card">
-                <img src="photo.jpg/11gatsu.jpg" alt="オープンゼミ" class="event-photo">
-                <div class="card-text-area">
-                    <div class="month-badge">11月</div>
-                    <h2 class="title">オープンゼミ</h2>
-                    <p class="desc">来年度ゼミに入りたい後輩たちに向けて、ゼミの雰囲気や研究内容を発表します。</p>
-                </div>
-            </section>
+    </div>
 
-            <section class="pop-event-card">
-                <img src="photo.jpg/12gatsu.jpg" alt="クリスマスパーティ" class="event-photo">
-                <div class="card-text-area">
-                    <div class="month-badge">12月</div>
-                    <h2 class="title">クリスマスパーティ</h2>
-                    <p class="desc">1年間の労をねぎらい、ゼミ生全員で楽しく盛り上がる大忘年会です！</p>
-                </div>
-            </section>
-
-            <section class="pop-event-card">
-                <img src="photo.jpg/1gatsu.jpg" alt="他大学合同ゼミ" class="event-photo">
-                <div class="card-text-area">
-                    <div class="month-badge">1月</div>
-                    <h2 class="title">他大学合同ゼミ</h2>
-                    <p class="desc">他大学の学生と研究発表を行い、普段とは違う視点からの意見交換で刺激を受けます。</p>
-                </div>
-            </section>
-
-            <section class="pop-event-card">
-                <img src="photo.jpg/3gatsu.jpg" alt="春合宿" class="event-photo">
-                <div class="card-text-area">
-                    <div class="month-badge">3月</div>
-                    <h2 class="title">春合宿</h2>
-                    <p class="desc">1年間の研究の集大成を発表し、次年度へ向けての目標を立てる締めくくりの合宿です。</p>
-                </div>
-            </section>
-
-        </div>
-
-        <script>
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('pop-show');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            const popCards = document.querySelectorAll('.pop-event-card');
-            popCards.forEach(card => {
-                observer.observe(card);
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('pop-show');
+                }
             });
-        </script>
-    </body>
+        }, { threshold: 0.1 });
+
+        const popCards = document.querySelectorAll('.pop-event-card');
+        popCards.forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
 
 </html>

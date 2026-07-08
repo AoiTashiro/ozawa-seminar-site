@@ -380,3 +380,14 @@ body {
     background-position: 40px 40px;
   }
 }
+
+/* ナビゲーションメニューの文字色をすべて黒にする設定 */
+.nav-links a {
+  color: #000000 !important;
+  /* 文字を強制的に黒にします */
+}
+
+/* ドロップダウンメニュー内の文字も念のため黒に指定 */
+.dropdown-content a {
+  color: #000000 !important;
+}
