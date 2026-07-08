@@ -1,118 +1,103 @@
-// スライダーを動かすための設定
-const swiper = new Swiper('.mySwiper', {
-    loop: false,
-    spaceBetween: 24,
+document.addEventListener('DOMContentLoaded', () => {
+    // ==========================================================================
+    // 1 🔔 モーダルの基本開閉 ＆ 連動処理
+    // ==========================================================================
+    const modalOverlay = document.querySelector('.modal-overlay');
+    const modalClose = document.querySelector('.modal-close');
+    const modalWindow = document.querySelector('.modal-window');
+    const cards = document.querySelectorAll('.card, .fancy-card');
 
-    // 矢印ボタンの設定
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
+    const modalTitle = modalOverlay ? modalOverlay.querySelector('.modal-window h2') : null;
+    const modalImg = modalOverlay ? modalOverlay.querySelector('.modal-img') : null;
 
-    // 画面サイズごとの枚数設定
-    breakpoints: {
-        0: {
-            slidesPerView: 1,
-        },
-        650: {
-            slidesPerView: 2,
-        },
-        1024: {
-            slidesPerView: 3,
-        }
-    }
-});
-// モーダルを開く関数
-function openModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.style.display = 'flex'; // 画面に表示する
-        document.body.style.overflow = 'hidden'; // 背景をスクロールさせない
-    }
-}
+    cards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            // 3D反転カード自体や、その中身をクリックした場合はモーダルを開かないようにする
+            if (e.target.closest('.flip-card')) return;
 
-// モーダルを閉じる関数
-function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.style.display = 'none'; // 非表示にする
-        document.body.style.overflow = 'auto'; // 背景のスクロールを戻す
-    }
-}
-// ======= 🖼️ 2年次春季活動：自動スライドショーコントロール（6枚版） =======
-(function () {
-    const container = document.getElementById('springSlideContainer');
-    const wrapper = document.getElementById('springSliderWrapper');
-    const dots = document.querySelectorAll('#springSliderNav .nav-dot');
-    const modal2 = document.getElementById('modal2');
+            if (!modalOverlay) return;
 
-    if (!container || !wrapper || dots.length === 0 || !modal2) return;
+            const cardTitle = card.querySelector('h3') ? card.querySelector('h3').textContent : '';
+            const cardImg = card.querySelector('img');
 
-    let currentIndex = 0;
-    const totalSlides = dots.length; // 自動的に6枚としてカウントされます
-    let slideInterval = null;
-    const intervalTime = 2500; // 2.5秒ごとに次のスライドへ
+            if (modalTitle && cardTitle) modalTitle.textContent = cardTitle;
 
-    function goToSlide(index) {
-        currentIndex = index;
-        const slideWidth = container.clientWidth;
-        container.scrollTo({
-            left: slideWidth * currentIndex,
-            behavior: 'smooth'
-        });
-
-        dots.forEach((dot, i) => {
-            if (i === currentIndex) {
-                dot.classList.add('active');
-            } else {
-                dot.classList.remove('active');
+            if (modalImg) {
+                if (cardImg && cardImg.src) {
+                    modalImg.src = cardImg.src;
+                    modalImg.style.display = 'block';
+                } else {
+                    modalImg.style.display = 'none';
+                }
             }
+
+            if (modalWindow) {
+                modalWindow.classList.remove('item-discussion', 'item-accounting', 'item-programming', 'item-research');
+                if (card.classList.contains('item-discussion')) modalWindow.classList.add('item-discussion');
+                if (card.classList.contains('item-accounting')) modalWindow.classList.add('item-accounting');
+                if (card.classList.contains('item-programming')) modalWindow.classList.add('item-programming');
+                if (card.classList.contains('item-research')) modalWindow.classList.add('item-research');
+            }
+
+            modalOverlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+
+            // モーダルが開いた瞬間に、中の流れるアニメーションをリセットして開始
+            startFlowingComments();
+        });
+    });
+
+    const closeModal = () => {
+        if (modalOverlay) {
+            modalOverlay.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    };
+
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', (event) => {
+            if (event.target === modalOverlay) closeModal();
         });
     }
 
-    function nextSlide() {
-        let nextIndex = currentIndex + 1;
-        if (nextIndex >= totalSlides) {
-            nextIndex = 0; // 6枚目の次は1枚目に戻る
+    // ==========================================================================
+    // 2 📦 モーダル内専用：意見が左へ自動で流れる仕組み
+    // ==========================================================================
+    function startFlowingComments() {
+        const scrollContainer = document.querySelector('.modal-scroll-container');
+        if (!scrollContainer) return;
+
+        // すでにアニメーションが設定されている場合は重複防止のため一度クリア
+        scrollContainer.style.animation = 'none';
+
+        // 意見が途切れなくループするように、中身のカードを複製して後ろに結合する処理
+        // (まだ複製していなければ実行)
+        if (!scrollContainer.classList.contains('cloned')) {
+            const children = Array.from(scrollContainer.children);
+            children.forEach(child => {
+                const clone = child.cloneNode(true);
+                scrollContainer.appendChild(clone);
+            });
+            scrollContainer.classList.add('cloned');
         }
-        goToSlide(nextIndex);
+
+        // 0.05秒後にアニメーションを再始動（CSS側の設定と連動）
+        setTimeout(() => {
+            scrollContainer.style.display = 'flex';
+            scrollContainer.style.width = 'max-content';
+            scrollContainer.style.animation = 'flowComments 15s linear infinite';
+        }, 50);
     }
 
-    function startSlide() {
-        if (window.getComputedStyle(modal2).display === 'none') return;
-        if (!slideInterval) {
-            slideInterval = setInterval(nextSlide, intervalTime);
-        }
-    }
-
-    function stopSlide() {
-        if (slideInterval) {
-            clearInterval(slideInterval);
-            slideInterval = null;
-        }
-    }
-
-    // マウスやスマホ操作時のホバーイベント
-    wrapper.addEventListener('mouseenter', stopSlide);
-    wrapper.addEventListener('mouseleave', startSlide);
-    wrapper.addEventListener('touchstart', stopSlide);
-    wrapper.addEventListener('touchend', startSlide);
-
-    // モーダル開閉の監視
-    const observer = new MutationObserver(() => {
-        if (window.getComputedStyle(modal2).display !== 'none') {
-            setTimeout(() => {
-                goToSlide(0);
-                startSlide();
-            }, 300);
-        } else {
-            stopSlide();
+    // ==========================================================================
+    // 3 🔄 モーダル内専用：タップするとカードがひっくり返る（3D反転）仕組み
+    // ==========================================================================
+    // モーダル内の「.flip-card」をタップしたときに、ひっくり返るクラスをつけ外しする
+    document.addEventListener('click', (e) => {
+        const flipCard = e.target.closest('.flip-card');
+        if (flipCard) {
+            flipCard.classList.toggle('is-flipped');
         }
     });
-
-    observer.observe(modal2, { attributes: true, attributeFilter: ['style', 'class'] });
-
-    window.addEventListener('resize', () => {
-        goToSlide(currentIndex);
-    });
-})();
+});
