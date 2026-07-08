@@ -571,3 +571,248 @@ a {
     flex-direction: row;
     gap: 15px;
 }
+
+/* ==========================================
+   流れるアニメーション（無限ループ）のスタイル
+   ========================================== */
+.infinite-flow-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+    margin-bottom: 15px;
+}
+
+/* 下線（オレンジ・ブルー）のアクセント */
+.orange-line {
+    border-bottom: 2px solid #ff9800;
+}
+
+.blue-line {
+    border-bottom: 2px solid #2196f3;
+}
+
+.infinite-flow-track {
+    display: flex;
+    width: max-content;
+    animation: scrollFlow 25s linear infinite;
+}
+
+/* マウスホールドやタップ時に動きを止める（お好みで） */
+.infinite-flow-track:hover {
+    animation-play-state: paused;
+}
+
+.flow-item {
+    display: inline-block;
+    padding: 6px 15px;
+    margin-right: 20px;
+    background-color: #f5f5f5;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+@keyframes scrollFlow {
+    0% {
+        transform: translateX(0);
+    }
+
+    /* 要素が2周分リピートされているので、半分（-50%）動いた時点でループさせる */
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* ==========================================
+   タップでひっくり返るカード（3Dフリップ）
+   ========================================== */
+.modal-scroll-container {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    /* 横スクロール可能に */
+    padding: 10px 5px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.mini-discussion-card {
+    flex: 0 0 280px;
+    /* カードの幅 */
+    height: 220px;
+    /* カードの高さ（文章量に合わせて調整） */
+    perspective: 1000px;
+    /* 3D効果の奥行き */
+    scroll-snap-align: start;
+    cursor: pointer;
+}
+
+.mini-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+/* flippedクラスがついたら180度回転 */
+.mini-discussion-card.flipped .mini-card-inner {
+    transform: rotateY(180deg);
+}
+
+.mini-card-front,
+.mini-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    /* 裏返ったときに見えなくする */
+    backface-visibility: hidden;
+    border-radius: 12px;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+/* 表側のデザイン */
+.mini-card-front {
+    background-color: #fff;
+    color: #333;
+}
+
+/* 裏側のデザイン */
+.mini-card-back {
+    background-color: #fafafa;
+    color: #333;
+    transform: rotateY(180deg);
+    /* 最初から裏を向けておく */
+    overflow-y: auto;
+    /* 文章が溢れたらスクロール */
+}
+
+/* カード内の細かな装飾 */
+.mini-card-tag {
+    align-self: flex-start;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.font-macro {
+    background-color: #e57373;
+}
+
+.font-labor {
+    background-color: #4fc3f7;
+}
+
+.font-digital {
+    background-color: #81c784;
+}
+
+.font-answer {
+    background-color: #ffb74d;
+}
+
+.mini-card-title {
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 10px 0;
+    text-align: left;
+    font-weight: 600;
+}
+
+.mini-card-body {
+    font-size: 12px;
+    text-align: left;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.mini-tap-hint {
+    font-size: 11px;
+    color: #999;
+    text-align: center;
+    margin-top: auto;
+}
+
+/* ==========================================
+   スライドショー（横スクロール）のスタイル
+   ========================================== */
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 15px 0;
+}
+
+.slide-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* スクロールバーを非表示にする（デザイン性重視） */
+.slide-container::-webkit-scrollbar {
+    display: none;
+}
+
+.slide-item {
+    flex: 0 0 100%;
+    /* 1枚ずつ全幅で表示 */
+    scroll-snap-align: start;
+}
+
+.slide-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* ナビゲーションドット */
+.slider-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.nav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.nav-dot.active {
+    background-color: #1565c0;
+    /* アクティブなドットの色 */
+}
+
+/* ==========================================
+   ゼミ生の意見：流れるアニメーション用
+   ========================================== */
+.infinite-flow-container.blue-box-line {
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #f9fbfd;
+    padding: 12px 0;
+    margin-top: 20px;
+}
