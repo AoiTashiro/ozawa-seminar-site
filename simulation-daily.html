@@ -379,858 +379,872 @@
 
 <body>
 
-    <header class="main-header">
-        <nav class="nav-container">
-            <div class="logo">Ozawa Seminar</div>
-            <ul class="nav-links">
-                <li><a href="index.html">ホーム</a></li>
-                <li class="dropdown">
-                    <a href="#">活動内容 ▼</a>
-                    <ul class="dropdown-content">
-                        <li><a href="activities-member.html">メンバー紹介</a></li>
-                        <li><a href="activities-event.html">年間行事</a></li>
-                    </ul>
-                </li>
-                <li><a href="activities-ozawaquiz.html">小澤先生クイズ</a></li>
-                <li class="dropdown">
-                    <a href="#">シミュレーション ▼</a>
-                    <ul class="dropdown-content">
-                        <li><a href="simulation-daily.html">日常編</a></li>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ozawa seminar</title>
 
-                    </ul>
-                </li>
-            </ul>
-            <div class="header-right">
-                <span
-                    style="border: 1px solid #fff; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold;">MENU</span>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@500;700&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <div class="emoji-border-line">🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼
+        </div>
+
+        <header class="main-header">
+            <nav class="nav-container">
+                <div class="logo">🍓 小澤ゼミ / Ozawa Seminar 🍓</div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">🏠 ホーム</a></li>
+                    <li class="dropdown">
+                        <a href="#">📢 活動内容 ▼</a>
+                        <ul class="dropdown-content">
+                            <li><a href="activities-member.html">👥 メンバー紹介</a></li>
+                            <li><a href="activities-event.html">📅 年間行事</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="activities-ozawaquiz.html">🧐 先生について ▼</a></li>
+                    <li class="dropdown">
+                        <a href="#">🎮 君もゼミ生だ！ ▼</a>
+                        <ul class="dropdown-content">
+                            <li><a href="simulation-daily.html">☀️シュミレーションゲームはこちら！</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="header-right">
+                    <span>MENU 📋</span>
+                </div>
+            </nav>
+        </header>
+
+        <div id="game-container">
+            <div id="bg-layer">
+                <div id="bg-placeholder"></div>
             </div>
-        </nav>
-    </header>
 
-    <div id="game-container">
-        <div id="bg-layer">
-            <div id="bg-placeholder"></div>
-        </div>
+            <div id="character-layer"
+                style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; display: flex; justify-content: center; align-items: flex-end;">
+                <img id="character-img" src="" style="max-height: 90%; display: none;">
+            </div>
 
-        <div id="character-layer"
-            style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; display: flex; justify-content: center; align-items: flex-end;">
-            <img id="character-img" src="" style="max-height: 90%; display: none;">
-        </div>
+            <canvas id="cyber-canvas" width="800" height="500"></canvas>
 
-        <canvas id="cyber-canvas" width="800" height="500"></canvas>
+            <div id="whiteout"></div>
+            <div id="blackout"></div>
+            <video id="game-video" src="803374691.495790.mp4"
+                style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1;"
+                loop muted playsinline></video>
 
-        <div id="whiteout"></div>
-        <div id="blackout"></div>
-        <video id="game-video" src="803374691.495790.mp4"
-            style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1;"
-            loop muted playsinline></video>
+            <div id="screen" class="screen-layer">
+                <div id="center-ui-container" class="center-ui"></div>
 
-        <div id="screen" class="screen-layer">
-            <div id="center-ui-container" class="center-ui"></div>
-
-            <div id="choices-area"></div>
-            <div id="text-box">
-                <div id="speaker-name"></div>
-                <div id="dialogue-text"></div>
-                <div id="indicator" style="display:none;">▼ ENTER</div>
+                <div id="choices-area"></div>
+                <div id="text-box">
+                    <div id="speaker-name"></div>
+                    <div id="dialogue-text"></div>
+                    <div id="indicator" style="display:none;">▼ ENTER</div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        const canvas = document.getElementById('cyber-canvas');
-        const ctx = canvas.getContext('2d');
-        const screen = document.getElementById('screen');
-        const whiteout = document.getElementById('whiteout');
-        const blackout = document.getElementById('blackout');
-        const centerUi = document.getElementById('center-ui-container');
-        const textBox = document.getElementById('text-box');
-        const bgPlaceholder = document.getElementById('bg-placeholder');
-        const bgLayer = document.getElementById('bg-layer');
+        <script>
+            const canvas = document.getElementById('cyber-canvas');
+            const ctx = canvas.getContext('2d');
+            const screen = document.getElementById('screen');
+            const whiteout = document.getElementById('whiteout');
+            const blackout = document.getElementById('blackout');
+            const centerUi = document.getElementById('center-ui-container');
+            const textBox = document.getElementById('text-box');
+            const bgPlaceholder = document.getElementById('bg-placeholder');
+            const bgLayer = document.getElementById('bg-layer');
 
-        let playerName = "主人公";
-        let warpSpeed = 2;
-        let warpMode = "multi";
+            let playerName = "主人公";
+            let warpSpeed = 2;
+            let warpMode = "multi";
 
-        // 内部集計用（性格診断用ポイント）
-        let scoreE = 0; // 社交
-        let scoreT = 0; // 論理
-        let scoreJ = 0; // 計画
-        let scoreP = 0; // 突発
+            // 内部集計用（性格診断用ポイント）
+            let scoreE = 0; // 社交
+            let scoreT = 0; // 論理
+            let scoreJ = 0; // 計画
+            let scoreP = 0; // 突発
 
-        // ========== ①〜⑤ 演出用パーティクルシステム ==========
-        const colors = {
-            multi: ['#888888', '#ff007f', '#ffff00', '#00ffff', '#7fff00', '#ff0000'],
-            blue: ['#0033ff', '#0099ff', '#00ffff', '#ffffff']
-        };
-        class Particle {
-            constructor() { this.reset(); this.z = Math.random() * 800; }
-            reset() {
-                this.x = (Math.random() - 0.5) * 800;
-                this.y = (Math.random() - 0.5) * 500;
-                this.z = 800;
-                this.color = colors[warpMode] ? colors[warpMode][Math.floor(Math.random() * colors[warpMode].length)] : '#fff';
-            }
-            update() { this.z -= warpSpeed; if (this.z <= 0) this.reset(); }
-            draw() {
-                if (warpMode === "stop") return;
-                let k = 300 / this.z;
-                let px = this.x * k + 400; let py = this.y * k + 250;
-                if (px >= 0 && px <= 800 && py >= 0 && py <= 500) {
-                    ctx.fillStyle = this.color;
-                    let size = (800 - this.z) * 0.01;
-                    ctx.fillRect(px, py, size, size * 2);
+            // ========== ①〜⑤ 演出用パーティクルシステム ==========
+            const colors = {
+                multi: ['#888888', '#ff007f', '#ffff00', '#00ffff', '#7fff00', '#ff0000'],
+                blue: ['#0033ff', '#0099ff', '#00ffff', '#ffffff']
+            };
+            class Particle {
+                constructor() { this.reset(); this.z = Math.random() * 800; }
+                reset() {
+                    this.x = (Math.random() - 0.5) * 800;
+                    this.y = (Math.random() - 0.5) * 500;
+                    this.z = 800;
+                    this.color = colors[warpMode] ? colors[warpMode][Math.floor(Math.random() * colors[warpMode].length)] : '#fff';
+                }
+                update() { this.z -= warpSpeed; if (this.z <= 0) this.reset(); }
+                draw() {
+                    if (warpMode === "stop") return;
+                    let k = 300 / this.z;
+                    let px = this.x * k + 400; let py = this.y * k + 250;
+                    if (px >= 0 && px <= 800 && py >= 0 && py <= 500) {
+                        ctx.fillStyle = this.color;
+                        let size = (800 - this.z) * 0.01;
+                        ctx.fillRect(px, py, size, size * 2);
+                    }
                 }
             }
-        }
-        const particles = Array.from({ length: 150 }, () => new Particle());
-        function animate() {
-            ctx.fillStyle = 'rgba(5, 5, 10, 0.3)';
-            ctx.fillRect(0, 0, 800, 500);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        // ========== 環境管理 ==========
-        function setEnvironment(bgInfo, bgImageURL = "", bgmInfo = "") {
-            // 画面に文字を出す処理を消して、常に空っぽ（見えない状態）にします
-            bgPlaceholder.innerHTML = "";
-
-            // 写真が指定された時だけ、背景を切り替える
-            if (bgImageURL) {
-                bgLayer.style.backgroundImage = `url(${bgImageURL})`;
+            const particles = Array.from({ length: 150 }, () => new Particle());
+            function animate() {
+                ctx.fillStyle = 'rgba(5, 5, 10, 0.3)';
+                ctx.fillRect(0, 0, 800, 500);
+                particles.forEach(p => { p.update(); p.draw(); });
+                requestAnimationFrame(animate);
             }
-        }
+            animate();
 
-        // ★ここに追加：キャラクター表示用の関数
-        function setChar(charImageURL) {
-            const charImg = document.getElementById('character-img');
-            if (charImageURL) {
-                charImg.src = charImageURL;
-                charImg.style.display = "block"; // 画像があれば表示する
-            } else {
-                charImg.style.display = "none";  // 空っぽなら隠す
-                charImg.src = "";
+            // ========== 環境管理 ==========
+            function setEnvironment(bgInfo, bgImageURL = "", bgmInfo = "") {
+                // 画面に文字を出す処理を消して、常に空っぽ（見えない状態）にします
+                bgPlaceholder.innerHTML = "";
+
+                // 写真が指定された時だけ、背景を切り替える
+                if (bgImageURL) {
+                    bgLayer.style.backgroundImage = `url(${bgImageURL})`;
+                }
             }
-        }
 
-        // ========== 各種進行用の制御関数 ==========
-        const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+            // ★ここに追加：キャラクター表示用の関数
+            function setChar(charImageURL) {
+                const charImg = document.getElementById('character-img');
+                if (charImageURL) {
+                    charImg.src = charImageURL;
+                    charImg.style.display = "block"; // 画像があれば表示する
+                } else {
+                    charImg.style.display = "none";  // 空っぽなら隠す
+                    charImg.src = "";
+                }
+            }
 
-        const waitClick = () => {
-            return new Promise(resolve => {
-                const indicator = document.getElementById('indicator');
-                if (indicator) indicator.style.display = 'block';
-                const handler = () => {
-                    window.removeEventListener('keydown', keyHandler);
-                    screen.removeEventListener('click', handler);
-                    if (indicator) indicator.style.display = 'none';
-                    resolve();
-                };
-                const keyHandler = (e) => { if (e.key === 'Enter' || e.key === ' ') handler(); };
-                setTimeout(() => {
-                    screen.addEventListener('click', handler);
-                    window.addEventListener('keydown', keyHandler);
-                }, 100);
-            });
-        };
+            // ========== 各種進行用の制御関数 ==========
+            const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-        const askChoices = (choices) => {
-            return new Promise(resolve => {
-                const area = document.getElementById('choices-area');
-                area.innerHTML = '';
-                choices.forEach((text, i) => {
-                    const btn = document.createElement('button');
-                    btn.className = 'choice-btn';
-                    btn.innerText = text;
-                    btn.onclick = (e) => {
-                        e.stopPropagation();
-                        area.innerHTML = '';
-                        resolve(i + 1);
+            const waitClick = () => {
+                return new Promise(resolve => {
+                    const indicator = document.getElementById('indicator');
+                    if (indicator) indicator.style.display = 'block';
+                    const handler = () => {
+                        window.removeEventListener('keydown', keyHandler);
+                        screen.removeEventListener('click', handler);
+                        if (indicator) indicator.style.display = 'none';
+                        resolve();
                     };
-                    area.appendChild(btn);
+                    const keyHandler = (e) => { if (e.key === 'Enter' || e.key === ' ') handler(); };
+                    setTimeout(() => {
+                        screen.addEventListener('click', handler);
+                        window.addEventListener('keydown', keyHandler);
+                    }, 100);
                 });
-            });
-        };
+            };
 
-        // 話者変更時の一瞬暗転用変数
-        let lastSpeaker = null;
+            const askChoices = (choices) => {
+                return new Promise(resolve => {
+                    const area = document.getElementById('choices-area');
+                    area.innerHTML = '';
+                    choices.forEach((text, i) => {
+                        const btn = document.createElement('button');
+                        btn.className = 'choice-btn';
+                        btn.innerText = text;
+                        btn.onclick = (e) => {
+                            e.stopPropagation();
+                            area.innerHTML = '';
+                            resolve(i + 1);
+                        };
+                        area.appendChild(btn);
+                    });
+                });
+            };
 
-        const setMsg = async (speaker, txt) => {
-            const speakerNameElem = document.getElementById('speaker-name');
-            const dialogueTextElem = document.getElementById('dialogue-text');
+            // 話者変更時の一瞬暗転用変数
+            let lastSpeaker = null;
 
-            // 日常・合宿の本編中(textBoxが表示されている)かつ、話者が変わった時のみ一瞬暗転
-            // 主人公のセリフ、心の声（空文字）、ナレーションなどは暗転から除外する
-            if (textBox.style.display === "block" &&
-                lastSpeaker !== null &&
-                lastSpeaker !== speaker &&
-                speaker !== playerName &&
-                speaker !== "" &&
-                speaker !== "ナレーション" &&
-                speaker !== "SYSTEM") {
+            const setMsg = async (speaker, txt) => {
+                const speakerNameElem = document.getElementById('speaker-name');
+                const dialogueTextElem = document.getElementById('dialogue-text');
 
-                blackout.style.transition = "opacity 0.12s ease";
-                blackout.style.opacity = "0.85"; // 一瞬画面を暗く落とす
-                await sleep(120);
+                // 日常・合宿の本編中(textBoxが表示されている)かつ、話者が変わった時のみ一瞬暗転
+                // 主人公のセリフ、心の声（空文字）、ナレーションなどは暗転から除外する
+                if (textBox.style.display === "block" &&
+                    lastSpeaker !== null &&
+                    lastSpeaker !== speaker &&
+                    speaker !== playerName &&
+                    speaker !== "" &&
+                    speaker !== "ナレーション" &&
+                    speaker !== "SYSTEM") {
 
-                speakerNameElem.innerText = speaker ? speaker : "";
-                dialogueTextElem.innerText = txt;
+                    blackout.style.transition = "opacity 0.12s ease";
+                    blackout.style.opacity = "0.85"; // 一瞬画面を暗く落とす
+                    await sleep(120);
 
-                blackout.style.opacity = "0";
-                await sleep(120);
-                blackout.style.transition = "opacity 0.5s ease"; // 元の設定に戻す
-            } else {
-                speakerNameElem.innerText = speaker ? speaker : "";
-                dialogueTextElem.innerText = txt;
-            }
-            lastSpeaker = speaker;
-        };
+                    speakerNameElem.innerText = speaker ? speaker : "";
+                    dialogueTextElem.innerText = txt;
 
-        // ========== ゲームメインシナリオ ==========
-        async function startSimulation() {
-            // テキストボックスは日常パートまで一旦隠す
-            textBox.style.display = "none";
+                    blackout.style.opacity = "0";
+                    await sleep(120);
+                    blackout.style.transition = "opacity 0.5s ease"; // 元の設定に戻す
+                } else {
+                    speakerNameElem.innerText = speaker ? speaker : "";
+                    dialogueTextElem.innerText = txt;
+                }
+                lastSpeaker = speaker;
+            };
 
-            // --- ① 多色ワープ演出 (4秒) ---
-            warpMode = "multi"; warpSpeed = 8;
-            setEnvironment("仮想空間演出：多色高速移動", "", "BGM: 電子音あり");
-            await sleep(4000);
+            // ========== ゲームメインシナリオ ==========
+            async function startSimulation() {
+                // テキストボックスは日常パートまで一旦隠す
+                textBox.style.display = "none";
 
-            // --- ② 言語自動選択 (1秒) ---
-            warpSpeed = 3;
-            centerUi.innerHTML = `
+                // --- ① 多色ワープ演出 (4秒) ---
+                warpMode = "multi"; warpSpeed = 8;
+                setEnvironment("仮想空間演出：多色高速移動", "", "BGM: 電子音あり");
+                await sleep(4000);
+
+                // --- ② 言語自動選択 (1秒) ---
+                warpSpeed = 3;
+                centerUi.innerHTML = `
                   <div id="lang-ui">
                       <div class="lang-option">Language ➤ English</div>
                       <div class="lang-option" id="lang-jp">Language ➤ Japanese</div>
                   </div>
               `;
-            await sleep(200);
-            document.getElementById('lang-jp').classList.add('active');
-            setEnvironment("演出：Language自動選択", "", "SE: 決定音");
-            await sleep(1000);
-            centerUi.innerHTML = "";
+                await sleep(200);
+                document.getElementById('lang-jp').classList.add('active');
+                setEnvironment("演出：Language自動選択", "", "SE: 決定音");
+                await sleep(1000);
+                centerUi.innerHTML = "";
 
-            // --- ③ ログイン画面自動入力 (1秒) ---
-            centerUi.innerHTML = `<div id="login-ui">Log in<br>account : <span id="acc"></span><br>password : <span id="pass"></span></div>`;
-            setEnvironment("演出：ログイン画面自動入力", "", "SE: 入力音");
-            let accStr = "ozawa2026", passStr = "********";
-            for (let i = 0; i < accStr.length; i++) {
-                document.getElementById('acc').innerHTML += accStr[i]; await sleep(40);
-            }
-            for (let i = 0; i < passStr.length; i++) {
-                document.getElementById('pass').innerHTML += passStr[i]; await sleep(40);
-            }
-            await sleep(600);
-            centerUi.innerHTML = "";
+                // --- ③ ログイン画面自動入力 (1秒) ---
+                centerUi.innerHTML = `<div id="login-ui">Log in<br>account : <span id="acc"></span><br>password : <span id="pass"></span></div>`;
+                setEnvironment("演出：ログイン画面自動入力", "", "SE: 入力音");
+                let accStr = "ozawa2026", passStr = "********";
+                for (let i = 0; i < accStr.length; i++) {
+                    document.getElementById('acc').innerHTML += accStr[i]; await sleep(40);
+                }
+                for (let i = 0; i < passStr.length; i++) {
+                    document.getElementById('pass').innerHTML += passStr[i]; await sleep(40);
+                }
+                await sleep(600);
+                centerUi.innerHTML = "";
 
-            // --- ④ プレイヤー名入力 ---
-            setEnvironment("演出：プレイヤー名入力待ち", "", "");
-            centerUi.innerHTML = `
+                // --- ④ プレイヤー名入力 ---
+                setEnvironment("演出：プレイヤー名入力待ち", "", "");
+                centerUi.innerHTML = `
                   <div id="input-ui">
                       <div style="color:#00f3ff; margin-bottom:15px; font-size:1.1rem; letter-spacing:2px;">ENTER USERNAME</div>
                       <input type="text" id="name-in" maxlength="10" placeholder="プレイヤー名を入力" autofocus><br>
                       <button id="name-btn">ENTER</button>
                   </div>
               `;
-            await new Promise(resolve => {
-                const btn = document.getElementById('name-btn');
-                const input = document.getElementById('name-in');
-                const proceed = () => {
-                    if (input.value.trim()) playerName = input.value.trim();
-                    resolve();
-                };
-                btn.onclick = proceed;
-                input.onkeydown = (e) => { if (e.key === 'Enter') proceed(); };
-            });
-            centerUi.innerHTML = "";
+                await new Promise(resolve => {
+                    const btn = document.getElementById('name-btn');
+                    const input = document.getElementById('name-in');
+                    const proceed = () => {
+                        if (input.value.trim()) playerName = input.value.trim();
+                        resolve();
+                    };
+                    btn.onclick = proceed;
+                    input.onkeydown = (e) => { if (e.key === 'Enter') proceed(); };
+                });
+                centerUi.innerHTML = "";
 
-            // --- ⑤-1 Welcome表示 (2秒) ---
-            centerUi.innerHTML = `<div id="welcome-ui">Welcome to Ozawa Seminar !</div>`;
-            await sleep(50);
-            document.getElementById('welcome-ui').classList.add('show');
-            setEnvironment("演出：Welcome表示（インパクト重視）", "", "SE: 電子音（強）");
-            await sleep(2000);
+                // --- ⑤-1 Welcome表示 (2秒) ---
+                centerUi.innerHTML = `<div id="welcome-ui">Welcome to Ozawa Seminar !</div>`;
+                await sleep(50);
+                document.getElementById('welcome-ui').classList.add('show');
+                setEnvironment("演出：Welcome表示（インパクト重視）", "", "SE: 電子音（強）");
+                await sleep(2000);
 
-            // --- ⑤-2 青系ワープ加速 ＆ ホワイトアウト (3秒) ---
-            warpMode = "blue"; warpSpeed = 25;
-            document.getElementById('welcome-ui').style.transition = "transform 3s ease-in, opacity 1s";
-            document.getElementById('welcome-ui').style.transform = "scale(0.01)";
-            setEnvironment("演出：青系ワープ空間へ吸い込み", "", "高速移動演出");
-            await sleep(2500);
+                // --- ⑤-2 青系ワープ加速 ＆ ホワイトアウト (3秒) ---
+                warpMode = "blue"; warpSpeed = 25;
+                document.getElementById('welcome-ui').style.transition = "transform 3s ease-in, opacity 1s";
+                document.getElementById('welcome-ui').style.transform = "scale(0.01)";
+                setEnvironment("演出：青系ワープ空間へ吸い込み", "", "高速移動演出");
+                await sleep(2500);
 
-            whiteout.style.opacity = "1";
-            await sleep(500);
+                whiteout.style.opacity = "1";
+                await sleep(500);
 
-            // --- 演出終了・日常パートへ移行 ---
-            warpMode = "stop";
-            ctx.clearRect(0, 0, 800, 500);
-            canvas.style.display = "none";
-            centerUi.innerHTML = "";
-            whiteout.style.opacity = "0";
-            textBox.style.display = "block";
-            lastSpeaker = null; // 日常パート開始時に話者リセット
+                // --- 演出終了・日常パートへ移行 ---
+                warpMode = "stop";
+                ctx.clearRect(0, 0, 800, 500);
+                canvas.style.display = "none";
+                centerUi.innerHTML = "";
+                whiteout.style.opacity = "0";
+                textBox.style.display = "block";
+                lastSpeaker = null; // 日常パート開始時に話者リセット
 
-            // ==================== 日常編 ====================
-            setEnvironment("", "photo.jpg/rouka_gawa.jpg", "");
-            await setMsg(playerName, "今日から経済学部最強の小澤ゼミが始まるぞ。まずは教室に向かおう。");
-            await waitClick();
+                // ==================== 日常編 ====================
+                setEnvironment("", "photo.jpg/rouka_gawa.jpg", "");
+                await setMsg(playerName, "今日から経済学部最強の小澤ゼミが始まるぞ。まずは教室に向かおう。");
+                await waitClick();
 
-            await setMsg(playerName, "（歩き始めた足は教室に近づくにつれて軽くなる。気づかぬうちに新たな挑戦に心が昂っているのだろう。）");
-            await waitClick();
+                await setMsg(playerName, "（歩き始めた足は教室に近づくにつれて軽くなる。気づかぬうちに新たな挑戦に心が昂っているのだろう。）");
+                await waitClick();
 
-            setEnvironment("", "photo.jpg/door.jpg", "");
-            await setMsg("", "（そんなことを思っている間に教室に着いていた。）");
-            await waitClick();
+                setEnvironment("", "photo.jpg/door.jpg", "");
+                await setMsg("", "（そんなことを思っている間に教室に着いていた。）");
+                await waitClick();
 
-            setEnvironment("", "photo.jpg/opendoor.jpg", "");
-            await setMsg(playerName, "（教室の扉を開けた瞬間、新たな高みに踏み入ったことを自覚する。）");
-            await waitClick();
+                setEnvironment("", "photo.jpg/opendoor.jpg", "");
+                await setMsg(playerName, "（教室の扉を開けた瞬間、新たな高みに踏み入ったことを自覚する。）");
+                await waitClick();
 
-            await setMsg(playerName, "賑やかだな。");
-            await waitClick();
+                await setMsg(playerName, "賑やかだな。");
+                await waitClick();
 
-            await setMsg(playerName, "よーしとりあえず...");
-            await sleep(500);
+                await setMsg(playerName, "よーしとりあえず...");
+                await sleep(500);
 
-            // 【選択肢A】
-            while (true) {
-                let choiceA = await askChoices(["①小澤先生に挨拶に行く", "②ゼミ生に挨拶に行く"]);
-                if (choiceA === 1) {
-                    scoreT++; // 論理
+                // 【選択肢A】
+                while (true) {
+                    let choiceA = await askChoices(["①小澤先生に挨拶に行く", "②ゼミ生に挨拶に行く"]);
+                    if (choiceA === 1) {
+                        scoreT++; // 論理
 
-                    // 背景を「kokuban.jpg（黒板前）」に変更
-                    setEnvironment("背景E：教室黒板前（画面右から黒く移動風）", "photo.jpg/kokuban.jpg", "BGM：賑やか");
-                    setChar(""); // 主人公のセリフなのでキャラは出さない
-                    await setMsg(playerName, "小澤先生！本日からよろしくお願いします！");
-                    await waitClick();
+                        // 背景を「kokuban.jpg（黒板前）」に変更
+                        setEnvironment("背景E：教室黒板前（画面右から黒く移動風）", "photo.jpg/kokuban.jpg", "BGM：賑やか");
+                        setChar(""); // 主人公のセリフなのでキャラは出さない
+                        await setMsg(playerName, "小澤先生！本日からよろしくお願いします！");
+                        await waitClick();
 
-                    // 小澤先生の画像を表示
-                    setChar("photo.jpg/ozawa.png");
-                    await setMsg("小澤先生", "おう、よう来たな。そんな固くならんでええ。適当に座れ。");
-                    await waitClick();
-                    break;
-                } else {
-                    scoreE++; // 社交
-                    if (Math.random() < 0.5) {
-                        // 背景を「mado.jpg（窓側）」に変更
-                        setEnvironment("", "photo.jpg/mado.jpg", "");
-                        setChar("photo.jpg/keigo.png");
-                        await setMsg("けいご", "おいおい。先に先生への挨拶や。筋は通しとかねぇとな。");
+                        // 小澤先生の画像を表示
+                        setChar("photo.jpg/ozawa.png");
+                        await setMsg("小澤先生", "おう、よう来たな。そんな固くならんでええ。適当に座れ。");
+                        await waitClick();
+                        break;
                     } else {
-                        // 背景を「rouka_gawa.jpg（廊下側）」に変更
-                        setEnvironment("", "photo.jpg/mado.jpg", "");
-                        setChar("photo.jpg/zen.png");
-                        await setMsg("ぜん", "小澤先生をスルーとはとんでもない新入りが入ってきたもんやな。");
+                        scoreE++; // 社交
+                        if (Math.random() < 0.5) {
+                            // 背景を「mado.jpg（窓側）」に変更
+                            setEnvironment("", "photo.jpg/mado.jpg", "");
+                            setChar("photo.jpg/keigo.png");
+                            await setMsg("けいご", "おいおい。先に先生への挨拶や。筋は通しとかねぇとな。");
+                        } else {
+                            // 背景を「rouka_gawa.jpg（廊下側）」に変更
+                            setEnvironment("", "photo.jpg/mado.jpg", "");
+                            setChar("photo.jpg/zen.png");
+                            await setMsg("ぜん", "小澤先生をスルーとはとんでもない新入りが入ってきたもんやな。");
+                        }
+                        await waitClick();
                     }
-                    await waitClick();
                 }
-            }
 
-            // 【選択肢B】
-            // 背景を「ushiro.jpg（黒板前逆向き）」に変更
-            setEnvironment("背景H：教室黒板前逆向き", "photo.jpg/kyousitu.jpg", "BGM：賑やか");
-            setChar(""); // 主人公のセリフなのでキャラは消す
-            await setMsg(playerName, "どこに座ろうかな？");
-            let choiceB = await askChoices(["①資料を読んでいる先輩のところに行く", "②話している先輩のところに行く"]);
-
-            if (choiceB === 1) {
-                scoreT++; // 論理
-                setChar("");
-                await setMsg(playerName, "真面目そうだな。よし。"); await waitClick();
-                await setMsg(playerName, `${playerName}です。今日からからよろしくお願いします。`); await waitClick();
-
-                setChar("photo.jpg/hayato.png");
-                await setMsg("はやと", "よろしく。今日は初めて？"); await waitClick();
-
-                setChar("");
-                await setMsg(playerName, "はい、今日が初めてです。"); await waitClick();
-
-                setChar("photo.jpg/konomi.png");
-                await setMsg("このみ", "そっか。最初は緊張するよね。聞きたいことがあったらなんでも聞いてね。"); await waitClick();
-            } else {
-                scoreE++; // 社交
-                setChar("");
-                await setMsg(playerName, "賑やかそうだな。よし.。。"); await waitClick();
-                await setMsg(playerName, `${playerName}です！今日からからよろしくお願いします！`); await waitClick();
-
-                setChar("photo.jpg/iki.png");
-                await setMsg("いき", "おぉ！これからよろしくね！！"); await waitClick();
-
-                setChar("photo.jpg/zen.png");
-                await setMsg("ぜん", "おぉ今日初めてか！そんな固くならなくて大丈夫よ。"); await waitClick();
-
-                setChar("");
-                await setMsg(playerName, "すごく緊張してます。"); await waitClick();
-
-                setChar("photo.jpg/iki.png");
-                await setMsg("いき", "最初はみんなそんな感じだったよ。"); await waitClick();
-
-                setChar("photo.jpg/zen.png");
-                await setMsg("ぜん", "わからないことあったら何でも聞いてくれい. 。"); await waitClick();
-            }
-
-            setChar("");
-            await setMsg(playerName, "じゃあ...");
-            await waitClick();
-
-            // 【選択肢C】
-            let choiceC = await askChoices(["①「ディスカッションって役割分担とかあるんですか？」", "②「このゼミってどんな人がいるんですか？」"]);
-
-            if (choiceC === 1) {
-                // choiceBの結果（1なら健太、それ以外なら行）を変数sにセット
-                let s = choiceB === 1 ? "健太" : "いき";
-
-                setChar("");
-                await setMsg(playerName, "ディスカッションって役割分担とかあるんですか？"); await waitClick();
-
-                // 前の選択肢Bで選んだ先輩の画像（kenta か iki）を自動で表示
-                setChar(choiceB === 1 ? "photo.jpg/kenta.png" : "photo.jpg/iki.png");
-                await setMsg(s, "あるよ。毎回班ごとに決めるんだ。発表者にタイムキーパー、進行役や記録係が主な役割だよ。最初は周りの先輩を頼るといいよ。"); await waitClick();
-
-                setChar("");
-                await setMsg(playerName, "はい。そうします。"); await waitClick();
-
-                // 次のセリフも、前の選択肢Bに合わせて健太か然（zen）の画像にする
-                setChar(choiceB === 1 ? "photo.jpg/kenta.png" : "photo.jpg/zen.png");
-                await setMsg(choiceB === 1 ? "健太" : "ぜん", "せっかくだから今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
-
-            } else {
-                setChar("");
-                await setMsg(playerName, "このゼミってどんな人がいるんですか？"); await waitClick();
+                // 【選択肢B】
+                // 背景を「ushiro.jpg（黒板前逆向き）」に変更
+                setEnvironment("背景H：教室黒板前逆向き", "photo.jpg/kyousitu.jpg", "BGM：賑やか");
+                setChar(""); // 主人公のセリフなのでキャラは消す
+                await setMsg(playerName, "どこに座ろうかな？");
+                let choiceB = await askChoices(["①資料を読んでいる先輩のところに行く", "②話している先輩のところに行く"]);
 
                 if (choiceB === 1) {
-                    setChar("photo.jpg/kousuke.png");
-                    await setMsg("こうすけ", "いろんな人がいるよ。私たちの代はお酒が好きな人が多いかな？やる気がなさそうに見えるけど、秘めてる力は底が見えないよ。"); await waitClick();
-                    await setMsg("こうすけ", "ディスカッションになると急に人が変わったように饒舌になる人もいるかな。普段は静かなのに、議論が始まるとまるで別人みたいになるんだよね。"); await waitClick();
+                    scoreT++; // 論理
+                    setChar("");
+                    await setMsg(playerName, "真面目そうだな。よし。"); await waitClick();
+                    await setMsg(playerName, `${playerName}です。今日からからよろしくお願いします。`); await waitClick();
+
+                    setChar("photo.jpg/hayato.png");
+                    await setMsg("はやと", "よろしく。今日は初めて？"); await waitClick();
+
+                    setChar("");
+                    await setMsg(playerName, "はい、今日が初めてです。"); await waitClick();
 
                     setChar("photo.jpg/konomi.png");
-                    await setMsg("このみ", "そうだね。せっかくだし、このまま今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
+                    await setMsg("このみ", "そっか。最初は緊張するよね。聞きたいことがあったらなんでも聞いてね。"); await waitClick();
                 } else {
+                    scoreE++; // 社交
+                    setChar("");
+                    await setMsg(playerName, "賑やかそうだな。よし.。。"); await waitClick();
+                    await setMsg(playerName, `${playerName}です！今日からからよろしくお願いします！`); await waitClick();
+
                     setChar("photo.jpg/iki.png");
-                    await setMsg("いき", "いろんな人がいるよ。機嫌がいいと帰りにみんなにドーナツをおごってくれる人がいるよ。"); await waitClick();
+                    await setMsg("いき", "おぉ！これからよろしくね！！"); await waitClick();
 
                     setChar("photo.jpg/zen.png");
-                    await setMsg("ぜん", "インドネシアに帰省しているのにオンラインで馬券を買っている人がいるよ。"); await waitClick();
+                    await setMsg("ぜん", "おぉ今日初めてか！そんな固くならなくて大丈夫よ。"); await waitClick();
 
-                    setChar("photo.jpg/haru.png");
-                    await setMsg("はる", "旅行好きで海外によく行ってお土産を買ってきてくれるんだけど、その買ってきてくれるお土産すべてが美味しくない人がいるよ。"); await waitClick();
+                    setChar("");
+                    await setMsg(playerName, "すごく緊張してます。"); await waitClick();
+
+                    setChar("photo.jpg/iki.png");
+                    await setMsg("いき", "最初はみんなそんな感じだったよ。"); await waitClick();
 
                     setChar("photo.jpg/zen.png");
-                    await setMsg("ぜん", "本当においしくないんだよなー。せっかくだし、このまま今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
+                    await setMsg("ぜん", "わからないことあったら何でも聞いてくれい. 。"); await waitClick();
                 }
-            }
-
-            setChar("");
-            await setMsg(playerName, "はい。ありがとうございます。");
-            await waitClick();
-
-            // 【選択肢D】
-            // ディスカッション用の背景（discussion.jpg）に変更
-            setEnvironment("ディスカッション開始", "photo.jpg/kyousitu.jpg", "SE/BGM連動箇所");
-
-            setChar("photo.jpg/haru.png");
-            await setMsg("はる", "ディスカッション始めるよー！班作ってー！"); await waitClick();
-
-            setChar("");
-            await setMsg(playerName, "誰と一緒の班になろうか？");
-            let choiceD = await askChoices(["①「真面目そうな人」のところに行く", "②「雰囲気良さそうだな。あそこに行ってみるか。」"]);
-            setEnvironment("ディスカッション開始", "photo.jpg/discussion.jpg", "SE/BGM連動箇所");
-
-            if (choiceD === 1) {
-                setChar("photo.jpg/aoi.png");
-                await setMsg("あおい", "人数ちょうどいいからぜひぜひ。"); await waitClick();
-
-                setChar("photo.jpg/aoi.png");
-                await setMsg("あおい", "じゃあ簡単に自己紹介しますか。私はあおいで趣味は競馬だよ。でこっちはあまねだよ。"); await waitClick();
-
-                setChar("photo.jpg/amane.png");
-                await setMsg("あまね", "よろしく。趣味は漫画だよ。"); await waitClick();
-            } else {
-                setChar("");
-                await setMsg(playerName, "雰囲気良さそうだな。あそこに行ってみるか！"); await waitClick();
-
-                setChar("photo.jpg/kaito.png");
-                await setMsg("かいと", "ちょうど人探してたところ！一緒にやろうか！！"); await waitClick();
-                await setMsg("かいと", "よろしくね！俺はかいとで趣味は漫画だよ。で、こっちがいきだよ。"); await waitClick();
-
-                setChar("photo.jpg/iki.png");
-                await setMsg("いき", "よろしく。趣味は競馬だよ。"); await waitClick();
-            }
-
-            setChar("");
-            await setMsg(playerName, `${playerName}です。よろしくお願いします。`); await waitClick();
-
-            setChar("photo.jpg/haru.png");
-            await setMsg("はる", "ディスカッション始めまーす。"); await waitClick();
-
-            setChar("");
-            await setMsg("ナレーション", "その後、時間を忘れるほど白熱した議論が交わされた……。");
-            await waitClick();
-
-            // ==================== 合宿編 ====================
-            // 1. 画面を真っ黒にして、下のテキストボックスを一時的に隠す
-            blackout.style.opacity = "1";
-            textBox.style.display = "none";
-            setEnvironment("暗転", "", "");
-            await sleep(500);
-
-            // 2. 真っ黒な画面の「中央」に文字をセットして、ふわっと浮き出させる
-            centerUi.innerHTML = `<div id="gassyuku-text" class="popup-narration">8月も終わり少し涼しくなったころ、<br>小澤ゼミの熱き合宿が、今、始まる…！！</div>`;
-            await sleep(50);
-            document.getElementById('gassyuku-text').classList.add('show');
-
-            // 3. プレイヤーのクリック（またはEnter）を待つ
-            await waitClick();
-
-            // 4. 中央の文字を消して、テキストボックスを表示状態に戻す
-            centerUi.innerHTML = "";
-            textBox.style.display = "block";
-            lastSpeaker = null; // 明けた直後のセリフで一瞬暗転が暴発するのを防ぐためにリセット
-
-            // 5. 裏で次の背景に変えてから、黒画面をフェードアウトさせて消す
-            setEnvironment("背景：集合場所", "photo.jpg/shuugou.jpg", "BGM：出発前の賑わい");
-            blackout.style.opacity = "0";
-            await sleep(500);
-
-            setChar("photo.jpg/amane.png");
-            await setMsg("あまね", "おはよー！！結構みんな集まってきたね！"); await waitClick();
-
-            setChar("photo.jpg/hinako.png");
-            await setMsg("ひなこ", "まじで合宿楽しみだね！！部屋どんな感じなんだろ！"); await waitClick();
-
-            setChar("photo.jpg/haru.png");
-            await setMsg("はる", "出発までまだもう少し時間あるから、トイレとか済ませといてねー！"); await waitClick();
-
-            // 集合場所の選択肢
-            setChar(""); // 選択肢の前はキャラを非表示にする
-            let choiceCampA = await askChoices(["① 友達とお昼ご飯を買いに行く", "② 10分前に到着して持ち物を確認しておく"]);
-
-            if (choiceCampA === 1) {
-                scoreP++; // 社交・突発
-
-                setChar("photo.jpg/kaito.png");
-                await setMsg("かいと", "コンビニ寄ろ！絶対途中でおなかすいちゃうわ！！"); await waitClick();
 
                 setChar("");
-                await setMsg(playerName, "行こ！！お菓子買いたい！"); await waitClick();
-            } else {
-                scoreJ++; // 論理・計画
+                await setMsg(playerName, "じゃあ...");
+                await waitClick();
+
+                // 【選択肢C】
+                let choiceC = await askChoices(["①「ディスカッションって役割分担とかあるんですか？」", "②「このゼミってどんな人がいるんですか？」"]);
+
+                if (choiceC === 1) {
+                    // choiceBの結果（1なら健太、それ以外なら行）を変数sにセット
+                    let s = choiceB === 1 ? "健太" : "いき";
+
+                    setChar("");
+                    await setMsg(playerName, "ディスカッションって役割分担とかあるんですか？"); await waitClick();
+
+                    // 前の選択肢Bで選んだ先輩の画像（kenta か iki）を自動で表示
+                    setChar(choiceB === 1 ? "photo.jpg/kenta.png" : "photo.jpg/iki.png");
+                    await setMsg(s, "あるよ。毎回班ごとに決めるんだ。発表者にタイムキーパー、進行役や記録係が主な役割だよ。最初は周りの先輩を頼るといいよ。"); await waitClick();
+
+                    setChar("");
+                    await setMsg(playerName, "はい。そうします。"); await waitClick();
+
+                    // 次のセリフも、前の選択肢Bに合わせて健太か然（zen）の画像にする
+                    setChar(choiceB === 1 ? "photo.jpg/kenta.png" : "photo.jpg/zen.png");
+                    await setMsg(choiceB === 1 ? "健太" : "ぜん", "せっかくだから今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
+
+                } else {
+                    setChar("");
+                    await setMsg(playerName, "このゼミってどんな人がいるんですか？"); await waitClick();
+
+                    if (choiceB === 1) {
+                        setChar("photo.jpg/kousuke.png");
+                        await setMsg("こうすけ", "いろんな人がいるよ。私たちの代はお酒が好きな人が多いかな？やる気がなさそうに見えるけど、秘めてる力は底が見えないよ。"); await waitClick();
+                        await setMsg("こうすけ", "ディスカッションになると急に人が変わったように饒舌になる人もいるかな。普段は静かなのに、議論が始まるとまるで別人みたいになるんだよね。"); await waitClick();
+
+                        setChar("photo.jpg/konomi.png");
+                        await setMsg("このみ", "そうだね。せっかくだし、このまま今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
+                    } else {
+                        setChar("photo.jpg/iki.png");
+                        await setMsg("いき", "いろんな人がいるよ。機嫌がいいと帰りにみんなにドーナツをおごってくれる人がいるよ。"); await waitClick();
+
+                        setChar("photo.jpg/zen.png");
+                        await setMsg("ぜん", "インドネシアに帰省しているのにオンラインで馬券を買っている人がいるよ。"); await waitClick();
+
+                        setChar("photo.jpg/haru.png");
+                        await setMsg("はる", "旅行好きで海外によく行ってお土産を買ってきてくれるんだけど、その買ってきてくれるお土産すべてが美味しくない人がいるよ。"); await waitClick();
+
+                        setChar("photo.jpg/zen.png");
+                        await setMsg("ぜん", "本当においしくないんだよなー。せっかくだし、このまま今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
+                    }
+                }
 
                 setChar("");
-                await setMsg(playerName, "早めに着けてよかった～・・・"); await waitClick();
-
-                setChar("photo.jpg/hayato.png");
-                await setMsg("はやと", "もう準備終わってるの！はやっ！！"); await waitClick();
-            }
-
-            // 背景をバスの車内に変更
-            setEnvironment("背景：バス車内", "photo.jpg/bus.jpg", "BGM：走行音と笑い声");
-
-            setChar("");
-            await setMsg("ナレーション", "バスが出発した。周りから楽しそうな笑い声が聞こえる。"); await waitClick();
-
-            setChar("photo.jpg/hinako.png");
-            await setMsg("ひなこ", "こっち席空いてるよ！"); await waitClick();
-            // バス内の選択肢
-            let choiceCampB = await askChoices(["① 何時に着くのか合宿スケジュールを確認しておく", "② 周りの人と雑談して盛り上がる"]);
-            if (choiceCampB === 1) {
-                scoreT++; scoreJ++; // 論理・計画
-
-                setChar("");
-                await setMsg(playerName, "13時ごろに着くのか、今日も長いし少し寝とこうかな"); await waitClick();
-
-                setChar("photo.jpg/tyura.png");
-                await setMsg("ちゅら", "今日も結構詰まってるんだね！私も少し寝とこうかな！"); await waitClick();
-            } else {
-                scoreE++; scoreP++; // 社交・突発
-
-                setChar("photo.jpg/tyura.png");
-                await setMsg("ちゅら", "みんなで話してたらあっという間だね！！"); await waitClick();
-            }
-
-            // 宿のディスカッションルームに背景を変更
-            setEnvironment("背景：宿・ディスカッションルーム", "photo.jpg/kaigisitu.jpg", "BGM：真剣な議論");
-
-            setChar("");
-            await setMsg("ナレーション", "宿に到着し、ディスカッションが始まる。ディスカッションを終え----"); await waitClick();
-
-            setChar("photo.jpg/kaito.png");
-            await setMsg("かいと", "ディスカッション疲れたねーー"); await waitClick();
-
-            setChar("photo.jpg/keigo.png");
-            await setMsg("けいご", "夜ご飯まで少し時間あるみたいだけど、この後どうする？"); await waitClick();
-
-            // 夕食前の選択肢
-            let choiceCampC = await askChoices(["① 先に荷物整理を終わらせる", "② 付近を探索してみる"]);
-            if (choiceCampC === 1) {
-                scoreJ++; // 論理・計画
-
-                setChar("");
-                await setMsg(playerName, "後でバタバタしたくないし、片づけとかお風呂の準備先にしておこう！！"); await waitClick();
-            } else {
-                scoreP++; // 社交・突発
-
-                setChar("photo.jpg/kaito.png");
-                await setMsg("かいと", "徒歩15分ぐらいのとこにコンビニあるっぽいよ！"); await waitClick();
-
-                setChar("");
-                await setMsg(playerName, "探索がてら行ってみよう！"); await waitClick();
-            }
-
-            // 大広間に背景を変更
-            setEnvironment("背景：大広間", "photo.jpg/hiroma.jpg", "BGM：賑やかな夕食");
-
-            setChar("");
-            await setMsg("ナレーション", "大広間で夜ご飯。おいしそうなごはんがずらりと並んでいる。"); await waitClick();
-
-            setChar("photo.jpg/zen.png");
-            await setMsg("ぜん", "席自由だから、好きなところ座ってー！"); await waitClick();
-
-            // 夕食時の選択肢
-            let choiceCampD = await askChoices(["① みんなとの会話を楽しむ", "② 履修について先輩に聞く"]);
-            if (choiceCampD === 1) {
-                scoreE++; scoreP++; // 社交・突発
-
-                setChar("photo.jpg/keigo.png");
-                await setMsg("けいご", "このゼミ思ったより雰囲気良いよね！！"); await waitClick();
-
-                setChar("");
-                await setMsg(playerName, "それ思った！先輩たちとも仲良くなれるのめっちゃいいよね！"); await waitClick();
-            } else {
-                scoreT++; scoreJ++; // 論理・計画
-
-                setChar("");
-                await setMsg(playerName, "おすすめの授業とかありますか？？"); await waitClick();
-
-                setChar("photo.jpg/kousuke.png");
-                await setMsg("こうすけ", "小澤先生の企画講座面白いよ！！"); await waitClick();
-            }
-
-            // 背景を飲み会用の部屋に変更
-            setEnvironment("背景：部屋（飲み会）", "photo.jpg/nomikai.jpg", "BGM：夜の懇親会");
-
-            setChar("");
-            await setMsg("ナレーション", "部屋に集まって飲み会が始まった。お酒を飲みながら話したり、カードゲームをしたり、みんな思い思いに過ごしている。"); await waitClick();
-
-            setChar("photo.jpg/tyura.png");
-            await setMsg("ちゅら", "もうこんな時間だ！そろそろ寝なくちゃ"); await waitClick();
-
-            setChar("");
-            await setMsg(playerName, "時間が経つのがあっという間だね。おやすみ！"); await waitClick();
-
-            setChar("photo.jpg/tyura.png");
-            await setMsg("ちゅら", "おやすみ～"); await waitClick();
-
-            // 背景を朝の部屋に変更
-            setEnvironment("背景：部屋（朝）", "photo.jpg/asa.jpg", "BGM：朝のアラーム");
-
-            setChar("");
-            await setMsg("ナレーション", "合宿2日目の朝。アラームの音で目が覚める。"); await waitClick();
-
-            // 朝の選択肢
-            let choiceCampF = await askChoices(["① ぎりぎりまで寝てから朝食を食べに行く", "② 早起きして準備を終えてから朝食を食べる"]);
-            if (choiceCampF === 1) {
-                scoreP++; // 社交・突発
-
-                setChar("photo.jpg/aoi.png");
-                await setMsg("あおい", "おはよー！もうすぐ朝ご飯の時間だね！"); await waitClick();
-
-                setChar("");
-                await setMsg(playerName, "夜更かししたからまだ眠いなあ。あと10分だけ寝よう…"); await waitClick();
-            } else {
-                scoreJ++; // 論理・計画
-
-                setChar("");
-                await setMsg(playerName, "そろそろ朝食だから支度をしよう！"); await waitClick();
-            }
-
-            // 背景をミーティングルーム（kaigisitu.jpg）に変更
-            setEnvironment("背景：ミーティングルーム", "photo.jpg/kaigisitu.jpg", "BGM：発表前の緊張感");
-
-            setChar("");
-            await setMsg("ナレーション", "午後は学年ゼミの発表だ。プレゼンに向けて班のメンバーと集まった。"); await waitClick();
-
-            // 発表前の選択肢
-            let choiceCampG = await askChoices(["① メンバーとの会話を楽しみ、緊張をほぐす", "② プレゼン内容の最終確認をする"]);
-            if (choiceCampG === 1) {
-                scoreP++; // 社交・突発
-
-                setChar("photo.jpg/konomi.png");
-                await setMsg("このみ", "今日の自由時間なにして遊ぼっか～"); await waitClick();
-
-                setChar("");
-                await setMsg(playerName, "みんなで買い物したり運動したりするのも楽しそう！緊張がほぐれてきた！"); await waitClick();
-            } else {
-                scoreJ++; // 論理・計画
-
-                setChar("");
-                await setMsg(playerName, "最終確認もできたし、これでプレゼンはばっちりだ！"); await waitClick();
-            }
-
-            // 背景をロビーに変更
-            setEnvironment("背景：合宿所・ロビー", "photo.jpg/lobby.jpg", "BGM：解放感のある音楽");
-
-            setChar("");
-            await setMsg("ナレーション", "学年ゼミが終わり、自由時間がきた。"); await waitClick();
-
-            // 自由時間の選択肢
-            setChar(""); // 選択肢の前なのでキャラを消す
-            let choiceCampH = await askChoices(["① 体育館で遊ぶ", "② 片づけをしてから体育館に向かう"]);
-
-            if (choiceCampH === 1) {
-                scoreP++; // 社交・突発
-
-                setChar("");
-                await setMsg(playerName, "自由時間だ！体育館で遊ぼう！！"); await waitClick();
-
-                setChar("photo.jpg/kousuke.png");
-                await setMsg("こうすけ", "お、主人公！ナイスフットワーク！バレーやろうぜバレー！"); await waitClick();
-
-                setChar("photo.jpg/hayato.png");
-                await setMsg("はやと", "怪我すんなよー。俺は端っこで見てるわ。"); await waitClick();
-            } else {
-                scoreJ++; // 論理・計画
-
-                setChar("");
-                await setMsg(playerName, "みんな動くの早いな……（笑）。よし、まずはこの資料とかの片づけをパパッと終わらせてから、体育館に向かおう。"); await waitClick();
-
-                setChar("photo.jpg/amane.png");
-                await setMsg("あまね", "${playerName}、片づけ手伝ってくれるの？助かる。じゃあこれ、あっちに運んじゃおうか。"); await waitClick();
-
-                setChar("");
-                await setMsg("ナレーション", "（片づけが終わり、体育館へ移動する主人公）"); await waitClick();
-            }
-
-            // ==================== Iパート（エンディング・気絶オチ） ====================
-            // 背景を体育館に変更
-            setEnvironment("背景：体育館", "photo.jpg/gym.jpg", "BGM：スポーツの音");
-
-            setChar("photo.jpg/konomi.png");
-            await setMsg("このみ", "ボールそっち行ったよー！"); await waitClick();
-
-            setChar("photo.jpg/kousuke.png");
-            await setMsg("こうすけ", "うおっ、思ったより伸びた！誰かカバー！！"); await waitClick();
-
-            setChar("");
-            await setMsg(playerName, "うわ、！前からボールが！！……って、え？ 待って、あれバレーボールじゃなくて……バスケットボール！？"); await waitClick();
-
-            setChar("photo.jpg/hinako.png");
-            await setMsg("ひなこ", "危ない！よけてーーー！！"); await waitClick();
-
-            setChar("");
-            await setMsg(playerName, "えっ、あ、ぶふぉっ！！！！！"); await waitClick();
-
-            // 気絶・画面暗転演出
-            blackout.style.transition = "opacity 0.1s ease";
-            blackout.style.opacity = "1";
-            await sleep(600);
-
-            setChar("photo.jpg/aoi.png");
-            // 以前直していただいたバッククォート（`）の変数埋め込み、完璧です！
-            await setMsg("あおい", `キャーーー！！${playerName}がーーー！？`); await waitClick();
-
-            setChar("photo.jpg/hayato.png");
-            await setMsg("はやと", "おいウソだろ！？顔面に直撃したぞ！起きてくれーーー！！"); await waitClick();
-
-            // 長めの暗転から池袋へワープ
-            blackout.style.opacity = "1";
-            textBox.style.display = "none";
-            await sleep(1500);
-
-            // 背景動画を再生（池袋グローバルリング）
-            const video = document.getElementById('game-video');
-            if (video) {
-                video.style.display = 'block';
-                video.play().catch(e => console.log("Video play error:", e));
-            }
-
-            // 背景を池袋グローバルリング（gurorin.jpg）に変更
-            setEnvironment("背景：池袋グローバルリング", "photo.jpg/gurorin.jpg", "BGM：街の雑踏");
-            blackout.style.opacity = "0";
-            textBox.style.display = "block";
-            lastSpeaker = null;
-
-            setChar("");
-            await setMsg("ナレーション", "目が覚めると、見覚えのある景色が広がっていた。……そこは体育館でも、合宿所でもなく。すっかり日常に戻った、池袋のグローバルリング前だった。"); await waitClick();
-            await setMsg(playerName, "あれ……？確か、顔面にボールが当たって……。……って、えええええ！？合宿もう終わってるじゃん！！"); await waitClick();
-
-            // 性格診断の分岐判定（最高得点の軸から算出）
-            let isE = scoreE >= scoreT;
-            let isJ = scoreJ >= scoreP;
-            let resultType = "";
-
-            if (isE && isJ) {
-                resultType = "社交・計画（EJ）タイプ";
-
-                setChar("photo.jpg/zen.png");
-                await setMsg("ぜん", `お疲れ様！合宿どうだった？ ${playerName}、周りよく見て動いてくれてたから、こっちもすごく助かったよ。`); await waitClick();
-
-                setChar("photo.jpg/aoi.png");
-                await setMsg("あおい", "ほんとほんと！スケジュール通りに進んだの、絶対そのおかげだよ〜。小澤ゼミってやること多いから、そういう風に一緒に計画立てて動けるの、めちゃくちゃ大事んだよね。"); await waitClick();
-
-                setChar("photo.jpg/konomi.png");
-                await setMsg("このみ", "最初は課題とかプロジェクトで大変なこともあるかもしれないけど、こうやってみんなで協力してやり遂げたときの達成感、ほんとに最高だから！これからも一緒に頑張ろうね！"); await waitClick();
-            }
-            else if (isE && !isJ) {
-                resultType = "社交・突発（EP）タイプ";
-
-                setChar("photo.jpg/kousuke.png");
-                await setMsg("こうすけ", "うぇーい！合宿おつかれ！いやー、主人公のあのフットワークの軽さ、最高だったわ！完全にゼミの空気掴んでたね！"); await waitClick();
-
-                setChar("photo.jpg/kaito.png");
-                await setMsg("かいと", "間違いない！ぶっちゃけこのゼミ、予定通りにいかないハプニングもしょっちゅうなんだけど（笑）、お前ならそういうのも全部ひっくるめて笑いに変えられそう！"); await waitClick();
-
-                setChar("photo.jpg/tyura.png");
-                await setMsg("ちゅら", "そうそう！大事なのはとりあえずやってみて、その場を楽しむこと！ノリと勢いがあればなんとでもなるから、これからもうちらと一緒に全力で楽しんでこー！"); await waitClick();
-            }
-            else if (!isE && isJ) {
-                resultType = "論理・計画（TJ）タイプ";
-
-                setChar("photo.jpg/keigo.png");
-                await setMsg("けいご", "合宿お疲れ。グループワークでの君の意見、すごく筋が通ってて感心したよ。状況を分析して動くのが得意みたいだね。"); await waitClick();
+                await setMsg(playerName, "はい。ありがとうございます。");
+                await waitClick();
+
+                // 【選択肢D】
+                // ディスカッション用の背景（discussion.jpg）に変更
+                setEnvironment("ディスカッション開始", "photo.jpg/kyousitu.jpg", "SE/BGM連動箇所");
 
                 setChar("photo.jpg/haru.png");
-                await setMsg("はる", "小澤ゼミって、ただ仲が良いだけじゃなくて、本気で意見をぶつけ合えるのが良いところなの。妥協せずに議論するからこそ、得られるものも大きいし。"); await waitClick();
+                await setMsg("はる", "ディスカッション始めるよー！班作ってー！"); await waitClick();
+
+                setChar("");
+                await setMsg(playerName, "誰と一緒の班になろうか？");
+                let choiceD = await askChoices(["①「真面目そうな人」のところに行く", "②「雰囲気良さそうだな。あそこに行ってみるか。」"]);
+                setEnvironment("ディスカッション開始", "photo.jpg/discussion.jpg", "SE/BGM連動箇所");
+
+                if (choiceD === 1) {
+                    setChar("photo.jpg/aoi.png");
+                    await setMsg("あおい", "人数ちょうどいいからぜひぜひ。"); await waitClick();
+
+                    setChar("photo.jpg/aoi.png");
+                    await setMsg("あおい", "じゃあ簡単に自己紹介しますか。私はあおいで趣味は競馬だよ。でこっちはあまねだよ。"); await waitClick();
+
+                    setChar("photo.jpg/amane.png");
+                    await setMsg("あまね", "よろしく。趣味は漫画だよ。"); await waitClick();
+                } else {
+                    setChar("");
+                    await setMsg(playerName, "雰囲気良さそうだな。あそこに行ってみるか！"); await waitClick();
+
+                    setChar("photo.jpg/kaito.png");
+                    await setMsg("かいと", "ちょうど人探してたところ！一緒にやろうか！！"); await waitClick();
+                    await setMsg("かいと", "よろしくね！俺はかいとで趣味は漫画だよ。で、こっちがいきだよ。"); await waitClick();
+
+                    setChar("photo.jpg/iki.png");
+                    await setMsg("いき", "よろしく。趣味は競馬だよ。"); await waitClick();
+                }
+
+                setChar("");
+                await setMsg(playerName, `${playerName}です。よろしくお願いします。`); await waitClick();
+
+                setChar("photo.jpg/haru.png");
+                await setMsg("はる", "ディスカッション始めまーす。"); await waitClick();
+
+                setChar("");
+                await setMsg("ナレーション", "その後、時間を忘れるほど白熱した議論が交わされた……。");
+                await waitClick();
+
+                // ==================== 合宿編 ====================
+                // 1. 画面を真っ黒にして、下のテキストボックスを一時的に隠す
+                blackout.style.opacity = "1";
+                textBox.style.display = "none";
+                setEnvironment("暗転", "", "");
+                await sleep(500);
+
+                // 2. 真っ黒な画面の「中央」に文字をセットして、ふわっと浮き出させる
+                centerUi.innerHTML = `<div id="gassyuku-text" class="popup-narration">8月も終わり少し涼しくなったころ、<br>小澤ゼミの熱き合宿が、今、始まる…！！</div>`;
+                await sleep(50);
+                document.getElementById('gassyuku-text').classList.add('show');
+
+                // 3. プレイヤーのクリック（またはEnter）を待つ
+                await waitClick();
+
+                // 4. 中央の文字を消して、テキストボックスを表示状態に戻す
+                centerUi.innerHTML = "";
+                textBox.style.display = "block";
+                lastSpeaker = null; // 明けた直後のセリフで一瞬暗転が暴発するのを防ぐためにリセット
+
+                // 5. 裏で次の背景に変えてから、黒画面をフェードアウトさせて消す
+                setEnvironment("背景：集合場所", "photo.jpg/shuugou.jpg", "BGM：出発前の賑わい");
+                blackout.style.opacity = "0";
+                await sleep(500);
 
                 setChar("photo.jpg/amane.png");
-                await setMsg("あまね", "うん。最初は先輩たちのレベルに圧倒されるかもしれないけど、確実にスキルアップできる環境だから。君ならきっとすぐについてこれると思う。"); await waitClick();
+                await setMsg("あまね", "おはよー！！結構みんな集まってきたね！"); await waitClick();
 
                 setChar("photo.jpg/hinako.png");
-                await setMsg("ひなこ", "これからプロジェクトも本格的になっていくから、一緒に高い目標クリアしていこうね。期待してるよ！"); await waitClick();
-            }
-            else {
-                resultType = "論理・突発（TP）タイプ";
+                await setMsg("ひなこ", "まじで合宿楽しみだね！！部屋どんな感じなんだろ！"); await waitClick();
+
+                setChar("photo.jpg/haru.png");
+                await setMsg("はる", "出発までまだもう少し時間あるから、トイレとか済ませといてねー！"); await waitClick();
+
+                // 集合場所の選択肢
+                setChar(""); // 選択肢の前はキャラを非表示にする
+                let choiceCampA = await askChoices(["① 友達とお昼ご飯を買いに行く", "② 10分前に到着して持ち物を確認しておく"]);
+
+                if (choiceCampA === 1) {
+                    scoreP++; // 社交・突発
+
+                    setChar("photo.jpg/kaito.png");
+                    await setMsg("かいと", "コンビニ寄ろ！絶対途中でおなかすいちゃうわ！！"); await waitClick();
+
+                    setChar("");
+                    await setMsg(playerName, "行こ！！お菓子買いたい！"); await waitClick();
+                } else {
+                    scoreJ++; // 論理・計画
+
+                    setChar("");
+                    await setMsg(playerName, "早めに着けてよかった～・・・"); await waitClick();
+
+                    setChar("photo.jpg/hayato.png");
+                    await setMsg("はやと", "もう準備終わってるの！はやっ！！"); await waitClick();
+                }
+
+                // 背景をバスの車内に変更
+                setEnvironment("背景：バス車内", "photo.jpg/bus.jpg", "BGM：走行音と笑い声");
+
+                setChar("");
+                await setMsg("ナレーション", "バスが出発した。周りから楽しそうな笑い声が聞こえる。"); await waitClick();
+
+                setChar("photo.jpg/hinako.png");
+                await setMsg("ひなこ", "こっち席空いてるよ！"); await waitClick();
+                // バス内の選択肢
+                let choiceCampB = await askChoices(["① 何時に着くのか合宿スケジュールを確認しておく", "② 周りの人と雑談して盛り上がる"]);
+                if (choiceCampB === 1) {
+                    scoreT++; scoreJ++; // 論理・計画
+
+                    setChar("");
+                    await setMsg(playerName, "13時ごろに着くのか、今日も長いし少し寝とこうかな"); await waitClick();
+
+                    setChar("photo.jpg/tyura.png");
+                    await setMsg("ちゅら", "今日も結構詰まってるんだね！私も少し寝とこうかな！"); await waitClick();
+                } else {
+                    scoreE++; scoreP++; // 社交・突発
+
+                    setChar("photo.jpg/tyura.png");
+                    await setMsg("ちゅら", "みんなで話してたらあっという間だね！！"); await waitClick();
+                }
+
+                // 宿のディスカッションルームに背景を変更
+                setEnvironment("背景：宿・ディスカッションルーム", "photo.jpg/kaigisitu.jpg", "BGM：真剣な議論");
+
+                setChar("");
+                await setMsg("ナレーション", "宿に到着し、ディスカッションが始まる。ディスカッションを終え----"); await waitClick();
+
+                setChar("photo.jpg/kaito.png");
+                await setMsg("かいと", "ディスカッション疲れたねーー"); await waitClick();
+
+                setChar("photo.jpg/keigo.png");
+                await setMsg("けいご", "夜ご飯まで少し時間あるみたいだけど、この後どうする？"); await waitClick();
+
+                // 夕食前の選択肢
+                let choiceCampC = await askChoices(["① 先に荷物整理を終わらせる", "② 付近を探索してみる"]);
+                if (choiceCampC === 1) {
+                    scoreJ++; // 論理・計画
+
+                    setChar("");
+                    await setMsg(playerName, "後でバタバタしたくないし、片づけとかお風呂の準備先にしておこう！！"); await waitClick();
+                } else {
+                    scoreP++; // 社交・突発
+
+                    setChar("photo.jpg/kaito.png");
+                    await setMsg("かいと", "徒歩15分ぐらいのとこにコンビニあるっぽいよ！"); await waitClick();
+
+                    setChar("");
+                    await setMsg(playerName, "探索がてら行ってみよう！"); await waitClick();
+                }
+
+                // 大広間に背景を変更
+                setEnvironment("背景：大広間", "photo.jpg/hiroma.jpg", "BGM：賑やかな夕食");
+
+                setChar("");
+                await setMsg("ナレーション", "大広間で夜ご飯。おいしそうなごはんがずらりと並んでいる。"); await waitClick();
+
+                setChar("photo.jpg/zen.png");
+                await setMsg("ぜん", "席自由だから、好きなところ座ってー！"); await waitClick();
+
+                // 夕食時の選択肢
+                let choiceCampD = await askChoices(["① みんなとの会話を楽しむ", "② 履修について先輩に聞く"]);
+                if (choiceCampD === 1) {
+                    scoreE++; scoreP++; // 社交・突発
+
+                    setChar("photo.jpg/keigo.png");
+                    await setMsg("けいご", "このゼミ思ったより雰囲気良いよね！！"); await waitClick();
+
+                    setChar("");
+                    await setMsg(playerName, "それ思った！先輩たちとも仲良くなれるのめっちゃいいよね！"); await waitClick();
+                } else {
+                    scoreT++; scoreJ++; // 論理・計画
+
+                    setChar("");
+                    await setMsg(playerName, "おすすめの授業とかありますか？？"); await waitClick();
+
+                    setChar("photo.jpg/kousuke.png");
+                    await setMsg("こうすけ", "小澤先生の企画講座面白いよ！！"); await waitClick();
+                }
+
+                // 背景を飲み会用の部屋に変更
+                setEnvironment("背景：部屋（飲み会）", "photo.jpg/nomikai.jpg", "BGM：夜の懇親会");
+
+                setChar("");
+                await setMsg("ナレーション", "部屋に集まって飲み会が始まった。お酒を飲みながら話したり、カードゲームをしたり、みんな思い思いに過ごしている。"); await waitClick();
+
+                setChar("photo.jpg/tyura.png");
+                await setMsg("ちゅら", "もうこんな時間だ！そろそろ寝なくちゃ"); await waitClick();
+
+                setChar("");
+                await setMsg(playerName, "時間が経つのがあっという間だね。おやすみ！"); await waitClick();
+
+                setChar("photo.jpg/tyura.png");
+                await setMsg("ちゅら", "おやすみ～"); await waitClick();
+
+                // 背景を朝の部屋に変更
+                setEnvironment("背景：部屋（朝）", "photo.jpg/asa.jpg", "BGM：朝のアラーム");
+
+                setChar("");
+                await setMsg("ナレーション", "合宿2日目の朝。アラームの音で目が覚める。"); await waitClick();
+
+                // 朝の選択肢
+                let choiceCampF = await askChoices(["① ぎりぎりまで寝てから朝食を食べに行く", "② 早起きして準備を終えてから朝食を食べる"]);
+                if (choiceCampF === 1) {
+                    scoreP++; // 社交・突発
+
+                    setChar("photo.jpg/aoi.png");
+                    await setMsg("あおい", "おはよー！もうすぐ朝ご飯の時間だね！"); await waitClick();
+
+                    setChar("");
+                    await setMsg(playerName, "夜更かししたからまだ眠いなあ。あと10分だけ寝よう…"); await waitClick();
+                } else {
+                    scoreJ++; // 論理・計画
+
+                    setChar("");
+                    await setMsg(playerName, "そろそろ朝食だから支度をしよう！"); await waitClick();
+                }
+
+                // 背景をミーティングルーム（kaigisitu.jpg）に変更
+                setEnvironment("背景：ミーティングルーム", "photo.jpg/kaigisitu.jpg", "BGM：発表前の緊張感");
+
+                setChar("");
+                await setMsg("ナレーション", "午後は学年ゼミの発表だ。プレゼンに向けて班のメンバーと集まった。"); await waitClick();
+
+                // 発表前の選択肢
+                let choiceCampG = await askChoices(["① メンバーとの会話を楽しみ、緊張をほぐす", "② プレゼン内容の最終確認をする"]);
+                if (choiceCampG === 1) {
+                    scoreP++; // 社交・突発
+
+                    setChar("photo.jpg/konomi.png");
+                    await setMsg("このみ", "今日の自由時間なにして遊ぼっか～"); await waitClick();
+
+                    setChar("");
+                    await setMsg(playerName, "みんなで買い物したり運動したりするのも楽しそう！緊張がほぐれてきた！"); await waitClick();
+                } else {
+                    scoreJ++; // 論理・計画
+
+                    setChar("");
+                    await setMsg(playerName, "最終確認もできたし、これでプレゼンはばっちりだ！"); await waitClick();
+                }
+
+                // 背景をロビーに変更
+                setEnvironment("背景：合宿所・ロビー", "photo.jpg/lobby.jpg", "BGM：解放感のある音楽");
+
+                setChar("");
+                await setMsg("ナレーション", "学年ゼミが終わり、自由時間がきた。"); await waitClick();
+
+                // 自由時間の選択肢
+                setChar(""); // 選択肢の前なのでキャラを消す
+                let choiceCampH = await askChoices(["① 体育館で遊ぶ", "② 片づけをしてから体育館に向かう"]);
+
+                if (choiceCampH === 1) {
+                    scoreP++; // 社交・突発
+
+                    setChar("");
+                    await setMsg(playerName, "自由時間だ！体育館で遊ぼう！！"); await waitClick();
+
+                    setChar("photo.jpg/kousuke.png");
+                    await setMsg("こうすけ", "お、主人公！ナイスフットワーク！バレーやろうぜバレー！"); await waitClick();
+
+                    setChar("photo.jpg/hayato.png");
+                    await setMsg("はやと", "怪我すんなよー。俺は端っこで見てるわ。"); await waitClick();
+                } else {
+                    scoreJ++; // 論理・計画
+
+                    setChar("");
+                    await setMsg(playerName, "みんな動くの早いな……（笑）。よし、まずはこの資料とかの片づけをパパッと終わらせてから、体育館に向かおう。"); await waitClick();
+
+                    setChar("photo.jpg/amane.png");
+                    await setMsg("あまね", "${playerName}、片づけ手伝ってくれるの？助かる。じゃあこれ、あっちに運んじゃおうか。"); await waitClick();
+
+                    setChar("");
+                    await setMsg("ナレーション", "（片づけが終わり、体育館へ移動する主人公）"); await waitClick();
+                }
+
+                // ==================== Iパート（エンディング・気絶オチ） ====================
+                // 背景を体育館に変更
+                setEnvironment("背景：体育館", "photo.jpg/gym.jpg", "BGM：スポーツの音");
+
+                setChar("photo.jpg/konomi.png");
+                await setMsg("このみ", "ボールそっち行ったよー！"); await waitClick();
+
+                setChar("photo.jpg/kousuke.png");
+                await setMsg("こうすけ", "うおっ、思ったより伸びた！誰かカバー！！"); await waitClick();
+
+                setChar("");
+                await setMsg(playerName, "うわ、！前からボールが！！……って、え？ 待って、あれバレーボールじゃなくて……バスケットボール！？"); await waitClick();
+
+                setChar("photo.jpg/hinako.png");
+                await setMsg("ひなこ", "危ない！よけてーーー！！"); await waitClick();
+
+                setChar("");
+                await setMsg(playerName, "えっ、あ、ぶふぉっ！！！！！"); await waitClick();
+
+                // 気絶・画面暗転演出
+                blackout.style.transition = "opacity 0.1s ease";
+                blackout.style.opacity = "1";
+                await sleep(600);
+
+                setChar("photo.jpg/aoi.png");
+                // 以前直していただいたバッククォート（`）の変数埋め込み、完璧です！
+                await setMsg("あおい", `キャーーー！！${playerName}がーーー！？`); await waitClick();
 
                 setChar("photo.jpg/hayato.png");
-                await setMsg("はやと", "おつかれー。君、なかなか面白い視点持ってるね。ワークのときのアプローチ、俺らにはない発想でちょっと驚いたわ。"); await waitClick();
+                await setMsg("はやと", "おいウソだろ！？顔面に直撃したぞ！起きてくれーーー！！"); await waitClick();
 
-                setChar("photo.jpg/iki.png");
-                await setMsg("いき", "だよね。このゼミ、無難な正解出すより『それ面白くね？』ってアイデアのほうが評価されたりするから。君みたいな柔軟なタイプは絶対向いてる。"); await waitClick();
+                // 長めの暗転から池袋へワープ
+                blackout.style.opacity = "1";
+                textBox.style.display = "none";
+                await sleep(1500);
 
-                setChar("photo.jpg/kenta.png");
-                await setMsg("けんた", "そうそう、突拍子もないこと言っても、小澤先生もみんなも面白がって乗っかってくれるのがこのゼミのいいところだからさ。これから一緒に、なんかヤバくて面白いこと企もうぜ！"); await waitClick();
-            }
+                // 背景動画を再生（池袋グローバルリング）
+                const video = document.getElementById('game-video');
+                if (video) {
+                    video.style.display = 'block';
+                    video.play().catch(e => console.log("Video play error:", e));
+                }
 
-            // 共通エンディング（主人公のモノローグ）
-            setChar("");
-            await setMsg(playerName, "（みんなそれぞれ言ってることは違うし、見ている視点も違うけど……）"); await waitClick();
-            await setMsg(playerName, "（共通しているのは、全員がこのゼミを心から楽しんでるってことなんだな。）"); await waitClick();
-            await setMsg(playerName, "（……小澤ゼミ、いいな。）"); await waitClick();
+                // 背景を池袋グローバルリング（gurorin.jpg）に変更
+                setEnvironment("背景：池袋グローバルリング", "photo.jpg/gurorin.jpg", "BGM：街の雑踏");
+                blackout.style.opacity = "0";
+                textBox.style.display = "block";
+                lastSpeaker = null;
 
-            // 最終シャットダウン・リザルト画面移行
-            blackout.style.transition = "opacity 0.8s ease";
-            blackout.style.opacity = "1";
-            textBox.style.display = "none";
-            if (video) video.style.display = 'none';
-            await sleep(1200);
+                setChar("");
+                await setMsg("ナレーション", "目が覚めると、見覚えのある景色が広がっていた。……そこは体育館でも、合宿所でもなく。すっかり日常に戻った、池袋のグローバルリング前だった。"); await waitClick();
+                await setMsg(playerName, "あれ……？確か、顔面にボールが当たって……。……って、えええええ！？合宿もう終わってるじゃん！！"); await waitClick();
 
-            // 終了処理・性格診断結果画面
-            setEnvironment("診断結果発表", "", "");
-            blackout.style.opacity = "0";
+                // 性格診断の分岐判定（最高得点の軸から算出）
+                let isE = scoreE >= scoreT;
+                let isJ = scoreJ >= scoreP;
+                let resultType = "";
 
-            centerUi.innerHTML = `
+                if (isE && isJ) {
+                    resultType = "社交・計画（EJ）タイプ";
+
+                    setChar("photo.jpg/zen.png");
+                    await setMsg("ぜん", `お疲れ様！合宿どうだった？ ${playerName}、周りよく見て動いてくれてたから、こっちもすごく助かったよ。`); await waitClick();
+
+                    setChar("photo.jpg/aoi.png");
+                    await setMsg("あおい", "ほんとほんと！スケジュール通りに進んだの、絶対そのおかげだよ〜。小澤ゼミってやること多いから、そういう風に一緒に計画立てて動けるの、めちゃくちゃ大事んだよね。"); await waitClick();
+
+                    setChar("photo.jpg/konomi.png");
+                    await setMsg("このみ", "最初は課題とかプロジェクトで大変なこともあるかもしれないけど、こうやってみんなで協力してやり遂げたときの達成感、ほんとに最高だから！これからも一緒に頑張ろうね！"); await waitClick();
+                }
+                else if (isE && !isJ) {
+                    resultType = "社交・突発（EP）タイプ";
+
+                    setChar("photo.jpg/kousuke.png");
+                    await setMsg("こうすけ", "うぇーい！合宿おつかれ！いやー、主人公のあのフットワークの軽さ、最高だったわ！完全にゼミの空気掴んでたね！"); await waitClick();
+
+                    setChar("photo.jpg/kaito.png");
+                    await setMsg("かいと", "間違いない！ぶっちゃけこのゼミ、予定通りにいかないハプニングもしょっちゅうなんだけど（笑）、お前ならそういうのも全部ひっくるめて笑いに変えられそう！"); await waitClick();
+
+                    setChar("photo.jpg/tyura.png");
+                    await setMsg("ちゅら", "そうそう！大事なのはとりあえずやってみて、その場を楽しむこと！ノリと勢いがあればなんとでもなるから、これからもうちらと一緒に全力で楽しんでこー！"); await waitClick();
+                }
+                else if (!isE && isJ) {
+                    resultType = "論理・計画（TJ）タイプ";
+
+                    setChar("photo.jpg/keigo.png");
+                    await setMsg("けいご", "合宿お疲れ。グループワークでの君の意見、すごく筋が通ってて感心したよ。状況を分析して動くのが得意みたいだね。"); await waitClick();
+
+                    setChar("photo.jpg/haru.png");
+                    await setMsg("はる", "小澤ゼミって、ただ仲が良いだけじゃなくて、本気で意見をぶつけ合えるのが良いところなの。妥協せずに議論するからこそ、得られるものも大きいし。"); await waitClick();
+
+                    setChar("photo.jpg/amane.png");
+                    await setMsg("あまね", "うん。最初は先輩たちのレベルに圧倒されるかもしれないけど、確実にスキルアップできる環境だから。君ならきっとすぐについてこれると思う。"); await waitClick();
+
+                    setChar("photo.jpg/hinako.png");
+                    await setMsg("ひなこ", "これからプロジェクトも本格的になっていくから、一緒に高い目標クリアしていこうね。期待してるよ！"); await waitClick();
+                }
+                else {
+                    resultType = "論理・突発（TP）タイプ";
+
+                    setChar("photo.jpg/hayato.png");
+                    await setMsg("はやと", "おつかれー。君、なかなか面白い視点持ってるね。ワークのときのアプローチ、俺らにはない発想でちょっと驚いたわ。"); await waitClick();
+
+                    setChar("photo.jpg/iki.png");
+                    await setMsg("いき", "だよね。このゼミ、無難な正解出すより『それ面白くね？』ってアイデアのほうが評価されたりするから。君みたいな柔軟なタイプは絶対向いてる。"); await waitClick();
+
+                    setChar("photo.jpg/kenta.png");
+                    await setMsg("けんた", "そうそう、突拍子もないこと言っても、小澤先生もみんなも面白がって乗っかってくれるのがこのゼミのいいところだからさ。これから一緒に、なんかヤバくて面白いこと企もうぜ！"); await waitClick();
+                }
+
+                // 共通エンディング（主人公のモノローグ）
+                setChar("");
+                await setMsg(playerName, "（みんなそれぞれ言ってることは違うし、見ている視点も違うけど……）"); await waitClick();
+                await setMsg(playerName, "（共通しているのは、全員がこのゼミを心から楽しんでるってことなんだな。）"); await waitClick();
+                await setMsg(playerName, "（……小澤ゼミ、いいな。）"); await waitClick();
+
+                // 最終シャットダウン・リザルト画面移行
+                blackout.style.transition = "opacity 0.8s ease";
+                blackout.style.opacity = "1";
+                textBox.style.display = "none";
+                if (video) video.style.display = 'none';
+                await sleep(1200);
+
+                // 終了処理・性格診断結果画面
+                setEnvironment("診断結果発表", "", "");
+                blackout.style.opacity = "0";
+
+                centerUi.innerHTML = `
                 <div style="background: rgba(0, 10, 25, 0.9); border: 2px solid #00f3ff; padding: 30px; border-radius: 12px; box-shadow: 0 0 25px rgba(0,243,255,0.5); text-align: center; width: 480px;">
                     <div style="color: #00f3ff; font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; letter-spacing: 2px;">DIAGNOSIS RESULT</div>
                     <div style="font-size: 1rem; margin-bottom: 20px; color: #ccc;">あなたの行動から導き出された、小澤ゼミでの適性タイプは……</div>
@@ -1238,10 +1252,10 @@
                     <button class="choice-btn" onclick="location.reload()">タイトル（最初から）に戻る</button>
                 </div>
             `;
-        }
+            }
 
-        startSimulation();
-    </script>
-</body>
+            startSimulation();
+        </script>
+    </body>
 
 </html>

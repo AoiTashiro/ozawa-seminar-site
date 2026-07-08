@@ -21,1266 +21,1338 @@
     </style>
 </head>
 
-<body> <!-- 👈 これでHTMLの「本文エリア」がここから正式にスタートします！ -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ozawa seminar</title>
 
-    <!-- 🎨 ここから下は元々あったクイズのデザイン命令（CSS）に戻ります -->
-    <style>
-        /* ==========================================
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="emoji-border-line">🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼🍓🌼
+    </div>
+
+    <header class="main-header">
+        <nav class="nav-container">
+            <div class="logo">🍓 小澤ゼミ / Ozawa Seminar 🍓</div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">🏠 ホーム</a></li>
+                <li class="dropdown">
+                    <a href="#">📢 活動内容 ▼</a>
+                    <ul class="dropdown-content">
+                        <li><a href="activities-member.html">👥 メンバー紹介</a></li>
+                        <li><a href="activities-event.html">📅 年間行事</a></li>
+                    </ul>
+                </li>
+                <li><a href="activities-ozawaquiz.html">🧐 先生について ▼</a></li>
+                <li class="dropdown">
+                    <a href="#">🎮 君もゼミ生だ！ ▼</a>
+                    <ul class="dropdown-content">
+                        <li><a href="simulation-daily.html">☀️シュミレーションゲームはこちら！</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="header-right">
+                <span>MENU 📋</span>
+            </div>
+        </nav>
+    </header>
+
+    <body> <!-- 👈 これでHTMLの「本文エリア」がここから正式にスタートします！ -->
+
+        <!-- 🎨 ここから下は元々あったクイズのデザイン命令（CSS）に戻ります -->
+        <style>
+            /* ==========================================
     右下の先生をクリックすると左下から飛び出す魔法
     ========================================== */
-        /* 飛び出す先生の画像（パターンA：ステッカー風） */
-        .right-bottom-popup img {
-            height: 450px;
-            width: auto;
-            object-fit: contain;
+            /* 飛び出す先生の画像（パターンA：ステッカー風） */
+            .right-bottom-popup img {
+                height: 450px;
+                width: auto;
+                object-fit: contain;
 
-            /* 🌟 ここを追加・変更：白いフチとオシャレな影 */
-            background: #ffffff;
-            padding: 10px;
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-            border: 3px solid #ff9f43;
-            /* Q4ならオレンジ、Q5ならブルーに。または無しでもOK */
+                /* 🌟 ここを追加・変更：白いフチとオシャレな影 */
+                background: #ffffff;
+                padding: 10px;
+                border-radius: 16px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+                border: 3px solid #ff9f43;
+                /* Q4ならオレンジ、Q5ならブルーに。または無しでもOK */
 
-            transform-origin: bottom right;
-            animation: popRightBottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
-        }
-
-        /* --- グリッド内での通常の見た目（崩れ防止） --- */
-        .grid-view-container .bonus-card,
-        .grid-view-container .bonus-card-q5 {
-            display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
-            background-color: #ffffff !important;
-            padding: 6px !important;
-            height: 100% !important;
-            box-sizing: border-box !important;
-            overflow: hidden !important;
-            cursor: pointer;
-        }
-
-        .grid-view-container .bonus-img {
-            max-height: 85px !important;
-            width: auto !important;
-        }
-
-        .grid-view-container .bonus-img-q5 {
-            max-height: 95px !important;
-            width: auto !important;
-        }
-
-        /* 🌟 右下にドカンと飛び出す大画面の設定（背景は暗くしない） */
-        .right-bottom-popup {
-            display: none;
-            /* 普段は隠す */
-            position: fixed;
-            bottom: 20px;
-            /* 右下からの距離 */
-            right: 20px;
-            z-index: 10000;
-            /* 一番手前に表示 */
-            cursor: zoom-out;
-        }
-
-        /* 飛び出す先生の画像 */
-        .right-bottom-popup img {
-            height: 450px;
-            /* 👈 ここでお好みの大きさに調整できます！ */
-            width: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3));
-            /* クッキリした影 */
-
-            /* 左下から右上にシュパッと大きく飛び出すアニメーション */
-            transform-origin: bottom right;
-            animation: popRightBottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
-        }
-
-        @keyframes popRightBottom {
-            0% {
-                transform: scale(0.3);
-                opacity: 0;
+                transform-origin: bottom right;
+                animation: popRightBottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
             }
 
-            100% {
-                transform: scale(1);
-                opacity: 1;
+            /* --- グリッド内での通常の見た目（崩れ防止） --- */
+            .grid-view-container .bonus-card,
+            .grid-view-container .bonus-card-q5 {
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                background-color: #ffffff !important;
+                padding: 6px !important;
+                height: 100% !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
+                cursor: pointer;
             }
-        }
 
-        .magazine-container {
-            max-width: 1040px;
-            margin: 40px auto;
-            background: #ffffff;
-            padding: 50px 60px;
-            box-sizing: border-box;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-        }
+            .grid-view-container .bonus-img {
+                max-height: 85px !important;
+                width: auto !important;
+            }
 
-        /* 38行目〜45行目のマーカー設定を、これに丸ごと差し替えます */
-        .magazine-container h3,
-        .magazine-container [class*="title"],
-        .magazine-container .main-title-text,
-        .magazine-container h2 {
-            background: linear-gradient(transparent 60%, rgba(255, 235, 59, 0.6) 60%);
-            display: table;
-            /* 1行ずつ独立させて、文字の長さぴったりに合わせる */
-            margin-bottom: 10px;
-            /* マーカー同士がくっつかないように少し隙間をあける */
-            padding-right: 4px;
-            /* 右端にほんの少し余白を作って綺麗に見せる */
-        }
+            .grid-view-container .bonus-img-q5 {
+                max-height: 95px !important;
+                width: auto !important;
+            }
 
-        /* 46行目の場所にこれを貼り付けます！ */
-        .magazine-container {
-            position: relative;
-            /* 右上の文字を配置するための基準の合図 */
-        }
+            /* 🌟 右下にドカンと飛び出す大画面の設定（背景は暗くしない） */
+            .right-bottom-popup {
+                display: none;
+                /* 普段は隠す */
+                position: fixed;
+                bottom: 20px;
+                /* 右下からの距離 */
+                right: 20px;
+                z-index: 10000;
+                /* 一番手前に表示 */
+                cursor: zoom-out;
+            }
 
-        .magazine-container::before {
-            content: "OZAWA SEMINAR";
-            position: absolute;
-            top: 30px;
-            /* 少し上に上げて、余白にきれいに収めます */
-            right: 50px;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            font-weight: bold;
-            font-size: 0.85rem;
-            color: #4a76a8;
-            /* ノートの青線より少し濃い、上品なネイビーブルー */
-            letter-spacing: 4px;
-            /* 文字の間隔を広げてオシャレに */
-            border-bottom: 2px solid #91c9ff;
-            /* 下に細い青線を引く */
-            padding-bottom: 4px;
-        }
+            /* 飛び出す先生の画像 */
+            .right-bottom-popup img {
+                height: 450px;
+                /* 👈 ここでお好みの大きさに調整できます！ */
+                width: auto;
+                object-fit: contain;
+                filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3));
+                /* クッキリした影 */
 
-        /* ファイルの上のほう（<style>
+                /* 左下から右上にシュパッと大きく飛び出すアニメーション */
+                transform-origin: bottom right;
+                animation: popRightBottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
+            }
+
+            @keyframes popRightBottom {
+                0% {
+                    transform: scale(0.3);
+                    opacity: 0;
+                }
+
+                100% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
+
+            .magazine-container {
+                max-width: 1040px;
+                margin: 40px auto;
+                background: #ffffff;
+                padding: 50px 60px;
+                box-sizing: border-box;
+                border-radius: 24px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            }
+
+            /* 38行目〜45行目のマーカー設定を、これに丸ごと差し替えます */
+            .magazine-container h3,
+            .magazine-container [class*="title"],
+            .magazine-container .main-title-text,
+            .magazine-container h2 {
+                background: linear-gradient(transparent 60%, rgba(255, 235, 59, 0.6) 60%);
+                display: table;
+                /* 1行ずつ独立させて、文字の長さぴったりに合わせる */
+                margin-bottom: 10px;
+                /* マーカー同士がくっつかないように少し隙間をあける */
+                padding-right: 4px;
+                /* 右端にほんの少し余白を作って綺麗に見せる */
+            }
+
+            /* 46行目の場所にこれを貼り付けます！ */
+            .magazine-container {
+                position: relative;
+                /* 右上の文字を配置するための基準の合図 */
+            }
+
+            .magazine-container::before {
+                content: "OZAWA SEMINAR";
+                position: absolute;
+                top: 30px;
+                /* 少し上に上げて、余白にきれいに収めます */
+                right: 50px;
+                font-family: 'Helvetica Neue', Arial, sans-serif;
+                font-weight: bold;
+                font-size: 0.85rem;
+                color: #4a76a8;
+                /* ノートの青線より少し濃い、上品なネイビーブルー */
+                letter-spacing: 4px;
+                /* 文字の間隔を広げてオシャレに */
+                border-bottom: 2px solid #91c9ff;
+                /* 下に細い青線を引く */
+                padding-bottom: 4px;
+            }
+
+            /* ファイルの上のほう（<style>
         の中）に貼り付けます */
-        .grid-view-container .bonus-card {
-            display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
-            background-color: #ffffff !important;
-            padding: 8px !important;
-            height: 100% !important;
-            box-sizing: border-box !important;
-            overflow: hidden !important;
-        }
+            .grid-view-container .bonus-card {
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                background-color: #ffffff !important;
+                padding: 8px !important;
+                height: 100% !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
+            }
 
-        .grid-view-container .bonus-img {
-            max-height: 85px !important;
-            width: auto !important;
-            object-fit: contain !important;
-            display: block !important;
-            margin: 0 auto !important;
-        }
+            .grid-view-container .bonus-img {
+                max-height: 85px !important;
+                width: auto !important;
+                object-fit: contain !important;
+                display: block !important;
+                margin: 0 auto !important;
+            }
 
-        /* =========================================
+            /* =========================================
            トップエリア（ヘッダー・2分割レイアウト）
            ========================================= */
-        .magazine-header {
-            text-align: left;
-            margin-bottom: 40px;
-        }
+            .magazine-header {
+                text-align: left;
+                margin-bottom: 40px;
+            }
 
-        .recruit-text {
-            font-size: 13px;
-            letter-spacing: 0.2em;
-            color: #94a3b8;
-            margin: 0 0 8px 0;
-            font-weight: bold;
-        }
+            .recruit-text {
+                font-size: 13px;
+                letter-spacing: 0.2em;
+                color: #94a3b8;
+                margin: 0 0 8px 0;
+                font-weight: bold;
+            }
 
-        .main-title-text {
-            font-size: 36px;
-            font-weight: bold;
-            color: #0c345a;
-            margin: 0 0 10px 0;
-        }
+            .main-title-text {
+                font-size: 36px;
+                font-weight: bold;
+                color: #0c345a;
+                margin: 0 0 10px 0;
+            }
 
-        .sub-title-line {
-            font-size: 22px;
-            color: #4ba3e3;
-            font-weight: bold;
-            border-bottom: 2px solid #edf2f7;
-            padding-bottom: 15px;
-            margin-top: 0;
-        }
+            .sub-title-line {
+                font-size: 22px;
+                color: #4ba3e3;
+                font-weight: bold;
+                border-bottom: 2px solid #edf2f7;
+                padding-bottom: 15px;
+                margin-top: 0;
+            }
 
-        /* 左右のレイアウトバランス */
-        .top-profile-flex {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 60px;
-            align-items: stretch;
-        }
+            /* 左右のレイアウトバランス */
+            .top-profile-flex {
+                display: flex;
+                gap: 40px;
+                margin-bottom: 60px;
+                align-items: stretch;
+            }
 
-        /* 左側カラム：写真エリア */
-        .profile-left-col {
-            flex: 0 0 380px;
-            position: relative;
-        }
+            /* 左側カラム：写真エリア */
+            .profile-left-col {
+                flex: 0 0 380px;
+                position: relative;
+            }
 
-        .prof-img-wrapper {
-            width: 100%;
-            height: 100%;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-        }
+            .prof-img-wrapper {
+                width: 100%;
+                height: 100%;
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            }
 
-        .prof-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+            .prof-img-wrapper img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
 
-        /* 2重名前カード */
-        .name-card-stacked-wrapper {
-            position: absolute;
-            bottom: -20px;
-            left: -15px;
-            width: 240px;
-            height: 90px;
-            z-index: 10;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
+            /* 2重名前カード */
+            .name-card-stacked-wrapper {
+                position: absolute;
+                bottom: -20px;
+                left: -15px;
+                width: 240px;
+                height: 90px;
+                z-index: 10;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
 
-        .name-card-stacked-wrapper:hover {
-            transform: translateY(-8px);
-        }
+            .name-card-stacked-wrapper:hover {
+                transform: translateY(-8px);
+            }
 
-        .name-card-shadow-layer {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            width: 100%;
-            height: 100%;
-            background: #0c345a;
-            border-radius: 12px;
-            z-index: 1;
-        }
+            .name-card-shadow-layer {
+                position: absolute;
+                top: 8px;
+                left: 8px;
+                width: 100%;
+                height: 100%;
+                background: #0c345a;
+                border-radius: 12px;
+                z-index: 1;
+            }
 
-        .name-card-front-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #e06a1b;
-            color: #ffffff;
-            padding: 15px 22px;
-            border-radius: 12px;
-            box-sizing: border-box;
-            z-index: 2;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+            .name-card-front-layer {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #e06a1b;
+                color: #ffffff;
+                padding: 15px 22px;
+                border-radius: 12px;
+                box-sizing: border-box;
+                z-index: 2;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
 
-        .name-card-front-layer .role {
-            font-size: 11px;
-            opacity: 0.9;
-            margin: 0 0 4px 0;
-            letter-spacing: 0.05em;
-        }
+            .name-card-front-layer .role {
+                font-size: 11px;
+                opacity: 0.9;
+                margin: 0 0 4px 0;
+                letter-spacing: 0.05em;
+            }
 
-        .name-card-front-layer .name {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 0;
-            white-space: nowrap;
-            letter-spacing: 0.02em;
-        }
+            .name-card-front-layer .name {
+                font-size: 24px;
+                font-weight: bold;
+                margin: 0;
+                white-space: nowrap;
+                letter-spacing: 0.02em;
+            }
 
-        /* 右側カラム */
-        .profile-right-col {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 20px;
-        }
+            /* 右側カラム */
+            .profile-right-col {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                gap: 20px;
+            }
 
-        .lead-message-box {
-            font-size: 16px;
-            color: #0c345a;
-            font-weight: bold;
-            line-height: 1.8;
-            padding-bottom: 5px;
-        }
+            .lead-message-box {
+                font-size: 16px;
+                color: #0c345a;
+                font-weight: bold;
+                line-height: 1.8;
+                padding-bottom: 5px;
+            }
 
-        .lead-message-box p {
-            margin: 6px 0;
-        }
+            .lead-message-box p {
+                margin: 6px 0;
+            }
 
-        .cards-inline-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
+            .cards-inline-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
 
-        /* 紹介カード */
-        .info-border-card {
-            border: 2px solid #cce0f0;
-            border-radius: 14px;
-            padding: 22px;
-            background: #ffffff;
-            box-shadow: 0 4px 12px rgba(12, 52, 90, 0.02);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-        }
+            /* 紹介カード */
+            .info-border-card {
+                border: 2px solid #cce0f0;
+                border-radius: 14px;
+                padding: 22px;
+                background: #ffffff;
+                box-shadow: 0 4px 12px rgba(12, 52, 90, 0.02);
+                transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            }
 
-        .info-border-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 24px rgba(12, 52, 90, 0.08);
-            border-color: #4ba3e3;
-        }
+            .info-border-card:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 12px 24px rgba(12, 52, 90, 0.08);
+                border-color: #4ba3e3;
+            }
 
-        .info-border-card h3 {
-            font-size: 14px;
-            color: #10497e;
-            margin: 0 0 14px 0;
-            font-weight: bold;
-            letter-spacing: 0.05em;
-        }
+            .info-border-card h3 {
+                font-size: 14px;
+                color: #10497e;
+                margin: 0 0 14px 0;
+                font-weight: bold;
+                letter-spacing: 0.05em;
+            }
 
-        .info-border-card h3 span.year-notice {
-            font-size: 11px;
-            color: #94a3b8;
-            font-weight: normal;
-            margin-left: 6px;
-        }
+            .info-border-card h3 span.year-notice {
+                font-size: 11px;
+                color: #94a3b8;
+                font-weight: normal;
+                margin-left: 6px;
+            }
 
-        .subject-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
+            .subject-tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
 
-        .tag-item {
-            background-color: #e0f2fe;
-            color: #0369a1;
-            font-size: 12px;
-            font-weight: bold;
-            padding: 6px 12px;
-            border-radius: 8px;
-        }
+            .tag-item {
+                background-color: #e0f2fe;
+                color: #0369a1;
+                font-size: 12px;
+                font-weight: bold;
+                padding: 6px 12px;
+                border-radius: 8px;
+            }
 
-        .plain-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            font-size: 14px;
-        }
+            .plain-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                font-size: 14px;
+            }
 
-        .plain-list li {
-            margin-bottom: 8px;
-            color: #334155;
-        }
+            .plain-list li {
+                margin-bottom: 8px;
+                color: #334155;
+            }
 
-        .history-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
+            .history-table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 14px;
+            }
 
-        .history-table td {
-            padding: 6px 0;
-            vertical-align: top;
-        }
+            .history-table td {
+                padding: 6px 0;
+                vertical-align: top;
+            }
 
-        .history-table td.year {
-            width: 90px;
-            color: #475569;
-            font-weight: bold;
-        }
+            .history-table td.year {
+                width: 90px;
+                color: #475569;
+                font-weight: bold;
+            }
 
-        .history-table td.desc {
-            color: #334155;
-        }
+            .history-table td.desc {
+                color: #334155;
+            }
 
-        /* =========================================
+            /* =========================================
            セクション共通タイトル
            ========================================= */
-        .survey-section-title {
-            font-size: 24px;
-            color: #0c345a;
-            font-weight: bold;
-            border-bottom: 3px solid #0c345a;
-            padding-bottom: 12px;
-            margin: 60px 0 35px 0;
-            display: flex;
-            align-items: center;
-        }
+            .survey-section-title {
+                font-size: 24px;
+                color: #0c345a;
+                font-weight: bold;
+                border-bottom: 3px solid #0c345a;
+                padding-bottom: 12px;
+                margin: 60px 0 35px 0;
+                display: flex;
+                align-items: center;
+            }
 
-        .survey-section-title .sub-count {
-            font-size: 14px;
-            color: #64748b;
-            font-weight: normal;
-            margin-left: 12px;
-        }
+            .survey-section-title .sub-count {
+                font-size: 14px;
+                color: #64748b;
+                font-weight: normal;
+                margin-left: 12px;
+            }
 
-        /* =========================================
+            /* =========================================
            新設：先生へのインタビュー用デザイン
            ========================================= */
-        .interview-card {
-            background: #ffffff;
-            border: 2px solid #0c345a;
-            border-radius: 16px;
-            padding: 35px 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(12, 52, 90, 0.04);
-        }
+            .interview-card {
+                background: #ffffff;
+                border: 2px solid #0c345a;
+                border-radius: 16px;
+                padding: 35px 40px;
+                margin-bottom: 30px;
+                box-shadow: 0 4px 15px rgba(12, 52, 90, 0.04);
+            }
 
-        .interview-q-title {
-            font-size: 17px;
-            color: #0c345a;
-            font-weight: bold;
-            margin: 0 0 20px 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            line-height: 1.5;
-        }
+            .interview-q-title {
+                font-size: 17px;
+                color: #0c345a;
+                font-weight: bold;
+                margin: 0 0 20px 0;
+                display: flex;
+                align-items: flex-start;
+                gap: 12px;
+                line-height: 1.5;
+            }
 
-        .interview-q-title .badge-q {
-            background: #0c345a;
-            color: #ffffff;
-            font-size: 13px;
-            padding: 3px 9px;
-            border-radius: 4px;
-            font-weight: 900;
-            white-space: nowrap;
-        }
+            .interview-q-title .badge-q {
+                background: #0c345a;
+                color: #ffffff;
+                font-size: 13px;
+                padding: 3px 9px;
+                border-radius: 4px;
+                font-weight: 900;
+                white-space: nowrap;
+            }
 
-        .interview-options-list {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 20px 0;
-            background: #f8fafc;
-            border-radius: 10px;
-            padding: 15px 20px;
-            border: 1px solid #e2e8f0;
-        }
+            .interview-options-list {
+                list-style: none;
+                padding: 0;
+                margin: 0 0 20px 0;
+                background: #f8fafc;
+                border-radius: 10px;
+                padding: 15px 20px;
+                border: 1px solid #e2e8f0;
+            }
 
-        .interview-options-list li {
-            font-size: 14px;
-            color: #64748b;
-            margin-bottom: 8px;
-            padding-left: 20px;
-            position: relative;
-        }
+            .interview-options-list li {
+                font-size: 14px;
+                color: #64748b;
+                margin-bottom: 8px;
+                padding-left: 20px;
+                position: relative;
+            }
 
-        .interview-options-list li::before {
-            content: "・";
-            position: absolute;
-            left: 0;
-        }
+            .interview-options-list li::before {
+                content: "・";
+                position: absolute;
+                left: 0;
+            }
 
-        .interview-options-list li.selected-option {
-            color: #e06a1b;
-            font-weight: bold;
-        }
+            .interview-options-list li.selected-option {
+                color: #e06a1b;
+                font-weight: bold;
+            }
 
-        .interview-options-list li.selected-option::before {
-            content: "✔";
-            color: #e06a1b;
-        }
+            .interview-options-list li.selected-option::before {
+                content: "✔";
+                color: #e06a1b;
+            }
 
-        .teacher-ans-box {
-            background: #fff8f4;
-            border-left: 5px solid #e06a1b;
-            border-radius: 0 12px 12px 0;
-            padding: 20px 25px;
-            margin-top: 15px;
-        }
+            .teacher-ans-box {
+                background: #fff8f4;
+                border-left: 5px solid #e06a1b;
+                border-radius: 0 12px 12px 0;
+                padding: 20px 25px;
+                margin-top: 15px;
+            }
 
-        .ans-label-flex {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 10px;
-        }
+            .ans-label-flex {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 10px;
+            }
 
-        .badge-a {
-            background: #e06a1b;
-            color: #ffffff;
-            font-size: 12px;
-            font-weight: bold;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
+            .badge-a {
+                background: #e06a1b;
+                color: #ffffff;
+                font-size: 12px;
+                font-weight: bold;
+                padding: 2px 6px;
+                border-radius: 4px;
+            }
 
-        .ans-text {
-            font-size: 16px;
-            font-weight: bold;
-            color: #0c345a;
-            margin: 0 0 12px 0;
-            line-height: 1.5;
-        }
+            .ans-text {
+                font-size: 16px;
+                font-weight: bold;
+                color: #0c345a;
+                margin: 0 0 12px 0;
+                line-height: 1.5;
+            }
 
-        .reason-title {
-            font-size: 12px;
-            color: #e06a1b;
-            font-weight: bold;
-            margin: 0 0 4px 0;
-            letter-spacing: 0.05em;
-        }
+            .reason-title {
+                font-size: 12px;
+                color: #e06a1b;
+                font-weight: bold;
+                margin: 0 0 4px 0;
+                letter-spacing: 0.05em;
+            }
 
-        .reason-text {
-            font-size: 14px;
-            color: #334155;
-            line-height: 1.6;
-            margin: 0;
-        }
+            .reason-text {
+                font-size: 14px;
+                color: #334155;
+                line-height: 1.6;
+                margin: 0;
+            }
 
-        /* =========================================
+            /* =========================================
            学生アンケートセクション（Q1〜Q3用）
            ========================================= */
-        .question-container {
-            border: 2px solid #10497e;
-            border-radius: 14px;
-            overflow: hidden;
-            margin-bottom: 35px;
-            background: #ffffff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-        }
+            .question-container {
+                border: 2px solid #10497e;
+                border-radius: 14px;
+                overflow: hidden;
+                margin-bottom: 35px;
+                background: #ffffff;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            }
 
-        .question-header {
-            background: #10497e;
-            color: #ffffff;
-            padding: 18px 24px;
-            font-weight: bold;
-            font-size: 16px;
-        }
+            .question-header {
+                background: #10497e;
+                color: #ffffff;
+                padding: 18px 24px;
+                font-weight: bold;
+                font-size: 16px;
+            }
 
-        .quiz-result-content,
-        .question-body {
-            padding: 35px 40px;
-        }
+            .quiz-result-content,
+            .question-body {
+                padding: 35px 40px;
+            }
 
-        .quiz-choice-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            padding: 30px;
-        }
+            .quiz-choice-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+                padding: 30px;
+            }
 
-        .choice-btn {
-            font-family: inherit;
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 16px 20px;
-            font-size: 15px;
-            font-weight: bold;
-            color: #334155;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
+            .choice-btn {
+                font-family: inherit;
+                background: #f8fafc;
+                border: 2px solid #e2e8f0;
+                border-radius: 10px;
+                padding: 16px 20px;
+                font-size: 15px;
+                font-weight: bold;
+                color: #334155;
+                text-align: left;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
 
-        .choice-btn:hover {
-            background: #f0fdf4;
-            border-color: #22c55e;
-            color: #15803d;
-            transform: translateY(-2px);
-        }
+            .choice-btn:hover {
+                background: #f0fdf4;
+                border-color: #22c55e;
+                color: #15803d;
+                transform: translateY(-2px);
+            }
 
-        .quiz-result-content {
-            display: none;
-        }
+            .quiz-result-content {
+                display: none;
+            }
 
-        .bar-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
+            .bar-row {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+            }
 
-        .bar-row:last-child {
-            margin-bottom: 0;
-        }
+            .bar-row:last-child {
+                margin-bottom: 0;
+            }
 
-        .row-label {
-            width: 240px;
-            font-size: 14px;
-            font-weight: bold;
-            color: #334155;
-            text-align: right;
-            padding-right: 15px;
-            box-sizing: border-box;
-            white-space: nowrap;
-        }
+            .row-label {
+                width: 240px;
+                font-size: 14px;
+                font-weight: bold;
+                color: #334155;
+                text-align: right;
+                padding-right: 15px;
+                box-sizing: border-box;
+                white-space: nowrap;
+            }
 
-        .track-bg {
-            flex-grow: 1;
-            background-color: #f1f5f9;
-            height: 32px;
-            border-radius: 8px;
-            margin: 0 15px;
-            position: relative;
-            overflow: hidden;
-        }
+            .track-bg {
+                flex-grow: 1;
+                background-color: #f1f5f9;
+                height: 32px;
+                border-radius: 8px;
+                margin: 0 15px;
+                position: relative;
+                overflow: hidden;
+            }
 
-        .fill-bar {
-            height: 100%;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 14px;
-            box-sizing: border-box;
-            transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-            box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.08);
-        }
+            .fill-bar {
+                height: 100%;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                padding-right: 14px;
+                box-sizing: border-box;
+                transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+                box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.08);
+            }
 
-        .fill-bar.orange-style {
-            background-color: #f37032;
-        }
+            .fill-bar.orange-style {
+                background-color: #f37032;
+            }
 
-        .fill-bar.blue-style {
-            background-color: #4ca4e4;
-        }
+            .fill-bar.blue-style {
+                background-color: #4ca4e4;
+            }
 
-        .fill-bar.empty-style {
-            background-color: #e2e8f0;
-            width: 0% !important;
-        }
+            .fill-bar.empty-style {
+                background-color: #e2e8f0;
+                width: 0% !important;
+            }
 
-        .inner-badge {
-            color: #ffffff;
-            font-size: 12px;
-            font-weight: bold;
-            white-space: nowrap;
-        }
+            .inner-badge {
+                color: #ffffff;
+                font-size: 12px;
+                font-weight: bold;
+                white-space: nowrap;
+            }
 
-        .row-percent {
-            width: 65px;
-            text-align: right;
-            font-weight: bold;
-            font-size: 16px;
-            color: #0c345a;
-        }
+            .row-percent {
+                width: 65px;
+                text-align: right;
+                font-weight: bold;
+                font-size: 16px;
+                color: #0c345a;
+            }
 
-        .other-opinions-box {
-            border-top: 1px dashed #cbd5e1;
-            margin-top: 30px;
-            padding-top: 20px;
-        }
+            .other-opinions-box {
+                border-top: 1px dashed #cbd5e1;
+                margin-top: 30px;
+                padding-top: 20px;
+            }
 
-        .other-title {
-            font-weight: bold;
-            color: #f37032;
-            font-size: 14px;
-            margin: 0 0 12px 0;
-        }
+            .other-title {
+                font-weight: bold;
+                color: #f37032;
+                font-size: 14px;
+                margin: 0 0 12px 0;
+            }
 
-        .other-list {
-            margin: 0;
-            padding-left: 20px;
-            font-size: 14px;
-            color: #475569;
-        }
+            .other-list {
+                margin: 0;
+                padding-left: 20px;
+                font-size: 14px;
+                color: #475569;
+            }
 
-        .other-list li {
-            margin-bottom: 8px;
-        }
+            .other-list li {
+                margin-bottom: 8px;
+            }
 
-        /* =========================================
+            /* =========================================
            自由回答セクション（Q4・Q5 流れるカード）
            ========================================= */
-        .section-header-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 50px 0 20px 0;
-            border-left: 5px solid #10497e;
-            padding-left: 12px;
-        }
-
-        .sub-question-title {
-            font-size: 18px;
-            color: #10497e;
-            font-weight: bold;
-            margin: 0;
-        }
-
-        .action-view-btn {
-            font-family: inherit;
-            background: #ffffff;
-            border: 2px solid #10497e;
-            color: #10497e;
-            padding: 8px 18px;
-            font-size: 13px;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .action-view-btn:hover {
-            background: #10497e;
-            color: #ffffff;
-        }
-
-        .slider-viewport {
-            overflow: hidden;
-            position: relative;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 24px 0;
-            display: block;
-        }
-
-        .loop-track {
-            display: flex;
-            gap: 16px;
-            width: max-content;
-            padding-left: 24px;
-            will-change: transform;
-        }
-
-        .ans-card {
-            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif !important;
-            font-size: 14px !important;
-            font-weight: bold !important;
-            -webkit-font-smoothing: antialiased;
-            color: #0c345a !important;
-            line-height: 1.5 !important;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 16px 20px !important;
-            box-sizing: border-box;
-            display: flex;
-            align-items: center;
-            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
-        }
-
-        .ans-card:hover {
-            transform: translateY(-6px) scale(1.01);
-            box-shadow: 0 10px 20px rgba(16, 73, 126, 0.08);
-            z-index: 5;
-        }
-
-        .ans-card.orange-border {
-            border-left: 5px solid #f37032 !important;
-            justify-content: center;
-        }
-
-        .ans-card.blue-border {
-            border-left: 5px solid #4ca4e4 !important;
-            justify-content: flex-start;
-        }
-
-        .loop-track .ans-card.orange-border {
-            min-width: 140px;
-            white-space: nowrap;
-        }
-
-        .loop-track .ans-card.blue-border {
-            min-width: 280px;
-            max-width: 400px;
-            white-space: normal;
-        }
-
-        .grid-view-container {
-            display: none;
-            background: #f1f5f9;
-            border-radius: 14px;
-            padding: 25px;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 16px;
-        }
-
-        .grid-view-container.sentence-grid {
-            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-        }
-
-        .grid-view-container .ans-card {
-            width: 100%;
-            min-height: 54px;
-            white-space: normal !important;
-            word-break: break-all !important;
-            justify-content: flex-start;
-        }
-    </style>
-    </head>
-
-    <body>
-        <!-- 共通ヘッダー（元のデザイン完全再現版） -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-        <link rel="stylesheet" href="style.css">
-
-        <header class="main-header">
-            <nav class="nav-container">
-                <div class="logo">Ozawa Seminar</div>
-                <ul class="nav-links">
-                    <li><a href="index.html">ホーム</a></li>
-                    <li class="dropdown">
-                        <a href="#">活動内容 ▼</a>
-                        <ul class="dropdown-content">
-                            <li><a href="activities-member.html">メンバー紹介</a></li>
-                            <li><a href="activities-event.html">年間行事</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="activities-ozawaquiz.html">小澤先生について知ろう！▼</a></li>
-                    <li class="dropdown">
-                        <a href="#">ゼミ生体験シュミレーション ▼</a>
-                        <ul class="dropdown-content">
-                            <li><a href="simulation-daily.html">日常編</a></li>
-                            <li><a href="simulation-camp.html">合宿編</a></li>
-                            <li><a href="simulation-factory.html">工場見学編</a></li>
-                            <li><a href="simulation-end.html">エンディング編</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <div class="header-right">
-                    <span>MENU</span>
-                </div>
-            </nav>
-        </header>
-        <!-- 共通ヘッダーここまで -->
-        <style>
-            /* 🌌 半透明で横幅いっぱいのデザイン */
-            .main-header {
-                width: 100% !important;
-                background-color: rgba(40, 44, 52, 0.85) !important;
-                backdrop-filter: blur(5px) !important;
-                position: absolute !important;
-                top: 0 !important;
-                left: 0 !important;
-                z-index: 99999 !important;
-                box-sizing: border-box !important;
+            .section-header-flex {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 50px 0 20px 0;
+                border-left: 5px solid #10497e;
+                padding-left: 12px;
             }
 
-            .nav-container {
-                width: 100% !important;
-                max-width: 1400px !important;
-                margin: 0 auto !important;
-                padding: 15px 40px !important;
-                display: flex !important;
-                justify-content: space-between !important;
-                align-items: center !important;
+            .sub-question-title {
+                font-size: 18px;
+                color: #10497e;
+                font-weight: bold;
+                margin: 0;
             }
 
-            .nav-links {
-                display: flex !important;
-                gap: 30px !important;
-                list-style: none !important;
-                margin: 0 !important;
-                padding: 0 !important;
+            .action-view-btn {
+                font-family: inherit;
+                background: #ffffff;
+                border: 2px solid #10497e;
+                color: #10497e;
+                padding: 8px 18px;
+                font-size: 13px;
+                font-weight: bold;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.2s;
             }
 
-            /* 親メニューの配置設定 */
-            .nav-links>li {
-                position: relative !important;
-                /* ドロップダウンの基準位置 */
+            .action-view-btn:hover {
+                background: #10497e;
+                color: #ffffff;
             }
 
-            .nav-links a {
-                color: #ffffff !important;
-                text-decoration: none !important;
-                font-size: 15px !important;
-                font-weight: bold !important;
-                transition: opacity 0.2s !important;
-                display: block !important;
+            .slider-viewport {
+                overflow: hidden;
+                position: relative;
+                background: #f8fafc;
+                border: 1px solid #e2e8f0;
+                border-radius: 14px;
+                padding: 24px 0;
+                display: block;
             }
 
-            .nav-links>li>a {
-                padding: 10px 0 !important;
+            .loop-track {
+                display: flex;
+                gap: 16px;
+                width: max-content;
+                padding-left: 24px;
+                will-change: transform;
             }
 
-            .nav-links a:hover {
-                opacity: 0.8 !important;
-            }
-
-            .logo {
-                color: #ffffff !important;
-                font-size: 22px !important;
-                font-weight: bold !important;
-                letter-spacing: 0.5px !important;
-            }
-
-            .header-right {
-                color: #ffffff !important;
-                font-weight: bold !important;
-                font-size: 15px !important;
-            }
-
-            /* ───────── 👇 ここからドロップダウン（2枚目再現）の仕組み ───────── */
-
-            /* 最初は非表示にしておく、白い四角のメニューボックス */
-            .dropdown-content {
-                display: none !important;
-                position: absolute !important;
-                top: 100% !important;
-                left: 50% !important;
-                transform: translateX(-50%) !important;
-                /* 真ん中寄せ */
-                background-color: #ffffff !important;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-                padding: 10px 0 !important;
-                min-width: 150px !important;
-                list-style: none !important;
-                margin: 0 !important;
-                border-radius: 4px !important;
-            }
-
-            /* ドロップダウンの中のリンク文字（グレー） */
-            .dropdown-content a {
-                color: #333333 !important;
-                padding: 10px 20px !important;
+            .ans-card {
+                font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif !important;
                 font-size: 14px !important;
-                font-weight: normal !important;
-                white-space: nowrap !important;
-                text-align: left !important;
+                font-weight: bold !important;
+                -webkit-font-smoothing: antialiased;
+                color: #0c345a !important;
+                line-height: 1.5 !important;
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 10px;
+                padding: 16px 20px !important;
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+                cursor: pointer;
             }
 
-            /* マウスを乗せた時の背景（うっすらグレーに） */
-            .dropdown-content a:hover {
-                background-color: #f5f5f5 !important;
-                opacity: 1 !important;
+            .ans-card:hover {
+                transform: translateY(-6px) scale(1.01);
+                box-shadow: 0 10px 20px rgba(16, 73, 126, 0.08);
+                z-index: 5;
             }
 
-            /* 🔥 カーソル（マウス）を合わせたら表示する魔法の命令 */
-            .dropdown:hover .dropdown-content {
-                display: block !important;
+            .ans-card.orange-border {
+                border-left: 5px solid #f37032 !important;
+                justify-content: center;
             }
 
-            /* 先生紹介ページのノート風背景の上側余白 */
-            .magazine-container {
-                margin-top: 60px !important;
+            .ans-card.blue-border {
+                border-left: 5px solid #4ca4e4 !important;
+                justify-content: flex-start;
+            }
+
+            .loop-track .ans-card.orange-border {
+                min-width: 140px;
+                white-space: nowrap;
+            }
+
+            .loop-track .ans-card.blue-border {
+                min-width: 280px;
+                max-width: 400px;
+                white-space: normal;
+            }
+
+            .grid-view-container {
+                display: none;
+                background: #f1f5f9;
+                border-radius: 14px;
+                padding: 25px;
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 16px;
+            }
+
+            .grid-view-container.sentence-grid {
+                grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            }
+
+            .grid-view-container .ans-card {
+                width: 100%;
+                min-height: 54px;
+                white-space: normal !important;
+                word-break: break-all !important;
+                justify-content: flex-start;
             }
         </style>
+        </head>
 
-        <div class="magazine-container">
+        <body>
+            <!-- 共通ヘッダー（元のデザイン完全再現版） -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+            <link rel="stylesheet" href="style.css">
 
-            <header class="magazine-header">
-                <p class="recruit-text">SPECIAL INTERVIEW</p>
-                <h1 class="main-title-text">厳しいのは、優しいから。</h1>
-                <p class="sub-title-line">笑顔と本音の小澤ゼミ。</p>
-            </header>
-
-            <div class="top-profile-flex">
-                <div class="profile-left-col">
-                    <div class="prof-img-wrapper">
-                        <img src="photo.jpg/ozawa-photo.jpg" alt="小澤先生の写真">
-                    </div>
-                    <div class="name-card-stacked-wrapper">
-                        <div class="name-card-shadow-layer"></div>
-                        <div class="name-card-front-layer">
-                            <p class="role">立教大学 教授</p>
-                            <p class="name">小澤 康裕</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="profile-right-col">
-                    <div class="lead-message-box">
-                        <p>小澤ゼミは、先生と学生の距離がとっても近いのが自慢です！</p>
-                        <p>「難しいことは後回し！！まずは面白い発見を共有することから始めませんか？」</p>
-                    </div>
-
-                    <div class="cards-inline-grid">
-                        <div class="info-border-card">
-                            <h3>PROFILES</h3>
-                            <ul class="plain-list">
-                                <li>● 学位：博士（経営学）</li>
-                                <li>● 専門：監査、会計</li>
+            <header class="main-header">
+                <nav class="nav-container">
+                    <div class="logo">Ozawa Seminar</div>
+                    <ul class="nav-links">
+                        <li><a href="index.html">ホーム</a></li>
+                        <li class="dropdown">
+                            <a href="#">活動内容 ▼</a>
+                            <ul class="dropdown-content">
+                                <li><a href="activities-member.html">メンバー紹介</a></li>
+                                <li><a href="activities-event.html">年間行事</a></li>
                             </ul>
-                        </div>
+                        </li>
+                        <li><a href="activities-ozawaquiz.html">小澤先生について知ろう！▼</a></li>
+                        <li class="dropdown">
+                            <a href="#">ゼミ生体験シュミレーション ▼</a>
+                            <ul class="dropdown-content">
+                                <li><a href="simulation-daily.html">日常編</a></li>
+                                <li><a href="simulation-camp.html">合宿編</a></li>
+                                <li><a href="simulation-factory.html">工場見学編</a></li>
+                                <li><a href="simulation-end.html">エンディング編</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="header-right">
+                        <span>MENU</span>
+                    </div>
+                </nav>
+            </header>
+            <!-- 共通ヘッダーここまで -->
+            <style>
+                /* 🌌 半透明で横幅いっぱいのデザイン */
+                .main-header {
+                    width: 100% !important;
+                    background-color: rgba(40, 44, 52, 0.85) !important;
+                    backdrop-filter: blur(5px) !important;
+                    position: absolute !important;
+                    top: 0 !important;
+                    left: 0 !important;
+                    z-index: 99999 !important;
+                    box-sizing: border-box !important;
+                }
 
-                        <div class="info-border-card">
-                            <h3>SUBJECTS <span class="year-notice">※2026年度段階</span></h3>
-                            <div class="subject-tags">
-                                <span class="tag-item">ゼミナール A・B</span>
-                                <span class="tag-item">会計監査論 1・2</span>
-                                <span class="tag-item">演習特別指導 / 研究指導等</span>
-                                <span class="tag-item">企画講座 5</span>
-                                <span class="tag-item">SHORT PROG AUS AU</span>
+                .nav-container {
+                    width: 100% !important;
+                    max-width: 1400px !important;
+                    margin: 0 auto !important;
+                    padding: 15px 40px !important;
+                    display: flex !important;
+                    justify-content: space-between !important;
+                    align-items: center !important;
+                }
+
+                .nav-links {
+                    display: flex !important;
+                    gap: 30px !important;
+                    list-style: none !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                }
+
+                /* 親メニューの配置設定 */
+                .nav-links>li {
+                    position: relative !important;
+                    /* ドロップダウンの基準位置 */
+                }
+
+                .nav-links a {
+                    color: #ffffff !important;
+                    text-decoration: none !important;
+                    font-size: 15px !important;
+                    font-weight: bold !important;
+                    transition: opacity 0.2s !important;
+                    display: block !important;
+                }
+
+                .nav-links>li>a {
+                    padding: 10px 0 !important;
+                }
+
+                .nav-links a:hover {
+                    opacity: 0.8 !important;
+                }
+
+                .logo {
+                    color: #ffffff !important;
+                    font-size: 22px !important;
+                    font-weight: bold !important;
+                    letter-spacing: 0.5px !important;
+                }
+
+                .header-right {
+                    color: #ffffff !important;
+                    font-weight: bold !important;
+                    font-size: 15px !important;
+                }
+
+                /* ───────── 👇 ここからドロップダウン（2枚目再現）の仕組み ───────── */
+
+                /* 最初は非表示にしておく、白い四角のメニューボックス */
+                .dropdown-content {
+                    display: none !important;
+                    position: absolute !important;
+                    top: 100% !important;
+                    left: 50% !important;
+                    transform: translateX(-50%) !important;
+                    /* 真ん中寄せ */
+                    background-color: #ffffff !important;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+                    padding: 10px 0 !important;
+                    min-width: 150px !important;
+                    list-style: none !important;
+                    margin: 0 !important;
+                    border-radius: 4px !important;
+                }
+
+                /* ドロップダウンの中のリンク文字（グレー） */
+                .dropdown-content a {
+                    color: #333333 !important;
+                    padding: 10px 20px !important;
+                    font-size: 14px !important;
+                    font-weight: normal !important;
+                    white-space: nowrap !important;
+                    text-align: left !important;
+                }
+
+                /* マウスを乗せた時の背景（うっすらグレーに） */
+                .dropdown-content a:hover {
+                    background-color: #f5f5f5 !important;
+                    opacity: 1 !important;
+                }
+
+                /* 🔥 カーソル（マウス）を合わせたら表示する魔法の命令 */
+                .dropdown:hover .dropdown-content {
+                    display: block !important;
+                }
+
+                /* 先生紹介ページのノート風背景の上側余白 */
+                .magazine-container {
+                    margin-top: 60px !important;
+                }
+            </style>
+
+            <div class="magazine-container">
+
+                <header class="magazine-header">
+                    <p class="recruit-text">SPECIAL INTERVIEW</p>
+                    <h1 class="main-title-text">厳しいのは、優しいから。</h1>
+                    <p class="sub-title-line">笑顔と本音の小澤ゼミ。</p>
+                </header>
+
+                <div class="top-profile-flex">
+                    <div class="profile-left-col">
+                        <div class="prof-img-wrapper">
+                            <img src="photo.jpg/ozawa-photo.jpg" alt="小澤先生の写真">
+                        </div>
+                        <div class="name-card-stacked-wrapper">
+                            <div class="name-card-shadow-layer"></div>
+                            <div class="name-card-front-layer">
+                                <p class="role">立教大学 教授</p>
+                                <p class="name">小澤 康裕</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="info-border-card">
-                        <h3>HISTORY <span class="year-notice">※2026年度段階</span></h3>
-                        <table class="history-table">
-                            <tr>
-                                <td class="year">2025年〜</td>
-                                <td class="desc">立教大学 教授</td>
-                            </tr>
-                            <tr>
-                                <td class="year">2026年〜</td>
-                                <td class="desc">日本商教育センター 副センター長</td>
-                            </tr>
-                            <tr>
-                                <td class="year">2020年〜</td>
-                                <td class="desc">大学教育開発・支援センター センター長</td>
-                            </tr>
-                        </table>
+                    <div class="profile-right-col">
+                        <div class="lead-message-box">
+                            <p>小澤ゼミは、先生と学生の距離がとっても近いのが自慢です！</p>
+                            <p>「難しいことは後回し！！まずは面白い発見を共有することから始めませんか？」</p>
+                        </div>
+
+                        <div class="cards-inline-grid">
+                            <div class="info-border-card">
+                                <h3>PROFILES</h3>
+                                <ul class="plain-list">
+                                    <li>● 学位：博士（経営学）</li>
+                                    <li>● 専門：監査、会計</li>
+                                </ul>
+                            </div>
+
+                            <div class="info-border-card">
+                                <h3>SUBJECTS <span class="year-notice">※2026年度段階</span></h3>
+                                <div class="subject-tags">
+                                    <span class="tag-item">ゼミナール A・B</span>
+                                    <span class="tag-item">会計監査論 1・2</span>
+                                    <span class="tag-item">演習特別指導 / 研究指導等</span>
+                                    <span class="tag-item">企画講座 5</span>
+                                    <span class="tag-item">SHORT PROG AUS AU</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-border-card">
+                            <h3>HISTORY <span class="year-notice">※2026年度段階</span></h3>
+                            <table class="history-table">
+                                <tr>
+                                    <td class="year">2025年〜</td>
+                                    <td class="desc">立教大学 教授</td>
+                                </tr>
+                                <tr>
+                                    <td class="year">2026年〜</td>
+                                    <td class="desc">日本商教育センター 副センター長</td>
+                                </tr>
+                                <tr>
+                                    <td class="year">2020年〜</td>
+                                    <td class="desc">大学教育開発・支援センター センター長</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <h2 class="survey-section-title">
-                Special Interview！先生にも本音を聞いてみた
-                <span class="sub-count">(小澤先生からの回答)</span>
-            </h2>
+                <h2 class="survey-section-title">
+                    Special Interview！先生にも本音を聞いてみた
+                    <span class="sub-count">(小澤先生からの回答)</span>
+                </h2>
 
-            <div class="interview-card">
-                <h4 class="interview-q-title">
-                    <span class="badge-q">質問 1</span>
-                    <div>小澤ゼミで学生を指導する際、先生がより重視している「育てたい力」はどちらですか？</div>
-                </h4>
-                <ul class="interview-options-list">
-                    <li>社会で即戦力になる「専門知識とロジック（論理）」</li>
-                    <li class="selected-option">どんな環境でも生き抜ける「自ら学ぶ力と人間性」</li>
-                    <li>その他</li>
-                </ul>
-                <div class="teacher-ans-box">
-                    <div class="ans-label-flex">
-                        <span class="badge-a">回答</span>
-                        <span style="font-size: 13px; color: #e06a1b; font-weight: bold;">先生セレクト</span>
-                    </div>
-                    <p class="ans-text">どんな環境でも生き抜ける「自ら学ぶ力と人間性」</p>
-                    <div style="border-top: 1px dashed #fadcc8; margin-top: 12px; padding-top: 12px;">
-                        <p class="reason-title">💡 その理由は？</p>
-                        <p class="reason-text">「専門知識は後からでも身につけられます。基礎は大学で学んで欲しいですが。」</p>
+                <div class="interview-card">
+                    <h4 class="interview-q-title">
+                        <span class="badge-q">質問 1</span>
+                        <div>小澤ゼミで学生を指導する際、先生がより重視している「育てたい力」はどちらですか？</div>
+                    </h4>
+                    <ul class="interview-options-list">
+                        <li>社会で即戦力になる「専門知識とロジック（論理）」</li>
+                        <li class="selected-option">どんな環境でも生き抜ける「自ら学ぶ力と人間性」</li>
+                        <li>その他</li>
+                    </ul>
+                    <div class="teacher-ans-box">
+                        <div class="ans-label-flex">
+                            <span class="badge-a">回答</span>
+                            <span style="font-size: 13px; color: #e06a1b; font-weight: bold;">先生セレクト</span>
+                        </div>
+                        <p class="ans-text">どんな環境でも生き抜ける「自ら学ぶ力と人間性」</p>
+                        <div style="border-top: 1px dashed #fadcc8; margin-top: 12px; padding-top: 12px;">
+                            <p class="reason-title">💡 その理由は？</p>
+                            <p class="reason-text">「専門知識は後からでも身につけられます。基礎は大学で学んで欲しいですが。」</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="interview-card">
-                <h4 class="interview-q-title">
-                    <span class="badge-q">質問 2</span>
-                    <div>先生にとって「簿記や会計」を学ぶ一番のメリットは何だと思いますか？</div>
-                </h4>
-                <ul class="interview-options-list">
-                    <li>就職や資格試験に直結する「実用的な武器」になる</li>
-                    <li>企業のビジネスや社会の仕組みがクリアに見える「メガネ」になる</li>
-                    <li class="selected-option">その他</li>
-                </ul>
-                <div class="teacher-ans-box">
-                    <div class="ans-label-flex">
-                        <span class="badge-a">回答</span>
-                        <span style="font-size: 13px; color: #e06a1b; font-weight: bold;">先生セレクト（独自回答）</span>
+                <div class="interview-card">
+                    <h4 class="interview-q-title">
+                        <span class="badge-q">質問 2</span>
+                        <div>先生にとって「簿記や会計」を学ぶ一番のメリットは何だと思いますか？</div>
+                    </h4>
+                    <ul class="interview-options-list">
+                        <li>就職や資格試験に直結する「実用的な武器」になる</li>
+                        <li>企業のビジネスや社会の仕組みがクリアに見える「メガネ」になる</li>
+                        <li class="selected-option">その他</li>
+                    </ul>
+                    <div class="teacher-ans-box">
+                        <div class="ans-label-flex">
+                            <span class="badge-a">回答</span>
+                            <span style="font-size: 13px; color: #e06a1b; font-weight: bold;">先生セレクト（独自回答）</span>
+                        </div>
+                        <p class="ans-text">
+                            その他：これは主語が「学生が」「簿記や会計」を学ぶという意味ですよね？そうだとすると、ビジネスがどのように成り立っているかを理解し、企業や社会の動きを数字で理解するための共通言語を身につけられること、です。
+                        </p>
+                        <div style="border-top: 1px dashed #fadcc8; margin-top: 12px; padding-top: 12px;">
+                            <p class="reason-title">💡 その理由は？</p>
+                            <p class="reason-text">
+                                「企業のニュースや経済の動きを『なんとなく』ではなく、根拠をもって理解する、あるいは解像度を高く理解するためには会計の知識が重要だからです。」
+                            </p>
+                        </div>
                     </div>
-                    <p class="ans-text">
-                        その他：これは主語が「学生が」「簿記や会計」を学ぶという意味ですよね？そうだとすると、ビジネスがどのように成り立っているかを理解し、企業や社会の動きを数字で理解するための共通言語を身につけられること、です。
-                    </p>
-                    <div style="border-top: 1px dashed #fadcc8; margin-top: 12px; padding-top: 12px;">
-                        <p class="reason-title">💡 その理由は？</p>
-                        <p class="reason-text">「企業のニュースや経済の動きを『なんとなく』ではなく、根拠をもって理解する、あるいは解像度を高く理解するためには会計の知識が重要だからです。」
+                </div>
+
+                <div class="interview-card">
+                    <h4 class="interview-q-title">
+                        <span class="badge-q">質問 3</span>
+                        <div>論文執筆や大学のお仕事で行き詰まった時、先生が実践しているリフレッシュ法は何ですか？</div>
+                    </h4>
+                    <div class="teacher-ans-box">
+                        <div class="ans-label-flex">
+                            <span class="badge-a">回答</span>
+                        </div>
+                        <p class="ans-text" style="color: #334155; font-weight: normal;">
+                            「今のところ<strong
+                                style="color: #e06a1b; font-size: 18px;">筋トレ</strong>です。まあ、行き詰まらなくても定期的にやってますが。」
                         </p>
                     </div>
                 </div>
-            </div>
 
-            <div class="interview-card">
-                <h4 class="interview-q-title">
-                    <span class="badge-q">質問 3</span>
-                    <div>論文執筆や大学のお仕事で行き詰まった時、先生が実践しているリフレッシュ法は何ですか？</div>
-                </h4>
-                <div class="teacher-ans-box">
-                    <div class="ans-label-flex">
-                        <span class="badge-a">回答</span>
-                    </div>
-                    <p class="ans-text" style="color: #334155; font-weight: normal;">
-                        「今のところ<strong style="color: #e06a1b; font-size: 18px;">筋トレ</strong>です。まあ、行き詰まらなくても定期的にやってますが。」
-                    </p>
-                </div>
-            </div>
-
-            <div class="interview-card">
-                <h4 class="interview-q-title">
-                    <span class="badge-q">質問 4</span>
-                    <div>先生がゼミ生に求めることは何ですか？</div>
-                </h4>
-                <div class="teacher-ans-box">
-                    <div class="ans-label-flex">
-                        <span class="badge-a">回答</span>
-                    </div>
-                    <p class="reason-text"
-                        style="font-size: 15px; color: #0c345a; font-weight: bold; line-height: 1.7;">
-                        「主体的に学び、他者と協力しようとする姿勢を継続することです。問いを立てる能力はますます重要になります。問いを立てて、自分なりに考え、わからないことをそのままにせず、他者と協力しながら、少しずつ成長しようとする姿勢を大切にしてほしいと思っています。」
-                    </p>
-                </div>
-            </div>
-
-            <h2 class="survey-section-title">
-                ゼミ生に聞いた！小澤先生ってどんな人？
-                <span class="sub-count">(23件の回答)</span>
-            </h2>
-
-            <div class="question-container" id="quiz-q1">
-                <div class="question-header">Q1. 小澤先生の第一印象は？（予想を選んで結果を見よう！）</div>
-                <div class="quiz-choice-grid" id="q1-choices">
-                    <button class="choice-btn" onclick="selectAndReveal('q1')">A. 厳しそう</button>
-                    <button class="choice-btn" onclick="selectAndReveal('q1')">B. 怖そう</button>
-                    <button class="choice-btn" onclick="selectAndReveal('q1')">C. 優しそう</button>
-                    <button class="choice-btn" onclick="selectAndReveal('q1')">D. 面白そう</button>
-                </div>
-                <div class="quiz-result-content" id="q1-result">
-                    <div class="bar-row">
-                        <span class="row-label">厳しそう：</span>
-                        <div class="track-bg">
-                            <div class="fill-bar orange-style" style="width: 58.3%;"><span class="inner-badge">👥
-                                    14人</span>
-                            </div>
+                <div class="interview-card">
+                    <h4 class="interview-q-title">
+                        <span class="badge-q">質問 4</span>
+                        <div>先生がゼミ生に求めることは何ですか？</div>
+                    </h4>
+                    <div class="teacher-ans-box">
+                        <div class="ans-label-flex">
+                            <span class="badge-a">回答</span>
                         </div>
-                        <span class="row-percent">58.3%</span>
-                    </div>
-                    <div class="bar-row">
-                        <span class="row-label">怖そう：</span>
-                        <div class="track-bg">
-                            <div class="fill-bar orange-style" style="width: 16.7%;"><span class="inner-badge">👥
-                                    4人</span>
-                            </div>
-                        </div>
-                        <span class="row-percent">16.7%</span>
-                    </div>
-                    <div class="bar-row">
-                        <span class="row-label">優しそう：</span>
-                        <div class="track-bg">
-                            <div class="fill-bar blue-style" style="width: 12.5%;"><span class="inner-badge">👥
-                                    3人</span>
-                            </div>
-                        </div>
-                        <span class="row-percent">12.5%</span>
-                    </div>
-                    <div class="bar-row">
-                        <span class="row-label">面白そう：</span>
-                        <div class="track-bg">
-                            <div class="fill-bar empty-style"></div>
-                        </div>
-                        <span class="row-percent">0%</span>
-                    </div>
-                    <div class="other-opinions-box">
-                        <p class="other-title">⚡ その他意見：3人 (12.6%)</p>
-                        <ul class="other-list">
-                            <li>かっこいい💖💖💖 (4.2%)</li>
-                            <li>賢そう。聡明そう。 (4.2%)</li>
-                            <li>イケメン かっこいい (4.2%)</li>
-                        </ul>
+                        <p class="reason-text"
+                            style="font-size: 15px; color: #0c345a; font-weight: bold; line-height: 1.7;">
+                            「主体的に学び、他者と協力しようとする姿勢を継続することです。問いを立てる能力はますます重要になります。問いを立てて、自分なりに考え、わからないことをそのままにせず、他者と協力しながら、少しずつ成長しようとする姿勢を大切にしてほしいと思っています。」
+                        </p>
                     </div>
                 </div>
-            </div>
 
-            <div class="question-container" id="quiz-q2">
-                <div class="question-header">Q2. 小澤先生の今の印象は？（予想を選んで結果を見よう！）</div>
-                <div class="quiz-choice-grid" id="q2-choices">
-                    <button class="choice-btn" onclick="selectAndReveal('q2')">A. 優しい</button>
-                    <button class="choice-btn" onclick="selectAndReveal('q2')">B. 面白い</button>
-                    <button class="choice-btn" onclick="selectAndReveal('q2')">C. 厳しい</button>
-                    <button class="choice-btn" onclick="selectAndReveal('q2')">D. 怖い</button>
-                </div>
-                <div class="quiz-result-content" id="q2-result">
-                    <div class="bar-row">
-                        <span class="row-label">優しい：</span>
-                        <div class="track-bg">
-                            <div class="fill-bar orange-style" style="width: 69.6%;"><span class="inner-badge">👥
-                                    16人</span>
-                            </div>
-                        </div>
-                        <span class="row-percent">69.6%</span>
-                    </div>
-                    <div class="bar-row">
-                        <span class="row-label">面白い：</span>
-                        <div class="track-bg">
-                            <div class="fill-bar blue-style" style="width: 21.7%;"><span class="inner-badge">👥
-                                    5人</span>
-                            </div>
-                        </div>
-                        <span class="row-percent">21.7%</span>
-                    </div>
-                    <div class="bar-row">
-                        <span class="row-label">厳しい：</span>
-                        <div class="track-bg">
-                            <div class="fill-bar blue-style" style="width: 8.7%;"><span class="inner-badge">👥 2人</span>
-                            </div>
-                        </div>
-                        <span class="row-percent">8.7%</span>
-                    </div>
-                    <div class="bar-row">
-                        <span class="row-label">怖い：</span>
-                        <div class="track-bg">
-                            <div class="fill-bar empty-style"></div>
-                        </div>
-                        <span class="row-percent">0%</span>
-                    </div>
-                </div>
-            </div>
+                <h2 class="survey-section-title">
+                    ゼミ生に聞いた！小澤先生ってどんな人？
+                    <span class="sub-count">(23件の回答)</span>
+                </h2>
 
-            <div class="question-container">
-                <div class="question-header">Q3. 小澤先生と仲良くなれたと思ったタイミングはいつでしたか？</div>
-                <div class="question-body">
-                    <div class="bar-row">
-                        <span class="row-label">夏合宿：</span>
-                        <div class="track-bg">
-                            <div class="fill-bar orange-style" style="width: 30.4%;"><span class="inner-badge">👥
-                                    7人</span>
-                            </div>
-                        </div>
-                        <span class="row-percent">30.4%</span>
+                <div class="question-container" id="quiz-q1">
+                    <div class="question-header">Q1. 小澤先生の第一印象は？（予想を選んで結果を見よう！）</div>
+                    <div class="quiz-choice-grid" id="q1-choices">
+                        <button class="choice-btn" onclick="selectAndReveal('q1')">A. 厳しそう</button>
+                        <button class="choice-btn" onclick="selectAndReveal('q1')">B. 怖そう</button>
+                        <button class="choice-btn" onclick="selectAndReveal('q1')">C. 優しそう</button>
+                        <button class="choice-btn" onclick="selectAndReveal('q1')">D. 面白そう</button>
                     </div>
-                    <div class="bar-row">
-                        <span class="row-label">普段のゼミ：</span>
-                        <div class="track-bg">
-                            <div class="fill-bar orange-style" style="width: 26.1%;"><span class="inner-badge">👥
-                                    6人</span>
+                    <div class="quiz-result-content" id="q1-result">
+                        <div class="bar-row">
+                            <span class="row-label">厳しそう：</span>
+                            <div class="track-bg">
+                                <div class="fill-bar orange-style" style="width: 58.3%;"><span class="inner-badge">👥
+                                        14人</span>
+                                </div>
                             </div>
+                            <span class="row-percent">58.3%</span>
                         </div>
-                        <span class="row-percent">26.1%</span>
-                    </div>
-                    <div class="bar-row">
-                        <span class="row-label">飲み会：</span>
-                        <div class="track-bg">
-                            <div class="fill-bar orange-style" style="width: 21.7%;"><span class="inner-badge">👥
-                                    5人</span>
+                        <div class="bar-row">
+                            <span class="row-label">怖そう：</span>
+                            <div class="track-bg">
+                                <div class="fill-bar orange-style" style="width: 16.7%;"><span class="inner-badge">👥
+                                        4人</span>
+                                </div>
                             </div>
+                            <span class="row-percent">16.7%</span>
                         </div>
-                        <span class="row-percent">21.7%</span>
-                    </div>
-                    <div class="bar-row">
-                        <span class="row-label">まだ仲良くなれたと思っていない：</span>
-                        <div class="track-bg">
-                            <div class="fill-bar orange-style" style="width: 17.4%;"><span class="inner-badge">👥
-                                    4人</span>
+                        <div class="bar-row">
+                            <span class="row-label">優しそう：</span>
+                            <div class="track-bg">
+                                <div class="fill-bar blue-style" style="width: 12.5%;"><span class="inner-badge">👥
+                                        3人</span>
+                                </div>
                             </div>
+                            <span class="row-percent">12.5%</span>
                         </div>
-                        <span class="row-percent">17.4%</span>
-                    </div>
-                    <div class="bar-row">
-                        <span class="row-label">クリスマス会：</span>
-                        <div class="track-bg">
-                            <div class="fill-bar blue-style" style="width: 8.7%;"><span class="inner-badge">👥 2人</span>
+                        <div class="bar-row">
+                            <span class="row-label">面白そう：</span>
+                            <div class="track-bg">
+                                <div class="fill-bar empty-style"></div>
                             </div>
+                            <span class="row-percent">0%</span>
                         </div>
-                        <span class="row-percent">8.7%</span>
-                    </div>
-                    <div class="other-opinions-box">
-                        <p class="other-title">💡 その他意見：2人 (8.6%)</p>
-                        <ul class="other-list">
-                            <li>日本に帰ってきて、ゼミに1年ぶりに復帰させていただいた時 (4.3%)</li>
-                            <li>先生担当の授業 (4.3%)</li>
-                        </ul>
+                        <div class="other-opinions-box">
+                            <p class="other-title">⚡ その他意見：3人 (12.6%)</p>
+                            <ul class="other-list">
+                                <li>かっこいい💖💖💖 (4.2%)</li>
+                                <li>賢そう。聡明そう。 (4.2%)</li>
+                                <li>イケメン かっこいい (4.2%)</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="section-header-flex">
-                <h3 class="sub-question-title">Q4. 小澤先生を一言で表すと？ (23件の回答)</h3>
-                <button class="action-view-btn" id="btn-toggle-q4" onclick="toggleDisplayMode('q4')">一覧で見る</button>
-            </div>
+                <div class="question-container" id="quiz-q2">
+                    <div class="question-header">Q2. 小澤先生の今の印象は？（予想を選んで結果を見よう！）</div>
+                    <div class="quiz-choice-grid" id="q2-choices">
+                        <button class="choice-btn" onclick="selectAndReveal('q2')">A. 優しい</button>
+                        <button class="choice-btn" onclick="selectAndReveal('q2')">B. 面白い</button>
+                        <button class="choice-btn" onclick="selectAndReveal('q2')">C. 厳しい</button>
+                        <button class="choice-btn" onclick="selectAndReveal('q2')">D. 怖い</button>
+                    </div>
+                    <div class="quiz-result-content" id="q2-result">
+                        <div class="bar-row">
+                            <span class="row-label">優しい：</span>
+                            <div class="track-bg">
+                                <div class="fill-bar orange-style" style="width: 69.6%;"><span class="inner-badge">👥
+                                        16人</span>
+                                </div>
+                            </div>
+                            <span class="row-percent">69.6%</span>
+                        </div>
+                        <div class="bar-row">
+                            <span class="row-label">面白い：</span>
+                            <div class="track-bg">
+                                <div class="fill-bar blue-style" style="width: 21.7%;"><span class="inner-badge">👥
+                                        5人</span>
+                                </div>
+                            </div>
+                            <span class="row-percent">21.7%</span>
+                        </div>
+                        <div class="bar-row">
+                            <span class="row-label">厳しい：</span>
+                            <div class="track-bg">
+                                <div class="fill-bar blue-style" style="width: 8.7%;"><span class="inner-badge">👥
+                                        2人</span>
+                                </div>
+                            </div>
+                            <span class="row-percent">8.7%</span>
+                        </div>
+                        <div class="bar-row">
+                            <span class="row-label">怖い：</span>
+                            <div class="track-bg">
+                                <div class="fill-bar empty-style"></div>
+                            </div>
+                            <span class="row-percent">0%</span>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="slider-viewport" id="q4-slider-view">
-                <div class="loop-track" id="q4Track">
+                <div class="question-container">
+                    <div class="question-header">Q3. 小澤先生と仲良くなれたと思ったタイミングはいつでしたか？</div>
+                    <div class="question-body">
+                        <div class="bar-row">
+                            <span class="row-label">夏合宿：</span>
+                            <div class="track-bg">
+                                <div class="fill-bar orange-style" style="width: 30.4%;"><span class="inner-badge">👥
+                                        7人</span>
+                                </div>
+                            </div>
+                            <span class="row-percent">30.4%</span>
+                        </div>
+                        <div class="bar-row">
+                            <span class="row-label">普段のゼミ：</span>
+                            <div class="track-bg">
+                                <div class="fill-bar orange-style" style="width: 26.1%;"><span class="inner-badge">👥
+                                        6人</span>
+                                </div>
+                            </div>
+                            <span class="row-percent">26.1%</span>
+                        </div>
+                        <div class="bar-row">
+                            <span class="row-label">飲み会：</span>
+                            <div class="track-bg">
+                                <div class="fill-bar orange-style" style="width: 21.7%;"><span class="inner-badge">👥
+                                        5人</span>
+                                </div>
+                            </div>
+                            <span class="row-percent">21.7%</span>
+                        </div>
+                        <div class="bar-row">
+                            <span class="row-label">まだ仲良くなれたと思っていない：</span>
+                            <div class="track-bg">
+                                <div class="fill-bar orange-style" style="width: 17.4%;"><span class="inner-badge">👥
+                                        4人</span>
+                                </div>
+                            </div>
+                            <span class="row-percent">17.4%</span>
+                        </div>
+                        <div class="bar-row">
+                            <span class="row-label">クリスマス会：</span>
+                            <div class="track-bg">
+                                <div class="fill-bar blue-style" style="width: 8.7%;"><span class="inner-badge">👥
+                                        2人</span>
+                                </div>
+                            </div>
+                            <span class="row-percent">8.7%</span>
+                        </div>
+                        <div class="other-opinions-box">
+                            <p class="other-title">💡 その他意見：2人 (8.6%)</p>
+                            <ul class="other-list">
+                                <li>日本に帰ってきて、ゼミに1年ぶりに復帰させていただいた時 (4.3%)</li>
+                                <li>先生担当の授業 (4.3%)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-header-flex">
+                    <h3 class="sub-question-title">Q4. 小澤先生を一言で表すと？ (23件の回答)</h3>
+                    <button class="action-view-btn" id="btn-toggle-q4" onclick="toggleDisplayMode('q4')">一覧で見る</button>
+                </div>
+
+                <div class="slider-viewport" id="q4-slider-view">
+                    <div class="loop-track" id="q4Track">
+                        <div class="ans-card orange-border">かまちょ</div>
+                        <div class="ans-card orange-border">なんやかんやゼミ生好きで優しい</div>
+                        <div class="ans-card orange-border">みちひろ</div>
+                        <div class="ans-card orange-border">みんなのお父さん🧓</div>
+                        <div class="ans-card orange-border">イケオジ</div>
+                        <div class="ans-card orange-border">イケメン</div>
+                        <div class="ans-card orange-border">ツンデレ</div>
+                        <div class="ans-card orange-border">ツンデレ</div>
+                        <div class="ans-card orange-border">ツンデレ♥</div>
+                        <div class="ans-card orange-border">優しいお父さん</div>
+                        <div class="ans-card orange-border">優秀なお方</div>
+                        <div class="ans-card orange-border">厳しそうでめっちゃ学生想いな方</div>
+                        <div class="ans-card orange-border">厳しいところはあるけどノリがのよくて優しい先生。</div>
+                        <div class="ans-card orange-border">堅物</div>
+                        <div class="ans-card orange-border">小澤ゼミのお父さん（？）</div>
+                        <div class="ans-card orange-border">康裕</div>
+                        <div class="ans-card orange-border">愛のある厳しさ</div>
+                        <div class="ans-card orange-border">掴みどころがない</div>
+                        <div class="ans-card orange-border">歩く辞書</div>
+                        <div class="ans-card orange-border">真面目</div>
+                        <div class="ans-card orange-border">知</div>
+                        <div class="ans-card orange-border">立教１イケメン穏やかストイック教授</div>
+                        <div class="ans-card orange-border">立教一のイケオジ</div>
+                    </div>
+                </div>
+                <div class="grid-view-container" id="q4-grid-view">
                     <div class="ans-card orange-border">かまちょ</div>
                     <div class="ans-card orange-border">なんやかんやゼミ生好きで優しい</div>
                     <div class="ans-card orange-border">みちひろ</div>
@@ -1304,44 +1376,50 @@
                     <div class="ans-card orange-border">知</div>
                     <div class="ans-card orange-border">立教１イケメン穏やかストイック教授</div>
                     <div class="ans-card orange-border">立教一のイケオジ</div>
+                    <div class="ans-card orange-border bonus-card"
+                        onclick="openTeacherPopup('photo.jpg/ozawa-cake.jpg')">
+                        <img src="photo.jpg/ozawa-cake.jpg" alt="小澤先生" class="bonus-img">
+                    </div>
                 </div>
-            </div>
-            <div class="grid-view-container" id="q4-grid-view">
-                <div class="ans-card orange-border">かまちょ</div>
-                <div class="ans-card orange-border">なんやかんやゼミ生好きで優しい</div>
-                <div class="ans-card orange-border">みちひろ</div>
-                <div class="ans-card orange-border">みんなのお父さん🧓</div>
-                <div class="ans-card orange-border">イケオジ</div>
-                <div class="ans-card orange-border">イケメン</div>
-                <div class="ans-card orange-border">ツンデレ</div>
-                <div class="ans-card orange-border">ツンデレ</div>
-                <div class="ans-card orange-border">ツンデレ♥</div>
-                <div class="ans-card orange-border">優しいお父さん</div>
-                <div class="ans-card orange-border">優秀なお方</div>
-                <div class="ans-card orange-border">厳しそうでめっちゃ学生想いな方</div>
-                <div class="ans-card orange-border">厳しいところはあるけどノリがのよくて優しい先生。</div>
-                <div class="ans-card orange-border">堅物</div>
-                <div class="ans-card orange-border">小澤ゼミのお父さん（？）</div>
-                <div class="ans-card orange-border">康裕</div>
-                <div class="ans-card orange-border">愛のある厳しさ</div>
-                <div class="ans-card orange-border">掴みどころがない</div>
-                <div class="ans-card orange-border">歩く辞書</div>
-                <div class="ans-card orange-border">真面目</div>
-                <div class="ans-card orange-border">知</div>
-                <div class="ans-card orange-border">立教１イケメン穏やかストイック教授</div>
-                <div class="ans-card orange-border">立教一のイケオジ</div>
-                <div class="ans-card orange-border bonus-card" onclick="openTeacherPopup('photo.jpg/ozawa-cake.jpg')">
-                    <img src="photo.jpg/ozawa-cake.jpg" alt="小澤先生" class="bonus-img">
+
+                <div class="section-header-flex">
+                    <h3 class="sub-question-title">Q5. 小澤先生の好きなところは？ (23件の回答)</h3>
+                    <button class="action-view-btn" id="btn-toggle-q5" onclick="toggleDisplayMode('q5')">一覧で見る</button>
                 </div>
-            </div>
 
-            <div class="section-header-flex">
-                <h3 class="sub-question-title">Q5. 小澤先生の好きなところは？ (23件の回答)</h3>
-                <button class="action-view-btn" id="btn-toggle-q5" onclick="toggleDisplayMode('q5')">一覧で見る</button>
-            </div>
+                <div class="slider-viewport" id="q5-slider-view">
+                    <div class="loop-track" id="q5Track">
+                        <div class="ans-card blue-border">なんだかんだで優しいところ</div>
+                        <div class="ans-card blue-border">普段は冷静な助言をくれる一方で、時々お茶目なところ</div>
+                        <div class="ans-card blue-border">仕事人タイプかと思いきや割と人との繋がりを重要視してそうなところ。</div>
+                        <div class="ans-card blue-border">優しい♡かっこいい♡飲み会好き♡ゼミの時とそれ以外の時間のメリハリ</div>
+                        <div class="ans-card blue-border">ゼミ活動では厳しく、しっかりしているが、飲み会や合宿ではノリが良く面白いところ</div>
+                        <div class="ans-card blue-border">すごい今後の人生をことを考えてくださってること</div>
+                        <div class="ans-card blue-border">メリハリあって面白いところ！</div>
+                        <div class="ans-card blue-border">除ゼミしない優しいところ</div>
+                        <div class="ans-card blue-border">
+                            まず顔がかっこいいところです。また普段厳しそうに見えて、実は笑顔が可愛かったりノリが良かったりとギャップがあるところも素敵です。
+                        </div>
+                        <div class="ans-card blue-border">先生が講義をされている大学の近くでアルバイトをしているため、ぜひお店に来てください！と言ったところ、毎週通ってくれたこと。
+                        </div>
+                        <div class="ans-card blue-border">為になることをよく言ってくれるところ。</div>
+                        <div class="ans-card blue-border">たまに出る笑顔</div>
+                        <div class="ans-card blue-border">ツンデレ</div>
+                        <div class="ans-card blue-border">大胸筋</div>
+                        <div class="ans-card blue-border">みちひろ</div>
+                        <div class="ans-card blue-border">普段真面目で偉い人だけど、遊ぶ時とか飲み会の時はちゃんと一緒にふざけて笑ってくれるところ</div>
+                        <div class="ans-card blue-border">厳しい指導の中に優しさがある</div>
+                        <div class="ans-card blue-border">笑顔☺️</div>
+                        <div class="ans-card blue-border">なんだかんだゼミ生に優しいところ</div>
+                        <div class="ans-card blue-border">筋肉</div>
+                        <div class="ans-card blue-border">結構ゼミ生思いで、ご飯会行事としてたくさんやってくれるし、2次会とかまで来てくれるところ</div>
+                        <div class="ans-card blue-border">ゼミ生好きなところ</div>
+                        <div class="ans-card blue-border">合宿の時、一緒にマシュマロ焼いたり、一緒に楽しんでくれるところ</div>
+                        <div class="ans-card blue-border">笑顔😊</div>
+                    </div>
+                </div>
 
-            <div class="slider-viewport" id="q5-slider-view">
-                <div class="loop-track" id="q5Track">
+                <div class="grid-view-container sentence-grid" id="q5-grid-view">
                     <div class="ans-card blue-border">なんだかんだで優しいところ</div>
                     <div class="ans-card blue-border">普段は冷静な助言をくれる一方で、時々お茶目なところ</div>
                     <div class="ans-card blue-border">仕事人タイプかと思いきや割と人との繋がりを重要視してそうなところ。</div>
@@ -1350,8 +1428,7 @@
                     <div class="ans-card blue-border">すごい今後の人生をことを考えてくださってること</div>
                     <div class="ans-card blue-border">メリハリあって面白いところ！</div>
                     <div class="ans-card blue-border">除ゼミしない優しいところ</div>
-                    <div class="ans-card blue-border">まず顔がかっこいいところです。また普段厳しそうに見えて、実は笑顔が可愛かったりノリが良かったりとギャップがあるところも素敵です。
-                    </div>
+                    <div class="ans-card blue-border">まず顔がかっこいいところです。また盤石な厳しさの裏にある笑顔が可愛いギャップが素敵。</div>
                     <div class="ans-card blue-border">先生が講義をされている大学の近くでアルバイトをしているため、ぜひお店に来てください！と言ったところ、毎週通ってくれたこと。
                     </div>
                     <div class="ans-card blue-border">為になることをよく言ってくれるところ。</div>
@@ -1362,111 +1439,84 @@
                     <div class="ans-card blue-border">普段真面目で偉い人だけど、遊ぶ時とか飲み会の時はちゃんと一緒にふざけて笑ってくれるところ</div>
                     <div class="ans-card blue-border">厳しい指導の中に優しさがある</div>
                     <div class="ans-card blue-border">笑顔☺️</div>
-                    <div class="ans-card blue-border">なんだかんだゼミ生に優しいところ</div>
+                    <div class="ans-card blue-border">なんだだかんだゼミ生に優しいところ</div>
                     <div class="ans-card blue-border">筋肉</div>
                     <div class="ans-card blue-border">結構ゼミ生思いで、ご飯会行事としてたくさんやってくれるし、2次会とかまで来てくれるところ</div>
                     <div class="ans-card blue-border">ゼミ生好きなところ</div>
                     <div class="ans-card blue-border">合宿の時、一緒にマシュマロ焼いたり、一緒に楽しんでくれるところ</div>
-                    <div class="ans-card blue-border">笑顔😊</div>
+                    <div class="ans-card blue-border bonus-card-q5"
+                        onclick="openTeacherPopup('photo.jpg/ozawa-happy.jpg')">
+                        <img src="photo.jpg/ozawa-happy.jpg" alt="小澤先生バンザイ" class="bonus-img-q5">
+                    </div>
                 </div>
             </div>
 
-            <div class="grid-view-container sentence-grid" id="q5-grid-view">
-                <div class="ans-card blue-border">なんだかんだで優しいところ</div>
-                <div class="ans-card blue-border">普段は冷静な助言をくれる一方で、時々お茶目なところ</div>
-                <div class="ans-card blue-border">仕事人タイプかと思いきや割と人との繋がりを重要視してそうなところ。</div>
-                <div class="ans-card blue-border">優しい♡かっこいい♡飲み会好き♡ゼミの時とそれ以外の時間のメリハリ</div>
-                <div class="ans-card blue-border">ゼミ活動では厳しく、しっかりしているが、飲み会や合宿ではノリが良く面白いところ</div>
-                <div class="ans-card blue-border">すごい今後の人生をことを考えてくださってること</div>
-                <div class="ans-card blue-border">メリハリあって面白いところ！</div>
-                <div class="ans-card blue-border">除ゼミしない優しいところ</div>
-                <div class="ans-card blue-border">まず顔がかっこいいところです。また盤石な厳しさの裏にある笑顔が可愛いギャップが素敵。</div>
-                <div class="ans-card blue-border">先生が講義をされている大学の近くでアルバイトをしているため、ぜひお店に来てください！と言ったところ、毎週通ってくれたこと。</div>
-                <div class="ans-card blue-border">為になることをよく言ってくれるところ。</div>
-                <div class="ans-card blue-border">たまに出る笑顔</div>
-                <div class="ans-card blue-border">ツンデレ</div>
-                <div class="ans-card blue-border">大胸筋</div>
-                <div class="ans-card blue-border">みちひろ</div>
-                <div class="ans-card blue-border">普段真面目で偉い人だけど、遊ぶ時とか飲み会の時はちゃんと一緒にふざけて笑ってくれるところ</div>
-                <div class="ans-card blue-border">厳しい指導の中に優しさがある</div>
-                <div class="ans-card blue-border">笑顔☺️</div>
-                <div class="ans-card blue-border">なんだだかんだゼミ生に優しいところ</div>
-                <div class="ans-card blue-border">筋肉</div>
-                <div class="ans-card blue-border">結構ゼミ生思いで、ご飯会行事としてたくさんやってくれるし、2次会とかまで来てくれるところ</div>
-                <div class="ans-card blue-border">ゼミ生好きなところ</div>
-                <div class="ans-card blue-border">合宿の時、一緒にマシュマロ焼いたり、一緒に楽しんでくれるところ</div>
-                <div class="ans-card blue-border bonus-card-q5" onclick="openTeacherPopup('photo.jpg/ozawa-happy.jpg')">
-                    <img src="photo.jpg/ozawa-happy.jpg" alt="小澤先生バンザイ" class="bonus-img-q5">
-                </div>
+            <div id="teacherPopup" class="right-bottom-popup" onclick="closeTeacherPopup()">
+                <img id="popupImg" src="" alt="拡大先生">
             </div>
-        </div>
 
-        <div id="teacherPopup" class="right-bottom-popup" onclick="closeTeacherPopup()">
-            <img id="popupImg" src="" alt="拡大先生">
-        </div>
-
-        <script>
-            // 🌟 先生を右下に大画面表示する最新の命令（Popup）に書き換え！
-            function openTeacherPopup(imageSrc) {
-                const popup = document.getElementById('teacherPopup');
-                const popupImg = document.getElementById('popupImg');
-                popupImg.src = imageSrc;
-                popup.style.display = 'block';
-            }
-
-            function closeTeacherPopup() {
-                document.getElementById('teacherPopup').style.display = 'none';
-            }
-
-            function selectAndReveal(quizId) {
-                document.getElementById(quizId + '-choices').style.display = 'none';
-                document.getElementById(quizId + '-result').style.display = 'block';
-            }
-
-            function toggleDisplayMode(qId) {
-                const sliderView = document.getElementById(qId + '-slider-view');
-                const gridView = document.getElementById(qId + '-grid-view');
-                const btn = document.getElementById('btn-toggle-' + qId);
-
-                if (window.getComputedStyle(sliderView).display !== 'none') {
-                    sliderView.style.display = 'none';
-                    gridView.style.display = 'grid';
-                    btn.innerText = '流れる表示に戻す';
-                } else {
-                    sliderView.style.display = 'block';
-                    gridView.style.display = 'none';
-                    btn.innerText = '一覧で見る';
+            <script>
+                // 🌟 先生を右下に大画面表示する最新の命令（Popup）に書き換え！
+                function openTeacherPopup(imageSrc) {
+                    const popup = document.getElementById('teacherPopup');
+                    const popupImg = document.getElementById('popupImg');
+                    popupImg.src = imageSrc;
+                    popup.style.display = 'block';
                 }
-            }
 
-            function setupSeamlessScroll(trackId) {
-                const track = document.getElementById(trackId);
-                const innerHTMLCopy = track.innerHTML;
-                track.innerHTML = innerHTMLCopy + innerHTMLCopy;
+                function closeTeacherPopup() {
+                    document.getElementById('teacherPopup').style.display = 'none';
+                }
 
-                let currentX = 0;
-                let isHovered = false;
+                function selectAndReveal(quizId) {
+                    document.getElementById(quizId + '-choices').style.display = 'none';
+                    document.getElementById(quizId + '-result').style.display = 'block';
+                }
 
-                track.addEventListener('mouseenter', () => { isHovered = true; });
-                track.addEventListener('mouseleave', () => { isHovered = false; });
+                function toggleDisplayMode(qId) {
+                    const sliderView = document.getElementById(qId + '-slider-view');
+                    const gridView = document.getElementById(qId + '-grid-view');
+                    const btn = document.getElementById('btn-toggle-' + qId);
 
-                function runScroll() {
-                    if (window.getComputedStyle(track.parentElement).display !== 'none' && !isHovered) {
-                        currentX += 1;
-                        if (currentX >= track.scrollWidth / 2) {
-                            currentX = 0;
-                        }
-                        track.style.transform = `translateX(-${currentX}px)`;
+                    if (window.getComputedStyle(sliderView).display !== 'none') {
+                        sliderView.style.display = 'none';
+                        gridView.style.display = 'grid';
+                        btn.innerText = '流れる表示に戻す';
+                    } else {
+                        sliderView.style.display = 'block';
+                        gridView.style.display = 'none';
+                        btn.innerText = '一覧で見る';
                     }
                 }
-                setInterval(runScroll, 30);
-            }
 
-            window.addEventListener('DOMContentLoaded', () => {
-                setupSeamlessScroll('q4Track');
-                setupSeamlessScroll('q5Track');
-            });
-        </script>
-    </body>
+                function setupSeamlessScroll(trackId) {
+                    const track = document.getElementById(trackId);
+                    const innerHTMLCopy = track.innerHTML;
+                    track.innerHTML = innerHTMLCopy + innerHTMLCopy;
+
+                    let currentX = 0;
+                    let isHovered = false;
+
+                    track.addEventListener('mouseenter', () => { isHovered = true; });
+                    track.addEventListener('mouseleave', () => { isHovered = false; });
+
+                    function runScroll() {
+                        if (window.getComputedStyle(track.parentElement).display !== 'none' && !isHovered) {
+                            currentX += 1;
+                            if (currentX >= track.scrollWidth / 2) {
+                                currentX = 0;
+                            }
+                            track.style.transform = `translateX(-${currentX}px)`;
+                        }
+                    }
+                    setInterval(runScroll, 30);
+                }
+
+                window.addEventListener('DOMContentLoaded', () => {
+                    setupSeamlessScroll('q4Track');
+                    setupSeamlessScroll('q5Track');
+                });
+            </script>
+        </body>
 
 </html>
