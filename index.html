@@ -59,8 +59,10 @@
 
           <h2 class="stage-main-title">🌱 ゼミ生の日常活動の流れ 🤖</h2>
 
+          <!-- 🌟 日常活動カードエリア（全4枚） -->
           <div class="stage-six-row">
 
+            <!-- 1枚目：通年活動 -->
             <div class="card" onclick="openModal('modal1')">
               <div class="card-img">
                 <img src="photo.jpg/photo1-daily.jpg" alt="ディスカッション風景">
@@ -77,6 +79,7 @@
               </div>
             </div>
 
+            <!-- 2枚目：２年次 春学期 -->
             <div class="card" onclick="openModal('modal2')">
               <div class="card-img">
                 <img src="photo.jpg/photo-daily-grade2.jpg" alt="財務会計の学習">
@@ -93,6 +96,7 @@
               </div>
             </div>
 
+            <!-- 3枚目：３年次 春学期 -->
             <div class="card" onclick="openModal('modal3')">
               <div class="card-img">
                 <img src="photo.jpg/photo3-daily.jpg" alt="プログラミング風景">
@@ -109,6 +113,7 @@
               </div>
             </div>
 
+            <!-- 4枚目：２・３年次 秋学期（modal4と連動） -->
             <div class="card" onclick="openModal('modal4')">
               <div class="card-img">
                 <img src="photo.jpg/photo-daily-kangaku.jpg" alt="3年生の活動2">
@@ -125,12 +130,13 @@
               </div>
             </div>
 
-          </div>
-        </div>
-      </div>
-    </div>
+          </div> <!-- /stage-six-row -->
+        </div> <!-- /cards-grid-container -->
+      </div> <!-- /content-container -->
+    </div> <!-- /main-left-column -->
   </main>
 
+  <!-- ======= 🟢 モーダル1：ディスカッション ======= -->
   <div id="modal1" class="modal-overlay" onclick="closeModal('modal1')">
     <div class="modal-window" onclick="event.stopPropagation()">
       <span class="modal-close" onclick="closeModal('modal1')">×</span>
@@ -238,6 +244,7 @@
     </div>
   </div>
 
+  <!-- ======= 🔵 モーダル2：財務会計（自動スライドショー 6枚版） ======= -->
   <div id="modal2" class="modal-overlay" onclick="closeModal('modal2')">
     <div class="modal-window" onclick="event.stopPropagation()">
       <span class="modal-close" onclick="closeModal('modal2')">×</span>
@@ -284,6 +291,7 @@
     </div>
   </div>
 
+  <!-- ======= 🔴 モーダル3：プログラミング ======= -->
   <div id="modal3" class="modal-overlay" onclick="closeModal('modal3')">
     <div class="modal-window" onclick="event.stopPropagation()">
       <span class="modal-close" onclick="closeModal('modal3')">×</span>
@@ -298,7 +306,7 @@
           グッドポイント</h4>
         <div class="infinite-flow-container orange-line">
           <div class="infinite-flow-track">
-            <div class="flow-item">学期末に全体発表があるので、計画性が身つくよ</div>
+            <div class="flow-item">学期末に全体発表があるので、計画性が身につくよ</div>
             <div class="flow-item">普段身近なシステムがどのように作られているのか、体験して学べる！</div>
             <div class="flow-item">最先端のAIスキルと開発力がガッツリ身につく！</div>
             <div class="flow-item">自分たちのアイデアが実際の形になる感動！</div>
@@ -323,20 +331,91 @@
     </div>
   </div>
 
+  <!-- ======= 🟠 モーダル4：インカレ合同ゼミ研究（復活合体！） ======= -->
   <div id="modal4" class="modal-overlay" onclick="closeModal('modal4')">
     <div class="modal-window" onclick="event.stopPropagation()">
       <span class="modal-close" onclick="closeModal('modal4')">×</span>
-      <h2>他大学との交流・合同ゼミ研究（データ収集中）</h2>
-      <img src="photo.jpg/photo-daily-kangaku.jpg" class="modal-img" alt="詳細画像">
+      <h2>インカレ合同ゼミ研究・他大学との交流</h2>
+      <img src="photo.jpg/photo-daily-kangaku.jpg" class="modal-img" alt="合同ゼミ・研究発表の様子">
 
       <div class="modal-body">
-        <p style="text-align: center; color: #888; padding: 40px 0;">
-          ⚠️ モーダル4の元のコードを探しています...<br>
-          見つかり次第、このエリアのHTMLと差し替えることで正常に合体できます。
-        </p>
-      </div>
-    </div>
-  </div>
+        <p>秋学期はゼミ生が一体となり、共通のテーマについて深く研究を行います。</p>
+        <p>他大学のゼミと合同で研究発表会（インカレ）を開催し、日頃の研究成果をプレゼンします。専門家や他校の学生からの鋭い質問に答えることで、論理的思考力と度胸が鍛えられます！</p>
+
+        <h4 style="color: #2e7d32; font-size: 15px; margin: 25px 0 6px 0; font-weight: bold; text-align: left;">✨
+          グッドポイント</h4>
+        <div class="infinite-flow-container orange-line">
+          <div class="infinite-flow-track">
+            <div class="flow-item">他大学の優秀な学生から大きな刺激をもらえる！</div>
+            <div class="flow-item">1つのテーマを数ヶ月かけて深掘りする達成感</div>
+            <div class="flow-item">発表後の懇親会で他校の仲間と人脈が広がる！</div>
+            <div class="flow-item">チームで役割分担し、協調性とリーダーシップが磨かれる</div>
+            <div class="flow-item">他大学の優秀な学生から大きな刺激をもらえる！</div>
+            <div class="flow-item">1つのテーマを数ヶ月かけて深掘りする達成感</div>
+          </div>
+        </div>
+
+        <h4 style="color: #1565c0; font-size: 15px; margin: 20px 0 6px 0; font-weight: bold; text-align: left;">💬
+          先輩からのメッセージ</h4>
+        <div class="infinite-flow-container blue-line">
+          <div class="infinite-flow-track">
+            <div class="flow-item">「他校のプレゼン資料の作り方や話し方、めちゃくちゃ勉強になった！」</div>
+            <div class="flow-item">「準備は大変だけど、やり遂げた後のビールの味（打ち上げ）は最高！」</div>
+            <div class="flow-item">「教授や他校の学生から鋭い質問が飛んでくるから、良い緊張感が味わえる！」</div>
+            <div class="flow-item">「ゼミ生同士の絆が一番深まるのは、間違いなくこの秋学期の合同ゼミ！」</div>
+          </div>
+        </div>
+
+        <hr style="border: none; border-top: 1px dashed #ddd; margin: 30px 0;">
+
+        <div class="modal-discussion-section">
+          <h4 class="modal-discussion-title">🏆 過去の研究テーマ・実績</h4>
+          <p class="modal-discussion-desc">タップすると、研究の概要やポイントが見れます！</p>
+
+          <div class="modal-scroll-container">
+            <div class="mini-discussion-card" onclick="this.classList.toggle('flipped')">
+              <div class="mini-card-inner">
+                <div class="mini-card-front">
+                  <span class="mini-card-tag font-macro" style="background-color: #6a1b9a;">テーマ 01</span>
+                  <h5 class="mini-card-title">「日本における労働生産性の向上とDX推進 of 相関分析」</h5>
+                  <div class="mini-tap-hint">👆 タップして詳細を見る</div>
+                </div>
+                <div class="mini-card-back">
+                  <span class="mini-card-tag font-answer">研究のポイント</span>
+                  <p class="mini-card-body">
+                    <strong>【概要】</strong><br>
+                    中小企業におけるITツール導入障壁を調査。単にツールを入れるだけでなく、社内風土の変革（経営陣の意識改革）が生産性向上に不可欠であることをデータから証明しました。
+                  </p>
+                  <div class="mini-tap-hint">👆 タップで戻る</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mini-discussion-card" onclick="this.classList.toggle('flipped')">
+              <div class="mini-card-inner">
+                <div class="mini-card-front">
+                  <span class="mini-card-tag font-labor" style="background-color: #00838f;">テーマ 02</span>
+                  <h5 class="mini-card-title">「若年層の購買行動におけるSNSショート動画の影響度調査」</h5>
+                  <div class="mini-tap-hint">👆 タップして詳細を見る</div>
+                </div>
+                <div class="mini-card-back">
+                  <span class="mini-card-tag font-answer">研究のポイント</span>
+                  <p class="mini-card-body">
+                    <strong>【概要】</strong><br>
+                    TikTokやInstagram Reelsが購買意欲に与える心理的影響を分析。従来の広告と異なり、「偶発的な出会い（セレンディピティ）」がZ世代の財布を開く鍵であることを明らかにしました。
+                  </p>
+                  <div class="mini-tap-hint">👆 タップで戻る</div>
+                </div>
+              </div>
+            </div>
+
+          </div> <!-- /modal-scroll-container -->
+        </div> <!-- /modal-discussion-section -->
+
+      </div> <!-- /modal-body -->
+    </div> <!-- /modal-window -->
+  </div> <!-- /modal4 -->
+
   <script src="script.js"></script>
 </body>
 
