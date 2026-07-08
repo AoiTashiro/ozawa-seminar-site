@@ -1,6 +1,106 @@
 /* ==========================================
    ページ全体の背景を水色＋ポップな「水玉模様」に！
    ========================================== */
+
+/* ==========================================================================
+   🎨 全体の基本スタイル ＆ 背景画像設定（他のメンバーが作成したコード）
+   ========================================================================== */
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.content-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ==========================================
+   🌐 ヘッダーとナビゲーション
+   ========================================== */
+.main-header {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links>li {
+  position: relative;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 20px 0;
+  display: block;
+}
+
+/* ドロップダウンメニュー */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border-radius: 4px;
+  min-width: 150px;
+  padding: 10px 0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content li {
+  list-style: none;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  height: auto;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
 body {
   background-image: none !important;
   background-color: #cceeff !important;
@@ -22,18 +122,18 @@ body {
 }
 
 .pop-header h1 {
-  display: inline-block; 
+  display: inline-block;
   background-color: #dd6a25;
-  color: #ffffff; 
-  padding: 20px 40px; 
-  border-radius: 12px; 
+  color: #ffffff;
+  padding: 20px 40px;
+  border-radius: 12px;
   box-shadow: 8px 8px 0px #1a355a;
   font-family: 'Hiragino Maru Gothic ProN', 'BIZ UDGothic', 'Meiryo', sans-serif;
-  font-size: 2.5rem; 
-  margin: 0; 
+  font-size: 2.5rem;
+  margin: 0;
   font-weight: 900;
   letter-spacing: 4px;
-  text-shadow: none; 
+  text-shadow: none;
   -webkit-text-stroke: 0;
 }
 
@@ -45,8 +145,8 @@ body {
   display: inline-block;
   padding: 8px 20px;
   border-radius: 30px;
-  margin-top: 45px;     
-  margin-bottom: 45px;  
+  margin-top: 45px;
+  margin-bottom: 45px;
 }
 
 /* ==========================================
@@ -62,13 +162,14 @@ body {
    ポップな行事カードのデザイン
    ========================================== */
 .pop-event-card {
-  position: relative; /* 💡 絵文字ステッカーの基準点として追加 */
+  position: relative;
+  /* 💡 絵文字ステッカーの基準点として追加 */
   background-color: #ffffff;
   border: 4px solid #222;
   border-radius: 25px;
   margin-bottom: 60px;
   overflow: hidden;
-  box-shadow: 8px 8px 0px #4ecdc4; 
+  box-shadow: 8px 8px 0px #4ecdc4;
   opacity: 0;
   transform: translateY(60px) scale(0.9);
   transition: opacity 0.6s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -79,9 +180,17 @@ body {
   transform: translateY(0) scale(1);
 }
 
-.pop-event-card:nth-child(3n+1) { box-shadow: 8px 8px 0px #ff6b6b; }
-.pop-event-card:nth-child(3n+2) { box-shadow: 8px 8px 0px #4ecdc4; }
-.pop-event-card:nth-child(3n+3) { box-shadow: 8px 8px 0px #ffeaa7; }
+.pop-event-card:nth-child(3n+1) {
+  box-shadow: 8px 8px 0px #ff6b6b;
+}
+
+.pop-event-card:nth-child(3n+2) {
+  box-shadow: 8px 8px 0px #4ecdc4;
+}
+
+.pop-event-card:nth-child(3n+3) {
+  box-shadow: 8px 8px 0px #ffeaa7;
+}
 
 /* ==========================================
    🌟 新機能：カードに貼る「絵文字ステッカー」
@@ -89,27 +198,65 @@ body {
 .pop-event-card::before {
   font-size: 5rem;
   position: absolute;
-  top: 310px;  /* 写真の右下あたりに配置 */
+  top: 310px;
+  /* 写真の右下あたりに配置 */
   right: 20px;
   z-index: 10;
-  filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.15)); /* ステッカー風の影 */
-  animation: floatEmoji 3s ease-in-out infinite; /* フワフワ動かす */
+  filter: drop-shadow(3px 3px 0px rgba(0, 0, 0, 0.15));
+  /* ステッカー風の影 */
+  animation: floatEmoji 3s ease-in-out infinite;
+  /* フワフワ動かす */
 }
 
 /* フワフワ動くアニメーション */
 @keyframes floatEmoji {
-  0%, 100% { transform: translateY(0) rotate(-5deg); }
-  50% { transform: translateY(-10px) rotate(10deg); }
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(10deg);
+  }
 }
 
 /* カードの順番ごとに季節の絵文字を自動で指定！ */
-.pop-event-card:nth-child(1)::before { content: '🏭'; } /* 6月: 工場見学 */
-.pop-event-card:nth-child(2)::before { content: '🍉'; } /* 9月: 夏合宿 */
-.pop-event-card:nth-child(3)::before { content: '🍻'; } /* 10月: OBOG会 */
-.pop-event-card:nth-child(4)::before { content: '🏫'; } /* 11月: オープンゼミ */
-.pop-event-card:nth-child(5)::before { content: '🎄'; } /* 12月: クリスマス */
-.pop-event-card:nth-child(6)::before { content: '🤝'; } /* 1月: 他大学合同 */
-.pop-event-card:nth-child(7)::before { content: '🌸'; } /* 3月: 春合宿 */
+.pop-event-card:nth-child(1)::before {
+  content: '🏭';
+}
+
+/* 6月: 工場見学 */
+.pop-event-card:nth-child(2)::before {
+  content: '🍉';
+}
+
+/* 9月: 夏合宿 */
+.pop-event-card:nth-child(3)::before {
+  content: '🍻';
+}
+
+/* 10月: OBOG会 */
+.pop-event-card:nth-child(4)::before {
+  content: '🏫';
+}
+
+/* 11月: オープンゼミ */
+.pop-event-card:nth-child(5)::before {
+  content: '🎄';
+}
+
+/* 12月: クリスマス */
+.pop-event-card:nth-child(6)::before {
+  content: '🤝';
+}
+
+/* 1月: 他大学合同 */
+.pop-event-card:nth-child(7)::before {
+  content: '🌸';
+}
+
+/* 3月: 春合宿 */
 
 /* ==========================================
    写真部分のデザイン
@@ -159,11 +306,29 @@ body {
 
 /* スマホ用の調整 */
 @media (max-width: 768px) {
-  .pop-header h1 { font-size: 2rem; }
-  .title { font-size: 1.8rem; }
-  .event-photo { height: 180px; }
-  .pop-event-card { box-shadow: 5px 5px 0px #4ecdc4; }
-  .pop-event-card::before { top: 140px; font-size: 2.5rem; right: 10px; } /* スマホ用のステッカー位置調整 */
+  .pop-header h1 {
+    font-size: 2rem;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .event-photo {
+    height: 180px;
+  }
+
+  .pop-event-card {
+    box-shadow: 5px 5px 0px #4ecdc4;
+  }
+
+  .pop-event-card::before {
+    top: 140px;
+    font-size: 2.5rem;
+    right: 10px;
+  }
+
+  /* スマホ用のステッカー位置調整 */
 }
 
 /* ==========================================
@@ -188,10 +353,13 @@ body {
   left: 20px;
   width: 120px;
   height: 35px;
-  background-color: rgba(255, 234, 167, 0.9); /* 半透明の黄色いテープ */
-  transform: rotate(-5deg); /* 少し斜めに貼る */
+  background-color: rgba(255, 234, 167, 0.9);
+  /* 半透明の黄色いテープ */
+  transform: rotate(-5deg);
+  /* 少し斜めに貼る */
   z-index: 20;
-  border-left: 2px dashed #d1ccc0; /* テープのちぎれた感じを演出 */
+  border-left: 2px dashed #d1ccc0;
+  /* テープのちぎれた感じを演出 */
   border-right: 2px dashed #d1ccc0;
 }
 
@@ -204,6 +372,11 @@ body {
 }
 
 @keyframes moveDots {
-  0% { background-position: 0 0; }
-  100% { background-position: 40px 40px; }
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 40px 40px;
+  }
 }
