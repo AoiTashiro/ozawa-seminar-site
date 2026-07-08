@@ -74,6 +74,12 @@ h1 {
     width: 180px;
     margin-top: 15px;
     border-radius: 15px;
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+    transition-delay: 0.2s;
 }
 
 h1::after {
@@ -144,6 +150,29 @@ h1::after {
 
 .modal-content h2 {
     margin-bottom: 25px;
+}
+
+/* ×ボタン */
+.close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: #f2f6ff;
+    font-size: 36px;
+    color: #333;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.close:hover {
+    background: #dce9ff;
+    transform: rotate(90deg);
 }
 
 /* メンバー紹介 */
