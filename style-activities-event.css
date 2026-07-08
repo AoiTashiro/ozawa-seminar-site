@@ -22,8 +22,10 @@ body {
    🌐 ヘッダーとナビゲーション
    ========================================== */
 .main-header {
-  background-color: rgba(0, 0, 0, 0.6);
-  color: #fff;
+  background-color: #fff;
+  padding: 15px 20px;
+  border-bottom: 4px solid #5c4033;
+  /* 太めのレトロな線 */
   position: fixed;
   top: 0;
   left: 0;

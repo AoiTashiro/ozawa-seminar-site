@@ -399,3 +399,199 @@ h1::after {
 body {
     padding-top: 70px !important;
 }
+
+/* ==========================================================================
+   🎨 全体の基本スタイル ＆ 背景・フォント設定
+   ========================================================================== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Kiwi Maru', serif;
+    background-color: #fffaf4;
+    /* 温かみのあるクリーム色の背景 */
+    color: #5c4033;
+    /* 優しいダークブラウンの文字色 */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 🍓 絵文字のボーダーライン（ドット絵の帯風） */
+.emoji-border-line {
+    background-color: #ffebe9;
+    border-top: 3px dashed #ffb3ba;
+    border-bottom: 3px dashed #ffb3ba;
+    padding: 6px 0;
+    font-size: 14px;
+    text-align: center;
+    letter-spacing: 4px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* ==========================================
+   🌐 ヘッダーとナビゲーション
+   ========================================== */
+.main-header {
+    background-color: #fff;
+    padding: 15px 20px;
+    border-bottom: 4px solid #5c4033;
+    /* 太めのレトロな線 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 60px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ff4d6d;
+    /* イチゴ色のピンクレッド */
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links>li {
+    position: relative;
+}
+
+.nav-links a {
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    display: block;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background-color: #ffccd5;
+    color: #ff4d6d;
+}
+
+/* ドロップダウンメニュー */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border: 3px solid #5c4033;
+    border-radius: 8px;
+    padding: 10px;
+    list-style: none;
+    z-index: 1010;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content li {
+    margin: 5px 0;
+    list-style: none;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.header-right {
+    font-weight: 700;
+    background: #fff0f2;
+    padding: 5px 15px;
+    border: 3px solid #5c4033;
+    border-radius: 20px;
+}
+
+/* ==========================================
+   🚀 メインレイアウト & ヒーローセクション
+   ========================================== */
+.home-main-layout {
+    max-width: 1000px;
+    margin: 100px auto 30px auto;
+    /* ヘッダー固定分、上に余白を追加 */
+    padding: 0 20px;
+}
+
+.main-left-column {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* 🍓 ファンシーなウエルカム看板 */
+.fancy-hero-box {
+    position: relative;
+    background-color: #ffffff;
+    border: 5px solid #5c4033;
+    /* レトロな太い外枠 */
+    border-radius: 15px;
+    padding: 35px 20px;
+    text-align: center;
+    box-shadow: 6px 6px 0px #ffccd5;
+    /* おもちゃっぽいカクカクした影 */
+}
+
+.hero-title {
+    font-size: 26px;
+    color: #ff4d6d;
+    margin: 0 0 12px 0;
+}
+
+.hero-subtitle {
+    font-size: 15px;
+    margin: 0;
+    color: #666;
+}
+
+/* 両脇に浮かぶお花絵文字 */
+.decor-flower {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+}
+
+.left-flower {
+    left: 20px;
+}
+
+.right-flower {
+    right: 20px;
+}
