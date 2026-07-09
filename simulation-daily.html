@@ -863,7 +863,7 @@
 
                 if (choiceC === 1) {
                     // choiceBの結果（1なら健太、それ以外なら行）を変数sにセット
-                    let s = choiceB === 1 ? "健太" : "いき";
+                    let s = choiceB === 1 ? "けんた" : "いき";
 
                     setChar("");
                     await setMsg(playerName, "ディスカッションって役割分担とかあるんですか？"); await waitClick();
@@ -877,7 +877,7 @@
 
                     // 次のセリフも、前の選択肢Bに合わせて健太か然（zen）の画像にする
                     setChar(choiceB === 1 ? "photo.jpg/kenta.png" : "photo.jpg/zen.png");
-                    await setMsg(choiceB === 1 ? "健太" : "ぜん", "せっかくだから今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
+                    await setMsg(choiceB === 1 ? "けんた" : "ぜん", "せっかくだから今日のThe Wall Street Journalを一緒に見てみようか。"); await waitClick();
 
                 } else {
                     setChar("");
@@ -1056,7 +1056,7 @@
                     scoreP++; // 社交・突発
 
                     setChar("photo.jpg/kaito.png");
-                    await setMsg("かいと", "徒歩15分ぐらいのとこにコンビニあるっぽいわ！"); await waitClick();
+                    await setMsg("かいと", "ここから1時間くらいのとこにコンビニあるっぽいわ！"); await waitClick();
 
                     setChar("");
                     await setMsg(playerName, "探索がてら行ってみよう！"); await waitClick();
