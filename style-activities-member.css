@@ -342,7 +342,7 @@ h1::after {
 }
 
 .nav-links a {
-    color: #fff;
+    color: #5c4033;
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
@@ -481,11 +481,11 @@ a {
 }
 
 .nav-links a {
-    font-weight: 700;
-    padding: 5px 10px;
-    border-radius: 8px;
-    transition: all 0.2s;
     display: block;
+    padding: 5px 10px;
+    color: #5c4033;
+    text-decoration: none;
+    font-weight: 700;
 }
 
 .nav-links a:hover,
