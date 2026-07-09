@@ -400,42 +400,7 @@ body {
     padding-top: 70px !important;
 }
 
-/* ==========================================================================
-   🎨 全体の基本スタイル ＆ 背景・フォント設定
-   ========================================================================== */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Kiwi Maru', serif;
-    background-color: #fffaf4;
-    /* 温かみのあるクリーム色の背景 */
-    color: #5c4033;
-    /* 優しいダークブラウンの文字色 */
-}
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.content-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* 🍓 絵文字のボーダーライン（ドット絵の帯風） */
-.emoji-border-line {
-    background-color: #ffebe9;
-    border-top: 3px dashed #ffb3ba;
-    border-bottom: 3px dashed #ffb3ba;
-    padding: 6px 0;
-    font-size: 14px;
-    text-align: center;
-    letter-spacing: 4px;
-    overflow: hidden;
-    white-space: nowrap;
-}
 
 /* ==========================================
    🌐 ヘッダーとナビゲーション
